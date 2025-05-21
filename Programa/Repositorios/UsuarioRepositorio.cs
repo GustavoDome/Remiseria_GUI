@@ -18,8 +18,8 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"INSERT INTO operador (rolUsuario, nombre, direccion, telefono, tipo_fuente, color_sistema, tamanoFuente, tipoAlarma, activo)
-                                 VALUES (@rolUsuario, @nombre, @direccion, @telefono, @tipo_fuente, @color_sistema, @tamanoFuente, @tipoAlarma, @activo)";
+                string query = @"INSERT INTO Operador (rolUsuario, nombre, direccion, telefono, tipo_fuente, color_sistema, tamanoFuente, tipoAlarma, activo)
+                                 VALUES (@rolUsuario, @nombre, @direccion, @telefono, @tipo_fuente, @color_sistema, @tamanoFuente, @tipoAlarma, @activo);";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@rolUsuario", usuarioModelo.RolUsuario);
@@ -41,10 +41,10 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"UPDATE operador SET 
+                string query = @"UPDATE Operador SET 
                                  rolUsuario=@rolUsuario, nombre=@nombre, direccion=@direccion, telefono=@telefono, tipo_fuente=@tipo_fuente, 
                                  color_sistema=@color_sistema, tamanoFuente=@tamanoFuente, tipoAlarma=@tipoAlarma
-                                 WHERE id=@id";
+                                 WHERE id_operador=@id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", usuarioModelo.Id);
@@ -66,7 +66,7 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = "UPDATE operador set activo = FALSE WHERE id=@id";
+                string query = "UPDATE Operador set activo = FALSE WHERE id_operador=@id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
@@ -81,7 +81,7 @@ namespace Programa.Repositorios
 
             using (var conn = BD.Abrirconexion())
             {
-                string query = "SELECT * FROM operador";
+                string query = "SELECT * FROM Operador WHERE Activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {

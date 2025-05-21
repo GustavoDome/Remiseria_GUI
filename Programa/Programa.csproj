@@ -100,16 +100,35 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion\ConexionBD.cs" />
+    <Compile Include="Modelos\BasesModelo.cs" />
+    <Compile Include="Modelos\CategoriaModelo.cs" />
     <Compile Include="Modelos\DuenoAutoModelo.cs" />
+    <Compile Include="Modelos\IBasesRepositorio.cs" />
+    <Compile Include="Modelos\ICategoriaRepositorio.cs" />
     <Compile Include="Modelos\IDuenoAutoRepositorio.cs" />
+    <Compile Include="Modelos\IMovilRepositorio.cs" />
+    <Compile Include="Modelos\IPreguntaRepositorio.cs" />
+    <Compile Include="Modelos\IRecordatorioRepositorio.cs" />
+    <Compile Include="Modelos\IRespuestasRepositorio.cs" />
     <Compile Include="Modelos\IUsuarioRepositorio.cs" />
+    <Compile Include="Modelos\IViajesRepositorio.cs" />
     <Compile Include="Modelos\MovilModelo.cs" />
+    <Compile Include="Modelos\PreguntaModelo.cs" />
+    <Compile Include="Modelos\RecordatorioModelo.cs" />
+    <Compile Include="Modelos\RespuestaModelo.cs" />
     <Compile Include="Modelos\UsuarioModelo.cs" />
     <Compile Include="Modelos\ViajesModelo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositorios\BasesRepositorio.cs" />
+    <Compile Include="Repositorios\CategoriaRepositorio.cs" />
     <Compile Include="Repositorios\DuenoAutoRepositorio.cs" />
+    <Compile Include="Repositorios\MovilRepositorio.cs" />
+    <Compile Include="Repositorios\PreguntaRepositorio.cs" />
+    <Compile Include="Repositorios\RecordatorioRepositorio.cs" />
+    <Compile Include="Repositorios\RespuestaRepositorio.cs" />
     <Compile Include="Repositorios\UsuarioRepositorio.cs" />
+    <Compile Include="Repositorios\ViajesRepositorio.cs" />
     <Compile Include="Vistas\Login.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -19,8 +19,8 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"INSERT into dueño_auto(nombre,apellido,direccion,chofer,telefono,activo)
-                                VALUES (@nombre,@apellido,@direccion,@chofer,@telefono,@activo)";
+                string query = @"INSERT into Dueño_auto(nombre,apellido,direccion,chofer,telefono,activo)
+                                VALUES (@nombre,@apellido,@direccion,@chofer,@telefono,@activo);";
 
                 using(var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -29,7 +29,7 @@ namespace Programa.Repositorios
                     cmd.Parameters.AddWithValue("@direccion", duenoAutoModelo.Direccion);
                     cmd.Parameters.AddWithValue("@chofer", duenoAutoModelo.Chofer);
                     cmd.Parameters.AddWithValue("@telefono", duenoAutoModelo.Telefono);
-                    cmd.Parameters.AddWithValue("@avctivo", duenoAutoModelo.Activo);
+                    cmd.Parameters.AddWithValue("@activo", duenoAutoModelo.Activo);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -40,9 +40,10 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"UPDATE dueño_auto set nombre = @nombre, apellido = @apellido, direccion = @direccion, chofer = @chofer, telefono = @telefono WHERE id = @id";
+                string query = @"UPDATE Dueño_auto set nombre = @nombre, apellido = @apellido, direccion = @direccion, chofer = @chofer, telefono = @telefono WHERE id_dueño = @id_dueño;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
+                    cmd.Parameters.AddWithValue("@id_dueño", duenoAutoModelo.Id);
                     cmd.Parameters.AddWithValue("@nombre", duenoAutoModelo.Nombre);
                     cmd.Parameters.AddWithValue("@apellido", duenoAutoModelo.Apellido);
                     cmd.Parameters.AddWithValue("@direccion", duenoAutoModelo.Direccion);
@@ -58,7 +59,7 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"UPDATE dueño_auto set activo = FALSE where id = @id";
+                string query = @"UPDATE Dueño_auto set activo = FALSE where id_dueño = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id",id);
@@ -72,7 +73,7 @@ namespace Programa.Repositorios
             var lista = new List<DuenoAutoModelo>();
             using (var conn = BD.Abrirconexion())
             {
-                string query = "SELECT * FROM dueño_auto";
+                string query = "SELECT * FROM Dueño_auto WHERE Activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader =  cmd.ExecuteReader())
                 {
