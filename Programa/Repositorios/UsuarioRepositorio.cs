@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 using Programa.Modelos;
+using Programa.Modelos.Interfaces;
 using Programa.Conexion;
 using Npgsql;
 

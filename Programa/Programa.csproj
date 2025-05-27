@@ -103,15 +103,15 @@
     <Compile Include="Modelos\BasesModelo.cs" />
     <Compile Include="Modelos\CategoriaModelo.cs" />
     <Compile Include="Modelos\DuenoAutoModelo.cs" />
-    <Compile Include="Modelos\IBasesRepositorio.cs" />
-    <Compile Include="Modelos\ICategoriaRepositorio.cs" />
-    <Compile Include="Modelos\IDuenoAutoRepositorio.cs" />
-    <Compile Include="Modelos\IMovilRepositorio.cs" />
-    <Compile Include="Modelos\IPreguntaRepositorio.cs" />
-    <Compile Include="Modelos\IRecordatorioRepositorio.cs" />
-    <Compile Include="Modelos\IRespuestasRepositorio.cs" />
-    <Compile Include="Modelos\IUsuarioRepositorio.cs" />
-    <Compile Include="Modelos\IViajesRepositorio.cs" />
+    <Compile Include="Modelos\Interfaces\IDuenoAutoRepositorio.cs" />
+    <Compile Include="Modelos\Interfaces\IMovilRepositorio.cs" />
+    <Compile Include="Modelos\Interfaces\IBasesRepositorio.cs" />
+    <Compile Include="Modelos\Interfaces\ICategoriaRepositorio.cs" />
+    <Compile Include="Modelos\Interfaces\IPreguntaRepositorio.cs" />
+    <Compile Include="Modelos\Interfaces\IRecordatorioRepositorio.cs" />
+    <Compile Include="Modelos\Interfaces\IRespuestasRepositorio.cs" />
+    <Compile Include="Modelos\Interfaces\IUsuarioRepositorio.cs" />
+    <Compile Include="Modelos\Interfaces\IViajesRepositorio.cs" />
     <Compile Include="Modelos\MovilModelo.cs" />
     <Compile Include="Modelos\PreguntaModelo.cs" />
     <Compile Include="Modelos\RecordatorioModelo.cs" />
@@ -129,11 +129,257 @@
     <Compile Include="Repositorios\RespuestaRepositorio.cs" />
     <Compile Include="Repositorios\UsuarioRepositorio.cs" />
     <Compile Include="Repositorios\ViajesRepositorio.cs" />
+    <Compile Include="Vistas\Alta\AgregarAyudaVistaCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarAyudaVistaCategoria.Designer.cs">
+      <DependentUpon>AgregarAyudaVistaCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarAyudaVistaPregunta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarAyudaVistaPregunta.Designer.cs">
+      <DependentUpon>AgregarAyudaVistaPregunta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarAyudaVistaRespuesta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarAyudaVistaRespuesta.Designer.cs">
+      <DependentUpon>AgregarAyudaVistaRespuesta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarBasesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarBasesVista.Designer.cs">
+      <DependentUpon>AgregarBasesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarInicioVistaRecordatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarInicioVistaRecordatorio.Designer.cs">
+      <DependentUpon>AgregarInicioVistaRecordatorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarMovilesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarMovilesVista.Designer.cs">
+      <DependentUpon>AgregarMovilesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarOperadoresVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarOperadoresVista.Designer.cs">
+      <DependentUpon>AgregarOperadoresVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarViajesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarViajesVista.Designer.cs">
+      <DependentUpon>AgregarViajesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarVueltaVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarVueltaVista.Designer.cs">
+      <DependentUpon>AgregarVueltaVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarAyudaVistaCategoria.cs" />
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarAyudaVistaPregunta.cs" />
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarAyudaVistaRespuesta.cs" />
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarBasesVista.cs" />
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarInicioVistaRecordatorio.cs" />
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarMovilesVista.cs" />
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarOperadoresVista.cs" />
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarViajesVista.cs" />
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarVueltaVista.cs" />
+    <Compile Include="Vistas\AyudaVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\AyudaVista.Designer.cs">
+      <DependentUpon>AyudaVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarAyudaVistaCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarAyudaVistaCategoria.Designer.cs">
+      <DependentUpon>EliminarAyudaVistaCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarAyudaVistaPregunta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarAyudaVistaPregunta.Designer.cs">
+      <DependentUpon>EliminarAyudaVistaPregunta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarAyudaVistaRespuesta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarAyudaVistaRespuesta.Designer.cs">
+      <DependentUpon>EliminarAyudaVistaRespuesta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarBasesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarBasesVista.Designer.cs">
+      <DependentUpon>EliminarBasesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarInicioVistaRecordatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarInicioVistaRecordatorio.Designer.cs">
+      <DependentUpon>EliminarInicioVistaRecordatorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarMovilesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarMovilesVista.Designer.cs">
+      <DependentUpon>EliminarMovilesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarOperadoresVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarOperadoresVista.Designer.cs">
+      <DependentUpon>EliminarOperadoresVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarViajesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarViajesVista.Designer.cs">
+      <DependentUpon>EliminarViajesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarVueltaVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Baja\EliminarVueltaVista.Designer.cs">
+      <DependentUpon>EliminarVueltaVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Baja\Interfaces\IEliminarAyudaVistaCategoria.cs" />
+    <Compile Include="Vistas\Baja\Interfaces\IEliminarAyudaVistaPregunta.cs" />
+    <Compile Include="Vistas\Baja\Interfaces\IEliminarAyudaVistaRespuesta.cs" />
+    <Compile Include="Vistas\Baja\Interfaces\IEliminarBasesVista.cs" />
+    <Compile Include="Vistas\Baja\Interfaces\IEliminarInicioVistaRecordatorio.cs" />
+    <Compile Include="Vistas\Baja\Interfaces\IEliminarMovilesVista.cs" />
+    <Compile Include="Vistas\Baja\Interfaces\IEliminarOperadoresVista.cs" />
+    <Compile Include="Vistas\Baja\Interfaces\IEliminarViajesVista.cs" />
+    <Compile Include="Vistas\Baja\Interfaces\IEliminarVueltaVista.cs" />
+    <Compile Include="Vistas\BasesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\BasesVista.Designer.cs">
+      <DependentUpon>BasesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\ConfiguracionesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\ConfiguracionesVista.Designer.cs">
+      <DependentUpon>ConfiguracionesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Interfaces\IAyudaVista.cs" />
+    <Compile Include="Vistas\Interfaces\IBasesVista.cs" />
+    <Compile Include="Vistas\Interfaces\IConfiguracionesVista.cs" />
+    <Compile Include="Vistas\Interfaces\IInicioVista.cs" />
+    <Compile Include="Vistas\InicioVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\InicioVista.Designer.cs">
+      <DependentUpon>InicioVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Interfaces\ILogin.cs" />
+    <Compile Include="Vistas\Interfaces\IMovilesVista.cs" />
+    <Compile Include="Vistas\Interfaces\IOperadoresVista.cs" />
+    <Compile Include="Vistas\Interfaces\IViajesVista.cs" />
+    <Compile Include="Vistas\Interfaces\IVueltaVista.cs" />
     <Compile Include="Vistas\Login.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Vistas\Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarAyudaVistaCategoria.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarAyudaVistaPregunta.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarAyudaVistaRespuesta.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarBasesVista.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarInicioVistaRecordatorio.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarMovilesVista.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarOperadoresVista.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarViajesVista.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarVueltaVista.cs" />
+    <Compile Include="Vistas\Modificacion\ModificarAyudaVistaCategoria.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarAyudaVistaCategoria.Designer.cs">
+      <DependentUpon>ModificarAyudaVistaCategoria.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarAyudaVistaPregunta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarAyudaVistaPregunta.Designer.cs">
+      <DependentUpon>ModificarAyudaVistaPregunta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarAyudaVistaRespuesta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarAyudaVistaRespuesta.Designer.cs">
+      <DependentUpon>ModificarAyudaVistaRespuesta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarBasesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarBasesVista.Designer.cs">
+      <DependentUpon>ModificarBasesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarInicioVistaRecordatorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarInicioVistaRecordatorio.Designer.cs">
+      <DependentUpon>ModificarInicioVistaRecordatorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarMovilesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarMovilesVista.Designer.cs">
+      <DependentUpon>ModificarMovilesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarOperadoresVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarOperadoresVista.Designer.cs">
+      <DependentUpon>ModificarOperadoresVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarViajesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarViajesVista.Designer.cs">
+      <DependentUpon>ModificarViajesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarVueltaVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarVueltaVista.Designer.cs">
+      <DependentUpon>ModificarVueltaVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\MovilesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\MovilesVista.Designer.cs">
+      <DependentUpon>MovilesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\OperadoresVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\OperadoresVista.Designer.cs">
+      <DependentUpon>OperadoresVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\ViajesVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\ViajesVista.Designer.cs">
+      <DependentUpon>ViajesVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\VueltaVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\VueltaVista.Designer.cs">
+      <DependentUpon>VueltaVista.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -144,8 +390,32 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Vistas\AyudaVista.resx">
+      <DependentUpon>AyudaVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\BasesVista.resx">
+      <DependentUpon>BasesVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\ConfiguracionesVista.resx">
+      <DependentUpon>ConfiguracionesVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\InicioVista.resx">
+      <DependentUpon>InicioVista.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\MovilesVista.resx">
+      <DependentUpon>MovilesVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\OperadoresVista.resx">
+      <DependentUpon>OperadoresVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\ViajesVista.resx">
+      <DependentUpon>ViajesVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\VueltaVista.resx">
+      <DependentUpon>VueltaVista.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

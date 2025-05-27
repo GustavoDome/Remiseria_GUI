@@ -1,6 +1,7 @@
 ﻿using Npgsql;
 using Programa.Conexion;
 using Programa.Modelos;
+using Programa.Modelos.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
