@@ -11,6 +11,7 @@ namespace Programa.Modelos
         private int id;
         private string rolUsuario;
         private string nombre;
+        private string contrasena;
         private string direccion;
         private string telefono;
         private string fuente;
@@ -21,61 +22,67 @@ namespace Programa.Modelos
 
         public int Id
         {
-            get {return Id;}
-            set {Id = value;}
+            get {return id;}
+            set {id = value;}
         }
         public string RolUsuario
         {
-            get { return RolUsuario; }
-            set {  RolUsuario = value;}
+            get { return rolUsuario; }
+            set {  rolUsuario = value;}
         }
 
         public string Nombre
         {
-            get { return Nombre; }
-            set { Nombre = value; }
+            get { return nombre; }
+            set { nombre = value; }
+        }
+
+        public string Contrasena 
+        {
+            get { return contrasena; }
+            set { contrasena = value;}
         }
 
         public string Direccion
         {
-            get { return Direccion; }
-            set { Direccion = value; }
+            get { return direccion; }
+            set { direccion = value; }
         }
 
         public string Telefono
         {
-            get { return Telefono; }
-            set { Telefono = value; }
+            get { return telefono; }
+            set { telefono = value; }
         }
 
         public string Fuente
         {
-            get { return Fuente; }
-            set { Fuente = value; }
+            get { return fuente; }
+            set { fuente = value; }
         }
 
         public bool Activo
         {
-            get { return Activo; }
-            set { Activo = value; }
+            get { return activo; }
+            set { activo = value; }
         }
 
         public string TamanoFuente
         {
-            get { return TamanoFuente; }
-            set { TamanoFuente = value; }
+            get { return tamanoFuente; }
+            set { tamanoFuente = value; }
         }
 
         public string TemaSistema
         {
-            get { return TemaSistema; }
-            set { TemaSistema = value; }
+            get { return temaSistema; }
+            set { temaSistema = value; }
         }
 
         public string TipoAlarma
         {
-            get { return TipoAlarma; }
-            set { TipoAlarma = value; }
+            get { return tipoAlarma; }
+            set { tipoAlarma = value; }
         }
     }
 }

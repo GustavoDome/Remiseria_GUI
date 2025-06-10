@@ -19,12 +19,13 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"INSERT INTO Operador (rolUsuario, nombre, direccion, telefono, tipo_fuente, color_sistema, tamanoFuente, tipoAlarma, activo)
-                                 VALUES (@rolUsuario, @nombre, @direccion, @telefono, @tipo_fuente, @color_sistema, @tamanoFuente, @tipoAlarma, @activo);";
+                string query = @"INSERT INTO Operador (rolUsuario, nombre, contrasena, direccion, telefono, tipo_fuente, color_sistema, tamanoFuente, tipoAlarma, activo)
+                                 VALUES (@rolUsuario, @nombre, @contrasena, @direccion, @telefono, @tipo_fuente, @color_sistema, @tamanoFuente, @tipoAlarma, @activo);";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@rolUsuario", usuarioModelo.RolUsuario);
                     cmd.Parameters.AddWithValue("@nombre", usuarioModelo.Nombre);
+                    cmd.Parameters.AddWithValue("@contrasena", usuarioModelo.Contrasena);
                     cmd.Parameters.AddWithValue("@direccion", usuarioModelo.Direccion);
                     cmd.Parameters.AddWithValue("@telefono", usuarioModelo.Telefono);
                     cmd.Parameters.AddWithValue("@tipo_fuente", usuarioModelo.Fuente);
@@ -43,7 +44,7 @@ namespace Programa.Repositorios
             using (var conn = BD.Abrirconexion())
             {
                 string query = @"UPDATE Operador SET 
-                                 rolUsuario=@rolUsuario, nombre=@nombre, direccion=@direccion, telefono=@telefono, tipo_fuente=@tipo_fuente, 
+                                 rolUsuario=@rolUsuario, nombre=@nombre, contrasena=@contrasena, direccion=@direccion, telefono=@telefono, tipo_fuente=@tipo_fuente, 
                                  color_sistema=@color_sistema, tamanoFuente=@tamanoFuente, tipoAlarma=@tipoAlarma
                                  WHERE id_operador=@id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -51,6 +52,7 @@ namespace Programa.Repositorios
                     cmd.Parameters.AddWithValue("@id", usuarioModelo.Id);
                     cmd.Parameters.AddWithValue("@rolUsuario", usuarioModelo.RolUsuario);
                     cmd.Parameters.AddWithValue("@nombre", usuarioModelo.Nombre);
+                    cmd.Parameters.AddWithValue("@contrasena", usuarioModelo.Contrasena);
                     cmd.Parameters.AddWithValue("@direccion", usuarioModelo.Direccion);
                     cmd.Parameters.AddWithValue("@telefono", usuarioModelo.Telefono);
                     cmd.Parameters.AddWithValue("@tipo_fuente", usuarioModelo.Fuente);
@@ -102,5 +104,34 @@ namespace Programa.Repositorios
 
             return lista;
         }
+
+        public UsuarioModelo LoginUsuario(string nombre, string contrasena)
+        {
+            using (var conn = BD.Abrirconexion())
+            {
+                string query = "SELECT * FROM Operador WHERE nombre=@nombre AND contrasena=@contrasena AND activo=TRUE;";
+                using (var cmd = new NpgsqlCommand(query, conn))
+                {
+                    cmd.Parameters.AddWithValue("@nombre", nombre);
+                    cmd.Parameters.AddWithValue("@contrasena", contrasena);
+
+                    using (var reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            return new UsuarioModelo
+                            {
+                                Id = reader.GetInt32(reader.GetOrdinal("id_operador")),
+                                Nombre = reader.GetString(reader.GetOrdinal("nombre")),
+                                RolUsuario = reader.GetString(reader.GetOrdinal("rolUsuario")),
+                            };
+                        }
+                    }
+                }
+            }
+
+            return null; // No encontrado
+        }
+
     }
 }

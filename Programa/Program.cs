@@ -1,23 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Programa.Presentadores;
+using Programa.Repositorios;
 using Programa.Vistas;
 
 namespace Programa
 {
     internal static class Program
     {
-        /// <summary>
-        /// Punto de entrada principal para la aplicación.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Vistas.Login());
+
+            // Instanciar la vista una única vez
+            var loginVista = Login.ObtenerInstancia();
+
+            // Instanciar el repositorio
+            var repositorio = new UsuarioRepositorio();
+
+            // Instanciar el presentador
+            var presentador = new LoginPresentador(loginVista, repositorio);
+
+            // Ejecutar la aplicación con esa única instancia
+            Application.Run(loginVista);
         }
     }
 }

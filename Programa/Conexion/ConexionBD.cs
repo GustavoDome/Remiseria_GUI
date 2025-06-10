@@ -13,7 +13,7 @@ namespace Programa.Conexion
         private readonly string connectionString;
         public ConexionBD()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["PostgresConnection"].ConnectionString;
+            connectionString = ConfigurationManager.ConnectionStrings["ConexionBD"].ConnectionString;
         }
 
         public NpgsqlConnection Abrirconexion ()

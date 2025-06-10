@@ -8,5 +8,11 @@ namespace Programa.Vistas.Interfaces
 {
     public interface ILogin
     {
+        //Propiedades
+        string txtUsuarios { get; }
+        string txtContrasenas { get; }
+
+        //Eventos
+        event EventHandler btnIngresar;
     }
 }
