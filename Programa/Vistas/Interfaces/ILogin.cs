@@ -9,10 +9,10 @@ namespace Programa.Vistas.Interfaces
     public interface ILogin
     {
         //Propiedades
-        string txtUsuarios { get; }
-        string txtContrasenas { get; }
+        string txtUsuarios { get; set; }
+        string txtContrasenas { get; set; }
 
         //Eventos
-        event EventHandler btnIngresar;
+        event EventHandler buscarUsuario;
     }
 }

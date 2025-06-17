@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.Vistas;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Programa.Modelos.Interfaces
         void editar(UsuarioModelo usuarioModelo);
         void eliminar(int id);
         IEnumerable<UsuarioModelo> mostrarTodo();
+        UsuarioModelo LoginUsuario(string nombre, string contrasena);
     }
 }

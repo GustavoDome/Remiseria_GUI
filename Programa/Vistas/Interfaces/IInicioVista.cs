@@ -11,17 +11,13 @@ namespace Programa.Vistas.Interfaces
     {
 
         //Eventos
-        event EventHandler btnOperadores;
-        event EventHandler btnMoviles;
-        event EventHandler btnViajes;
-        event EventHandler btnVuelta;
-        event EventHandler btnBases;
-        event EventHandler btnVolver;
-        event EventHandler btnRecAgregar;
-        event EventHandler btnRecModificar;
-        event EventHandler btnRecEliminar;
-        event EventHandler btnAyuda;
-        event EventHandler btnConfiguracion;
+        event EventHandler agregarRecordatorio;
+        event EventHandler eliminarRecordatorio;
+        event EventHandler modificarRecordatorio;
+        event EventHandler ingresarViajes;
+        event EventHandler ingresarBases;
+        event EventHandler ingresarVueltas;
+        event EventHandler ingresarMoviles;
 
         //Metodos
         void SetRecordatoriosBindingSource(BindingSource RecordatorioLista);

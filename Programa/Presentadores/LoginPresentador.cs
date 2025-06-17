@@ -1,5 +1,7 @@
 ﻿using Programa.Modelos;
+using Programa.Modelos.Interfaces;
 using Programa.Repositorios;
+using Programa.Vistas;
 using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,34 +12,35 @@ using System.Windows.Forms;
 
 namespace Programa.Presentadores
 {
-    internal class LoginPresentador
+    public class LoginPresentador
     {
-        private readonly ILogin vista;
-        private readonly UsuarioRepositorio repositorio;
+        private IUsuarioRepositorio repositorio;
+        private ILogin vista;
+        private IEnumerable<UsuarioModelo> modelos_usuario;
+        private BindingSource filtrador;
 
-        public LoginPresentador(ILogin vista, UsuarioRepositorio repositorio)
+        //Constructor
+        public LoginPresentador(ILogin vista, IUsuarioRepositorio repositorio)
         {
+            this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
-            Console.WriteLine("Estuve aqui");
-            this.vista.btnIngresar += ValidarLogin;
+
+            //metodos
+
+            this.vista.buscarUsuario += buscar_usuario;
         }
 
-        private void ValidarLogin(object sender, EventArgs e)
+        private void buscar_usuario(object sender, EventArgs e)
         {
-            string nombre = vista.txtUsuarios;
-            string contrasena = vista.txtContrasenas;
+            var usuario = repositorio.LoginUsuario(vista.txtUsuarios,vista.txtContrasenas);
 
-            UsuarioModelo usuario = repositorio.LoginUsuario(nombre, contrasena);
-
-            if (usuario != null)
+            if(usuario != null) 
             {
-                MessageBox.Show($"Bienvenido {usuario.Nombre}, rol: {usuario.RolUsuario}");
-                // Ir a menú principal
             }
-            else
+            else 
             {
-                MessageBox.Show("Usuario o contraseña incorrectos");
+                MessageBox.Show("No se encontro al usuario");
             }
         }
     }

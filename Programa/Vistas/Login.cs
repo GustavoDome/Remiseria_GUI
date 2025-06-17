@@ -16,22 +16,34 @@ namespace Programa.Vistas
         public Login() //Constructor del archivo
         {
             InitializeComponent();
-            this.FormClosed += (s, e) => Application.Exit(); // Metodo para cerrar el programa
+            asociacionPresentador();
+        }
+
+        //Conexion con el presentador
+        void asociacionPresentador()
+        {
+            btnIngresar.Click += delegate 
+            {
+                buscarUsuario?.Invoke(this, EventArgs.Empty);
+            };
         }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static Login instancia;
 
         // Variables que contienen los Inputs de los TextInput
-        public string txtUsuarios { get => txtUsuario.Text; }
-        public string txtContrasenas { get => txtContrasena.Text; }
-
-        // Metodo para el boton de la vista. Lo ejecuta el presentador
-        event EventHandler ILogin.btnIngresar
+        public string txtUsuarios 
         {
-            add {this.btnIngresar.Click += value;}
-            remove {this.btnIngresar.Click -= value;}
+            get { return txtUsuario.Text;}
+            set { txtUsuario.Text = value; }
         }
+        public string txtContrasenas 
+        {
+            get { return txtContrasena.Text; }
+            set { txtContrasena.Text = value; }
+        }
+        // Metodo para el boton de la vista. Lo ejecuta el presentador
+        public event EventHandler buscarUsuario;
 
         // Metodo para el uso del Singleton
         public static Login ObtenerInstancia()

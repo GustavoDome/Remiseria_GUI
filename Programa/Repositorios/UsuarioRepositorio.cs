@@ -92,7 +92,7 @@ namespace Programa.Repositorios
                     {
                         lista.Add(new UsuarioModelo
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("id")),
+                            Id = reader.GetInt32(reader.GetOrdinal("id_operador")),
                             Nombre = reader.GetString(reader.GetOrdinal("nombre")),
                             Direccion = reader.GetString(reader.GetOrdinal("direccion")),
                             Telefono = reader.GetString(reader.GetOrdinal("telefono")),
@@ -123,15 +123,16 @@ namespace Programa.Repositorios
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("id_operador")),
                                 Nombre = reader.GetString(reader.GetOrdinal("nombre")),
-                                RolUsuario = reader.GetString(reader.GetOrdinal("rolUsuario")),
+                                RolUsuario = reader.GetString(reader.GetOrdinal("rolUsuario"))
                             };
+                        }
+                        else 
+                        {
+                            return null;
                         }
                     }
                 }
             }
-
-            return null; // No encontrado
         }
-
-    }
+    }   
 }

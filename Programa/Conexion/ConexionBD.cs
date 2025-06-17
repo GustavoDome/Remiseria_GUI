@@ -13,7 +13,8 @@ namespace Programa.Conexion
         private readonly string connectionString;
         public ConexionBD()
         {
-            connectionString = ConfigurationManager.ConnectionStrings["ConexionBD"].ConnectionString;
+            connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
         }
 
         public NpgsqlConnection Abrirconexion ()

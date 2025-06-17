@@ -16,5 +16,28 @@ namespace Programa.Vistas
         {
             InitializeComponent();
         }
+
+
+        // Variable que llamaran los otros forms para el comportamiento Singleton
+        private static InicioVista instancia;
+
+        // Metodo para el uso del Singleton
+        public static InicioVista ObtenerInstancia()
+        {
+            if (instancia == null || instancia.IsDisposed)
+            {
+                instancia = new InicioVista();
+            }
+            else
+            {
+                if (instancia.WindowState == FormWindowState.Minimized)
+                {
+                    instancia.WindowState = FormWindowState.Normal;
+                }
+                instancia.BringToFront();
+                instancia.Activate();
+            }
+            return instancia;
+        }
     }
 }
