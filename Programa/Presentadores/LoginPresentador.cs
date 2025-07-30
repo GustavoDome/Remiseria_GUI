@@ -18,6 +18,7 @@ namespace Programa.Presentadores
         private ILogin vista;
         private IEnumerable<UsuarioModelo> modelos_usuario;
         private BindingSource filtrador;
+        private string rol;
 
         //Constructor
         public LoginPresentador(ILogin vista, IUsuarioRepositorio repositorio)
@@ -37,6 +38,11 @@ namespace Programa.Presentadores
 
             if(usuario != null) 
             {
+                MessageBox.Show("se encontro al usuario");
+                IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
+                IInicioVista inicio = InicioVista.ObtenerInstancia((Login)vista);
+                new InicioPresentador(inicio, recordatorio);
+
             }
             else 
             {

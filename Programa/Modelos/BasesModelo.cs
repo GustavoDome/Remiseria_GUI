@@ -23,8 +23,8 @@ namespace Programa.Modelos
 
         public bool Estado_base
         {
-            get { return Estado_base; }
-            set {  Estado_base = value; }
+            get { return estado_base; }
+            set {  estado_base = value; }
         }
 
         public string Fecha_base

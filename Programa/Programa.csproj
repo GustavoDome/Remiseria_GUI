@@ -118,6 +118,7 @@
     <Compile Include="Modelos\RespuestaModelo.cs" />
     <Compile Include="Modelos\UsuarioModelo.cs" />
     <Compile Include="Modelos\ViajesModelo.cs" />
+    <Compile Include="Presentadores\InicioPresentador.cs" />
     <Compile Include="Presentadores\LoginPresentador.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -178,6 +179,12 @@
     <Compile Include="Vistas\Alta\AgregarOperadoresVista.Designer.cs">
       <DependentUpon>AgregarOperadoresVista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Alta\AgregarPlanillaCostoVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Alta\AgregarPlanillaCostoVista.Designer.cs">
+      <DependentUpon>AgregarPlanillaCostoVista.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Alta\AgregarViajesVista.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -205,69 +212,6 @@
     <Compile Include="Vistas\AyudaVista.Designer.cs">
       <DependentUpon>AyudaVista.cs</DependentUpon>
     </Compile>
-    <Compile Include="Vistas\Baja\EliminarAyudaVistaCategoria.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarAyudaVistaCategoria.Designer.cs">
-      <DependentUpon>EliminarAyudaVistaCategoria.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarAyudaVistaPregunta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarAyudaVistaPregunta.Designer.cs">
-      <DependentUpon>EliminarAyudaVistaPregunta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarAyudaVistaRespuesta.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarAyudaVistaRespuesta.Designer.cs">
-      <DependentUpon>EliminarAyudaVistaRespuesta.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarBasesVista.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarBasesVista.Designer.cs">
-      <DependentUpon>EliminarBasesVista.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarInicioVistaRecordatorio.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarInicioVistaRecordatorio.Designer.cs">
-      <DependentUpon>EliminarInicioVistaRecordatorio.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarMovilesVista.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarMovilesVista.Designer.cs">
-      <DependentUpon>EliminarMovilesVista.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarOperadoresVista.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarOperadoresVista.Designer.cs">
-      <DependentUpon>EliminarOperadoresVista.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarViajesVista.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarViajesVista.Designer.cs">
-      <DependentUpon>EliminarViajesVista.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarVueltaVista.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Vistas\Baja\EliminarVueltaVista.Designer.cs">
-      <DependentUpon>EliminarVueltaVista.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Vistas\Baja\Interfaces\IEliminarAyudaVistaCategoria.cs" />
-    <Compile Include="Vistas\Baja\Interfaces\IEliminarAyudaVistaPregunta.cs" />
-    <Compile Include="Vistas\Baja\Interfaces\IEliminarAyudaVistaRespuesta.cs" />
-    <Compile Include="Vistas\Baja\Interfaces\IEliminarBasesVista.cs" />
-    <Compile Include="Vistas\Baja\Interfaces\IEliminarInicioVistaRecordatorio.cs" />
-    <Compile Include="Vistas\Baja\Interfaces\IEliminarMovilesVista.cs" />
-    <Compile Include="Vistas\Baja\Interfaces\IEliminarOperadoresVista.cs" />
-    <Compile Include="Vistas\Baja\Interfaces\IEliminarViajesVista.cs" />
-    <Compile Include="Vistas\Baja\Interfaces\IEliminarVueltaVista.cs" />
     <Compile Include="Vistas\BasesVista.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -352,6 +296,36 @@
     <Compile Include="Vistas\Modificacion\ModificarOperadoresVista.Designer.cs">
       <DependentUpon>ModificarOperadoresVista.cs</DependentUpon>
     </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCiudad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCiudad.Designer.cs">
+      <DependentUpon>ModificarPlanillaCostoVistaCiudad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCiudadPrecio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCiudadPrecio.Designer.cs">
+      <DependentUpon>ModificarPlanillaCostoVistaCiudadPrecio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCuadraPrecio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCuadraPrecio.Designer.cs">
+      <DependentUpon>ModificarPlanillaCostoVistaCuadraPrecio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaEsperaCiudad.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaEsperaCiudad.Designer.cs">
+      <DependentUpon>ModificarPlanillaCostoVistaEsperaCiudad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaEsperaCuadra.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaEsperaCuadra.Designer.cs">
+      <DependentUpon>ModificarPlanillaCostoVistaEsperaCuadra.cs</DependentUpon>
+    </Compile>
     <Compile Include="Vistas\Modificacion\ModificarViajesVista.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -375,6 +349,12 @@
     </Compile>
     <Compile Include="Vistas\OperadoresVista.Designer.cs">
       <DependentUpon>OperadoresVista.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\PlanillaCostoVista.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\PlanillaCostoVista.Designer.cs">
+      <DependentUpon>PlanillaCostoVista.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\ViajesVista.cs">
       <SubType>Form</SubType>
@@ -421,6 +401,9 @@
     <EmbeddedResource Include="Vistas\Alta\AgregarOperadoresVista.resx">
       <DependentUpon>AgregarOperadoresVista.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Alta\AgregarPlanillaCostoVista.resx">
+      <DependentUpon>AgregarPlanillaCostoVista.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Alta\AgregarViajesVista.resx">
       <DependentUpon>AgregarViajesVista.cs</DependentUpon>
     </EmbeddedResource>
@@ -442,11 +425,56 @@
     <EmbeddedResource Include="Vistas\Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarAyudaVistaCategoria.resx">
+      <DependentUpon>ModificarAyudaVistaCategoria.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarAyudaVistaPregunta.resx">
+      <DependentUpon>ModificarAyudaVistaPregunta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarAyudaVistaRespuesta.resx">
+      <DependentUpon>ModificarAyudaVistaRespuesta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarBasesVista.resx">
+      <DependentUpon>ModificarBasesVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarInicioVistaRecordatorio.resx">
+      <DependentUpon>ModificarInicioVistaRecordatorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarMovilesVista.resx">
+      <DependentUpon>ModificarMovilesVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarOperadoresVista.resx">
+      <DependentUpon>ModificarOperadoresVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCiudad.resx">
+      <DependentUpon>ModificarPlanillaCostoVistaCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCiudadPrecio.resx">
+      <DependentUpon>ModificarPlanillaCostoVistaCiudadPrecio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCuadraPrecio.resx">
+      <DependentUpon>ModificarPlanillaCostoVistaCuadraPrecio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarPlanillaCostoVistaEsperaCiudad.resx">
+      <DependentUpon>ModificarPlanillaCostoVistaEsperaCiudad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarPlanillaCostoVistaEsperaCuadra.resx">
+      <DependentUpon>ModificarPlanillaCostoVistaEsperaCuadra.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarViajesVista.resx">
+      <DependentUpon>ModificarViajesVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarVueltaVista.resx">
+      <DependentUpon>ModificarVueltaVista.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Vistas\MovilesVista.resx">
       <DependentUpon>MovilesVista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\OperadoresVista.resx">
       <DependentUpon>OperadoresVista.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\PlanillaCostoVista.resx">
+      <DependentUpon>PlanillaCostoVista.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\ViajesVista.resx">
       <DependentUpon>ViajesVista.cs</DependentUpon>

@@ -38,24 +38,24 @@ namespace Programa.Modelos
         public string Direccion
         {
             get { return direccion; }
-            set { Direccion = value; }
+            set { direccion = value; }
         }
 
         public bool Chofer
         {
-            get { return Chofer; }
-            set { Chofer = value; }
+            get { return chofer; }
+            set { chofer = value; }
         }
         public string Telefono
         {
-            get { return Telefono; }
-            set {  Telefono = value; }
+            get { return telefono; }
+            set {  telefono = value; }
         }
 
         public bool Activo
         {
-            get { return Activo; }
-            set { Activo = value; }
+            get { return activo; }
+            set { activo = value; }
         }
     }
 }

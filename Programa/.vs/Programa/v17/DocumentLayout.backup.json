@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\vistas\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:vistas\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\vistas\\interfaces\\ilogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:vistas\\interfaces\\ilogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\presentadores\\loginpresentador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\presentadores\\loginpresentador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:presentadores\\loginpresentador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\vistas\\iniciovista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:vistas\\iniciovista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\vistas\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:vistas\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\presentadores\\iniciopresentador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:presentadores\\iniciopresentador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\vistas\\iniciovista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -34,82 +22,45 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Login.cs",
-              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Login.cs",
-              "RelativeDocumentMoniker": "Vistas\\Login.cs",
-              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Login.cs",
-              "RelativeToolTip": "Vistas\\Login.cs",
-              "ViewState": "AgIAABYAAAAAAAAAAAAgwCsAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T20:35:58.48Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 2,
               "Title": "InicioVista.cs",
               "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\InicioVista.cs",
               "RelativeDocumentMoniker": "Vistas\\InicioVista.cs",
               "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\InicioVista.cs",
               "RelativeToolTip": "Vistas\\InicioVista.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAswBYAAAA0AAAAAAAAAA==",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAowGYAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T23:16:39.008Z",
+              "WhenOpened": "2025-07-20T16:21:52.788Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "InicioVista.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\InicioVista.cs",
-              "RelativeDocumentMoniker": "Vistas\\InicioVista.cs",
-              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\InicioVista.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Vistas\\InicioVista.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T23:16:34.045Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Login.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Login.cs",
-              "RelativeDocumentMoniker": "Vistas\\Login.cs",
-              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Login.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Vistas\\Login.cs [Dise\u00F1o]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-17T22:41:10.417Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ILogin.cs",
-              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Interfaces\\ILogin.cs",
-              "RelativeDocumentMoniker": "Vistas\\Interfaces\\ILogin.cs",
-              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Interfaces\\ILogin.cs",
-              "RelativeToolTip": "Vistas\\Interfaces\\ILogin.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAxwA0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T22:45:18.623Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "LoginPresentador.cs",
               "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Presentadores\\LoginPresentador.cs",
               "RelativeDocumentMoniker": "Presentadores\\LoginPresentador.cs",
               "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Presentadores\\LoginPresentador.cs",
               "RelativeToolTip": "Presentadores\\LoginPresentador.cs",
-              "ViewState": "AgIAACEAAAAAAAAAAAA5wCoAAAA9AAAAAAAAAA==",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwB0AAAAVAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-06-10T22:17:38.744Z",
+              "WhenOpened": "2025-07-20T15:33:53.766Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "InicioPresentador.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Presentadores\\InicioPresentador.cs",
+              "RelativeDocumentMoniker": "Presentadores\\InicioPresentador.cs",
+              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Presentadores\\InicioPresentador.cs",
+              "RelativeToolTip": "Presentadores\\InicioPresentador.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwBYAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-20T15:33:48.816Z",
               "EditorCaption": ""
             }
           ]
