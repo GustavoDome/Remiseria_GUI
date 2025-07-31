@@ -51,6 +51,7 @@ namespace Programa.Vistas
             if (instancia == null || instancia.IsDisposed)
             {
                 instancia = new Login();
+                instancia.Show();
             }
             else
             {

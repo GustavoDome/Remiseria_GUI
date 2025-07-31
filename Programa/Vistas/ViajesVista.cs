@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.Vistas.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,11 +11,34 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas
 {
-    public partial class ViajesVista : Form
+    public partial class ViajesVista : Form, IViajesVista
     {
         public ViajesVista()
         {
             InitializeComponent();
+        }
+
+        // Variable que llamaran los otros forms para el comportamiento Singleton
+        private static ViajesVista instancia;
+
+        // Metodo para el uso del Singleton
+        public static ViajesVista ObtenerInstancia()
+        {
+            if (instancia == null || instancia.IsDisposed)
+            {
+                instancia = new ViajesVista();
+                instancia.Show();
+            }
+            else
+            {
+                if (instancia.WindowState == FormWindowState.Minimized)
+                {
+                    instancia.WindowState = FormWindowState.Normal;
+                }
+                instancia.BringToFront();
+                instancia.Activate();
+            }
+            return instancia;
         }
     }
 }

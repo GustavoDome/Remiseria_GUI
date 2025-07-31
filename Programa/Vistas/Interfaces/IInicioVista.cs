@@ -17,9 +17,9 @@ namespace Programa.Vistas.Interfaces
         event EventHandler ingresarBases;
         event EventHandler ingresarVueltas;
         event EventHandler ingresarMoviles;
-        event EventHandler ingresaroperadores;
-        event EventHandler ingresarayuda;
-        event EventHandler ingresarconfiguracion;
+        event EventHandler ingresarOperadores;
+        event EventHandler ingresarAyuda;
+        event EventHandler ingresarConfiguracion;
         event EventHandler volver;
 
 

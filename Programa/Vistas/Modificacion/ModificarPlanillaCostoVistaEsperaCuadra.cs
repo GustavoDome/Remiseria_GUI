@@ -16,5 +16,29 @@ namespace Programa.Vistas.Modificacion
         {
             InitializeComponent();
         }
+
+
+        // Variable que llamaran los otros forms para el comportamiento Singleton
+        private static ModificarPlanillaCostoVistaEsperaCuadra instancia;
+
+        // Metodo para el uso del Singleton
+        public static ModificarPlanillaCostoVistaEsperaCuadra ObtenerInstancia()
+        {
+            if (instancia == null || instancia.IsDisposed)
+            {
+                instancia = new ModificarPlanillaCostoVistaEsperaCuadra();
+                instancia.Show();
+            }
+            else
+            {
+                if (instancia.WindowState == FormWindowState.Minimized)
+                {
+                    instancia.WindowState = FormWindowState.Normal;
+                }
+                instancia.BringToFront();
+                instancia.Activate();
+            }
+            return instancia;
+        }
     }
 }

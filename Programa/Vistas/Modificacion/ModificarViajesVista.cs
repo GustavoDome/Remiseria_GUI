@@ -16,5 +16,29 @@ namespace Programa.Vistas.Modificacion
         {
             InitializeComponent();
         }
+
+
+        // Variable que llamaran los otros forms para el comportamiento Singleton
+        private static ModificarViajesVista instancia;
+
+        // Metodo para el uso del Singleton
+        public static ModificarViajesVista ObtenerInstancia()
+        {
+            if (instancia == null || instancia.IsDisposed)
+            {
+                instancia = new ModificarViajesVista();
+                instancia.Show();
+            }
+            else
+            {
+                if (instancia.WindowState == FormWindowState.Minimized)
+                {
+                    instancia.WindowState = FormWindowState.Normal;
+                }
+                instancia.BringToFront();
+                instancia.Activate();
+            }
+            return instancia;
+        }
     }
 }

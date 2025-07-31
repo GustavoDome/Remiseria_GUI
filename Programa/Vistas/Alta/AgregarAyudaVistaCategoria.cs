@@ -16,5 +16,29 @@ namespace Programa.Vistas.Alta
         {
             InitializeComponent();
         }
+
+
+        // Variable que llamaran los otros forms para el comportamiento Singleton
+        private static AgregarAyudaVistaCategoria instancia;
+
+        // Metodo para el uso del Singleton
+        public static AgregarAyudaVistaCategoria ObtenerInstancia()
+        {
+            if (instancia == null || instancia.IsDisposed)
+            {
+                instancia = new AgregarAyudaVistaCategoria();
+                instancia.Show();
+            }
+            else
+            {
+                if (instancia.WindowState == FormWindowState.Minimized)
+                {
+                    instancia.WindowState = FormWindowState.Normal;
+                }
+                instancia.BringToFront();
+                instancia.Activate();
+            }
+            return instancia;
+        }
     }
 }

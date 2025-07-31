@@ -16,5 +16,29 @@ namespace Programa.Vistas.Alta
         {
             InitializeComponent();
         }
+
+
+        // Variable que llamaran los otros forms para el comportamiento Singleton
+        private static AgregarViajesVista instancia;
+
+        // Metodo para el uso del Singleton
+        public static AgregarViajesVista ObtenerInstancia()
+        {
+            if (instancia == null || instancia.IsDisposed)
+            {
+                instancia = new AgregarViajesVista();
+                instancia.Show();
+            }
+            else
+            {
+                if (instancia.WindowState == FormWindowState.Minimized)
+                {
+                    instancia.WindowState = FormWindowState.Normal;
+                }
+                instancia.BringToFront();
+                instancia.Activate();
+            }
+            return instancia;
+        }
     }
 }

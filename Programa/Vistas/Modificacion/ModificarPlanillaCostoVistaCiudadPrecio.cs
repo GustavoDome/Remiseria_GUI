@@ -16,5 +16,30 @@ namespace Programa.Vistas.Modificacion
         {
             InitializeComponent();
         }
+
+
+
+        // Variable que llamaran los otros forms para el comportamiento Singleton
+        private static ModificarPlanillaCostoVistaCiudadPrecio instancia;
+
+        // Metodo para el uso del Singleton
+        public static ModificarPlanillaCostoVistaCiudadPrecio ObtenerInstancia()
+        {
+            if (instancia == null || instancia.IsDisposed)
+            {
+                instancia = new ModificarPlanillaCostoVistaCiudadPrecio();
+                instancia.Show();
+            }
+            else
+            {
+                if (instancia.WindowState == FormWindowState.Minimized)
+                {
+                    instancia.WindowState = FormWindowState.Normal;
+                }
+                instancia.BringToFront();
+                instancia.Activate();
+            }
+            return instancia;
+        }
     }
 }

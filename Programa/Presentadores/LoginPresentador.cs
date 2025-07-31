@@ -16,7 +16,7 @@ namespace Programa.Presentadores
     {
         private IUsuarioRepositorio repositorio;
         private ILogin vista;
-        private IEnumerable<UsuarioModelo> modelos_usuario;
+        private IEnumerable<UsuarioModelo> modelosUsuario;
         private BindingSource filtrador;
         private string rol;
 
@@ -40,8 +40,9 @@ namespace Programa.Presentadores
             {
                 MessageBox.Show("se encontro al usuario");
                 IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
-                IInicioVista inicio = InicioVista.ObtenerInstancia((Login)vista);
+                IInicioVista inicio = InicioVista.ObtenerInstancia();
                 new InicioPresentador(inicio, recordatorio);
+                ((Form)vista).Hide();
 
             }
             else 

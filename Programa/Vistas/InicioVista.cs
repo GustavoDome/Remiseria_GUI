@@ -44,17 +44,17 @@ namespace Programa.Vistas
 
             btnAyuda.Click += delegate 
             {
-                ingresarayuda?.Invoke(this, EventArgs.Empty);
+                ingresarAyuda?.Invoke(this, EventArgs.Empty);
             };
 
             btnConfiguracion.Click += delegate
             {
-                ingresarconfiguracion?.Invoke(this, EventArgs.Empty);
+                ingresarConfiguracion?.Invoke(this, EventArgs.Empty);
             };
 
             btnOperadores.Click += delegate 
             {
-                ingresaroperadores?.Invoke(this, EventArgs.Empty);
+                ingresarOperadores?.Invoke(this, EventArgs.Empty);
             };
 
             btnMoviles.Click += delegate
@@ -89,18 +89,18 @@ namespace Programa.Vistas
         public event EventHandler ingresarBases;
         public event EventHandler ingresarVueltas;
         public event EventHandler ingresarMoviles;
-        public event EventHandler ingresarayuda;
-        public event EventHandler ingresaroperadores;
-        public event EventHandler ingresarconfiguracion;
+        public event EventHandler ingresarAyuda;
+        public event EventHandler ingresarOperadores;
+        public event EventHandler ingresarConfiguracion;
         public event EventHandler volver;
 
         // Metodo para el uso del Singleton
-        public static InicioVista ObtenerInstancia(Form vistapadre)
+        public static InicioVista ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)
             {
                 instancia = new InicioVista();
-                instancia.MdiParent = vistapadre;
+                instancia.Show();
             }
             else
             {
