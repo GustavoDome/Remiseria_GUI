@@ -1,12 +1,20 @@
-﻿using System;
+﻿using Programa.Modelos;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
     public interface IMovilesVista
     {
+        event EventHandler agregarMovil;
+        event EventHandler modificarMovil;
+        event EventHandler eliminarMovil;
+        event EventHandler volver;
+
+        void SetMovilesBindingSource(BindingSource moviles);
     }
 }

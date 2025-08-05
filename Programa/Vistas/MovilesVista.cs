@@ -16,11 +16,37 @@ namespace Programa.Vistas
         public MovilesVista()
         {
             InitializeComponent();
+            asociacionPresentador();
+        }
+
+        public void asociacionPresentador()
+        {
+            btnAgregar.Click += delegate 
+            {
+                agregarMovil?.Invoke(this, EventArgs.Empty);
+            };
+            btnModificar.Click += delegate 
+            {
+                modificarMovil?.Invoke(this, EventArgs.Empty);
+            };
+            btnEliminar.Click += delegate
+            {
+                eliminarMovil?.Invoke(this, EventArgs.Empty);
+            };
+            btnVolver.Click += delegate 
+            {
+                volver?.Invoke(this, EventArgs.Empty);
+            };
         }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static MovilesVista instancia;
 
+        public event EventHandler agregarMovil;
+        public event EventHandler modificarMovil;
+        public event EventHandler eliminarMovil;
+        public event EventHandler volver;
+        public void SetMovilesBindingSource(BindingSource moviles) { }
         // Metodo para el uso del Singleton
         public static MovilesVista ObtenerInstancia()
         {

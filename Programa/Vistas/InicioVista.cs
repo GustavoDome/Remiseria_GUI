@@ -26,52 +26,42 @@ namespace Programa.Vistas
             {
                 agregarRecordatorio?.Invoke(this, EventArgs.Empty);
             };
-
             btnRecModificar.Click += delegate 
             {
                 modificarRecordatorio?.Invoke(this, EventArgs.Empty);
             };
-
             btnRecEliminar.Click += delegate
             {
                 eliminarRecordatorio?.Invoke(this, EventArgs.Empty);
             };
-
             btnVolver.Click += delegate 
             {
                 volver?.Invoke(this, EventArgs.Empty);
             };
-
             btnAyuda.Click += delegate 
             {
                 ingresarAyuda?.Invoke(this, EventArgs.Empty);
             };
-
             btnConfiguracion.Click += delegate
             {
                 ingresarConfiguracion?.Invoke(this, EventArgs.Empty);
             };
-
             btnOperadores.Click += delegate 
             {
                 ingresarOperadores?.Invoke(this, EventArgs.Empty);
             };
-
             btnMoviles.Click += delegate
             {
                 ingresarMoviles?.Invoke(this, EventArgs.Empty);
             };
-
             btnViajes.Click += delegate
             {
                 ingresarViajes?.Invoke(this, EventArgs.Empty);
             };
-
             btnVuelta.Click += delegate
             {
                 ingresarVueltas?.Invoke(this, EventArgs.Empty);
             };
-
             btnBases.Click += delegate
             {
                 ingresarBases?.Invoke(this, EventArgs.Empty);

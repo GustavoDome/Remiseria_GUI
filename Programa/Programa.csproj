@@ -118,12 +118,14 @@
     <Compile Include="Modelos\RespuestaModelo.cs" />
     <Compile Include="Modelos\UsuarioModelo.cs" />
     <Compile Include="Modelos\ViajesModelo.cs" />
+    <Compile Include="Presentadores\AyudaPresentador.cs" />
     <Compile Include="Presentadores\BasesPresentador.cs" />
     <Compile Include="Presentadores\ConfiguracionesPresentador.cs" />
     <Compile Include="Presentadores\InicioPresentador.cs" />
     <Compile Include="Presentadores\LoginPresentador.cs" />
     <Compile Include="Presentadores\MovilesPresentador.cs" />
     <Compile Include="Presentadores\OperadoresPresentador.cs" />
+    <Compile Include="Presentadores\PlanillaCostoPresentador.cs" />
     <Compile Include="Presentadores\ViajesPresentador.cs" />
     <Compile Include="Presentadores\VueltaPresentador.cs" />
     <Compile Include="Program.cs" />
@@ -243,6 +245,7 @@
     <Compile Include="Vistas\Interfaces\ILogin.cs" />
     <Compile Include="Vistas\Interfaces\IMovilesVista.cs" />
     <Compile Include="Vistas\Interfaces\IOperadoresVista.cs" />
+    <Compile Include="Vistas\Interfaces\IPlanillaCostoVista.cs" />
     <Compile Include="Vistas\Interfaces\IViajesVista.cs" />
     <Compile Include="Vistas\Interfaces\IVueltaVista.cs" />
     <Compile Include="Vistas\Login.cs">

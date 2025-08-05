@@ -51,6 +51,7 @@
             // 
             // dtpFecha
             // 
+            this.dtpFecha.Enabled = false;
             this.dtpFecha.Location = new System.Drawing.Point(12, 12);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(885, 20);

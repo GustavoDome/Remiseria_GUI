@@ -3,10 +3,23 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
     public interface IConfiguracionesVista
     {
+        string tipoFuente { get; set; }
+        string tamanoFuente { get; set; }
+        string temaSistema { get; set; }
+        string tipoAlarma { get; set; }
+
+        event EventHandler volver;
+        event EventHandler guardar;
+
+        void SetTipoFuenteBindingSource(BindingSource tipoFuentes);
+        void SetTamanoFuenteBindingSource(BindingSource tamanoFuentes);
+        void SetTemaSistemaBindingSource(BindingSource temaSistemas);
+        void SetTipoAlarmaBindingSource(BindingSource tipoAlarmas);
     }
 }

@@ -16,8 +16,49 @@ namespace Programa.Vistas
         public ConfiguracionesVista()
         {
             InitializeComponent();
+            asociacionPresentador();
         }
 
+        public void asociacionPresentador() 
+        {
+            btnGuardar.Click += delegate 
+            {
+                guardar?.Invoke(this, EventArgs.Empty);
+            };
+            btnVolver.Click += delegate 
+            {
+                volver?.Invoke(this, EventArgs.Empty);
+            };
+        }
+
+        public string tipoFuente 
+        {
+            get { return cbTipoFuente.Text; }
+            set { cbTipoFuente.Text = value; }
+        }
+        public string tamanoFuente 
+        {
+            get { return tbTamanoFuente.Text; }
+            set { tbTamanoFuente.Text = value; }
+        }
+        public string temaSistema 
+        {
+            get { return cbTema.Text; }
+            set { cbTema.Text = value; }
+        }
+        public string tipoAlarma 
+        {
+            get { return cbAlarma.Text; }
+            set { cbAlarma.Text = value; }
+        }
+
+        public event EventHandler volver;
+        public event EventHandler guardar;
+
+        public void SetTipoFuenteBindingSource(BindingSource tipoFuentes) { }
+        public void SetTamanoFuenteBindingSource(BindingSource tamanoFuentes) { }
+        public void SetTemaSistemaBindingSource(BindingSource temaSistemas) { }
+        public void SetTipoAlarmaBindingSource(BindingSource tipoAlarmas) { }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static ConfiguracionesVista instancia;

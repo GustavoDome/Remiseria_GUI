@@ -16,10 +16,43 @@ namespace Programa.Vistas
         public BasesVista()
         {
             InitializeComponent();
+            asociacionPresentador();
+        }
+
+        public void asociacionPresentador() 
+        {
+            btnAgregar.Click += delegate
+            {
+                agregarBase?.Invoke(this, EventArgs.Empty);
+            };
+            btnModificar.Click += delegate
+            {
+                modificarBase?.Invoke(this, EventArgs.Empty);
+            };
+            btnComentar.Click += delegate 
+            {
+                comentarBase?.Invoke(this, EventArgs.Empty);
+            };
+            btnEliminar.Click += delegate 
+            {
+                eliminarBase?.Invoke(this, EventArgs.Empty);
+            };
+            btnVolver.Click += delegate 
+            {
+                volver?.Invoke(this, EventArgs.Empty);
+            };
         }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static BasesVista instancia;
+
+        public event EventHandler agregarBase;
+        public event EventHandler modificarBase;
+        public event EventHandler comentarBase;
+        public event EventHandler eliminarBase;
+        public event EventHandler volver;
+
+        public void mostrarBases(BindingSource basesVista) { }
 
         // Metodo para el uso del Singleton
         public static BasesVista ObtenerInstancia()

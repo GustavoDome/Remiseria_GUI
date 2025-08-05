@@ -34,7 +34,7 @@ namespace Programa.Presentadores
 
         private void buscar_usuario(object sender, EventArgs e)
         {
-            var usuario = repositorio.LoginUsuario(vista.txtUsuarios,vista.txtContrasenas);
+            var usuario = this.repositorio.LoginUsuario(vista.txtUsuarios,vista.txtContrasenas);
 
             if(usuario != null) 
             {

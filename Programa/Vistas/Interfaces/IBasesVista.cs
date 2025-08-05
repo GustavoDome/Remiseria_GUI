@@ -3,10 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
     public interface IBasesVista
     {
+        event EventHandler agregarBase;
+        event EventHandler modificarBase;
+        event EventHandler comentarBase;
+        event EventHandler eliminarBase;
+        event EventHandler volver;
+
+        void mostrarBases(BindingSource listaBase);
     }
 }

@@ -62,6 +62,11 @@ namespace Programa.Presentadores
         }
         private void ingresarAyuda(object sender, EventArgs e)
         {
+            ICategoriaRepositorio categoria = new CategoriaRepositorio();
+            IPreguntaRepositorio pregunta = new PreguntaRepositorio();
+            IRespuestasRepositorio respuesta = new RespuestaRepositorio();
+            IAyudaVista ayuda = AyudaVista.ObtenerInstancia();
+            new AyudaPresentador(ayuda, categoria, pregunta, respuesta);
         }
         private void ingresarConfiguracion(object sender, EventArgs e) 
         {

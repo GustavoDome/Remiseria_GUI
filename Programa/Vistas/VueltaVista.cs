@@ -18,6 +18,47 @@ namespace Programa.Vistas
             InitializeComponent();
         }
 
+        public void asociarPresentador() 
+        {
+            btnAgregar.Click += delegate 
+            {
+                agregarVuelta?.Invoke(this, EventArgs.Empty);
+            };
+            btnModificar.Click += delegate 
+            {
+                modificarVuelta?.Invoke(this, EventArgs.Empty);
+            };
+            btnEliminar.Click += delegate 
+            { 
+                eliminarVuelta?.Invoke(this, EventArgs.Empty); 
+            };
+            btnAnterior.Click += delegate 
+            { 
+                retroceder?.Invoke(this, EventArgs.Empty);
+            };
+            btnSiguiente.Click += delegate {
+                adelantar?.Invoke(this, EventArgs.Empty);
+            };
+            btnViajes.Click += delegate 
+            { 
+                ingresarViaje?.Invoke(this, EventArgs.Empty);
+            };
+            btnVolver.Click += delegate 
+            { 
+                volver?.Invoke(this, EventArgs.Empty);
+            };
+        }
+
+        public event EventHandler agregarVuelta;
+        public event EventHandler modificarVuelta;
+        public event EventHandler eliminarVuelta;
+        public event EventHandler retroceder;
+        public event EventHandler adelantar;
+        public event EventHandler ingresarViaje;
+        public event EventHandler volver;
+
+        public void SetViajesBindingSource(BindingSource viajes) { }
+
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static VueltaVista instancia;
 
