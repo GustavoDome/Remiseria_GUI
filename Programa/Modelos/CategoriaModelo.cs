@@ -11,16 +11,8 @@ namespace Programa.Modelos
         private int id_categoria;
         private string categoria_pregunta;
 
-        public int Id_categoria
-        {
-            get { return id_categoria; }
-            set { id_categoria = value; }
-        }
+        public int Id_categoria { get; set; }
 
-        public string Categoria_pregunta
-        {
-            get { return categoria_pregunta;}
-            set { categoria_pregunta = value; }
-        }
+        public string Categoria_pregunta { get; set; }
     }
 }

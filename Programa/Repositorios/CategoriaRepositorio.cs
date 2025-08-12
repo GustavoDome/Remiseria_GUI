@@ -4,25 +4,21 @@ using Programa.Modelos.Interfaces;
 using Programa.Modelos;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Programa.Repositorios
 {
     public class CategoriaRepositorio : ICategoriaRepositorio
     {
-        ConexionBD BD = new ConexionBD();
+        private readonly ConexionBD BD = new ConexionBD();
+
         public void agregar(CategoriaModelo categoriaModelo)
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"INSERT into Categoria(Categoria_pregunta) Values
-                                (@Categoria_pregunta);";
+                string query = @"INSERT INTO Categoria(Categoria_pregunta) VALUES (@Categoria_pregunta);";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@Categoria_pregunta", categoriaModelo.Categoria_pregunta);
-
+                    cmd.Parameters.AddWithValue("@Categoria_pregunta", categoriaModelo.Categoria_pregunta ?? (object)DBNull.Value);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -32,12 +28,11 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"UPDATE Categoria set Categoria_pregunta = @Categoria_pregunta WHERE id_categoria = @id_categoria;";
+                string query = @"UPDATE Categoria SET Categoria_pregunta = @Categoria_pregunta WHERE id_categoria = @id_categoria;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id_categoria", categoriaModelo.Id_categoria);
-                    cmd.Parameters.AddWithValue("@Categoria_pregunta", categoriaModelo.Categoria_pregunta);
-
+                    cmd.Parameters.AddWithValue("@Categoria_pregunta", categoriaModelo.Categoria_pregunta ?? (object)DBNull.Value);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -47,7 +42,7 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = "DELETE from Categoria where id_categoria = @id;";
+                string query = "DELETE FROM Categoria WHERE id_categoria = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
@@ -70,7 +65,7 @@ namespace Programa.Repositorios
                     {
                         lista.Add(new CategoriaModelo
                         {
-                            Categoria_pregunta = reader.GetString(reader.GetOrdinal("Categoria_pregunta")),
+                            Categoria_pregunta = reader["Categoria_pregunta"] != DBNull.Value ? reader["Categoria_pregunta"].ToString() : string.Empty
                         });
                     }
                 }

@@ -22,7 +22,6 @@ namespace Programa.Vistas.Interfaces
         event EventHandler ingresarConfiguracion;
         event EventHandler volver;
 
-
         //Metodos
         void SetRecordatoriosBindingSource(BindingSource RecordatorioLista);
         void Mostrar();

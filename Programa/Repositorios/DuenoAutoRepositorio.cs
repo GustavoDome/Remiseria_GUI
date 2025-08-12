@@ -1,35 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Configuration;
+﻿using Npgsql;
+using Programa.Conexion;
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
-using Programa.Conexion;
-using Npgsql;
-using System.Windows.Forms;
+using System;
+using System.Collections.Generic;
 
 namespace Programa.Repositorios
 {
     public class DuenoAutoRepositorio : IDuenoAutoRepositorio
     {
-        ConexionBD BD = new ConexionBD();
-        
+        private readonly ConexionBD BD = new ConexionBD();
+
         public void agregar(DuenoAutoModelo duenoAutoModelo)
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"INSERT into Dueño_auto(nombre,apellido,direccion,chofer,telefono,activo)
-                                VALUES (@nombre,@apellido,@direccion,@chofer,@telefono,@activo);";
+                string query = @"INSERT INTO Dueño_auto(nombre, apellido, direccion, chofer, telefono, activo)
+                                 VALUES (@nombre, @apellido, @direccion, @chofer, @telefono, @activo);";
 
-                using(var cmd = new NpgsqlCommand(query, conn))
+                using (var cmd = new NpgsqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@nombre", duenoAutoModelo.Nombre);
-                    cmd.Parameters.AddWithValue("@apellido", duenoAutoModelo.Apellido);
-                    cmd.Parameters.AddWithValue("@direccion", duenoAutoModelo.Direccion);
+                    cmd.Parameters.AddWithValue("@nombre", duenoAutoModelo.Nombre ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@apellido", duenoAutoModelo.Apellido ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@direccion", duenoAutoModelo.Direccion ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@chofer", duenoAutoModelo.Chofer);
-                    cmd.Parameters.AddWithValue("@telefono", duenoAutoModelo.Telefono);
+                    cmd.Parameters.AddWithValue("@telefono", duenoAutoModelo.Telefono ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@activo", duenoAutoModelo.Activo);
 
                     cmd.ExecuteNonQuery();
@@ -41,15 +36,22 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"UPDATE Dueño_auto set nombre = @nombre, apellido = @apellido, direccion = @direccion, chofer = @chofer, telefono = @telefono WHERE id_dueño = @id_dueño;";
+                string query = @"UPDATE Dueño_auto SET 
+                                 nombre = @nombre, 
+                                 apellido = @apellido, 
+                                 direccion = @direccion, 
+                                 chofer = @chofer, 
+                                 telefono = @telefono 
+                                 WHERE id_dueño = @id_dueño;";
+
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id_dueño", duenoAutoModelo.Id);
-                    cmd.Parameters.AddWithValue("@nombre", duenoAutoModelo.Nombre);
-                    cmd.Parameters.AddWithValue("@apellido", duenoAutoModelo.Apellido);
-                    cmd.Parameters.AddWithValue("@direccion", duenoAutoModelo.Direccion);
+                    cmd.Parameters.AddWithValue("@nombre", duenoAutoModelo.Nombre ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@apellido", duenoAutoModelo.Apellido ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@direccion", duenoAutoModelo.Direccion ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@chofer", duenoAutoModelo.Chofer);
-                    cmd.Parameters.AddWithValue("@telefono", duenoAutoModelo.Telefono);
+                    cmd.Parameters.AddWithValue("@telefono", duenoAutoModelo.Telefono ?? (object)DBNull.Value);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -60,10 +62,11 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"UPDATE Dueño_auto set activo = FALSE where id_dueño = @id;";
+                string query = @"UPDATE Dueño_auto SET activo = FALSE WHERE id_dueño = @id;";
+
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id",id);
+                    cmd.Parameters.AddWithValue("@id", id);
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -72,22 +75,24 @@ namespace Programa.Repositorios
         public IEnumerable<DuenoAutoModelo> mostrarTodo()
         {
             var lista = new List<DuenoAutoModelo>();
+
             using (var conn = BD.Abrirconexion())
             {
-                string query = "SELECT * FROM Dueño_auto WHERE Activo = TRUE;";
+                string query = "SELECT * FROM Dueño_auto WHERE activo = TRUE;";
+
                 using (var cmd = new NpgsqlCommand(query, conn))
-                using (var reader =  cmd.ExecuteReader())
+                using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
                         lista.Add(new DuenoAutoModelo
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("id")),
-                            Nombre = reader.GetString(reader.GetOrdinal("nombre")),
-                            Apellido = reader.GetString(reader.GetOrdinal("apellido")),
-                            Direccion = reader.GetString(reader.GetOrdinal("direccion")),
-                            Telefono = reader.GetString(reader.GetOrdinal("telefono")),
-                            Chofer = reader.GetBoolean(reader.GetOrdinal("chofer"))
+                            Id = reader["id_dueño"] != DBNull.Value ? Convert.ToInt32(reader["id_dueño"]) : 0,
+                            Nombre = reader["nombre"]?.ToString(),
+                            Apellido = reader["apellido"]?.ToString(),
+                            Direccion = reader["direccion"]?.ToString(),
+                            Telefono = reader["telefono"]?.ToString(),
+                            Chofer = reader["chofer"] != DBNull.Value && Convert.ToBoolean(reader["chofer"])
                         });
                     }
                 }

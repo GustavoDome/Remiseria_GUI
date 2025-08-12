@@ -1,36 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Configuration;
+﻿using Npgsql;
+using Programa.Conexion;
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
-using Programa.Conexion;
-using Npgsql;
-using System.Windows.Forms;
-using System.Security.Cryptography.X509Certificates;
+using System;
+using System.Collections.Generic;
 
 namespace Programa.Repositorios
 {
     public class MovilRepositorio : IMovilRepositorio
     {
-        ConexionBD BD = new ConexionBD();
+        private readonly ConexionBD BD = new ConexionBD();
 
         public void agregar(MovilModelo movilmodelo)
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"INSERT into Movil(numero_movil,marca_auto,modelo_auto,año_auto,color_auto,id_dueño,activo)
-                                VALUES (@numero_movil,@marca_auto,@modelo_auto,@año_auto,@color_auto,@id_dueño,@activo);";
+                string query = @"INSERT INTO Movil(numero_movil, marca_auto, modelo_auto, año_auto, color_auto, id_dueño, activo)
+                                 VALUES (@numero_movil, @marca_auto, @modelo_auto, @año_auto, @color_auto, @id_dueño, @activo);";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@numero_movil", movilmodelo.Numero_movil);
-                    cmd.Parameters.AddWithValue("@marca_auto", movilmodelo.Marca_auto);
-                    cmd.Parameters.AddWithValue("@modelo_auto", movilmodelo.Modelo_auto);
-                    cmd.Parameters.AddWithValue("@año_auto", movilmodelo.Ano_auto);
-                    cmd.Parameters.AddWithValue("@color_auto", movilmodelo.Color_auto);
+                    cmd.Parameters.AddWithValue("@marca_auto", movilmodelo.Marca_auto ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@modelo_auto", movilmodelo.Modelo_auto ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@año_auto", movilmodelo.Ano_auto ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@color_auto", movilmodelo.Color_auto ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@id_dueño", movilmodelo.Id_dueno_auto);
                     cmd.Parameters.AddWithValue("@activo", movilmodelo.Activo);
 
@@ -43,15 +37,24 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"UPDATE Movil set numero_movil = @numero_movil, marca_auto = @marca_auto, modelo_auto = @modelo_auto, año_auto = @año_auto, color_auto = @color_auto, id_dueño = @id_dueño, activo = @activo where id_movil = @id;";
+                string query = @"UPDATE Movil SET 
+                                 numero_movil = @numero_movil, 
+                                 marca_auto = @marca_auto, 
+                                 modelo_auto = @modelo_auto, 
+                                 año_auto = @año_auto, 
+                                 color_auto = @color_auto, 
+                                 id_dueño = @id_dueño, 
+                                 activo = @activo 
+                                 WHERE id_movil = @id;";
+
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", movilmodelo.Id_movil);
                     cmd.Parameters.AddWithValue("@numero_movil", movilmodelo.Numero_movil);
-                    cmd.Parameters.AddWithValue("@marca_auto", movilmodelo.Marca_auto);
-                    cmd.Parameters.AddWithValue("@modelo_auto", movilmodelo.Modelo_auto);
-                    cmd.Parameters.AddWithValue("@año_auto", movilmodelo.Ano_auto);
-                    cmd.Parameters.AddWithValue("@color_auto", movilmodelo.Color_auto);
+                    cmd.Parameters.AddWithValue("@marca_auto", movilmodelo.Marca_auto ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@modelo_auto", movilmodelo.Modelo_auto ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@año_auto", movilmodelo.Ano_auto ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@color_auto", movilmodelo.Color_auto ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@id_dueño", movilmodelo.Id_dueno_auto);
                     cmd.Parameters.AddWithValue("@activo", movilmodelo.Activo);
 
@@ -64,7 +67,7 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"UPDATE Movil set activo = FALSE where id_movil = @id;";
+                string query = @"UPDATE Movil SET activo = FALSE WHERE id_movil = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
@@ -79,7 +82,7 @@ namespace Programa.Repositorios
 
             using (var conn = BD.Abrirconexion())
             {
-                string query = "SELECT * FROM Movil WHERE Activo = TRUE;";
+                string query = "SELECT * FROM Movil WHERE activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -87,13 +90,14 @@ namespace Programa.Repositorios
                     {
                         lista.Add(new MovilModelo
                         {
-                            Id_movil = reader.GetInt32(reader.GetOrdinal("id")),
-                            Numero_movil = reader.GetInt32(reader.GetOrdinal("numero_movil")),
-                            Marca_auto = reader.GetString(reader.GetOrdinal("marca_auto")),
-                            Modelo_auto = reader.GetString(reader.GetOrdinal("modelo_auto")),
-                            Ano_auto = reader.GetString(reader.GetOrdinal("año_auto")),
-                            Color_auto = reader.GetString(reader.GetOrdinal("color_auto")),
-                            Id_dueno_auto = reader.GetInt32(reader.GetOrdinal("id_dueño"))
+                            Id_movil = reader["id_movil"] != DBNull.Value ? Convert.ToInt32(reader["id_movil"]) : 0,
+                            Numero_movil = reader["numero_movil"] != DBNull.Value ? Convert.ToInt32(reader["numero_movil"]) : 0,
+                            Marca_auto = reader["marca_auto"]?.ToString(),
+                            Modelo_auto = reader["modelo_auto"]?.ToString(),
+                            Ano_auto = reader["año_auto"]?.ToString(),
+                            Color_auto = reader["color_auto"]?.ToString(),
+                            Id_dueno_auto = reader["id_dueño"] != DBNull.Value ? Convert.ToInt32(reader["id_dueño"]) : 0,
+                            Activo = reader["activo"] != DBNull.Value ? Convert.ToBoolean(reader["activo"]) : false
                         });
                     }
                 }

@@ -4,27 +4,26 @@ using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Programa.Repositorios
 {
     public class RecordatorioRepositorio : IRecordatorioRepositorio
     {
-        ConexionBD BD = new ConexionBD();
+        private readonly ConexionBD BD = new ConexionBD();
+
         public void agregar(RecordatorioModelo recordatorioModelo)
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"INSERT into Recordatorio(id_viaje,ubicacion,fecha_dia,fecha_hora) Values
-                                (@id_viaje,@ubicacion,@fecha_dia,@fecha_hora);";
+                string query = @"INSERT INTO Recordatorio (id_viaje, ubicacion, fecha_dia, fecha_hora) 
+                                 VALUES (@id_viaje, @ubicacion, @fecha_dia, @fecha_hora);";
+
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id_viaje", recordatorioModelo.Id_viaje);
-                    cmd.Parameters.AddWithValue("@ubicacion", recordatorioModelo.Ubicacion);
-                    cmd.Parameters.AddWithValue("@fecha_dia", recordatorioModelo.Fecha_dia);
-                    cmd.Parameters.AddWithValue("@fecha_hora", recordatorioModelo.Fecha_hora);
+                    cmd.Parameters.AddWithValue("@ubicacion", recordatorioModelo.Ubicacion ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@fecha_dia", recordatorioModelo.Fecha_dia ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@fecha_hora", recordatorioModelo.Fecha_hora ?? (object)DBNull.Value);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -35,14 +34,20 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"UPDATE Recordatorio set id_viaje = @id_viaje, ubicacion = @ubicacion, fecha_dia = @fecha_dia, fecha_hora = @fecha_hora WHERE id_recordatorio = @id_recordatorio;";
+                string query = @"UPDATE Recordatorio SET 
+                                 id_viaje = @id_viaje, 
+                                 ubicacion = @ubicacion, 
+                                 fecha_dia = @fecha_dia, 
+                                 fecha_hora = @fecha_hora 
+                                 WHERE id_recordatorio = @id_recordatorio;";
+
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id_recordatorio", recordatorioModelo.Id_recordatorio);
                     cmd.Parameters.AddWithValue("@id_viaje", recordatorioModelo.Id_viaje);
-                    cmd.Parameters.AddWithValue("@ubicacion", recordatorioModelo.Ubicacion);
-                    cmd.Parameters.AddWithValue("@fecha_dia", recordatorioModelo.Fecha_dia);
-                    cmd.Parameters.AddWithValue("@fecha_hora", recordatorioModelo.Fecha_hora);
+                    cmd.Parameters.AddWithValue("@ubicacion", recordatorioModelo.Ubicacion ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@fecha_dia", recordatorioModelo.Fecha_dia ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@fecha_hora", recordatorioModelo.Fecha_hora ?? (object)DBNull.Value);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -53,7 +58,7 @@ namespace Programa.Repositorios
         {
             using (var conn = BD.Abrirconexion())
             {
-                string query = "DELETE from Recordatorio where id_respuesta = @id;";
+                string query = "DELETE FROM Recordatorio WHERE id_recordatorio = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
                     cmd.Parameters.AddWithValue("@id", id);
@@ -76,10 +81,11 @@ namespace Programa.Repositorios
                     {
                         lista.Add(new RecordatorioModelo
                         {
-                            Id_viaje = reader.GetInt32(reader.GetOrdinal("id_viaje")),
-                            Ubicacion = reader.GetString(reader.GetOrdinal("ubicacion")),
-                            Fecha_dia = reader.GetString(reader.GetOrdinal("fecha_dia")),
-                            Fecha_hora = reader.GetString(reader.GetOrdinal("fecha_hora")),
+                            Id_recordatorio = reader["id_recordatorio"] != DBNull.Value ? Convert.ToInt32(reader["id_recordatorio"]) : 0,
+                            Id_viaje = reader["id_viaje"] != DBNull.Value ? Convert.ToInt32(reader["id_viaje"]) : 0,
+                            Ubicacion = reader["ubicacion"]?.ToString(),
+                            Fecha_dia = reader["fecha_dia"]?.ToString(),
+                            Fecha_hora = reader["fecha_hora"]?.ToString()
                         });
                     }
                 }

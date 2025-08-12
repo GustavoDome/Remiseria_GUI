@@ -13,28 +13,9 @@ namespace Programa.Modelos
         private byte[] respuesta_audio_video;
         private int id_pregunta;
 
-        public int Id_respuesta
-        {
-            get { return id_respuesta; }
-            set { id_respuesta = value; }
-        }
-
-        public string Respuesta_texto
-        {
-            get { return respuesta_texto; }
-            set { respuesta_texto = value; }
-        }
-
-        public byte[] Respuesta_audio_video
-        {
-            get { return respuesta_audio_video; }
-            set { respuesta_audio_video = value; }
-        }
-
-        public int Id_pregunta
-        {
-            get { return id_pregunta; }
-            set { id_pregunta = value; }
-        }
+        public int Id_respuesta { get; set; }
+        public string Respuesta_texto { get; set; }
+        public byte[] Respuesta_audio_video { get; set; }
+        public int Id_pregunta { get; set; }
     }
 }

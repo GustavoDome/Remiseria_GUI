@@ -20,69 +20,16 @@ namespace Programa.Modelos
         private string temaSistema;
         private string tipoAlarma;
 
-        public int Id
-        {
-            get {return id;}
-            set {id = value;}
-        }
-        public string RolUsuario
-        {
-            get { return rolUsuario; }
-            set {  rolUsuario = value;}
-        }
-
-        public string Nombre
-        {
-            get { return nombre; }
-            set { nombre = value; }
-        }
-
-        public string Contrasena 
-        {
-            get { return contrasena; }
-            set { contrasena = value;}
-        }
-
-        public string Direccion
-        {
-            get { return direccion; }
-            set { direccion = value; }
-        }
-
-        public string Telefono
-        {
-            get { return telefono; }
-            set { telefono = value; }
-        }
-
-        public string Fuente
-        {
-            get { return fuente; }
-            set { fuente = value; }
-        }
-
-        public bool Activo
-        {
-            get { return activo; }
-            set { activo = value; }
-        }
-
-        public string TamanoFuente
-        {
-            get { return tamanoFuente; }
-            set { tamanoFuente = value; }
-        }
-
-        public string TemaSistema
-        {
-            get { return temaSistema; }
-            set { temaSistema = value; }
-        }
-
-        public string TipoAlarma
-        {
-            get { return tipoAlarma; }
-            set { tipoAlarma = value; }
-        }
+        public int Id { get; set; }
+        public string RolUsuario { get; set; }
+        public string Nombre { get; set; }
+        public string Contrasena { get; set; }
+        public string Direccion { get; set; }
+        public string Telefono { get; set; }
+        public string Fuente { get; set; }
+        public bool Activo { get; set; }
+        public string TamanoFuente { get; set; }
+        public string TemaSistema { get; set; }
+        public string TipoAlarma { get; set; }
     }
 }

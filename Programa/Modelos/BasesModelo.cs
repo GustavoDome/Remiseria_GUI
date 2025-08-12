@@ -15,40 +15,11 @@ namespace Programa.Modelos
         private int id_movil;
         private int id_operador;
 
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public bool Estado_base
-        {
-            get { return estado_base; }
-            set {  estado_base = value; }
-        }
-
-        public string Fecha_base
-        {
-            get { return fecha_base; }
-            set { fecha_base = value; }
-        }
-
-        public bool Activo
-        {
-            get { return activo; }
-            set { activo = value; }
-        }
-
-        public int Id_movil
-        {
-            get { return id_movil; }
-            set { id_movil = value; }
-        }
-
-        public int Id_operador
-        {
-            get { return id_operador; }
-            set { id_operador = value; }
-        }
+        public int Id { get; set; }
+        public bool Estado_base { get; set; }
+        public string Fecha_base { get; set; }
+        public bool Activo { get; set; }
+        public int Id_movil { get; set; }
+        public int Id_operador { get; set; }
     }
 }

@@ -17,45 +17,12 @@ namespace Programa.Modelos
         private string telefono;
         private bool activo;
 
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public string Nombre 
-        { 
-            get { return nombre; }
-            set { nombre = value; } 
-        }
-
-        public string Apellido
-        {
-            get { return apellido; }
-            set {  apellido = value; }
-        }
-
-        public string Direccion
-        {
-            get { return direccion; }
-            set { direccion = value; }
-        }
-
-        public bool Chofer
-        {
-            get { return chofer; }
-            set { chofer = value; }
-        }
-        public string Telefono
-        {
-            get { return telefono; }
-            set {  telefono = value; }
-        }
-
-        public bool Activo
-        {
-            get { return activo; }
-            set { activo = value; }
-        }
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Apellido { get; set; }
+        public string Direccion { get; set; }
+        public bool Chofer { get; set; }
+        public string Telefono { get; set; }
+        public bool Activo { get; set; }
     }
 }

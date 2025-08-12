@@ -34,20 +34,23 @@ namespace Programa.Presentadores
 
         private void buscar_usuario(object sender, EventArgs e)
         {
-            var usuario = this.repositorio.LoginUsuario(vista.txtUsuarios,vista.txtContrasenas);
-
-            if(usuario != null) 
+            try 
             {
-                MessageBox.Show("se encontro al usuario");
-                IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
-                IInicioVista inicio = InicioVista.ObtenerInstancia();
-                new InicioPresentador(inicio, recordatorio);
-                ((Form)vista).Hide();
+                var usuario = this.repositorio.LoginUsuario(vista.txtUsuarios, vista.txtContrasenas);
 
+                if (usuario.Nombre == vista.txtUsuarios && usuario.Contrasena == vista.txtContrasenas)
+                {
+                    IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
+                    IInicioVista inicio = InicioVista.ObtenerInstancia();
+                    new InicioPresentador(inicio, recordatorio);
+                    ((Form)vista).Hide();
+
+                }
             }
-            else 
+            catch (NullReferenceException ex) 
             {
-                MessageBox.Show("No se encontro al usuario");
+                MessageBox.Show($"No se encuentra al usuario. Error {ex.Message}");
+
             }
         }
     }
