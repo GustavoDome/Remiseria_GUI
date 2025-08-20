@@ -1,14 +1,16 @@
-﻿using Programa.Modelos.Interfaces;
-using Programa.Modelos;
+﻿using Programa.Modelos;
+using Programa.Modelos.Interfaces;
+using Programa.Repositorios;
+using Programa.Vistas;
 using Programa.Vistas.Interfaces;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Programa.Repositorios;
-using Programa.Vistas;
 
 namespace Programa.Presentadores
 {
@@ -25,11 +27,67 @@ namespace Programa.Presentadores
             this.vista = vista;
             this.repositorio = repositorio;
 
+            this.vista.mostrarBases(this.filtrador);
+            mostrarBases();
+
             this.vista.agregarBase += agregar_base;
             this.vista.modificarBase += modificar_base;
             this.vista.comentarBase += comentar_base;
             this.vista.eliminarBase += eliminar_base;
             this.vista.volver += voler_menu;
+        }
+        public DataTable ConvertListToDataTable(IEnumerable<BasesModeloMovilId> lista)
+        {
+            var dt = new DataTable();
+            dt.Columns.Add("Id_movil");
+
+            foreach (var item in lista)
+            {
+                var row = dt.NewRow();
+                row["Id_movil"] = item.Id_movil;
+                dt.Rows.Add(row);
+            }
+
+            return dt;
+        }
+
+        public DataTable TransponerDataTable(DataTable original)
+        {
+            DataTable transpuesta = new DataTable();
+
+            // La primera columna es el nombre de la propiedad
+            transpuesta.Columns.Add("Propiedad");
+
+            // Cada fila del DataTable original será una columna en el nuevo DataTable
+            for (int i = 0; i < original.Rows.Count; i++)
+            {
+                transpuesta.Columns.Add($"Valor {i + 1}");
+            }
+
+            // Por cada columna en original (solo 1 en este caso: "Id_movil")
+            foreach (DataColumn col in original.Columns)
+            {
+                DataRow newRow = transpuesta.NewRow();
+                newRow[0] = col.ColumnName;
+
+                // Agregar el valor de cada fila original como columna en la fila transpuesta
+                for (int i = 0; i < original.Rows.Count; i++)
+                {
+                    newRow[i + 1] = original.Rows[i][col];
+                }
+
+                transpuesta.Rows.Add(newRow);
+            }
+
+            return transpuesta;
+        }
+
+        private void mostrarBases()
+        {
+            var listaIds = this.repositorio.seleccionarMovil().ToList();
+            DataTable dtOriginal = ConvertListToDataTable(listaIds);
+            DataTable dtTranspuesta = TransponerDataTable(dtOriginal);
+            this.filtrador.DataSource = dtTranspuesta;
         }
 
         private void agregar_base(object sender, EventArgs e) { }

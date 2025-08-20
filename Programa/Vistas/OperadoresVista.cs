@@ -43,7 +43,10 @@ namespace Programa.Vistas
         public event EventHandler modificiarOperador;
         public event EventHandler eliminarOperador;
         public event EventHandler volver;
-        public void SetOperadoresBindingSource(BindingSource operadores) { }
+        public void SetOperadoresBindingSource(BindingSource operadores) 
+        {
+            dgvOperadores.DataSource = operadores;
+        }
 
         // Metodo para el uso del Singleton
         public static OperadoresVista ObtenerInstancia()

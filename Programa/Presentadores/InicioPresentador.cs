@@ -28,6 +28,9 @@ namespace Programa.Presentadores
             this.vista = vista;
             this.repositorio = repositorio;
 
+            vista.SetRecordatoriosBindingSource(this.filtrador);
+            cargarRecordatorio();
+
             //metodos
             this.vista.agregarRecordatorio += agregarRecordatorio;
             this.vista.modificarRecordatorio += modificarRecordatorio;
@@ -40,6 +43,13 @@ namespace Programa.Presentadores
             this.vista.ingresarViajes += ingresarViajes;
             this.vista.ingresarVueltas += ingresarVueltas;
             this.vista.ingresarBases += ingresarBases;
+
+        }
+
+        private void cargarRecordatorio() 
+        {
+            var lista = this.repositorio.mostrarTodo().ToList();
+            this.filtrador.DataSource = lista;
         }
 
         private void agregarRecordatorio(object sender, EventArgs e)

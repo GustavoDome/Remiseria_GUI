@@ -61,17 +61,40 @@ namespace Programa.Repositorios
                 }
             }
         }
+        public IEnumerable<BasesModeloMovilId> seleccionarMovil() 
+        {
+            var lista = new List<BasesModeloMovilId>();
 
-        public IEnumerable<BasesModelo> mostrarTodo()
+            using (var conn = BD.Abrirconexion()) 
+            {
+                string query = "SELECT id_movil FROM Bases where activo = TRUE;";
+                using (var cmd = new NpgsqlCommand(query, conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lista.Add(new BasesModeloMovilId
+                        {
+                            Id_movil = reader["id_movil"] != DBNull.Value ? Convert.ToInt32(reader["id_movil"]) : 0,
+                        });
+                    }
+                }
+            }
+
+            return lista;
+        }
+
+        public IEnumerable<BasesModelo> mostrarTodo(BasesModelo basesmodelo)
         {
             var lista = new List<BasesModelo>();
 
             using (var conn = BD.Abrirconexion())
             {
-                string query = "SELECT * FROM Bases WHERE activo = TRUE;";
+                string query = @"SELECT estado_base AS 'Base', fecha_base AS 'Fecha' FROM Bases WHERE activo = TRUE and id_movil = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
+                    cmd.Parameters.AddWithValue("@id", basesmodelo.Id_movil);
                     while (reader.Read())
                     {
                         lista.Add(new BasesModelo

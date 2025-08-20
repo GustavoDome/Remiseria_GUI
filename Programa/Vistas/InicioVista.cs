@@ -106,7 +106,7 @@ namespace Programa.Vistas
 
         public void SetRecordatoriosBindingSource(BindingSource RecordatorioLista)
         {
-            throw new NotImplementedException();
+            dgvRecordatorio.DataSource = RecordatorioLista;
         }
 
         public void Mostrar()

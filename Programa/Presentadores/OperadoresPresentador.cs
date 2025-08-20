@@ -25,12 +25,20 @@ namespace Programa.Presentadores
             this.vista = vista;
             this.repositorio = repositorio;
 
+            vista.SetOperadoresBindingSource(this.filtrador);
+            mostrarOperadores();
+
             this.vista.agregarOperador += agregar_operador;
             this.vista.modificiarOperador += modificar_operador;
             this.vista.eliminarOperador += eliminar_operador;
             this.vista.volver += volver_menu;
         }
 
+        private void mostrarOperadores() 
+        {
+            var lista = this.repositorio.mostrarTodo().ToList();
+            this.filtrador.DataSource = lista;
+        }
         private void agregar_operador(object sender, EventArgs e) { }
         private void modificar_operador(object sender, EventArgs e) { }
         private void eliminar_operador(object sender, EventArgs e) { }

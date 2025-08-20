@@ -50,9 +50,13 @@ namespace Programa.Vistas
         public event EventHandler modificarBase;
         public event EventHandler comentarBase;
         public event EventHandler eliminarBase;
+        public event EventHandler seleccionarMovil;
         public event EventHandler volver;
 
-        public void mostrarBases(BindingSource basesVista) { }
+        public void mostrarBases(BindingSource basesVista) 
+        {
+            dgvMoviles.DataSource = basesVista;
+        }
 
         // Metodo para el uso del Singleton
         public static BasesVista ObtenerInstancia()

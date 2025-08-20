@@ -42,6 +42,7 @@
             // dgvBases
             // 
             this.dgvBases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBases.ColumnHeadersVisible = false;
             this.dgvBases.Location = new System.Drawing.Point(12, 80);
             this.dgvBases.Name = "dgvBases";
             this.dgvBases.Size = new System.Drawing.Size(891, 375);
@@ -49,9 +50,17 @@
             // 
             // dgvMoviles
             // 
-            this.dgvMoviles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMoviles.AllowUserToAddRows = false;
+            this.dgvMoviles.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
+            this.dgvMoviles.ColumnHeadersHeight = 50;
+            this.dgvMoviles.ColumnHeadersVisible = false;
+            this.dgvMoviles.EnableHeadersVisualStyles = false;
+            this.dgvMoviles.ImeMode = System.Windows.Forms.ImeMode.On;
             this.dgvMoviles.Location = new System.Drawing.Point(12, 12);
+            this.dgvMoviles.MultiSelect = false;
             this.dgvMoviles.Name = "dgvMoviles";
+            this.dgvMoviles.RowHeadersVisible = false;
+            this.dgvMoviles.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToFirstHeader;
             this.dgvMoviles.Size = new System.Drawing.Size(891, 62);
             this.dgvMoviles.TabIndex = 1;
             // 

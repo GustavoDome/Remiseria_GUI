@@ -22,4 +22,11 @@ namespace Programa.Modelos
         public int Id_movil { get; set; }
         public int Id_operador { get; set; }
     }
+
+    public class BasesModeloMovilId 
+    {
+        private int id_movil;
+
+        public int Id_movil { get; set; }
+    }
 }
