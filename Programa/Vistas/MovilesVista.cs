@@ -46,7 +46,10 @@ namespace Programa.Vistas
         public event EventHandler modificarMovil;
         public event EventHandler eliminarMovil;
         public event EventHandler volver;
-        public void SetMovilesBindingSource(BindingSource moviles) { }
+        public void SetMovilesBindingSource(BindingSource moviles) 
+        {
+            dgvMoviles.DataSource = moviles;
+        }
         // Metodo para el uso del Singleton
         public static MovilesVista ObtenerInstancia()
         {

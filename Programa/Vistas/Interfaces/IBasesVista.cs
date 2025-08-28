@@ -14,8 +14,12 @@ namespace Programa.Vistas.Interfaces
         event EventHandler comentarBase;
         event EventHandler eliminarBase;
         event EventHandler volver;
-        event EventHandler seleccionarMovil;
+        event EventHandler OnMovilSeleccionado;
 
-        void mostrarBases(BindingSource listaBase);
+        int id_movil { get; set; }
+
+
+        void mostrarMoviles(BindingSource listaBase);
+        void mostrarBases(BindingSource listaBase, int id);
     }
 }

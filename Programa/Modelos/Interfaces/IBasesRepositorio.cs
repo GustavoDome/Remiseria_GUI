@@ -14,7 +14,7 @@ namespace Programa.Modelos.Interfaces
 
         void eliminar(int id);
 
-        IEnumerable<BasesModeloMovilId> seleccionarMovil();
-        IEnumerable<BasesModelo> mostrarTodo(BasesModelo basesmodelo);
+        IEnumerable<MovilModeloId> seleccionarMovil();
+        IEnumerable<BasesModelo> mostrarTodo(int id);
     }
 }

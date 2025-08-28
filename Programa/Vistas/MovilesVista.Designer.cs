@@ -28,21 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dgvBases = new System.Windows.Forms.DataGridView();
+            this.dgvMoviles = new System.Windows.Forms.DataGridView();
             this.btnAgregar = new System.Windows.Forms.Button();
             this.btnModificar = new System.Windows.Forms.Button();
             this.btnEliminar = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBases)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMoviles)).BeginInit();
             this.SuspendLayout();
             // 
-            // dgvBases
+            // dgvMoviles
             // 
-            this.dgvBases.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvBases.Location = new System.Drawing.Point(12, 12);
-            this.dgvBases.Name = "dgvBases";
-            this.dgvBases.Size = new System.Drawing.Size(912, 434);
-            this.dgvBases.TabIndex = 0;
+            this.dgvMoviles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvMoviles.Location = new System.Drawing.Point(12, 12);
+            this.dgvMoviles.Name = "dgvMoviles";
+            this.dgvMoviles.Size = new System.Drawing.Size(912, 434);
+            this.dgvMoviles.TabIndex = 0;
             // 
             // btnAgregar
             // 
@@ -89,17 +89,17 @@
             this.Controls.Add(this.btnEliminar);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnAgregar);
-            this.Controls.Add(this.dgvBases);
+            this.Controls.Add(this.dgvMoviles);
             this.Name = "MovilesVista";
             this.Text = "Moviles";
-            ((System.ComponentModel.ISupportInitialize)(this.dgvBases)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvMoviles)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dgvBases;
+        private System.Windows.Forms.DataGridView dgvMoviles;
         private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Button btnEliminar;

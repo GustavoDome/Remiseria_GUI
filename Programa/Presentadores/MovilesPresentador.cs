@@ -25,10 +25,19 @@ namespace Programa.Presentadores
             this.vista = vista;
             this.repositorio = repositorio;
 
+            vista.SetMovilesBindingSource(this.filtrador);
+            mostrar_moviles();
+
             this.vista.agregarMovil += agregar_movil;
             this.vista.modificarMovil += modificar_movil;
             this.vista.eliminarMovil += eliminar_movil;
             this.vista.volver += volver_menu;
+        }
+
+        private void mostrar_moviles() 
+        {
+            var lista = this.repositorio.mostrarTodo().ToList();
+            this.filtrador.DataSource = lista;
         }
 
         private void agregar_movil(object sender, EventArgs e) { }

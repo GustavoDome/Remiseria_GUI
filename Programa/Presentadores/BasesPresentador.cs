@@ -20,23 +20,27 @@ namespace Programa.Presentadores
         private IBasesVista vista;
         private IEnumerable<BasesModelo> movilModelos;
         private BindingSource filtrador;
+        private BindingSource tablaMoviles;
 
         public BasesPresentador(IBasesVista vista, IBasesRepositorio repositorio)
         {
             this.filtrador = new BindingSource();
+            this.tablaMoviles = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
 
-            this.vista.mostrarBases(this.filtrador);
-            mostrarBases();
+            this.vista.mostrarMoviles(this.filtrador);
+            mostrarMoviles();
 
             this.vista.agregarBase += agregar_base;
             this.vista.modificarBase += modificar_base;
             this.vista.comentarBase += comentar_base;
             this.vista.eliminarBase += eliminar_base;
             this.vista.volver += voler_menu;
+            this.vista.OnMovilSeleccionado += vista_OnMovilSeleccionado;
+
         }
-        public DataTable ConvertListToDataTable(IEnumerable<BasesModeloMovilId> lista)
+        public DataTable ConvertListToDataTable(IEnumerable<MovilModeloId> lista)
         {
             var dt = new DataTable();
             dt.Columns.Add("Id_movil");
@@ -82,13 +86,24 @@ namespace Programa.Presentadores
             return transpuesta;
         }
 
-        private void mostrarBases()
+        private void mostrarMoviles()
         {
             var listaIds = this.repositorio.seleccionarMovil().ToList();
             DataTable dtOriginal = ConvertListToDataTable(listaIds);
             DataTable dtTranspuesta = TransponerDataTable(dtOriginal);
             this.filtrador.DataSource = dtTranspuesta;
         }
+        private void vista_OnMovilSeleccionado(object sender, EventArgs e)
+        {
+            int id = vista.id_movil;
+            var listaBases = this.repositorio.mostrarTodo(id).ToList();
+
+            this.tablaMoviles.DataSource = null; // 🔑 Limpio primero
+            this.tablaMoviles.DataSource = listaBases;
+            this.vista.mostrarBases(this.tablaMoviles, id);
+        }
+
+
 
         private void agregar_base(object sender, EventArgs e) { }
         private void modificar_base(object sender, EventArgs e) { }

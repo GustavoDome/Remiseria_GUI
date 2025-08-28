@@ -17,6 +17,7 @@ namespace Programa.Vistas
         {
             InitializeComponent();
             asociacionPresentador();
+            this.Load += BasesVista_Load;
         }
 
         public void asociacionPresentador() 
@@ -41,6 +42,20 @@ namespace Programa.Vistas
             {
                 volver?.Invoke(this, EventArgs.Empty);
             };
+            dgvMoviles.SelectionChanged += (s, e) =>
+            {
+                if (dgvMoviles.CurrentRow != null && dgvMoviles.CurrentRow.Cells.Count > 0)
+                {
+                    int idMovil;
+                    // Asegurarse que el valor se puede parsear a int
+                    if (int.TryParse(dgvMoviles.CurrentRow.Cells[1].Value?.ToString(), out idMovil))
+                    {
+                        id_movil = idMovil;
+                        // Avisar al Presentador que se seleccionó un móvil
+                        OnMovilSeleccionado?.Invoke(this, EventArgs.Empty);
+                    }
+                }
+            };
         }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
@@ -50,13 +65,28 @@ namespace Programa.Vistas
         public event EventHandler modificarBase;
         public event EventHandler comentarBase;
         public event EventHandler eliminarBase;
-        public event EventHandler seleccionarMovil;
         public event EventHandler volver;
+        public event EventHandler OnMovilSeleccionado;
 
-        public void mostrarBases(BindingSource basesVista) 
+
+        public int id_movil { get; set; }
+
+        public void mostrarMoviles(BindingSource basesVista) 
         {
             dgvMoviles.DataSource = basesVista;
         }
+
+        public void mostrarBases(BindingSource basesVista, int movil) 
+        {
+            dgvBases.DataSource = basesVista;
+        }
+
+        private void BasesVista_Load(object sender, EventArgs e)
+        {
+            dgvMoviles.ClearSelection(); // 🔑 Nada seleccionado
+            dgvBases.DataSource = null;  // 🔑 Arranca vacío
+        }
+
 
         // Metodo para el uso del Singleton
         public static BasesVista ObtenerInstancia()

@@ -24,9 +24,6 @@ namespace Programa.Repositorios
                 {
                     cmd.Parameters.AddWithValue("@hora_viaje", viajesModelo.Hora_viaje ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@direccion", viajesModelo.Direccion ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@estado_vuelta", viajesModelo.Estado_vuelta);
-                    cmd.Parameters.AddWithValue("@vuelta", viajesModelo.Vuelta);
-                    cmd.Parameters.AddWithValue("@vuelta_fecha", viajesModelo.Vuelta_fecha ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@id_movil", viajesModelo.Id_movil);
                     cmd.Parameters.AddWithValue("@id_operador", viajesModelo.Id_operador);
 
@@ -54,9 +51,6 @@ namespace Programa.Repositorios
                     cmd.Parameters.AddWithValue("@id_viajes", viajesModelo.Id_viajes);
                     cmd.Parameters.AddWithValue("@hora_viaje", viajesModelo.Hora_viaje ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@direccion", viajesModelo.Direccion ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@estado_vuelta", viajesModelo.Estado_vuelta);
-                    cmd.Parameters.AddWithValue("@vuelta", viajesModelo.Vuelta);
-                    cmd.Parameters.AddWithValue("@vuelta_fecha", viajesModelo.Vuelta_fecha ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@id_movil", viajesModelo.Id_movil);
                     cmd.Parameters.AddWithValue("@id_operador", viajesModelo.Id_operador);
 
@@ -95,11 +89,7 @@ namespace Programa.Repositorios
                             Id_viajes = Convert.ToInt32(reader["id_viajes"]),
                             Hora_viaje = reader["hora_viaje"]?.ToString(),
                             Direccion = reader["direccion"]?.ToString(),
-                            Estado_vuelta = Convert.ToInt32(reader["estado_vuelta"]),
-                            Vuelta = Convert.ToInt32(reader["vuelta"]),
-                            Vuelta_fecha = reader["vuelta_fecha"]?.ToString(),
-                            Id_movil = Convert.ToInt32(reader["id_movil"]),
-                            Id_operador = Convert.ToInt32(reader["id_operador"])
+
                         });
                     }
                 }

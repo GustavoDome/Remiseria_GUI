@@ -12,12 +12,10 @@ namespace Programa.Modelos
         private string ubicacion;
         private string fecha_dia;
         private string fecha_hora;
-        private int id_viaje;
 
         public int Id_recordatorio { get; set; }
         public string Ubicacion { get; set; }
         public string Fecha_dia { get; set; }
         public string Fecha_hora { get; set; }
-        public int Id_viaje { get; set; }
     }
 }

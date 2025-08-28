@@ -21,9 +21,6 @@ namespace Programa.Repositorios
                 {
                     cmd.Parameters.AddWithValue("@estado_base", basesmodelo.Estado_base);
                     cmd.Parameters.AddWithValue("@fecha_base", basesmodelo.Fecha_base ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@id_movil", basesmodelo.Id_movil);
-                    cmd.Parameters.AddWithValue("@id_operador", basesmodelo.Id_operador);
-                    cmd.Parameters.AddWithValue("@activo", basesmodelo.Activo);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -38,11 +35,8 @@ namespace Programa.Repositorios
                                  WHERE id_base = @id_base;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id_base", basesmodelo.Id);
                     cmd.Parameters.AddWithValue("@estado_base", basesmodelo.Estado_base);
                     cmd.Parameters.AddWithValue("@fecha_base", basesmodelo.Fecha_base ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@id_movil", basesmodelo.Id_movil);
-                    cmd.Parameters.AddWithValue("@id_operador", basesmodelo.Id_operador);
 
                     cmd.ExecuteNonQuery();
                 }
@@ -61,19 +55,19 @@ namespace Programa.Repositorios
                 }
             }
         }
-        public IEnumerable<BasesModeloMovilId> seleccionarMovil() 
+        public IEnumerable<MovilModeloId> seleccionarMovil() 
         {
-            var lista = new List<BasesModeloMovilId>();
+            var lista = new List<MovilModeloId>();
 
             using (var conn = BD.Abrirconexion()) 
             {
-                string query = "SELECT id_movil FROM Bases where activo = TRUE;";
+                string query = "SELECT id_movil FROM Movil where activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
-                        lista.Add(new BasesModeloMovilId
+                        lista.Add(new MovilModeloId
                         {
                             Id_movil = reader["id_movil"] != DBNull.Value ? Convert.ToInt32(reader["id_movil"]) : 0,
                         });
@@ -84,26 +78,23 @@ namespace Programa.Repositorios
             return lista;
         }
 
-        public IEnumerable<BasesModelo> mostrarTodo(BasesModelo basesmodelo)
+        public IEnumerable<BasesModelo> mostrarTodo(int id_movil)
         {
             var lista = new List<BasesModelo>();
 
             using (var conn = BD.Abrirconexion())
             {
-                string query = @"SELECT estado_base AS 'Base', fecha_base AS 'Fecha' FROM Bases WHERE activo = TRUE and id_movil = @id;";
+                string query = @"select estado_base, fecha_base from Bases where activo = true and id_movil = @id_movil;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
-                    cmd.Parameters.AddWithValue("@id", basesmodelo.Id_movil);
+                    cmd.Parameters.AddWithValue("@id_movil", id_movil.ToString());
                     while (reader.Read())
                     {
                         lista.Add(new BasesModelo
                         {
-                            Id = reader["id"] != DBNull.Value ? Convert.ToInt32(reader["id"]) : 0,
                             Estado_base = reader["estado_base"] != DBNull.Value ? Convert.ToBoolean(reader["estado_base"]) : false,
                             Fecha_base = reader["fecha_base"] != DBNull.Value ? reader["fecha_base"].ToString() : string.Empty,
-                            Id_movil = reader["id_movil"] != DBNull.Value ? Convert.ToInt32(reader["id_movil"]) : 0,
-                            Id_operador = reader["id_operador"] != DBNull.Value ? Convert.ToInt32(reader["id_operador"]) : 0
                         });
                     }
                 }
