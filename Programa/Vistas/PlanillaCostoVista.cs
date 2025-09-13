@@ -16,6 +16,7 @@ namespace Programa.Vistas
         public PlanillaCostoVista()
         {
             InitializeComponent();
+            asociarPresentador();
         }
 
         public void asociarPresentador() 

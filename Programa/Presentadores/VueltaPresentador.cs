@@ -16,14 +16,20 @@ namespace Programa.Presentadores
     {
         private IViajesRepositorio repositorio;
         private IVueltaVista vista;
-        private IEnumerable<ViajesModelo> viajesModelos;
+        private IEnumerable<VueltaModelo> vueltaModelos;
         private BindingSource filtrador;
+        private string rol;
 
-        public VueltaPresentador(IVueltaVista vista, IViajesRepositorio repositorio)
+        public VueltaPresentador(IVueltaVista vista, IViajesRepositorio repositorio, string rol)
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
+            this.rol = rol;
+
+            this.vista.ocultarBotones(this.rol);
+            this.vista.SetViajesBindingSource(this.filtrador);
+            MostrarVuelta();
 
             this.vista.agregarVuelta += agregar_vuelta;
             this.vista.modificarVuelta += modificar_vuelta;
@@ -34,17 +40,28 @@ namespace Programa.Presentadores
             this.vista.volver += volver_menu;
         }
 
+        private void MostrarVuelta() 
+        {
+            var lista = this.repositorio.mostrarVuelta().ToList();
+            this.filtrador.DataSource = lista;
+        }
         private void agregar_vuelta(object sender, EventArgs e) { }
         private void modificar_vuelta(object sender, EventArgs e) { }
         private void eliminar_vuelta(object sender, EventArgs e) { }
         private void retroceder_dia(object sender, EventArgs e) { }
         private void adelantar_dia(object sender, EventArgs e) { }
-        private void ingresar_viaje(object sender, EventArgs e) { }
+        private void ingresar_viaje(object sender, EventArgs e)
+        {
+            IViajesRepositorio viajes = new ViajesRepositorio();
+            IViajesVista viajesvista = ViajesVista.ObtenerInstancia();
+            new ViajesPresentador(viajesvista, viajes, this.rol);
+            ((Form)vista).Close();
+        }
         private void volver_menu(object sender, EventArgs e) 
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio);
+            new InicioPresentador(inicio, recordatorio, this.rol);
             ((Form)vista).Close();
         }
     }

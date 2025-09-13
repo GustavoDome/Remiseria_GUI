@@ -47,7 +47,7 @@ namespace Programa.Presentadores
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio);
+            new InicioPresentador(inicio, recordatorio,"Gerente");
             ((Form)vista).Close();
         }
     }

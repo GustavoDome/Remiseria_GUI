@@ -22,14 +22,18 @@ namespace Programa.Presentadores
         private IEnumerable<PreguntaModelo> modeloPregunta; 
         private IEnumerable<RespuestaModelo> modeloRespuesta;
         private BindingSource filtrador;
+        private string rol;
 
-        public AyudaPresentador(IAyudaVista vista, ICategoriaRepositorio repositorioCategoria, IPreguntaRepositorio repositorioPregunta, IRespuestasRepositorio repositorioRespuesta)
+        public AyudaPresentador(IAyudaVista vista, ICategoriaRepositorio repositorioCategoria, IPreguntaRepositorio repositorioPregunta, IRespuestasRepositorio repositorioRespuesta, string rol)
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorioCategoria = repositorioCategoria;
             this.repositorioPregunta = repositorioPregunta;
             this.repositorioRespuesta = repositorioRespuesta;
+            this.rol = rol;
+
+            this.vista.ocultarBotones(this.rol);
 
             this.vista.ingresarPlanillasCosto += ingresar_planilla_costos;
             this.vista.agregarPregunta += agregar_pregunta;
@@ -44,7 +48,13 @@ namespace Programa.Presentadores
             this.vista.volver += volver_menu;
         }
 
-        public void ingresar_planilla_costos(object sender, EventArgs e) { }
+        public void ingresar_planilla_costos(object sender, EventArgs e) 
+        {
+            IPlanillaCostosRepositorio planillacostosrepositorio = new PlanillaCostosRepositorio();
+            IPlanillaCostoVista planillaCostoVista = PlanillaCostoVista.ObtenerInstancia();
+            new PlanillaCostoPresentador(planillaCostoVista, planillacostosrepositorio, this.rol);
+            ((Form)vista).Close();
+        }
 
         public void agregar_pregunta(object sender, EventArgs e) { }
 
@@ -68,7 +78,7 @@ namespace Programa.Presentadores
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio);
+            new InicioPresentador(inicio, recordatorio, this.rol);
             ((Form)vista).Close();
         }
     }

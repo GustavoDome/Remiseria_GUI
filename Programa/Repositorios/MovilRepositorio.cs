@@ -71,13 +71,36 @@ namespace Programa.Repositorios
             }
         }
 
+        public IEnumerable<MovilModeloId> seleccionarMovil()
+        {
+            var lista = new List<MovilModeloId>();
+
+            using (var conn = BD.Abrirconexion())
+            {
+                string query = "SELECT numero_movil FROM Movil where activo = TRUE;";
+                using (var cmd = new NpgsqlCommand(query, conn))
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        lista.Add(new MovilModeloId
+                        {
+                            Numero_movil = reader["numero_movil"] != DBNull.Value ? Convert.ToInt32(reader["numero_movil"]) : 0,
+                        });
+                    }
+                }
+            }
+
+            return lista;
+        }
+
         public IEnumerable<MovilModelo> mostrarTodo()
         {
             var lista = new List<MovilModelo>();
 
             using (var conn = BD.Abrirconexion())
             {
-                string query = "SELECT numero_movil,marca_auto,modelo_auto,ano_auto FROM Movil WHERE Activo = TRUE;";
+                string query = "SELECT numero_movil,marca_auto,modelo_auto,ano_auto,color_auto,nombre,apellido, chofer, telefono  FROM Movil join dueno_auto on Movil.id_dueno = dueno_auto.id_dueno WHERE Movil.Activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -90,6 +113,10 @@ namespace Programa.Repositorios
                             Modelo_auto = reader["modelo_auto"]?.ToString(),
                             Ano_auto = reader["ano_auto"]?.ToString(),
                             Color_auto = reader["color_auto"]?.ToString(),
+                            Nombre = reader["nombre"]?.ToString(),
+                            Apellido = reader["apellido"]?.ToString(),
+                            Chofer = Convert.ToBoolean(reader["chofer"]),
+                            Telefono = reader["telefono"]?.ToString(),
                         });
                     }
                 }

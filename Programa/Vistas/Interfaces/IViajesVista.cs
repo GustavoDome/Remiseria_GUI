@@ -18,6 +18,7 @@ namespace Programa.Vistas.Interfaces
         event EventHandler ingresarVuelta;
         event EventHandler volver;
 
+        void ocultarBotones(string rol);
         void SetViajesBindingSource(BindingSource viajes);
     }
 }

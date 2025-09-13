@@ -19,6 +19,7 @@ namespace Programa.Vistas.Interfaces
         int id_movil { get; set; }
 
 
+        void ocultarBotones(string rol);
         void mostrarMoviles(BindingSource listaBase);
         void mostrarBases(BindingSource listaBase, int id);
     }

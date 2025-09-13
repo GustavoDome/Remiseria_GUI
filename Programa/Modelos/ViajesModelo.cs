@@ -9,31 +9,38 @@ namespace Programa.Modelos
     public class ViajesModelo
     {
         private int id_viajes;
-        private string hora_viaje;
+        private TimeSpan hora_viaje;
         private string direccion;
+        private string comentario;
+        private string tipo_viaje;
         private int id_operador;
+        private List<int> id_movil;
+        private string movilesconcatenados;
 
         public int Id_viajes { get; set; }
-        public string Hora_viaje { get; set; }
+        public TimeSpan Hora_viaje { get; set; }
         public string Direccion { get; set; }
-        public IEnumerable<ViajesModeloId> Id_movil { get; set; }
-        public string Id_operador { get; set; }
+        public string Comentario { get; set; }
+        public string Tipo_viaje { get; set; }
+        public int Id_operador { get; set; }
+        public List<int> Id_movil { get; set; } // Lista de móviles
+        public string MovilesConcatenados { get; set; } // Para mostrar en DataGridView
     }
 
     public class ViajesModeloId 
     {
-        private string id_movil;
+        private string numero_movil;
 
         public int Id_movil { get; set; }
     }
 
     public class VueltaModelo
     {
-        private int estado_vuelta;
+        private string estado_vuelta;
         private int vuelta;
         private string vuelta_fecha;
 
-        public int Estado_vuelta { get; set; }
+        public string Estado_vuelta { get; set; }
         public int Vuelta { get; set; }
         public string Vuelta_fecha { get; set; }
 

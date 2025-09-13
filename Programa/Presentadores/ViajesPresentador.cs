@@ -2,6 +2,8 @@
 using Programa.Modelos.Interfaces;
 using Programa.Repositorios;
 using Programa.Vistas;
+using Programa.Vistas.Alta;
+using Programa.Vistas.Alta.Interfaces;
 using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,12 +20,18 @@ namespace Programa.Presentadores
         private IViajesVista vista;
         private IEnumerable<ViajesModelo> viajesModelos;
         private BindingSource filtrador;
+        private string rol;
 
-        public ViajesPresentador(IViajesVista vista, IViajesRepositorio repositorio) 
+        public ViajesPresentador(IViajesVista vista, IViajesRepositorio repositorio, string rol) 
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
+            this.rol = rol;
+
+            this.vista.ocultarBotones(this.rol);
+            this.vista.SetViajesBindingSource(filtrador);
+            cargar_datos();
 
             this.vista.agregarViaje += agregar_viaje;
             this.vista.modificarViaje += modificar_viaje;
@@ -35,18 +43,46 @@ namespace Programa.Presentadores
             this.vista.volver += volver_menu;
         }
 
-        private void agregar_viaje(object sender, EventArgs e) { }
+        private void cargar_datos() 
+        {
+            var lista = this.repositorio.mostrarTodo();
+            filtrador.DataSource = lista;
+        }
+
+        private int ObtenerSiguienteId()
+        {
+            if (filtrador.Count == 0)
+                return 1; // Si no hay viajes, empezamos desde 1
+
+            // Obtenemos el viaje con el Id más alto
+            var maxId = ((IEnumerable<ViajesModelo>)filtrador.DataSource)
+                        .Max(v => v.Id_viajes);
+
+            return maxId + 1;
+        }
+
+        private void agregar_viaje(object sender, EventArgs e) 
+        {
+            int siguienteid = ObtenerSiguienteId();
+            IAgregarViajesVista agregarViajes = AgregarViajesVista.ObtenerInstancia(siguienteid);
+        }
         private void modificar_viaje(object sender, EventArgs e) { }
         private void comentar_viaje(object sender, EventArgs e) { }
         private void eliminar_viaje(object sender, EventArgs e) { }
         private void retroceder_dia(object sender, EventArgs e) { }
         private void adelantar_dia(object sender, EventArgs e) { }
-        private void ingresar_vuelta(object sender, EventArgs e) { }
+        private void ingresar_vuelta(object sender, EventArgs e) 
+        {
+            IViajesRepositorio viajes = new ViajesRepositorio();
+            IVueltaVista vuelta = VueltaVista.ObtenerInstancia();
+            new VueltaPresentador(vuelta, viajes, this.rol);
+            ((Form)vista).Close();
+        }
         private void volver_menu(object sender, EventArgs e) 
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio);
+            new InicioPresentador(inicio, recordatorio, this.rol);
             ((Form)vista).Close();
         }
     }

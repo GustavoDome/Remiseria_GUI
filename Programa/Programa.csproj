@@ -129,12 +129,14 @@
     <Compile Include="Modelos\Interfaces\IMovilRepositorio.cs" />
     <Compile Include="Modelos\Interfaces\IBasesRepositorio.cs" />
     <Compile Include="Modelos\Interfaces\ICategoriaRepositorio.cs" />
+    <Compile Include="Modelos\Interfaces\IPlanillaCostosRepositorio.cs" />
     <Compile Include="Modelos\Interfaces\IPreguntaRepositorio.cs" />
     <Compile Include="Modelos\Interfaces\IRecordatorioRepositorio.cs" />
     <Compile Include="Modelos\Interfaces\IRespuestasRepositorio.cs" />
     <Compile Include="Modelos\Interfaces\IUsuarioRepositorio.cs" />
     <Compile Include="Modelos\Interfaces\IViajesRepositorio.cs" />
     <Compile Include="Modelos\MovilModelo.cs" />
+    <Compile Include="Modelos\PlanillaCostosModelo.cs" />
     <Compile Include="Modelos\PreguntaModelo.cs" />
     <Compile Include="Modelos\RecordatorioModelo.cs" />
     <Compile Include="Modelos\RespuestaModelo.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Repositorios\CategoriaRepositorio.cs" />
     <Compile Include="Repositorios\DuenoAutoRepositorio.cs" />
     <Compile Include="Repositorios\MovilRepositorio.cs" />
+    <Compile Include="Repositorios\PlanillaCostosRepositorio.cs" />
     <Compile Include="Repositorios\PreguntaRepositorio.cs" />
     <Compile Include="Repositorios\RecordatorioRepositorio.cs" />
     <Compile Include="Repositorios\RespuestaRepositorio.cs" />

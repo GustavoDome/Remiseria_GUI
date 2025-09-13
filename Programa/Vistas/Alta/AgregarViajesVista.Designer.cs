@@ -34,13 +34,13 @@
             this.rbtnDesignado = new System.Windows.Forms.RadioButton();
             this.rbtnOtro = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtDireccion = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.lblComentario = new System.Windows.Forms.Label();
-            this.rtbComentarios = new System.Windows.Forms.RichTextBox();
+            this.rtbComentario = new System.Windows.Forms.RichTextBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.gbMoviles = new System.Windows.Forms.GroupBox();
+            this.clbMoviles = new System.Windows.Forms.CheckedListBox();
             this.SuspendLayout();
             // 
             // label3
@@ -107,13 +107,13 @@
             this.label1.TabIndex = 14;
             this.label1.Text = "Ingrese la direccion del viaje";
             // 
-            // textBox1
+            // txtDireccion
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(12, 38);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(289, 26);
-            this.textBox1.TabIndex = 15;
+            this.txtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtDireccion.Location = new System.Drawing.Point(12, 38);
+            this.txtDireccion.Name = "txtDireccion";
+            this.txtDireccion.Size = new System.Drawing.Size(289, 26);
+            this.txtDireccion.TabIndex = 15;
             // 
             // label2
             // 
@@ -136,15 +136,15 @@
             this.lblComentario.Text = "label";
             this.lblComentario.Visible = false;
             // 
-            // rtbComentarios
+            // rtbComentario
             // 
-            this.rtbComentarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbComentarios.Location = new System.Drawing.Point(444, 122);
-            this.rtbComentarios.Name = "rtbComentarios";
-            this.rtbComentarios.Size = new System.Drawing.Size(343, 96);
-            this.rtbComentarios.TabIndex = 19;
-            this.rtbComentarios.Text = "";
-            this.rtbComentarios.Visible = false;
+            this.rtbComentario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rtbComentario.Location = new System.Drawing.Point(444, 122);
+            this.rtbComentario.Name = "rtbComentario";
+            this.rtbComentario.Size = new System.Drawing.Size(343, 96);
+            this.rtbComentario.TabIndex = 19;
+            this.rtbComentario.Text = "";
+            this.rtbComentario.Visible = false;
             // 
             // btnVolver
             // 
@@ -163,27 +163,33 @@
             this.btnAgregar.TabIndex = 21;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // gbMoviles
+            // clbMoviles
             // 
-            this.gbMoviles.Location = new System.Drawing.Point(12, 118);
-            this.gbMoviles.Name = "gbMoviles";
-            this.gbMoviles.Size = new System.Drawing.Size(386, 172);
-            this.gbMoviles.TabIndex = 22;
-            this.gbMoviles.TabStop = false;
+            this.clbMoviles.ColumnWidth = 80;
+            this.clbMoviles.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.clbMoviles.FormattingEnabled = true;
+            this.clbMoviles.HorizontalExtent = 9;
+            this.clbMoviles.HorizontalScrollbar = true;
+            this.clbMoviles.Location = new System.Drawing.Point(16, 113);
+            this.clbMoviles.MultiColumn = true;
+            this.clbMoviles.Name = "clbMoviles";
+            this.clbMoviles.Size = new System.Drawing.Size(369, 172);
+            this.clbMoviles.TabIndex = 22;
             // 
             // AgregarViajesVista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 358);
-            this.Controls.Add(this.gbMoviles);
+            this.Controls.Add(this.clbMoviles);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnVolver);
-            this.Controls.Add(this.rtbComentarios);
+            this.Controls.Add(this.rtbComentario);
             this.Controls.Add(this.lblComentario);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.rbtnOtro);
             this.Controls.Add(this.rbtnDesignado);
@@ -205,12 +211,12 @@
         private System.Windows.Forms.RadioButton rbtnDesignado;
         private System.Windows.Forms.RadioButton rbtnOtro;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label lblComentario;
-        private System.Windows.Forms.RichTextBox rtbComentarios;
+        private System.Windows.Forms.RichTextBox rtbComentario;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.GroupBox gbMoviles;
+        private System.Windows.Forms.CheckedListBox clbMoviles;
     }
 }

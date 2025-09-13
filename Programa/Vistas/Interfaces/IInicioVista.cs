@@ -23,6 +23,7 @@ namespace Programa.Vistas.Interfaces
         event EventHandler volver;
 
         //Metodos
+        void ocultarBotones(string rol);
         void SetRecordatoriosBindingSource(BindingSource RecordatorioLista);
         void Mostrar();
     }

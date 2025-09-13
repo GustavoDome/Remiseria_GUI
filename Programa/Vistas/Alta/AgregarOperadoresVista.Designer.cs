@@ -39,6 +39,8 @@
             this.txtDireccion = new System.Windows.Forms.TextBox();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.txtcontrasena = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -53,9 +55,9 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(22, 212);
+            this.btnVolver.Location = new System.Drawing.Point(12, 311);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 33);
+            this.btnVolver.Size = new System.Drawing.Size(94, 33);
             this.btnVolver.TabIndex = 1;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -64,7 +66,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 98);
+            this.label2.Location = new System.Drawing.Point(12, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(217, 20);
             this.label2.TabIndex = 4;
@@ -74,7 +76,7 @@
             // 
             this.rbtnOperador.AutoSize = true;
             this.rbtnOperador.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnOperador.Location = new System.Drawing.Point(12, 146);
+            this.rbtnOperador.Location = new System.Drawing.Point(12, 169);
             this.rbtnOperador.Name = "rbtnOperador";
             this.rbtnOperador.Size = new System.Drawing.Size(94, 24);
             this.rbtnOperador.TabIndex = 5;
@@ -86,7 +88,7 @@
             // 
             this.rbtnGerente.AutoSize = true;
             this.rbtnGerente.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rbtnGerente.Location = new System.Drawing.Point(144, 146);
+            this.rbtnGerente.Location = new System.Drawing.Point(144, 169);
             this.rbtnGerente.Name = "rbtnGerente";
             this.rbtnGerente.Size = new System.Drawing.Size(86, 24);
             this.rbtnGerente.TabIndex = 6;
@@ -108,7 +110,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(296, 98);
+            this.label4.Location = new System.Drawing.Point(309, 121);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(234, 20);
             this.label4.TabIndex = 8;
@@ -117,7 +119,7 @@
             // txtNombre
             // 
             this.txtNombre.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNombre.Location = new System.Drawing.Point(16, 44);
+            this.txtNombre.Location = new System.Drawing.Point(16, 53);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(226, 26);
             this.txtNombre.TabIndex = 9;
@@ -125,7 +127,7 @@
             // txtDireccion
             // 
             this.txtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtDireccion.Location = new System.Drawing.Point(313, 44);
+            this.txtDireccion.Location = new System.Drawing.Point(313, 53);
             this.txtDireccion.Name = "txtDireccion";
             this.txtDireccion.Size = new System.Drawing.Size(226, 26);
             this.txtDireccion.TabIndex = 10;
@@ -133,25 +135,45 @@
             // txtTelefono
             // 
             this.txtTelefono.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTelefono.Location = new System.Drawing.Point(300, 146);
+            this.txtTelefono.Location = new System.Drawing.Point(313, 167);
             this.txtTelefono.Name = "txtTelefono";
             this.txtTelefono.Size = new System.Drawing.Size(226, 26);
             this.txtTelefono.TabIndex = 11;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(486, 212);
+            this.btnAgregar.Location = new System.Drawing.Point(467, 311);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 33);
+            this.btnAgregar.Size = new System.Drawing.Size(94, 33);
             this.btnAgregar.TabIndex = 12;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            // 
+            // txtcontrasena
+            // 
+            this.txtcontrasena.AutoSize = true;
+            this.txtcontrasena.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtcontrasena.Location = new System.Drawing.Point(159, 229);
+            this.txtcontrasena.Name = "txtcontrasena";
+            this.txtcontrasena.Size = new System.Drawing.Size(256, 20);
+            this.txtcontrasena.TabIndex = 13;
+            this.txtcontrasena.Text = "Ingrese la contraseña del operador";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBox1.Location = new System.Drawing.Point(12, 267);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(549, 26);
+            this.textBox1.TabIndex = 14;
             // 
             // AgregarOperadoresVista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 264);
+            this.ClientSize = new System.Drawing.Size(573, 356);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtcontrasena);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.txtDireccion);
@@ -183,5 +205,7 @@
         private System.Windows.Forms.TextBox txtDireccion;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Label txtcontrasena;
+        private System.Windows.Forms.TextBox textBox1;
     }
 }

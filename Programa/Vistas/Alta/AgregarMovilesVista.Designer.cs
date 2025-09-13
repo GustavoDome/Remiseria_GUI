@@ -252,7 +252,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNumeroMovil);
             this.Name = "AgregarMovilesVista";
-            this.Text = "Agregar Vista";
+            this.Text = "Agregar Remis";
             this.ResumeLayout(false);
             this.PerformLayout();
 

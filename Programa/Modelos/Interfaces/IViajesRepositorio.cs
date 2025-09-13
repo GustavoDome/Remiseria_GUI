@@ -14,6 +14,8 @@ namespace Programa.Modelos.Interfaces
 
         void eliminar(int id);
 
+        IEnumerable<MovilModeloId> seleccionarMovil();
         IEnumerable<ViajesModelo> mostrarTodo();
+        IEnumerable<VueltaModelo> mostrarVuelta();
     }
 }

@@ -21,6 +21,7 @@ namespace Programa.Vistas.Interfaces
         event EventHandler eliminarCategoria;
         event EventHandler volver;
 
+        void ocultarBotones(string rol);
         void SetCategoriaBindingSource(BindingSource categorias);
         void SetPreguntaBindingSource(BindingSource preguntas);
         void SetRespuestaBindingSource(BindingSource respuestas);

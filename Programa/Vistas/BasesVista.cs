@@ -20,6 +20,15 @@ namespace Programa.Vistas
             this.Load += BasesVista_Load;
         }
 
+        public void ocultarBotones(string rol) 
+        {
+            if(rol == "Usuario")
+            {
+                btnModificar.Hide();
+                btnEliminar.Hide();
+            }
+        }
+
         public void asociacionPresentador() 
         {
             btnAgregar.Click += delegate

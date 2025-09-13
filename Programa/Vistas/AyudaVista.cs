@@ -19,6 +19,21 @@ namespace Programa.Vistas
             asociarPresentador();
         }
 
+        public void ocultarBotones(string rol) 
+        {
+            if (rol == "Usuario") 
+            {
+                btnModificarPregunta.Hide();
+                btnEliminarPregunta.Hide();
+                btnAgregarRespuesta.Hide();
+                btnModificarRespuesta.Hide();
+                btnEliminarRespuesta.Hide();
+                btnAgregarCategoria.Hide();
+                btnModificarCategoria.Hide();
+                btnEliminarCategoria.Hide();
+            }
+        }
+
         public void asociarPresentador() 
         {
             btnPlanillaCostos.Click += delegate 

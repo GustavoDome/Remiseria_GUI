@@ -16,8 +16,19 @@ namespace Programa.Vistas
         public VueltaVista()
         {
             InitializeComponent();
+            asociarPresentador();
         }
 
+        public void ocultarBotones(string rol) 
+        {
+            if(rol== "Usuario")
+            {
+                dateTimePicker1.Enabled = false;
+                btnEliminar.Hide();
+                btnAnterior.Hide();
+                btnSiguiente.Hide();
+            }
+        }
         public void asociarPresentador() 
         {
             btnAgregar.Click += delegate 
@@ -57,7 +68,10 @@ namespace Programa.Vistas
         public event EventHandler ingresarViaje;
         public event EventHandler volver;
 
-        public void SetViajesBindingSource(BindingSource viajes) { }
+        public void SetViajesBindingSource(BindingSource viajes) 
+        {
+            dgvVuelta.DataSource = viajes;
+        }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static VueltaVista instancia;
