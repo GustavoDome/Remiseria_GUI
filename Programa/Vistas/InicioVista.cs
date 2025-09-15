@@ -17,6 +17,7 @@ namespace Programa.Vistas
         {
             InitializeComponent();
             asociacionPresentador();
+            this.FormClosed += (s, e) => Application.Exit();
         }
 
         public void ocultarBotones(string rol) 

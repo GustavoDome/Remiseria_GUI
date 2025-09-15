@@ -127,7 +127,7 @@ namespace Programa.Vistas.Alta
             viaje.Id_viajes = this.id;
             viaje.Hora_viaje = hora;
             viaje.Direccion = txtDirecciones;
-            viaje.Tipo_viaje = obtenerOpcion();
+            viaje.Estado_viaje = obtenerOpcion();
             viaje.Comentario = rtbComentarios;
             viaje.Id_movil = obtenermovil();
             viaje.Id_operador = 1; 

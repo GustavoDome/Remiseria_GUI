@@ -12,7 +12,7 @@ namespace Programa.Modelos
         private TimeSpan hora_viaje;
         private string direccion;
         private string comentario;
-        private string tipo_viaje;
+        private string estado_viaje;
         private int id_operador;
         private List<int> id_movil;
         private string movilesconcatenados;
@@ -21,7 +21,7 @@ namespace Programa.Modelos
         public TimeSpan Hora_viaje { get; set; }
         public string Direccion { get; set; }
         public string Comentario { get; set; }
-        public string Tipo_viaje { get; set; }
+        public string Estado_viaje { get; set; }
         public int Id_operador { get; set; }
         public List<int> Id_movil { get; set; } // Lista de móviles
         public string MovilesConcatenados { get; set; } // Para mostrar en DataGridView

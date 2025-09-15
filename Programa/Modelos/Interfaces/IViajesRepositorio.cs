@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +16,7 @@ namespace Programa.Modelos.Interfaces
         void eliminar(int id);
 
         IEnumerable<MovilModeloId> seleccionarMovil();
-        IEnumerable<ViajesModelo> mostrarTodo();
+        DataTable mostrarTodo();
         IEnumerable<VueltaModelo> mostrarVuelta();
     }
 }

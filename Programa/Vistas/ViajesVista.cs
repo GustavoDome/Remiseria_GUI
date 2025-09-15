@@ -80,6 +80,18 @@ namespace Programa.Vistas
             dgvViajes.DataSource = viajes;
         }
 
+        public void congelarVista() 
+        {
+            dgvViajes.Columns[0].Width = 40;
+            dgvViajes.Columns[1].Width = 60;
+            dgvViajes.Columns[2].Width = 200;
+            dgvViajes.Columns[3].Width = 120;
+
+            dgvViajes.Columns[0].Frozen = true;
+            dgvViajes.Rows[1].Frozen = true;
+            dgvViajes.Rows[2].Frozen = true;
+        }
+
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static ViajesVista instancia;
 

@@ -4,7 +4,9 @@ using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace Programa.Repositorios
 {
@@ -21,8 +23,8 @@ namespace Programa.Repositorios
                 {
                     // 1️⃣ Insertar el viaje principal y obtener su ID generado
                     string queryViaje = @"INSERT INTO Viajes
-                                  (hora_viaje, direccion, comentario, tipo_viaje, id_operador) 
-                                  VALUES (@hora_viaje, @direccion, @comentario, @tipo_viaje, @id_operador)
+                                  (hora_viaje, direccion, comentario, estado_viaje, id_operador) 
+                                  VALUES (@hora_viaje, @direccion, @comentario, @estado_viaje, @id_operador)
                                   RETURNING id_viajes;";
 
                     int idViaje;
@@ -31,7 +33,7 @@ namespace Programa.Repositorios
                         cmd.Parameters.AddWithValue("@hora_viaje", viaje.Hora_viaje);
                         cmd.Parameters.AddWithValue("@direccion", viaje.Direccion ?? (object)DBNull.Value);
                         cmd.Parameters.AddWithValue("@comentario", viaje.Comentario ?? (object)DBNull.Value);
-                        cmd.Parameters.AddWithValue("@tipo_viaje", viaje.Tipo_viaje ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@estado_viaje", viaje.Estado_viaje ?? (object)DBNull.Value);
                         cmd.Parameters.AddWithValue("@id_operador", viaje.Id_operador);
 
                         idViaje = Convert.ToInt32(cmd.ExecuteScalar()); // Obtener el id generado
@@ -128,55 +130,74 @@ namespace Programa.Repositorios
 
             return lista;
         }
-        public IEnumerable<ViajesModelo> mostrarTodo()
+        public DataTable mostrarTodo()
         {
-            var listaTemporal = new List<(int id_viajes, TimeSpan hora_viaje, string direccion, string comentario, string tipo_viaje, int id_operador, int numero_movil)>();
+            DataTable dt = new DataTable();
 
-            using (var conn = BD.Abrirconexion())
+            // columnas fijas
+            dt.Columns.Add("ID Viaje");
+            dt.Columns.Add("Hora");
+            dt.Columns.Add("Dirección");
+            dt.Columns.Add("Comentario");
+
+            // diccionario para no repetir filas
+            Dictionary<int, DataRow> filas = new Dictionary<int, DataRow>();
+
+            try
             {
-                string query = @"
-            SELECT v.id_viajes, v.hora_viaje, v.direccion, v.comentario, v.tipo_viaje, v.id_operador, m.numero_movil
-            FROM Viajes v
-            JOIN Viajes_Moviles vm ON v.id_viajes = vm.id_viaje
-            JOIN Movil m ON vm.id_movil = m.id_movil;
-        ";
-
-                using (var cmd = new NpgsqlCommand(query, conn))
-                using (var reader = cmd.ExecuteReader())
+                using (var conn = BD.Abrirconexion())
                 {
-                    while (reader.Read())
+                    string query = @"
+                    SELECT v.id_viajes,
+                           v.hora_viaje,
+                           v.direccion,
+                           v.comentario,
+                           v.estado_viaje,
+                           m.numero_movil
+                    FROM Viajes v
+                    JOIN Viajes_Moviles vm ON v.id_viajes = vm.id_viaje
+                    JOIN Movil m ON vm.id_movil = m.id_movil
+                    ORDER BY v.id_viajes, m.numero_movil;
+                ";
+
+                    using (var cmd = new NpgsqlCommand(query, conn))
+                    using (var reader = cmd.ExecuteReader())
                     {
-                        listaTemporal.Add((
-                            Convert.ToInt32(reader["id_viajes"]),
-                            (TimeSpan)reader["hora_viaje"],
-                            reader["direccion"]?.ToString(),
-                            reader["comentario"]?.ToString(),
-                            reader["tipo_viaje"]?.ToString(),
-                            Convert.ToInt32(reader["id_operador"]),
-                            Convert.ToInt32(reader["numero_movil"])
-                        ));
+                        while (reader.Read())
+                        {
+                            int idViaje = Convert.ToInt32(reader["id_viajes"]);
+                            int movil = Convert.ToInt32(reader["numero_movil"]);
+                            string estado = reader["estado_viaje"]?.ToString();
+
+                            // si el viaje aún no existe, creo la fila
+                            if (!filas.ContainsKey(idViaje))
+                            {
+                                DataRow row = dt.NewRow();
+                                row["ID Viaje"] = idViaje;
+                                row["Hora"] = reader["hora_viaje"];
+                                row["Dirección"] = reader["direccion"];
+                                row["Comentario"] = reader["comentario"];
+
+                                filas[idViaje] = row;
+                                dt.Rows.Add(row);
+                            }
+
+                            // nombre dinámico de la columna para cada móvil
+                            string colName = $"Movil {movil}";
+                            if (!dt.Columns.Contains(colName))
+                                dt.Columns.Add(colName);
+
+                            filas[idViaje][colName] = estado;
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar los viajes: " + ex.Message);
+            }
 
-            // Agrupamos por viaje y convertimos los móviles en un string para mostrar en DataGridView
-            var listaFinal = listaTemporal
-                .GroupBy(x => x.id_viajes)
-                .Select(g => new ViajesModelo
-                {
-                    Id_viajes = g.Key,
-                    Hora_viaje = g.First().hora_viaje,
-                    Direccion = g.First().direccion,
-                    Comentario = g.First().comentario,
-                    Tipo_viaje = g.First().tipo_viaje,
-                    Id_operador = g.First().id_operador,
-                    // Convertimos la lista de móviles en un string separado por comas
-                    Id_movil = g.Select(x => x.numero_movil).ToList(),
-                    MovilesConcatenados = string.Join(", ", g.Select(x => x.numero_movil)) // Nueva propiedad para DataGridView
-                })
-                .ToList();
-
-            return listaFinal;
+            return dt;
         }
 
 

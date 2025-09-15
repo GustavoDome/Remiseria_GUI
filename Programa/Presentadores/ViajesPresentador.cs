@@ -45,17 +45,17 @@ namespace Programa.Presentadores
 
         private void cargar_datos() 
         {
-            var lista = this.repositorio.mostrarTodo();
-            filtrador.DataSource = lista;
+            this.filtrador.DataSource = this.repositorio.mostrarTodo();
+            this.vista.congelarVista();
         }
 
         private int ObtenerSiguienteId()
         {
-            if (filtrador.Count == 0)
+            if (this.filtrador.Count == 0)
                 return 1; // Si no hay viajes, empezamos desde 1
 
             // Obtenemos el viaje con el Id más alto
-            var maxId = ((IEnumerable<ViajesModelo>)filtrador.DataSource)
+            var maxId = ((IEnumerable<ViajesModelo>)this.filtrador.DataSource)
                         .Max(v => v.Id_viajes);
 
             return maxId + 1;

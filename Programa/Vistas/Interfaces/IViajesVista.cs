@@ -20,5 +20,6 @@ namespace Programa.Vistas.Interfaces
 
         void ocultarBotones(string rol);
         void SetViajesBindingSource(BindingSource viajes);
+        void congelarVista();
     }
 }
