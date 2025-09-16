@@ -33,7 +33,7 @@ namespace Programa.Modelos
         private TimeSpan hora_viaje;
         private string direccion;
         private string estado_vuelta;
-        private string vuelta;
+        private List<int> vuelta;
         private DateTime vuelta_fecha;
         private string id_operador;
         private string estado_viaje;
@@ -44,7 +44,7 @@ namespace Programa.Modelos
         public TimeSpan Hora_viaje { get; set; }
         public string Direccion { get; set; }
         public string Estado_vuelta { get; set; }
-        public int Vuelta { get; set; }
+        public List<int> Vuelta { get; set; }
         public DateTime Vuelta_fecha { get; set; }
         public int Id_operador { get; set; }
         public string Estado_viaje { get; set; }
@@ -61,6 +61,13 @@ namespace Programa.Modelos
         public int Id_movil { get; set; }
     }
 
+    public class VueltaIdModelo 
+    {
+        private int vuelta;
+        private int numero_movil;
+        public int Vuelta { get; set; }
+        public int Numero_movil { get; set; }
+    }
     public class VueltaModelo
     {
         private string estado_vuelta;

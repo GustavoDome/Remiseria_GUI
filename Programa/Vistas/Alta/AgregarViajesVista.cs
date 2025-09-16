@@ -133,6 +133,25 @@ namespace Programa.Vistas.Alta
             return instancia;
         }
 
+        public List<int> obtenerVuelta()
+        {
+            var repositorio = new ViajesRepositorio();
+
+            // Móviles seleccionados desde la UI (por ejemplo, CheckedListBox)
+            var movilesSeleccionados = obtenermovil(); // List<int>
+
+            // Lista de vueltas desde la base
+            var listavueltas = repositorio.seleccionarVuelta(); // IEnumerable<VueltaIdModelo>
+
+            // Filtrar las vueltas que coinciden con los móviles seleccionados
+            var vueltasFiltradas = listavueltas
+                .Where(v => movilesSeleccionados.Contains(v.Numero_movil))
+                .Select(v => v.Vuelta)
+                .ToList();
+
+            return vueltasFiltradas;
+        }
+
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             var repositorio = new ViajesRepositorio();
@@ -142,6 +161,7 @@ namespace Programa.Vistas.Alta
             viaje.Id = this.id;
             viaje.Hora_viaje = hora;
             viaje.Direccion = txtDirecciones;
+            viaje.Vuelta = obtenerVuelta();
             viaje.Estado_vuelta = "X";
             viaje.Vuelta_fecha = fecha_vuelta;
             viaje.Estado_viaje = "·";

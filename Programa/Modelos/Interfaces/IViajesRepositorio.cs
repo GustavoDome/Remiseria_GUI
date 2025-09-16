@@ -18,5 +18,6 @@ namespace Programa.Modelos.Interfaces
         IEnumerable<MovilModeloId> seleccionarMovil();
         DataTable mostrarTodo();
         IEnumerable<VueltaModelo> mostrarVuelta();
+        IEnumerable<VueltaIdModelo> seleccionarVuelta();
     }
 }
