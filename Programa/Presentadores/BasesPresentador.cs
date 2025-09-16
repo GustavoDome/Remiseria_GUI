@@ -22,14 +22,16 @@ namespace Programa.Presentadores
         private BindingSource filtrador;
         private BindingSource tablaMoviles;
         private string rol;
+        private int id;
 
-        public BasesPresentador(IBasesVista vista, IBasesRepositorio repositorio, string rol)
+        public BasesPresentador(IBasesVista vista, IBasesRepositorio repositorio, string rol, int id)
         {
             this.filtrador = new BindingSource();
             this.tablaMoviles = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
             this.rol = rol;
+            this.id = id;
 
             this.vista.ocultarBotones(this.rol);
             this.vista.mostrarMoviles(this.filtrador);
@@ -41,7 +43,7 @@ namespace Programa.Presentadores
             this.vista.eliminarBase += eliminar_base;
             this.vista.volver += voler_menu;
             this.vista.OnMovilSeleccionado += vista_OnMovilSeleccionado;
-
+            this.id = id;
         }
         public DataTable ConvertListToDataTable(IEnumerable<MovilModeloId> lista)
         {
@@ -116,7 +118,7 @@ namespace Programa.Presentadores
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio, this.rol);
+            new InicioPresentador(inicio, recordatorio, this.rol, this.id);
             ((Form)vista).Close();
         }
     }

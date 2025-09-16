@@ -7,6 +7,7 @@ using Programa.Vistas.Alta.Interfaces;
 using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,13 +22,15 @@ namespace Programa.Presentadores
         private IEnumerable<ViajesModelo> viajesModelos;
         private BindingSource filtrador;
         private string rol;
+        private int id;
 
-        public ViajesPresentador(IViajesVista vista, IViajesRepositorio repositorio, string rol) 
+        public ViajesPresentador(IViajesVista vista, IViajesRepositorio repositorio, string rol, int id) 
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
             this.rol = rol;
+            this.id = id;
 
             this.vista.ocultarBotones(this.rol);
             this.vista.SetViajesBindingSource(filtrador);
@@ -51,20 +54,32 @@ namespace Programa.Presentadores
 
         private int ObtenerSiguienteId()
         {
+            // Verificamos si el DataSource está vacío
             if (this.filtrador.Count == 0)
-                return 1; // Si no hay viajes, empezamos desde 1
+                return 1;
 
-            // Obtenemos el viaje con el Id más alto
-            var maxId = ((IEnumerable<ViajesModelo>)this.filtrador.DataSource)
-                        .Max(v => v.Id_viajes);
+            // Convertimos el DataTable a una lista de ViajesModelo
+            var tabla = this.filtrador.DataSource as DataTable;
+            if (tabla == null)
+                throw new InvalidOperationException("El DataSource no es un DataTable.");
 
+            var listaViajes = tabla.AsEnumerable()
+                .Select(row => new ViajesModelo
+                {
+                    Id_viajes = Convert.ToInt32(row["ID Viaje"]),
+                    // Agregá otros campos si los necesitás
+                }).ToList();
+
+            // Obtenemos el ID máximo
+            var maxId = listaViajes.Max(v => v.Id_viajes);
             return maxId + 1;
         }
+
 
         private void agregar_viaje(object sender, EventArgs e) 
         {
             int siguienteid = ObtenerSiguienteId();
-            IAgregarViajesVista agregarViajes = AgregarViajesVista.ObtenerInstancia(siguienteid);
+            IAgregarViajesVista agregarViajes = AgregarViajesVista.ObtenerInstancia(siguienteid, this.id, this.rol);
         }
         private void modificar_viaje(object sender, EventArgs e) { }
         private void comentar_viaje(object sender, EventArgs e) { }
@@ -75,14 +90,14 @@ namespace Programa.Presentadores
         {
             IViajesRepositorio viajes = new ViajesRepositorio();
             IVueltaVista vuelta = VueltaVista.ObtenerInstancia();
-            new VueltaPresentador(vuelta, viajes, this.rol);
+            new VueltaPresentador(vuelta, viajes, this.rol, this.id);
             ((Form)vista).Close();
         }
         private void volver_menu(object sender, EventArgs e) 
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio, this.rol);
+            new InicioPresentador(inicio, recordatorio, this.rol, this.id);
             ((Form)vista).Close();
         }
     }

@@ -18,12 +18,14 @@ namespace Programa.Presentadores
         private IOperadoresVista vista;
         private IEnumerable<UsuarioModelo> usuarioModelos;
         private BindingSource filtrador;
+        private int id;
 
-        public OperadoresPresentador(IOperadoresVista vista, IUsuarioRepositorio repositorio)
+        public OperadoresPresentador(IOperadoresVista vista, IUsuarioRepositorio repositorio, int id)
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
+            this.id = id;
 
             vista.SetOperadoresBindingSource(this.filtrador);
             mostrarOperadores();
@@ -46,7 +48,7 @@ namespace Programa.Presentadores
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio,"Gerente");
+            new InicioPresentador(inicio, recordatorio,"Gerente", this.id);
             ((Form)vista).Close();
         }
     }

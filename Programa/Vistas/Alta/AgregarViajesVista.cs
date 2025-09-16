@@ -1,7 +1,9 @@
 ﻿using Programa.Modelos;
 using Programa.Modelos.Interfaces;
+using Programa.Presentadores;
 using Programa.Repositorios;
 using Programa.Vistas.Alta.Interfaces;
+using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,9 +19,13 @@ namespace Programa.Vistas.Alta
     public partial class AgregarViajesVista : Form, IAgregarViajesVista
     {
         private int id;
-        public AgregarViajesVista(int id)
+        private int idusuario;
+        private string rol;
+        public AgregarViajesVista(int id, int idusuario, string rol)
         {
             this.id = id;
+            this.idusuario = idusuario;
+            this.rol = rol;
             InitializeComponent();
             cargarMovlies();
         }
@@ -74,14 +80,22 @@ namespace Programa.Vistas.Alta
                 clbMoviles.Items.Add($"Móvil {movil.Numero_movil}", false); // false = no seleccionado por defecto
             }
         }
-        public List<int> obtenermovil() 
+        public List<int> obtenermovil()
         {
-            List<int> movilesSeleccionados = new List<int>();
+            var movilesrepositorios = new MovilRepositorio();
+            var listaMoviles = movilesrepositorios.seleccionarMovil();
 
-            foreach (var item in clbMoviles.CheckedItems)
-            {
-                movilesSeleccionados.Add(Convert.ToInt32(item.ToString().Split(' ')[1]));
-            }
+            // IDs reales desde la base de datos
+            var numeroMovilesid = listaMoviles.Select(m => m.Id).ToList();
+
+            // IDs seleccionados desde la UI
+            var numeroMoviles = clbMoviles.CheckedItems
+                .Cast<string>()
+                .Select(item => Convert.ToInt32(item.ToString().Split(' ')[1]))
+                .ToList();
+
+            // Intersección entre ambos
+            var movilesSeleccionados = numeroMoviles.Intersect(numeroMovilesid).ToList();
 
             return movilesSeleccionados;
         }
@@ -100,11 +114,11 @@ namespace Programa.Vistas.Alta
         }
 
         // Metodo para el uso del Singleton
-        public static AgregarViajesVista ObtenerInstancia(int id)
+        public static AgregarViajesVista ObtenerInstancia(int id, int idusuario, string rol)
         {
             if (instancia == null || instancia.IsDisposed)
             {
-                instancia = new AgregarViajesVista(id);
+                instancia = new AgregarViajesVista(id, idusuario, rol);
                 instancia.Show();
             }
             else
@@ -122,23 +136,34 @@ namespace Programa.Vistas.Alta
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             var repositorio = new ViajesRepositorio();
-            ViajesModelo viaje = new ViajesModelo();
+            agregarViajeModelo viaje = new agregarViajeModelo();
             TimeSpan hora = DateTime.Now.TimeOfDay;
-            viaje.Id_viajes = this.id;
+            DateTime fecha_vuelta = DateTime.Today;
+            viaje.Id = this.id;
             viaje.Hora_viaje = hora;
             viaje.Direccion = txtDirecciones;
-            viaje.Estado_viaje = obtenerOpcion();
-            viaje.Comentario = rtbComentarios;
+            viaje.Estado_vuelta = "X";
+            viaje.Vuelta_fecha = fecha_vuelta;
+            viaje.Estado_viaje = "·";
+            viaje.Comentario = obtenerOpcion();
             viaje.Id_movil = obtenermovil();
-            viaje.Id_operador = 1; 
+            viaje.Id_operador = this.idusuario; 
 
             try
             {
                 repositorio.agregar(viaje);
+                MessageBox.Show("si se pudo agregar el viaje");
             }
             catch (Exception ex) 
             {
                 MessageBox.Show($"No se pudo agregar el viaje. Error {ex.Message}");
+            }
+            finally
+            {
+                this.Close();
+                IViajesRepositorio viajes = new ViajesRepositorio();
+                IViajesVista viajesvista = ViajesVista.ObtenerInstancia();
+                new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
             }
         }
     }

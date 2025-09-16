@@ -27,5 +27,11 @@ namespace Programa.Modelos
         public bool Chofer { get; set; }
         public string Telefono { get; set; }
     }
-    public class MovilModeloId { private int numero_movil; public int Numero_movil { get; set; } }
+    public class MovilModeloId 
+    {
+        private int id;
+        private int numero_movil;
+        public int Id { get; set; }
+        public int Numero_movil { get; set; }
+    }
 }

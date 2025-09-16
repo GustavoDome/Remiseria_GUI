@@ -19,13 +19,15 @@ namespace Programa.Presentadores
         private IEnumerable<VueltaModelo> vueltaModelos;
         private BindingSource filtrador;
         private string rol;
+        private int id;
 
-        public VueltaPresentador(IVueltaVista vista, IViajesRepositorio repositorio, string rol)
+        public VueltaPresentador(IVueltaVista vista, IViajesRepositorio repositorio, string rol, int id)
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
             this.rol = rol;
+            this.id = id;
 
             this.vista.ocultarBotones(this.rol);
             this.vista.SetViajesBindingSource(this.filtrador);
@@ -38,6 +40,7 @@ namespace Programa.Presentadores
             this.vista.adelantar += adelantar_dia;
             this.vista.ingresarViaje += ingresar_viaje;
             this.vista.volver += volver_menu;
+            this.id = id;
         }
 
         private void MostrarVuelta() 
@@ -54,14 +57,14 @@ namespace Programa.Presentadores
         {
             IViajesRepositorio viajes = new ViajesRepositorio();
             IViajesVista viajesvista = ViajesVista.ObtenerInstancia();
-            new ViajesPresentador(viajesvista, viajes, this.rol);
+            new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
             ((Form)vista).Close();
         }
         private void volver_menu(object sender, EventArgs e) 
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio, this.rol);
+            new InicioPresentador(inicio, recordatorio, this.rol, this.id);
             ((Form)vista).Close();
         }
     }

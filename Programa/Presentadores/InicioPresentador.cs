@@ -20,15 +20,17 @@ namespace Programa.Presentadores
         private IEnumerable<RecordatorioModelo> modelosRecordatorio;
         private BindingSource filtrador;
         private string rol;
+        private int id;
 
 
         //constructor
-        public InicioPresentador (IInicioVista vista, IRecordatorioRepositorio repositorio, string rol)
+        public InicioPresentador (IInicioVista vista, IRecordatorioRepositorio repositorio, string rol, int id)
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
             this.rol = rol;
+            this.id = id;
 
             this.vista.ocultarBotones(this.rol);
 
@@ -78,44 +80,44 @@ namespace Programa.Presentadores
             IPreguntaRepositorio pregunta = new PreguntaRepositorio();
             IRespuestasRepositorio respuesta = new RespuestaRepositorio();
             IAyudaVista ayuda = AyudaVista.ObtenerInstancia();
-            new AyudaPresentador(ayuda, categoria, pregunta, respuesta, this.rol);
+            new AyudaPresentador(ayuda, categoria, pregunta, respuesta, this.rol, this.id);
         }
         private void ingresarConfiguracion(object sender, EventArgs e) 
         {
             IUsuarioRepositorio usuario = new UsuarioRepositorio();
             IConfiguracionesVista configuracion = ConfiguracionesVista.ObtenerInstancia();
-            new ConfiguracionesPresentador(configuracion, usuario, this.rol);
+            new ConfiguracionesPresentador(configuracion, usuario, this.rol, this.id);
             ((Form)vista).Close();
         }
         private void ingresarOperadores(object sender, EventArgs e) 
         {
             IUsuarioRepositorio usuario = new UsuarioRepositorio();
             IOperadoresVista operadores = OperadoresVista.ObtenerInstancia();
-            new OperadoresPresentador(operadores, usuario);
+            new OperadoresPresentador(operadores, usuario, this.id);
         }
         private void ingresarMoviles(object sender, EventArgs e) 
         {
             IMovilRepositorio movilrepositorio = new MovilRepositorio();
             IMovilesVista movilVista = MovilesVista.ObtenerInstancia();
-            new MovilesPresentador(movilVista, movilrepositorio);
+            new MovilesPresentador(movilVista, movilrepositorio, this.id);
         }
         private void ingresarViajes(object sender, EventArgs e) 
         {
             IViajesRepositorio viajes = new ViajesRepositorio();
             IViajesVista viajesvista = ViajesVista.ObtenerInstancia();
-            new ViajesPresentador(viajesvista, viajes, this.rol);
+            new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
         }
         private void ingresarVueltas(object sender, EventArgs e) 
         {
             IViajesRepositorio viajes = new ViajesRepositorio();
             IVueltaVista vuelta = VueltaVista.ObtenerInstancia();
-            new VueltaPresentador(vuelta, viajes, this.rol);
+            new VueltaPresentador(vuelta, viajes, this.rol, this.id);
         }
         private void ingresarBases(object sender, EventArgs e) 
         {
             IBasesRepositorio bases = new BasesRepositorio();
             IBasesVista basesvista = BasesVista.ObtenerInstancia();
-            new BasesPresentador(basesvista, bases, this.rol);
+            new BasesPresentador(basesvista, bases, this.rol, this.id);
         }
     }
 }

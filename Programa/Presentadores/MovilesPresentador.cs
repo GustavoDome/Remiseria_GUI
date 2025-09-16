@@ -18,12 +18,14 @@ namespace Programa.Presentadores
         private IMovilesVista vista;
         private IEnumerable<MovilModelo> movilModelos;
         private BindingSource filtrador;
+        private int id;
 
-        public MovilesPresentador(IMovilesVista vista, IMovilRepositorio repositorio)
+        public MovilesPresentador(IMovilesVista vista, IMovilRepositorio repositorio, int id)
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
+            this.id = id;
 
             vista.SetMovilesBindingSource(this.filtrador);
             mostrar_moviles();
@@ -47,7 +49,7 @@ namespace Programa.Presentadores
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio,"Gerente");
+            new InicioPresentador(inicio, recordatorio,"Gerente", this.id);
             ((Form)vista).Close();
         }
     }

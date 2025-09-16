@@ -26,14 +26,16 @@ namespace Programa.Presentadores
         private BindingSource tablacuadras;
         private BindingSource tablaciudades;
         private string rol;
+        private int id;
 
-        public PlanillaCostoPresentador (IPlanillaCostoVista vista, IPlanillaCostosRepositorio repositorio, string rol) 
+        public PlanillaCostoPresentador (IPlanillaCostoVista vista, IPlanillaCostosRepositorio repositorio, string rol, int id) 
         {
             this.tablacuadras = new BindingSource();
             this.tablaciudades = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
             this.rol = rol;
+            this.id = id;
 
             this.vista.modificarCuadrasCosto += modificarCuadras_costo;
             this.vista.modificarCuadrasCostoMandado += modificarCuadras_mandado;
@@ -58,7 +60,7 @@ namespace Programa.Presentadores
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio, this.rol);
+            new InicioPresentador(inicio, recordatorio, this.rol, this.id);
             ((Form)vista).Close();
         }
     }

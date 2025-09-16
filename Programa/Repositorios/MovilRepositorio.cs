@@ -77,7 +77,7 @@ namespace Programa.Repositorios
 
             using (var conn = BD.Abrirconexion())
             {
-                string query = "SELECT numero_movil FROM Movil where activo = TRUE;";
+                string query = "SELECT id_movil, numero_movil FROM Movil where activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
                 {
@@ -85,6 +85,7 @@ namespace Programa.Repositorios
                     {
                         lista.Add(new MovilModeloId
                         {
+                            Id = Convert.ToInt32(reader["id_movil"]),
                             Numero_movil = reader["numero_movil"] != DBNull.Value ? Convert.ToInt32(reader["numero_movil"]) : 0,
                         });
                     }

@@ -23,8 +23,9 @@ namespace Programa.Presentadores
         private IEnumerable<RespuestaModelo> modeloRespuesta;
         private BindingSource filtrador;
         private string rol;
+        private int id;
 
-        public AyudaPresentador(IAyudaVista vista, ICategoriaRepositorio repositorioCategoria, IPreguntaRepositorio repositorioPregunta, IRespuestasRepositorio repositorioRespuesta, string rol)
+        public AyudaPresentador(IAyudaVista vista, ICategoriaRepositorio repositorioCategoria, IPreguntaRepositorio repositorioPregunta, IRespuestasRepositorio repositorioRespuesta, string rol, int id)
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
@@ -32,6 +33,7 @@ namespace Programa.Presentadores
             this.repositorioPregunta = repositorioPregunta;
             this.repositorioRespuesta = repositorioRespuesta;
             this.rol = rol;
+            this.id = id;
 
             this.vista.ocultarBotones(this.rol);
 
@@ -52,7 +54,7 @@ namespace Programa.Presentadores
         {
             IPlanillaCostosRepositorio planillacostosrepositorio = new PlanillaCostosRepositorio();
             IPlanillaCostoVista planillaCostoVista = PlanillaCostoVista.ObtenerInstancia();
-            new PlanillaCostoPresentador(planillaCostoVista, planillacostosrepositorio, this.rol);
+            new PlanillaCostoPresentador(planillaCostoVista, planillacostosrepositorio, this.rol, this.id);
             ((Form)vista).Close();
         }
 
@@ -78,7 +80,7 @@ namespace Programa.Presentadores
         {
             IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio, this.rol);
+            new InicioPresentador(inicio, recordatorio, this.rol, this.id);
             ((Form)vista).Close();
         }
     }

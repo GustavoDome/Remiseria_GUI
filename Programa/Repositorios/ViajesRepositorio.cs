@@ -14,8 +14,9 @@ namespace Programa.Repositorios
     {
         private readonly ConexionBD BD = new ConexionBD();
 
-        public void agregar(ViajesModelo viaje)
+        public void agregar(agregarViajeModelo viaje)
         {
+            int idViaje;
             using (var conn = BD.Abrirconexion())
             using (var tran = conn.BeginTransaction())
             {
@@ -23,20 +24,21 @@ namespace Programa.Repositorios
                 {
                     // 1️⃣ Insertar el viaje principal y obtener su ID generado
                     string queryViaje = @"INSERT INTO Viajes
-                                  (hora_viaje, direccion, comentario, estado_viaje, id_operador) 
-                                  VALUES (@hora_viaje, @direccion, @comentario, @estado_viaje, @id_operador)
+                                  (hora_viaje, direccion, estado_vuelta, vuelta_fecha, id_operador, estado_viaje, comentario) 
+                                  VALUES (@hora_viaje, @direccion, @estado_vuelta, @vuelta_fecha, @id_operador, @estado_viaje, @comentario)
                                   RETURNING id_viajes;";
 
-                    int idViaje;
                     using (var cmd = new NpgsqlCommand(queryViaje, conn))
                     {
-                        cmd.Parameters.AddWithValue("@hora_viaje", viaje.Hora_viaje);
+                        cmd.Parameters.AddWithValue("@hora_viaje", NpgsqlTypes.NpgsqlDbType.Time, viaje.Hora_viaje);
                         cmd.Parameters.AddWithValue("@direccion", viaje.Direccion ?? (object)DBNull.Value);
-                        cmd.Parameters.AddWithValue("@comentario", viaje.Comentario ?? (object)DBNull.Value);
-                        cmd.Parameters.AddWithValue("@estado_viaje", viaje.Estado_viaje ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@estado_vuelta", viaje.Estado_vuelta);
+                        cmd.Parameters.AddWithValue("@vuelta_fecha", viaje.Vuelta_fecha);
                         cmd.Parameters.AddWithValue("@id_operador", viaje.Id_operador);
+                        cmd.Parameters.AddWithValue("@estado_viaje", viaje.Estado_viaje ?? (object)DBNull.Value);
+                        cmd.Parameters.AddWithValue("@comentario", viaje.Comentario);
 
-                        idViaje = Convert.ToInt32(cmd.ExecuteScalar()); // Obtener el id generado
+                        idViaje = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
                     // 2️⃣ Insertar cada móvil en la tabla intermedia
@@ -64,11 +66,15 @@ namespace Programa.Repositorios
                     tran.Rollback();
                     throw; // relanza la excepción para manejo externo
                 }
+                finally 
+                {
+                    BD.CerrarConexion();
+                }
             }
         }
 
 
-        public void editar(ViajesModelo viajesModelo)
+        public void editar(agregarViajeModelo viajesModelo)
         {
             using (var conn = BD.Abrirconexion())
             {
@@ -84,7 +90,7 @@ namespace Programa.Repositorios
 
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@id_viajes", viajesModelo.Id_viajes);
+                    cmd.Parameters.AddWithValue("@id_viajes", viajesModelo.Id_operador);
                     cmd.Parameters.AddWithValue("@hora_viaje", viajesModelo.Hora_viaje);
                     cmd.Parameters.AddWithValue("@direccion", viajesModelo.Direccion ?? (object)DBNull.Value);
                     cmd.Parameters.AddWithValue("@id_movil", viajesModelo.Id_movil);
@@ -127,6 +133,7 @@ namespace Programa.Repositorios
                     }
                 }
             }
+            BD.CerrarConexion();
 
             return lista;
         }
@@ -195,6 +202,10 @@ namespace Programa.Repositorios
             catch (Exception ex)
             {
                 MessageBox.Show("Error al cargar los viajes: " + ex.Message);
+            }
+            finally
+            {
+                BD.CerrarConexion();
             }
 
             return dt;

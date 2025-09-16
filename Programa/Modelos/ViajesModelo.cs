@@ -27,6 +27,33 @@ namespace Programa.Modelos
         public string MovilesConcatenados { get; set; } // Para mostrar en DataGridView
     }
 
+    public class agregarViajeModelo 
+    {
+        private int id;
+        private TimeSpan hora_viaje;
+        private string direccion;
+        private string estado_vuelta;
+        private string vuelta;
+        private DateTime vuelta_fecha;
+        private string id_operador;
+        private string estado_viaje;
+        private string comentario;
+        private List<int> id_movil;
+        private string movilesconcatenados;
+        public int Id { get; set; }
+        public TimeSpan Hora_viaje { get; set; }
+        public string Direccion { get; set; }
+        public string Estado_vuelta { get; set; }
+        public int Vuelta { get; set; }
+        public DateTime Vuelta_fecha { get; set; }
+        public int Id_operador { get; set; }
+        public string Estado_viaje { get; set; }
+        public string Comentario { get; set; }
+        public List<int> Id_movil { get; set; } // Lista de móviles
+        public string MovilesConcatenados { get; set; } // Para mostrar en DataGridView
+
+    }
+
     public class ViajesModeloId 
     {
         private string numero_movil;

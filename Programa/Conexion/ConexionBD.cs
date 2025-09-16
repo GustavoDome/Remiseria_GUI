@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Configuration;
-using Npgsql;
+using System.Windows.Forms;
 
 namespace Programa.Conexion
 {
@@ -24,11 +25,16 @@ namespace Programa.Conexion
             return conexion;
         }
 
-        public void CerrarConexion(NpgsqlConnection conexion)
+        public void CerrarConexion()
         {
-            if (conexion != null && conexion.State == System.Data.ConnectionState.Open)
+            try 
             {
+                var conexion = new NpgsqlConnection(connectionString);
                 conexion.Close();
+            }
+            catch (Exception ex) 
+            {
+                MessageBox.Show($"No se pudo cerrar la Base de Datos, Error: {ex.Message}");
             }
         }
     }

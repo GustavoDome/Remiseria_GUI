@@ -3,32 +3,32 @@
   "WorkspaceRootPath": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\vistas\\viajesvista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:vistas\\viajesvista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\repositorios\\viajesrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:repositorios\\viajesrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\vistas\\alta\\agregarviajesvista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\vistas\\alta\\agregarviajesvista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:vistas\\alta\\agregarviajesvista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\repositorios\\movilrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:repositorios\\movilrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\modelos\\movilmodelo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:modelos\\movilmodelo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\presentadores\\viajespresentador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:presentadores\\viajespresentador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\repositorios\\viajesrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:repositorios\\viajesrepositorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\modelos\\viajesmodelo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:modelos\\viajesmodelo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\vistas\\alta\\agregarviajesvista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:vistas\\alta\\agregarviajesvista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\vistas\\alta\\interfaces\\iagregarviajesvista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:vistas\\alta\\interfaces\\iagregarviajesvista.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|c:\\users\\usuario\\desktop\\codigos\\githubprojectos\\remiseria\\remiseria_gui\\programa\\presentadores\\iniciopresentador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E3938A3-323F-4C22-8836-6EC3CE25385A}|Programa.csproj|solutionrelative:presentadores\\iniciopresentador.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -38,82 +38,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ViajesModelo.cs",
-              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Modelos\\ViajesModelo.cs",
-              "RelativeDocumentMoniker": "Modelos\\ViajesModelo.cs",
-              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Modelos\\ViajesModelo.cs",
-              "RelativeToolTip": "Modelos\\ViajesModelo.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAASwBcAAAAXAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "MovilModelo.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Modelos\\MovilModelo.cs",
+              "RelativeDocumentMoniker": "Modelos\\MovilModelo.cs",
+              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Modelos\\MovilModelo.cs",
+              "RelativeToolTip": "Modelos\\MovilModelo.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAA0wCEAAAAhAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T21:18:40.991Z",
+              "WhenOpened": "2025-09-16T03:46:04.778Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "ViajesRepositorio.cs",
-              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Repositorios\\ViajesRepositorio.cs",
-              "RelativeDocumentMoniker": "Repositorios\\ViajesRepositorio.cs",
-              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Repositorios\\ViajesRepositorio.cs",
-              "RelativeToolTip": "Repositorios\\ViajesRepositorio.cs",
-              "ViewState": "AgIAAIgAAAAAAAAAAAAcwIwAAAApAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "MovilRepositorio.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Repositorios\\MovilRepositorio.cs",
+              "RelativeDocumentMoniker": "Repositorios\\MovilRepositorio.cs",
+              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Repositorios\\MovilRepositorio.cs",
+              "RelativeToolTip": "Repositorios\\MovilRepositorio.cs",
+              "ViewState": "AgIAAEcAAAAAAAAAAAAIwFgAAACAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T23:41:58.034Z",
+              "WhenOpened": "2025-09-16T03:45:30.312Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "InicioPresentador.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Presentadores\\InicioPresentador.cs",
+              "RelativeDocumentMoniker": "Presentadores\\InicioPresentador.cs",
+              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Presentadores\\InicioPresentador.cs",
+              "RelativeToolTip": "Presentadores\\InicioPresentador.cs",
+              "ViewState": "AgIAAFsAAAAAAAAAAAAzwGkAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-16T03:17:31.713Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "AgregarViajesVista.cs [Dise\u00F1o]",
-              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Alta\\AgregarViajesVista.cs",
-              "RelativeDocumentMoniker": "Vistas\\Alta\\AgregarViajesVista.cs",
-              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Alta\\AgregarViajesVista.cs [Dise\u00F1o]",
-              "RelativeToolTip": "Vistas\\Alta\\AgregarViajesVista.cs [Dise\u00F1o]",
+              "Title": "ViajesModelo.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Modelos\\ViajesModelo.cs",
+              "RelativeDocumentMoniker": "Modelos\\ViajesModelo.cs",
+              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Modelos\\ViajesModelo.cs",
+              "RelativeToolTip": "Modelos\\ViajesModelo.cs",
+              "ViewState": "AgIAAB0AAAAAAAAAAAAAwCoAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T23:31:42.272Z",
-              "EditorCaption": " [Dise\u00F1o]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "IAgregarViajesVista.cs",
-              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Alta\\Interfaces\\IAgregarViajesVista.cs",
-              "RelativeDocumentMoniker": "Vistas\\Alta\\Interfaces\\IAgregarViajesVista.cs",
-              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Alta\\Interfaces\\IAgregarViajesVista.cs",
-              "RelativeToolTip": "Vistas\\Alta\\Interfaces\\IAgregarViajesVista.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAAmAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T23:24:16.216Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ViajesPresentador.cs",
-              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Presentadores\\ViajesPresentador.cs",
-              "RelativeDocumentMoniker": "Presentadores\\ViajesPresentador.cs",
-              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Presentadores\\ViajesPresentador.cs",
-              "RelativeToolTip": "Presentadores\\ViajesPresentador.cs",
-              "ViewState": "AgIAAB8AAAAAAAAAAAAgwDAAAAAnAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T23:17:24.516Z",
+              "WhenOpened": "2025-09-16T02:03:39.756Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "ViajesVista.cs",
-              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\ViajesVista.cs",
-              "RelativeDocumentMoniker": "Vistas\\ViajesVista.cs",
-              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\ViajesVista.cs",
-              "RelativeToolTip": "Vistas\\ViajesVista.cs",
-              "ViewState": "AgIAAE0AAAAAAAAAAAAwwFMAAAAJAAAAAAAAAA==",
+              "Title": "ViajesRepositorio.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Repositorios\\ViajesRepositorio.cs",
+              "RelativeDocumentMoniker": "Repositorios\\ViajesRepositorio.cs",
+              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Repositorios\\ViajesRepositorio.cs",
+              "RelativeToolTip": "Repositorios\\ViajesRepositorio.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAgwC8AAABKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T23:17:16.068Z",
+              "WhenOpened": "2025-09-16T02:02:56.983Z",
               "EditorCaption": ""
             },
             {
@@ -124,9 +113,22 @@
               "RelativeDocumentMoniker": "Vistas\\Alta\\AgregarViajesVista.cs",
               "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Vistas\\Alta\\AgregarViajesVista.cs",
               "RelativeToolTip": "Vistas\\Alta\\AgregarViajesVista.cs",
-              "ViewState": "AgIAAHQAAAAAAAAAAAAMwH8AAAAkAAAAAAAAAA==",
+              "ViewState": "AgIAAJAAAAAAAAAAAAAmwJkAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-09T23:08:33.532Z",
+              "WhenOpened": "2025-09-15T21:26:43.938Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "ViajesPresentador.cs",
+              "DocumentMoniker": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Presentadores\\ViajesPresentador.cs",
+              "RelativeDocumentMoniker": "Presentadores\\ViajesPresentador.cs",
+              "ToolTip": "C:\\Users\\usuario\\Desktop\\Codigos\\GithubProjectos\\Remiseria\\Remiseria_GUI\\Programa\\Presentadores\\ViajesPresentador.cs",
+              "RelativeToolTip": "Presentadores\\ViajesPresentador.cs",
+              "ViewState": "AgIAAD4AAAAAAAAAAAAQwEoAAAAdAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-09T23:17:24.516Z",
               "EditorCaption": ""
             }
           ]

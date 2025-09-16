@@ -9,9 +9,9 @@ namespace Programa.Modelos.Interfaces
 {
     public interface IViajesRepositorio
     {
-        void agregar(ViajesModelo viajesModelo);
+        void agregar(agregarViajeModelo viajesModelo);
 
-        void editar(ViajesModelo viajesModelo);
+        void editar(agregarViajeModelo viajesModelo);
 
         void eliminar(int id);
 
