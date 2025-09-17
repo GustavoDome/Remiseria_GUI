@@ -1,4 +1,6 @@
-﻿using Programa.Vistas.Interfaces;
+﻿using Programa.Presentadores;
+using Programa.Repositorios;
+using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -92,11 +94,17 @@ namespace Programa.Vistas
             dgvViajes.Rows[2].Frozen = true;
         }
 
+        public void RecargarDatos(string rol, int id)
+        {
+            var presentador = new ViajesPresentador(this, new ViajesRepositorio(),rol, id);
+            presentador.cargar_datos();
+        }
+
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static ViajesVista instancia;
 
         // Metodo para el uso del Singleton
-        public static ViajesVista ObtenerInstancia()
+        public static ViajesVista ObtenerInstancia(string rol, int id)
         {
             if (instancia == null || instancia.IsDisposed)
             {
@@ -111,6 +119,7 @@ namespace Programa.Vistas
                 }
                 instancia.BringToFront();
                 instancia.Activate();
+                instancia.RecargarDatos(rol, id);
             }
             return instancia;
         }

@@ -18,8 +18,9 @@ namespace Programa.Repositorios
         public IEnumerable<CuadrasImporteModelo> mostrarImporteCuadras()
         {
             var lista = new List<CuadrasImporteModelo>();
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "Select cuadras from ImportesCuadras;";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -40,8 +41,9 @@ namespace Programa.Repositorios
         public IEnumerable<CuadrasMinimoImporteModelo> mostrarImporteMinimoCuadras()
         {
             var lista = new List<CuadrasMinimoImporteModelo>();
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "Select minimo from ImportesCuadras;";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -62,8 +64,9 @@ namespace Programa.Repositorios
         public IEnumerable<CuadrasEsperaModelo> mostrarEsperaCuadras() 
         {
             var lista = new List<CuadrasEsperaModelo>();
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "Select espera from ImportesCuadras;";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -84,8 +87,9 @@ namespace Programa.Repositorios
         public IEnumerable<CuadrasMandadoModelo> mostrarMandadoCuadras() 
         {
             var lista = new List<CuadrasMandadoModelo>();
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "Select mandado from ImportesCuadras;";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -105,8 +109,9 @@ namespace Programa.Repositorios
 
         public void modificarImporteCuadras(CuadrasImporteModelo cuadras) 
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"update ImporteCuadras set cuadras = @cuadras where id_importe_cuadras = 1;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -118,8 +123,9 @@ namespace Programa.Repositorios
 
         public void modificarImporteCuadrasMandado(CuadrasMandadoModelo mandado) 
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"update ImporteCuadras set mandado = @mandado where id_importe_cuadras = 1;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -130,8 +136,9 @@ namespace Programa.Repositorios
         }
         public void modificarImporteCuadrasEspera(CuadrasEsperaModelo espera) 
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"update ImporteCuadras set espera = @espera where id_importe_cuadras = 1;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -144,8 +151,9 @@ namespace Programa.Repositorios
         public IEnumerable<ImporteCiudadModelo> mostrarImporteCiudad()
         {
             var lista = new List<ImporteCiudadModelo>();
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "Select kilometro from ImporteCiudad;";
 
                 using (var cmd = new NpgsqlCommand(query,conn))
@@ -166,8 +174,9 @@ namespace Programa.Repositorios
         public IEnumerable<ImporteCiudadEspera> mostrarEsperaCiudad() 
         {
             var lista = new List<ImporteCiudadEspera>();
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "Select espera from ImporteCiudad;";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -187,8 +196,9 @@ namespace Programa.Repositorios
 
         public void modificarImporteCiudad(ImporteCiudadModelo kilometros) 
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"update ImporteCiudad set kilometro = @kilometro where id_importe_ciudad = 1;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -200,8 +210,9 @@ namespace Programa.Repositorios
 
         public void modificarImporteCIudadEspera(ImporteCiudadEspera espera) 
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"update ImporteCiudad set espera = @espera where id_importe_ciudad = 1;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -214,8 +225,9 @@ namespace Programa.Repositorios
         public IEnumerable<CiudadesModelo> mostrarCiudades() 
         {
             var lista = new List<CiudadesModelo>();
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "Select id_ciudad,ciudad,importe from Ciudad;";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -237,8 +249,9 @@ namespace Programa.Repositorios
 
         public void agregarCiudades(CiudadesModelo ciudad) 
         {
-            using (var conn = BD.Abrirconexion()) 
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"insert into ciudad (ciudad,importe) values (@ciudad,@importe);";
 
                 using (var cmd = new NpgsqlCommand(query,conn)) 
@@ -252,8 +265,9 @@ namespace Programa.Repositorios
 
         public void editarCiudades(CiudadesModelo ciudades) 
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"update Ciudad set ciudad = @ciudad, importe = @importe where id_ciudad = @id_ciudad;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -267,8 +281,9 @@ namespace Programa.Repositorios
 
         public void eliminarCiudades(int id) 
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"delete from Ciudad where id_ciudad = @id_ciudad;";
                 using (var cmd = new NpgsqlCommand(query,conn)) 
                 {

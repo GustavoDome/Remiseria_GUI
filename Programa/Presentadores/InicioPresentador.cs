@@ -104,7 +104,7 @@ namespace Programa.Presentadores
         private void ingresarViajes(object sender, EventArgs e) 
         {
             IViajesRepositorio viajes = new ViajesRepositorio();
-            IViajesVista viajesvista = ViajesVista.ObtenerInstancia();
+            IViajesVista viajesvista = ViajesVista.ObtenerInstancia(this.rol, this.id);
             new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
         }
         private void ingresarVueltas(object sender, EventArgs e) 

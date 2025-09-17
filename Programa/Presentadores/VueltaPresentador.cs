@@ -56,7 +56,7 @@ namespace Programa.Presentadores
         private void ingresar_viaje(object sender, EventArgs e)
         {
             IViajesRepositorio viajes = new ViajesRepositorio();
-            IViajesVista viajesvista = ViajesVista.ObtenerInstancia();
+            IViajesVista viajesvista = ViajesVista.ObtenerInstancia(this.rol, this.id);
             new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
             ((Form)vista).Close();
         }

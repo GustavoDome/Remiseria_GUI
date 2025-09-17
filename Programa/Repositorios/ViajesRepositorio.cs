@@ -17,72 +17,73 @@ namespace Programa.Repositorios
         public void agregar(agregarViajeModelo viaje)
         {
             int idViaje;
-            using (var conn = BD.Abrirconexion())
-            using (var tran = conn.BeginTransaction())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
-                try
+                conn.Open();
+                using (var tran = conn.BeginTransaction())
                 {
-                    // 1️⃣ Insertar el viaje principal y obtener su ID generado
-                    string queryViaje = @"INSERT INTO Viajes
+                    try
+                    {
+                        // 1️⃣ Insertar el viaje principal y obtener su ID generado
+                        string queryViaje = @"INSERT INTO Viajes
                                   (hora_viaje, direccion, id_operador, estado_viaje, comentario) 
                                   VALUES (@hora_viaje, @direccion, @id_operador, @estado_viaje, @comentario)
                                   RETURNING id_viajes;";
 
-                    using (var cmd = new NpgsqlCommand(queryViaje, conn))
-                    {
-                        cmd.Parameters.AddWithValue("@hora_viaje", NpgsqlTypes.NpgsqlDbType.Time, viaje.Hora_viaje);
-                        cmd.Parameters.AddWithValue("@direccion", viaje.Direccion ?? (object)DBNull.Value);
-                        cmd.Parameters.AddWithValue("@id_operador", viaje.Id_operador);
-                        cmd.Parameters.AddWithValue("@estado_viaje", viaje.Estado_viaje ?? (object)DBNull.Value);
-                        cmd.Parameters.AddWithValue("@comentario", viaje.Comentario);
-
-                        idViaje = Convert.ToInt32(cmd.ExecuteScalar());
-                    }
-                    if (viaje.Id_movil.Count != viaje.Vuelta.Count)
-                        throw new Exception("Cantidad de móviles y vueltas no coincide.");
-                    // 2️⃣ Insertar cada móvil en la tabla intermedia
-                    string queryMoviles = @"INSERT INTO Vuelta (id_viaje, id_movil, vuelta, vuelta_fecha, estado_vuelta) VALUES (@id_viaje, @id_movil, @vuelta, @vuelta_fecha, @estado_vuelta)";
-                    using (var cmd = new NpgsqlCommand(queryMoviles, conn))
-                    {
-
-                        cmd.Parameters.AddWithValue("@id_viaje", idViaje);
-                        cmd.Parameters.AddWithValue("@vuelta", viaje.Vuelta);
-                        cmd.Parameters.AddWithValue("@vuelta_fecha", viaje.Vuelta_fecha);
-                        cmd.Parameters.AddWithValue("@estado_vuelta", viaje.Estado_vuelta);
-                        var paramVuelta = cmd.Parameters.Add("@vuelta", NpgsqlTypes.NpgsqlDbType.Integer);
-                        var paramMovil = cmd.Parameters.Add("@id_movil", NpgsqlTypes.NpgsqlDbType.Integer);
-
-                        for (int i = 0; i < viaje.Id_movil.Count; i++)
+                        using (var cmd = new NpgsqlCommand(queryViaje, conn))
                         {
-                            paramMovil.Value = viaje.Id_movil[i];
-                            paramVuelta.Value = viaje.Vuelta[i];
-                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.AddWithValue("@hora_viaje", NpgsqlTypes.NpgsqlDbType.Time, viaje.Hora_viaje);
+                            cmd.Parameters.AddWithValue("@direccion", viaje.Direccion ?? (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@id_operador", viaje.Id_operador);
+                            cmd.Parameters.AddWithValue("@estado_viaje", viaje.Estado_viaje ?? (object)DBNull.Value);
+                            cmd.Parameters.AddWithValue("@comentario", viaje.Comentario);
+
+                            idViaje = Convert.ToInt32(cmd.ExecuteScalar());
                         }
+                        if (viaje.Id_movil.Count != viaje.Vuelta.Count)
+                            throw new Exception("Cantidad de móviles y vueltas no coincide.");
+                        // 2️⃣ Insertar cada móvil en la tabla intermedia
+                        string queryMoviles = @"INSERT INTO Vuelta (id_viaje, id_movil, vuelta, vuelta_fecha, estado_vuelta) VALUES (@id_viaje, @id_movil, @vuelta, @vuelta_fecha, @estado_vuelta)";
+                        using (var cmd = new NpgsqlCommand(queryMoviles, conn))
+                        {
+
+                            cmd.Parameters.AddWithValue("@id_viaje", idViaje);
+                            cmd.Parameters.AddWithValue("@vuelta", viaje.Vuelta);
+                            cmd.Parameters.AddWithValue("@vuelta_fecha", viaje.Vuelta_fecha);
+                            cmd.Parameters.AddWithValue("@estado_vuelta", viaje.Estado_vuelta);
+                            var paramVuelta = cmd.Parameters.Add("@vuelta", NpgsqlTypes.NpgsqlDbType.Integer);
+                            var paramMovil = cmd.Parameters.Add("@id_movil", NpgsqlTypes.NpgsqlDbType.Integer);
+
+                            for (int i = 0; i < viaje.Id_movil.Count; i++)
+                            {
+                                paramMovil.Value = viaje.Id_movil[i];
+                                paramVuelta.Value = viaje.Vuelta[i];
+                                cmd.ExecuteNonQuery();
+                            }
+                        }
+
+                        // 3️⃣ Generar el string concatenado de móviles para mostrar en DataGridView
+                        viaje.MovilesConcatenados = string.Join(", ", viaje.Id_movil);
+
+                        // 4️⃣ Commit de la transacción
+                        tran.Commit();
                     }
-
-                    // 3️⃣ Generar el string concatenado de móviles para mostrar en DataGridView
-                    viaje.MovilesConcatenados = string.Join(", ", viaje.Id_movil);
-
-                    // 4️⃣ Commit de la transacción
-                    tran.Commit();
-                }
-                catch
-                {
-                    tran.Rollback();
-                    throw; // relanza la excepción para manejo externo
-                }
-                finally 
-                {
-                    BD.CerrarConexion();
+                    catch
+                    {
+                        tran.Rollback();
+                        throw; // relanza la excepción para manejo externo
+                    }
                 }
             }
         }
+           
 
 
         public void editar(agregarViajeModelo viajesModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"UPDATE Viajes 
                                  SET hora_viaje = @hora_viaje, 
                                      direccion = @direccion, 
@@ -108,8 +109,9 @@ namespace Programa.Repositorios
 
         public void eliminar(int id)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "DELETE FROM Viajes WHERE id_viajes = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -123,8 +125,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<MovilModeloId>();
 
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT numero_movil FROM Movil where activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
@@ -138,8 +141,6 @@ namespace Programa.Repositorios
                     }
                 }
             }
-            BD.CerrarConexion();
-
             return lista;
         }
         public DataTable mostrarTodo()
@@ -157,8 +158,9 @@ namespace Programa.Repositorios
 
             try
             {
-                using (var conn = BD.Abrirconexion())
+                using (var conn = new ConexionBD().ObtenerConexion())
                 {
+                    conn.Open();
                     string query = @"
                     SELECT v.id_viajes,
                            v.hora_viaje,
@@ -167,8 +169,8 @@ namespace Programa.Repositorios
                            v.estado_viaje,
                            m.numero_movil
                     FROM Viajes v
-                    JOIN Vuelta vm ON v.id_viajes = vm.id_viaje
-                    JOIN Movil m ON vm.id_movil = m.id_movil
+                    left JOIN Vuelta vm ON v.id_viajes = vm.id_viaje
+                    left JOIN Movil m ON vm.id_movil = m.id_movil
                     ORDER BY v.id_viajes, m.numero_movil;
                 ";
 
@@ -178,7 +180,7 @@ namespace Programa.Repositorios
                         while (reader.Read())
                         {
                             int idViaje = Convert.ToInt32(reader["id_viajes"]);
-                            int movil = Convert.ToInt32(reader["numero_movil"]);
+                            int movil = reader["numero_movil"] != DBNull.Value ? Convert.ToInt32(reader["numero_movil"]) : -1;
                             string estado = reader["estado_viaje"]?.ToString();
 
                             // si el viaje aún no existe, creo la fila
@@ -208,11 +210,6 @@ namespace Programa.Repositorios
             {
                 MessageBox.Show("Error al cargar los viajes: " + ex.Message);
             }
-            finally
-            {
-                BD.CerrarConexion();
-            }
-
             return dt;
         }
 
@@ -221,8 +218,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<VueltaModelo>();
 
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT estado_vuelta, vuelta, vuelta_fecha FROM Viajes;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
@@ -246,8 +244,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<VueltaIdModelo>();
 
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "select max(vuelta) as vuelta, Movil.numero_movil  from viajes join Vuelta on viajes.id_viajes = Vuelta.id_viaje join Movil on Vuelta.id_movil = Movil.id_movil group by movil.numero_movil;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
@@ -262,8 +261,6 @@ namespace Programa.Repositorios
                     }
                 }
             }
-            BD.CerrarConexion();
-
             return lista;
         }
     }

@@ -13,8 +13,9 @@ namespace Programa.Repositorios
 
         public void agregar(RespuestaModelo respuestaModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"INSERT INTO Respuesta (respuesta_texto, respuesta_audio_video, id_pregunta) 
                                  VALUES (@respuesta_texto, @respuesta_audio_video, @id_pregunta);";
 
@@ -31,8 +32,9 @@ namespace Programa.Repositorios
 
         public void editar(RespuestaModelo respuestaModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"UPDATE Respuesta SET 
                                  respuesta_texto = @respuesta_texto, 
                                  respuesta_audio_video = @respuesta_audio_video, 
@@ -53,8 +55,9 @@ namespace Programa.Repositorios
 
         public void eliminar(int id)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "DELETE FROM Respuesta WHERE id_respuesta = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -68,8 +71,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<RespuestaModelo>();
 
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT * FROM Respuesta;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())

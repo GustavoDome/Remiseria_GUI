@@ -13,8 +13,9 @@ namespace Programa.Repositorios
 
         public void agregar(CategoriaModelo categoriaModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"INSERT INTO Categoria(Categoria_pregunta) VALUES (@Categoria_pregunta);";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -26,8 +27,9 @@ namespace Programa.Repositorios
 
         public void editar(CategoriaModelo categoriaModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"UPDATE Categoria SET Categoria_pregunta = @Categoria_pregunta WHERE id_categoria = @id_categoria;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -40,8 +42,9 @@ namespace Programa.Repositorios
 
         public void eliminar(int id)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "DELETE FROM Categoria WHERE id_categoria = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -55,8 +58,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<CategoriaModelo>();
 
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT * FROM Categoria;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())

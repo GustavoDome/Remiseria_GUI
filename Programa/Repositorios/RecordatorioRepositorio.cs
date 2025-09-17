@@ -13,8 +13,9 @@ namespace Programa.Repositorios
 
         public void agregar(RecordatorioModelo recordatorioModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"INSERT INTO Recordatorio (id_viaje, ubicacion, fecha_dia, fecha_hora) 
                                  VALUES (@id_viaje, @ubicacion, @fecha_dia, @fecha_hora);";
 
@@ -31,8 +32,9 @@ namespace Programa.Repositorios
 
         public void editar(RecordatorioModelo recordatorioModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"UPDATE Recordatorio SET 
                                  id_viaje = @id_viaje, 
                                  ubicacion = @ubicacion, 
@@ -54,8 +56,9 @@ namespace Programa.Repositorios
 
         public void eliminar(int id)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "DELETE FROM Recordatorio WHERE id_recordatorio = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -69,8 +72,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<RecordatorioModelo>();
 
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT * FROM Recordatorio;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())

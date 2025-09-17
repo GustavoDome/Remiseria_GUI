@@ -14,8 +14,9 @@ namespace Programa.Repositorios
 
         public void agregar(UsuarioModelo usuarioModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"INSERT INTO Operador 
                                  (rolUsuario, nombre, contrasena, direccion, telefono, tipo_fuente, color_sistema, tamanoFuente, tipoAlarma, activo)
                                  VALUES 
@@ -41,8 +42,9 @@ namespace Programa.Repositorios
 
         public void editar(UsuarioModelo usuarioModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"UPDATE Operador SET 
                                  rolUsuario=@rolUsuario, nombre=@nombre, contrasena=@contrasena, direccion=@direccion, 
                                  telefono=@telefono, tipo_fuente=@tipo_fuente, color_sistema=@color_sistema, 
@@ -69,8 +71,9 @@ namespace Programa.Repositorios
 
         public void eliminar(int id)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "UPDATE Operador SET activo = FALSE WHERE id_operador=@id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -84,8 +87,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<UsuarioModelo>();
 
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT * FROM Operador WHERE Activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
@@ -115,8 +119,9 @@ namespace Programa.Repositorios
 
         public UsuarioModelo LoginUsuario(string nombre, string contrasena)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT * FROM Operador WHERE nombre=@nombre AND contrasena=@contrasena AND activo=TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {

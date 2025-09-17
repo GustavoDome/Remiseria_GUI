@@ -13,8 +13,9 @@ namespace Programa.Repositorios
 
         public void agregar(MovilModelo movilmodelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"INSERT INTO Movil(numero_movil, marca_auto, modelo_auto, año_auto, color_auto, id_dueño, activo)
                                  VALUES (@numero_movil, @marca_auto, @modelo_auto, @año_auto, @color_auto, @id_dueño, @activo);";
 
@@ -33,8 +34,9 @@ namespace Programa.Repositorios
 
         public void editar(MovilModelo movilmodelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"UPDATE Movil SET 
                                  numero_movil = @numero_movil, 
                                  marca_auto = @marca_auto, 
@@ -60,8 +62,9 @@ namespace Programa.Repositorios
 
         public void eliminar(int id)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"UPDATE Movil SET activo = FALSE WHERE id_movil = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -74,9 +77,9 @@ namespace Programa.Repositorios
         public IEnumerable<MovilModeloId> seleccionarMovil()
         {
             var lista = new List<MovilModeloId>();
-
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT id_movil, numero_movil FROM Movil where activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
@@ -99,8 +102,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<MovilModelo>();
 
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT numero_movil,marca_auto,modelo_auto,ano_auto,color_auto,nombre,apellido, chofer, telefono  FROM Movil join dueno_auto on Movil.id_dueno = dueno_auto.id_dueno WHERE Movil.Activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())

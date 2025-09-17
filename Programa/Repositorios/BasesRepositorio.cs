@@ -13,8 +13,9 @@ namespace Programa.Repositorios
 
         public void agregar(BasesModelo basesmodelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"INSERT INTO Bases(estado_base, fecha_base, id_movil, id_operador, activo) 
                                  VALUES (@estado_base, @fecha_base, @id_movil, @id_operador, @activo);";
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -29,8 +30,9 @@ namespace Programa.Repositorios
 
         public void editar(BasesModelo basesmodelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"UPDATE Bases SET estado_base = @estado_base, fecha_base = @fecha_base, id_movil = @id_movil, id_operador = @id_operador 
                                  WHERE id_base = @id_base;";
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -45,8 +47,9 @@ namespace Programa.Repositorios
 
         public void eliminar(int id)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "UPDATE Bases SET activo = FALSE WHERE id_base = @id;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 {
@@ -59,8 +62,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<MovilModeloId>();
 
-            using (var conn = BD.Abrirconexion()) 
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT numero_movil FROM Movil where activo = TRUE;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())
@@ -82,8 +86,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<BasesModelo>();
 
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"select estado_base, fecha_base from Bases where activo = true and id_movil = @id_movil;";
                 using (var cmd = new NpgsqlCommand(query, conn))
                 using (var reader = cmd.ExecuteReader())

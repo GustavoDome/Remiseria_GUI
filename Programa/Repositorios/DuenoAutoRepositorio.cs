@@ -13,8 +13,9 @@ namespace Programa.Repositorios
 
         public void agregar(DuenoAutoModelo duenoAutoModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"INSERT INTO Dueño_auto(nombre, apellido, direccion, chofer, telefono, activo)
                                  VALUES (@nombre, @apellido, @direccion, @chofer, @telefono, @activo);";
 
@@ -34,8 +35,9 @@ namespace Programa.Repositorios
 
         public void editar(DuenoAutoModelo duenoAutoModelo)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"UPDATE Dueño_auto SET 
                                  nombre = @nombre, 
                                  apellido = @apellido, 
@@ -60,8 +62,9 @@ namespace Programa.Repositorios
 
         public void eliminar(int id)
         {
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = @"UPDATE Dueño_auto SET activo = FALSE WHERE id_dueño = @id;";
 
                 using (var cmd = new NpgsqlCommand(query, conn))
@@ -76,8 +79,9 @@ namespace Programa.Repositorios
         {
             var lista = new List<DuenoAutoModelo>();
 
-            using (var conn = BD.Abrirconexion())
+            using (var conn = new ConexionBD().ObtenerConexion())
             {
+                conn.Open();
                 string query = "SELECT * FROM Dueño_auto WHERE activo = TRUE;";
 
                 using (var cmd = new NpgsqlCommand(query, conn))

@@ -17,25 +17,9 @@ namespace Programa.Conexion
             connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         }
-
-        public NpgsqlConnection Abrirconexion ()
+        public NpgsqlConnection ObtenerConexion()
         {
-            var conexion = new NpgsqlConnection(connectionString);
-            conexion.Open();
-            return conexion;
-        }
-
-        public void CerrarConexion()
-        {
-            try 
-            {
-                var conexion = new NpgsqlConnection(connectionString);
-                conexion.Close();
-            }
-            catch (Exception ex) 
-            {
-                MessageBox.Show($"No se pudo cerrar la Base de Datos, Error: {ex.Message}");
-            }
+            return new NpgsqlConnection(connectionString);
         }
     }
 }

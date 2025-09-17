@@ -46,7 +46,7 @@ namespace Programa.Presentadores
             this.vista.volver += volver_menu;
         }
 
-        private void cargar_datos() 
+        public void cargar_datos() 
         {
             this.filtrador.DataSource = this.repositorio.mostrarTodo();
             this.vista.congelarVista();
