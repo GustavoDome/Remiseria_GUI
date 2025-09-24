@@ -15,6 +15,7 @@ namespace Programa.Vistas.Interfaces
         event EventHandler eliminarMovil;
         event EventHandler volver;
 
+        int ObtenerIdMovilSeleccionado();
         void SetMovilesBindingSource(BindingSource moviles);
     }
 }

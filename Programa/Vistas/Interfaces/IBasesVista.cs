@@ -9,6 +9,7 @@ namespace Programa.Vistas.Interfaces
 {
     public interface IBasesVista
     {
+        // Eventos
         event EventHandler agregarBase;
         event EventHandler modificarBase;
         event EventHandler comentarBase;
@@ -16,11 +17,12 @@ namespace Programa.Vistas.Interfaces
         event EventHandler volver;
         event EventHandler OnMovilSeleccionado;
 
+        // Propiedades
         int id_movil { get; set; }
 
-
+        // Métodos
         void ocultarBotones(string rol);
-        void mostrarMoviles(BindingSource listaBase);
-        void mostrarBases(BindingSource listaBase, int id);
+        void mostrarMoviles(BindingSource listaMoviles);
+        void mostrarBases(BindingSource listaBases, int idMovil);
     }
 }

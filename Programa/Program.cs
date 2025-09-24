@@ -18,7 +18,7 @@ namespace Programa
             try
             {
                 ILogin vista = new Login();
-                IUsuarioRepositorio vista_modelo = new UsuarioRepositorio();
+                IOperadorRepositorio vista_modelo = new OperadorRepositorio();
                 new LoginPresentador(vista, vista_modelo);
                 Application.Run((Form)vista);
             }

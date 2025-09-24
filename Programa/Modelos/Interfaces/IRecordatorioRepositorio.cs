@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,9 @@ namespace Programa.Modelos.Interfaces
 {
     public interface IRecordatorioRepositorio
     {
-        void agregar(RecordatorioModelo recordatorioModelo);
-
-        void editar(RecordatorioModelo recordatorioModelo);
-
-        void eliminar(int id);
-
-        IEnumerable<RecordatorioModelo> mostrarTodo();
+        void Agregar(Recordatorio recordatorioModelo);
+        void Editar(Recordatorio recordatorioModelo);
+        void Eliminar(int id);
+        IEnumerable<RecordatorioDTO> ObtenerTodos();
     }
 }

@@ -1,101 +1,70 @@
 ﻿using Npgsql;
 using Programa.Conexion;
+using Programa.DTOs;
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using System;
+using System.Data.Entity;
+using System.Linq;
 using System.Collections.Generic;
+using static Programa.Conexion.RemiseriaDbContext;
 
 namespace Programa.Repositorios
 {
     public class RespuestaRepositorio : IRespuestasRepositorio
     {
-        private readonly ConexionBD BD = new ConexionBD();
-
-        public void agregar(RespuestaModelo respuestaModelo)
+        public void Agregar(Respuesta respuestaModelo)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"INSERT INTO Respuesta (respuesta_texto, respuesta_audio_video, id_pregunta) 
-                                 VALUES (@respuesta_texto, @respuesta_audio_video, @id_pregunta);";
+                contexto.Respuestas.Add(respuestaModelo);
+                contexto.SaveChanges();
+            }
+        }
 
-                using (var cmd = new NpgsqlCommand(query, conn))
+        public void Editar(Respuesta respuestaModelo)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var respuestaExistente = contexto.Respuestas.Find(respuestaModelo.IdRespuesta);
+                if (respuestaExistente != null)
                 {
-                    cmd.Parameters.AddWithValue("@respuesta_texto", respuestaModelo.Respuesta_texto ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@respuesta_audio_video", respuestaModelo.Respuesta_audio_video ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@id_pregunta", respuestaModelo.Id_pregunta);
+                    respuestaExistente.TextoRespuesta = respuestaModelo.TextoRespuesta;
+                    respuestaExistente.AudioVideo = respuestaModelo.AudioVideo;
+                    respuestaExistente.IdPregunta = respuestaModelo.IdPregunta;
 
-                    cmd.ExecuteNonQuery();
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void editar(RespuestaModelo respuestaModelo)
+        public void Eliminar(int id)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"UPDATE Respuesta SET 
-                                 respuesta_texto = @respuesta_texto, 
-                                 respuesta_audio_video = @respuesta_audio_video, 
-                                 id_pregunta = @id_pregunta 
-                                 WHERE id_respuesta = @id_respuesta;";
-
-                using (var cmd = new NpgsqlCommand(query, conn))
+                var respuesta = contexto.Respuestas.Find(id);
+                if (respuesta != null)
                 {
-                    cmd.Parameters.AddWithValue("@id_respuesta", respuestaModelo.Id_respuesta);
-                    cmd.Parameters.AddWithValue("@respuesta_texto", respuestaModelo.Respuesta_texto ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@respuesta_audio_video", respuestaModelo.Respuesta_audio_video ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@id_pregunta", respuestaModelo.Id_pregunta);
-
-                    cmd.ExecuteNonQuery();
+                    contexto.Respuestas.Remove(respuesta);
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void eliminar(int id)
+        public IEnumerable<RespuestaDTO> MostrarTodo()
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = "DELETE FROM Respuesta WHERE id_respuesta = @id;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public IEnumerable<RespuestaModelo> mostrarTodo()
-        {
-            var lista = new List<RespuestaModelo>();
-
-            using (var conn = new ConexionBD().ObtenerConexion())
-            {
-                conn.Open();
-                string query = "SELECT * FROM Respuesta;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
+                return contexto.Respuestas
+                    .Select(r => new RespuestaDTO
                     {
-                        // Leer el campo byte[] para respuesta_audio_video
-                        long length = (long)(reader["respuesta_audio_video"] is DBNull ? 0 : ((byte[])reader["respuesta_audio_video"]).LongLength);
-                        byte[] respuestaAudioVideo = length > 0 ? (byte[])reader["respuesta_audio_video"] : null;
-
-                        lista.Add(new RespuestaModelo
-                        {
-                            Respuesta_texto = reader["respuesta_texto"]?.ToString(),
-                            Respuesta_audio_video = respuestaAudioVideo,
-                            Id_pregunta = Convert.ToInt32(reader["id_pregunta"]),
-                            Id_respuesta = reader["id_respuesta"] != DBNull.Value ? Convert.ToInt32(reader["id_respuesta"]) : 0
-                        });
-                    }
-                }
+                        IdRespuesta = r.IdRespuesta,
+                        TextoRespuesta = r.TextoRespuesta,
+                        AudioVideo = r.AudioVideo,
+                        IdPregunta = r.IdPregunta
+                    })
+                    .ToList();
             }
-
-            return lista;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Programa.Modelos;
+﻿using Programa.Conexion;
+using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using Programa.Repositorios;
 using Programa.Vistas;
@@ -14,45 +15,61 @@ namespace Programa.Presentadores
 {
     public class LoginPresentador
     {
-        private IUsuarioRepositorio repositorio;
-        private ILogin vista;
-        private IEnumerable<UsuarioModelo> modelosUsuario;
-        private BindingSource filtrador;
-        private string rol;
+        private readonly IOperadorRepositorio repositorio;
+        private readonly ILogin vista;
 
-        //Constructor
-        public LoginPresentador(ILogin vista, IUsuarioRepositorio repositorio)
+        public LoginPresentador(ILogin vista, IOperadorRepositorio repositorio)
         {
-            this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
 
-            //metodos
-
             this.vista.buscarUsuario += buscar_usuario;
+        }
+        private void test()
+        {
+            try
+            {
+                using (var contexto = new RemiseriaDbContext())
+                {
+                    var test = contexto.Operadores.FirstOrDefault();
+                    MessageBox.Show("Conexión exitosa");
+                }
+            }
+            catch (Exception ex)
+            {
+                string mensaje = "Error: " + ex.Message;
+                if (ex.InnerException != null)
+                {
+                    mensaje += "\n\nDetalle interno: " + ex.InnerException.Message;
+                }
+                MessageBox.Show(mensaje);
+            }
+
         }
 
         private void buscar_usuario(object sender, EventArgs e)
         {
-            try 
+            test();
+            try
             {
-                var usuario = this.repositorio.LoginUsuario(vista.txtUsuarios, vista.txtContrasenas);
+                var usuario = repositorio.Autenticar(vista.txtUsuarios, vista.txtContrasenas);
 
-                if (usuario.Nombre == vista.txtUsuarios && usuario.Contrasena == vista.txtContrasenas)
+                if (usuario != null)
                 {
                     IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
                     IInicioVista inicio = InicioVista.ObtenerInstancia();
-                    string rol = usuario.RolUsuario;
-                    int id = usuario.Id;
-                    new InicioPresentador(inicio, recordatorio,rol,id);
-                    ((Form)vista).Hide();
+                    new InicioPresentador(inicio, recordatorio, usuario.RolUsuario, usuario.IdOperador);
 
+                    ((Form)vista).Hide();
+                }
+                else
+                {
+                    MessageBox.Show("Usuario o contraseña incorrectos.");
                 }
             }
-            catch (NullReferenceException ex) 
+            catch (Exception ex)
             {
-                MessageBox.Show($"No se encuentra al usuario. Error {ex.Message}");
-
+                MessageBox.Show($"Error al intentar iniciar sesión: {ex.Message}");
             }
         }
     }

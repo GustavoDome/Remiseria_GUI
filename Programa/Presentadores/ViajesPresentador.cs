@@ -17,23 +17,26 @@ namespace Programa.Presentadores
 {
     public class ViajesPresentador
     {
-        private IViajesRepositorio repositorio;
-        private IViajesVista vista;
-        private IEnumerable<ViajesModelo> viajesModelos;
-        private BindingSource filtrador;
-        private string rol;
-        private int id;
+        private readonly IViajesVista vista;
+        private readonly IViajesRepositorio repositorio;
+        private readonly BindingSource filtrador;
+        private DateTime fechaActual;
+        private readonly string rol;
+        private readonly int id;
 
-        public ViajesPresentador(IViajesVista vista, IViajesRepositorio repositorio, string rol, int id) 
+        public ViajesPresentador(IViajesVista vista, IViajesRepositorio repositorio, string rol, int id)
         {
-            this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
             this.rol = rol;
             this.id = id;
+            this.filtrador = new BindingSource();
+            this.fechaActual = DateTime.Today;
 
             this.vista.ocultarBotones(this.rol);
-            this.vista.SetViajesBindingSource(filtrador);
+            this.vista.SetViajesBindingSource(this.filtrador);
+            this.vista.SetFecha(this.fechaActual);
+
             cargar_datos();
 
             this.vista.agregarViaje += agregar_viaje;
@@ -44,60 +47,82 @@ namespace Programa.Presentadores
             this.vista.adelantar += adelantar_dia;
             this.vista.ingresarVuelta += ingresar_vuelta;
             this.vista.volver += volver_menu;
+            this.vista.recargar += cargar_datos;
         }
 
-        public void cargar_datos() 
+        private void cargar_datos(object sender = null, EventArgs e = null)
         {
-            this.filtrador.DataSource = this.repositorio.mostrarTodo();
-            this.vista.congelarVista();
+            var tabla = repositorio.MostrarTodo(fechaActual);
+            filtrador.DataSource = tabla;
+            vista.congelarVista();
+            vista.OcultarIdViaje();
         }
 
-        private int ObtenerSiguienteId()
+        private int ObtenerSiguienteNumeroViaje()
         {
-            // Verificamos si el DataSource está vacío
-            if (this.filtrador.Count == 0)
+            var tabla = filtrador.DataSource as DataTable;
+            if (tabla == null || tabla.Rows.Count == 0)
                 return 1;
 
-            // Convertimos el DataTable a una lista de ViajesModelo
-            var tabla = this.filtrador.DataSource as DataTable;
-            if (tabla == null)
-                throw new InvalidOperationException("El DataSource no es un DataTable.");
+            var max = tabla.AsEnumerable()
+                .Select(row => Convert.ToInt32(row["N° Viaje"]))
+                .DefaultIfEmpty(0)
+                .Max();
 
-            var listaViajes = tabla.AsEnumerable()
-                .Select(row => new ViajesModelo
-                {
-                    Id_viajes = Convert.ToInt32(row["ID Viaje"]),
-                    // Agregá otros campos si los necesitás
-                }).ToList();
-
-            // Obtenemos el ID máximo
-            var maxId = listaViajes.Max(v => v.Id_viajes);
-            return maxId + 1;
+            return max + 1;
         }
 
-
-        private void agregar_viaje(object sender, EventArgs e) 
+        private void agregar_viaje(object sender, EventArgs e)
         {
-            int siguienteid = ObtenerSiguienteId();
-            IAgregarViajesVista agregarViajes = AgregarViajesVista.ObtenerInstancia(siguienteid, this.id, this.rol);
+            int numeroViaje = ObtenerSiguienteNumeroViaje();
+            IAgregarViajesVista agregarVista = AgregarViajesVista.ObtenerInstancia(numeroViaje, id, rol);
+            // Podés pasar fechaActual si querés que el viaje se cree en ese día
         }
-        private void modificar_viaje(object sender, EventArgs e) { }
-        private void comentar_viaje(object sender, EventArgs e) { }
-        private void eliminar_viaje(object sender, EventArgs e) { }
-        private void retroceder_dia(object sender, EventArgs e) { }
-        private void adelantar_dia(object sender, EventArgs e) { }
-        private void ingresar_vuelta(object sender, EventArgs e) 
+
+        private void modificar_viaje(object sender, EventArgs e)
         {
-            IViajesRepositorio viajes = new ViajesRepositorio();
-            IVueltaVista vuelta = VueltaVista.ObtenerInstancia();
-            new VueltaPresentador(vuelta, viajes, this.rol, this.id);
+            // Implementar lógica de edición
+            cargar_datos();
+        }
+
+        private void comentar_viaje(object sender, EventArgs e)
+        {
+            // Implementar lógica de comentario
+            cargar_datos();
+        }
+
+        private void eliminar_viaje(object sender, EventArgs e)
+        {
+            int idViaje = vista.ObtenerIdViajeSeleccionado();
+            repositorio.Eliminar(idViaje);
+            cargar_datos();
+        }
+
+        private void retroceder_dia(object sender, EventArgs e)
+        {
+            fechaActual = fechaActual.AddDays(-1);
+            vista.SetFecha(fechaActual);
+            cargar_datos();
+        }
+
+        private void adelantar_dia(object sender, EventArgs e)
+        {
+            fechaActual = fechaActual.AddDays(1);
+            vista.SetFecha(fechaActual);
+            cargar_datos();
+        }
+
+        private void ingresar_vuelta(object sender, EventArgs e)
+        {
+            IVueltaVista vueltaVista = VueltaVista.ObtenerInstancia();
+            IViajesRepositorio repo = new ViajesRepositorio();
+            new VueltaPresentador(vueltaVista, repo, rol, id);
             ((Form)vista).Close();
         }
-        private void volver_menu(object sender, EventArgs e) 
+
+        private void volver_menu(object sender, EventArgs e)
         {
-            IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio, this.rol, this.id);
             ((Form)vista).Close();
         }
     }

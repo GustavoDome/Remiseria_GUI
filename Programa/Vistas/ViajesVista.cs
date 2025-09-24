@@ -76,28 +76,51 @@ namespace Programa.Vistas
         public event EventHandler adelantar;
         public event EventHandler ingresarVuelta;
         public event EventHandler volver;
+        public event EventHandler recargar;
 
         public void SetViajesBindingSource(BindingSource viajes) 
         {
             dgvViajes.DataSource = viajes;
         }
-
-        public void congelarVista() 
+        public void SetFecha(DateTime fecha)
         {
-            dgvViajes.Columns[0].Width = 40;
-            dgvViajes.Columns[1].Width = 60;
-            dgvViajes.Columns[2].Width = 200;
-            dgvViajes.Columns[3].Width = 120;
+            dtpFecha.Value = fecha;
+        }
 
-            dgvViajes.Columns[0].Frozen = true;
-            dgvViajes.Rows[1].Frozen = true;
-            dgvViajes.Rows[2].Frozen = true;
+        public void OcultarIdViaje()
+        {
+            dgvViajes.Columns["ID Viaje"].Visible = false;
+        }
+        public int ObtenerIdViajeSeleccionado()
+        {
+            return Convert.ToInt32(dgvViajes.CurrentRow.Cells["ID Viaje"].Value);
+        }
+        public void congelarVista()
+        {
+            if (dgvViajes.Columns.Contains("ID Viaje"))
+                dgvViajes.Columns["ID Viaje"].Visible = false;
+
+            if (dgvViajes.Columns.Count >= 5)
+            {
+                dgvViajes.Columns[1].Width = 60;
+                dgvViajes.Columns[2].Width = 60;
+                dgvViajes.Columns[3].Width = 200;
+                dgvViajes.Columns[4].Width = 120;
+
+                dgvViajes.Columns[0].Frozen = true;
+                dgvViajes.Columns[1].Frozen = true;
+            }
+
+            if (dgvViajes.Rows.Count > 2)
+            {
+                dgvViajes.Rows[1].Frozen = true;
+                dgvViajes.Rows[2].Frozen = true;
+            }
         }
 
         public void RecargarDatos(string rol, int id)
         {
-            var presentador = new ViajesPresentador(this, new ViajesRepositorio(),rol, id);
-            presentador.cargar_datos();
+            recargar.Invoke(this, EventArgs.Empty);
         }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton

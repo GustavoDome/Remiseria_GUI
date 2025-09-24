@@ -1,54 +1,74 @@
-﻿using Programa.Modelos.Interfaces;
-using Programa.Modelos;
+﻿using Programa.Modelos;
+using Programa.Modelos.Interfaces;
+using Programa.Repositorios;
+using Programa.Vistas;
+using Programa.Vistas.Alta;
+using Programa.Vistas.Alta.Interfaces;
 using Programa.Vistas.Interfaces;
+using Programa.Vistas.Modificacion;
+using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Programa.Repositorios;
-using Programa.Vistas;
 
 namespace Programa.Presentadores
 {
     public class OperadoresPresentador
     {
-        private IUsuarioRepositorio repositorio;
-        private IOperadoresVista vista;
-        private IEnumerable<UsuarioModelo> usuarioModelos;
-        private BindingSource filtrador;
-        private int id;
+        private readonly IOperadoresVista vista;
+        private readonly IOperadorRepositorio repositorio;
+        private readonly BindingSource filtrador;
+        private readonly int id;
 
-        public OperadoresPresentador(IOperadoresVista vista, IUsuarioRepositorio repositorio, int id)
+        public OperadoresPresentador(IOperadoresVista vista, IOperadorRepositorio repositorio, int id)
         {
-            this.filtrador = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
             this.id = id;
+            this.filtrador = new BindingSource();
 
-            vista.SetOperadoresBindingSource(this.filtrador);
-            mostrarOperadores();
+            vista.SetOperadoresBindingSource(filtrador);
+            cargar_operadores();
 
-            this.vista.agregarOperador += agregar_operador;
-            this.vista.modificiarOperador += modificar_operador;
-            this.vista.eliminarOperador += eliminar_operador;
-            this.vista.volver += volver_menu;
+            vista.agregarOperador += agregar_operador;
+            vista.modificiarOperador += modificar_operador;
+            vista.eliminarOperador += eliminar_operador;
+            vista.volver += volver_menu;
         }
 
-        private void mostrarOperadores() 
+        private void cargar_operadores()
         {
-            var lista = this.repositorio.mostrarTodo().ToList();
-            this.filtrador.DataSource = lista;
+            var lista = repositorio.MostrarActivos().ToList(); // solo operadores activos
+            filtrador.DataSource = lista;
         }
-        private void agregar_operador(object sender, EventArgs e) { }
-        private void modificar_operador(object sender, EventArgs e) { }
-        private void eliminar_operador(object sender, EventArgs e) { }
-        private void volver_menu(object sender, EventArgs e) 
+
+        private void agregar_operador(object sender, EventArgs e)
         {
-            IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
+            //IAgregarOperadorVista agregarVista = AgregarOperadorVista.ObtenerInstancia(id);
+            //new AgregarOperadorPresentador(agregarVista, repositorio, id);
+        }
+
+        private void modificar_operador(object sender, EventArgs e)
+        {
+            int idOperador = vista.ObtenerIdOperadorSeleccionado();
+            //IModificarOperadorVista modificarVista = ModificarOperadorVista.ObtenerInstancia(idOperador);
+            //new ModificarOperadorPresentador(modificarVista, repositorio, idOperador);
+            //cargar_operadores();
+        }
+
+        private void eliminar_operador(object sender, EventArgs e)
+        {
+            int idOperador = vista.ObtenerIdOperadorSeleccionado();
+            repositorio.Eliminar(idOperador);
+            cargar_operadores();
+        }
+
+        private void volver_menu(object sender, EventArgs e)
+        {
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio,"Gerente", this.id);
             ((Form)vista).Close();
         }
     }

@@ -50,6 +50,10 @@ namespace Programa.Vistas
         {
             dgvMoviles.DataSource = moviles;
         }
+        public int ObtenerIdMovilSeleccionado()
+        {
+            return Convert.ToInt32(dgvMoviles.CurrentRow.Cells["IdMovil"].Value);
+        }
         // Metodo para el uso del Singleton
         public static MovilesVista ObtenerInstancia()
         {

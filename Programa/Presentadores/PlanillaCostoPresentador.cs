@@ -5,6 +5,7 @@ using Programa.Vistas;
 using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,53 +15,85 @@ namespace Programa.Presentadores
 {
     public class PlanillaCostoPresentador
     {
-        private IPlanillaCostosRepositorio repositorio;
-        private IPlanillaCostoVista vista;
-        private IEnumerable<CuadrasImporteModelo> cuadrasImporteModelo;
-        private IEnumerable<CuadrasMinimoImporteModelo> cuadrasMinimoModelo;
-        private IEnumerable<CuadrasMandadoModelo> cuadrasMandadoModelo;
-        private IEnumerable<CuadrasEsperaModelo> cuadrasEsperaModelos;
-        private IEnumerable<ImporteCiudadModelo> ciudadImportemodelo;
-        private IEnumerable<ImporteCiudadEspera> ciudadEsperaModelo;
-        private IEnumerable<CiudadesModelo> ciudadesmodelo;
-        private BindingSource tablacuadras;
-        private BindingSource tablaciudades;
-        private string rol;
-        private int id;
+        private readonly IPlanillaCostoVista vista;
+        private readonly ICiudadRepositorio ciudadRepo;
+        private readonly IImporteCuadrasRepositorio cuadrasRepo;
+        private readonly IImporteCiudadRepositorio ciudadImporteRepo;
+        private readonly BindingSource tablacuadras;
+        private readonly BindingSource tablaciudades;
+        private readonly string rol;
+        private readonly int id;
 
-        public PlanillaCostoPresentador (IPlanillaCostoVista vista, IPlanillaCostosRepositorio repositorio, string rol, int id) 
+        public PlanillaCostoPresentador(
+            IPlanillaCostoVista vista,
+            ICiudadRepositorio ciudadRepo,
+            IImporteCuadrasRepositorio cuadrasRepo,
+            IImporteCiudadRepositorio ciudadImporteRepo,
+            string rol,
+            int id)
         {
-            this.tablacuadras = new BindingSource();
-            this.tablaciudades = new BindingSource();
             this.vista = vista;
-            this.repositorio = repositorio;
+            this.ciudadRepo = ciudadRepo;
+            this.cuadrasRepo = cuadrasRepo;
+            this.ciudadImporteRepo = ciudadImporteRepo;
             this.rol = rol;
             this.id = id;
+            this.tablacuadras = new BindingSource();
+            this.tablaciudades = new BindingSource();
 
-            this.vista.modificarCuadrasCosto += modificarCuadras_costo;
-            this.vista.modificarCuadrasCostoMandado += modificarCuadras_mandado;
-            this.vista.modificarCuadrasEspera += modificarCuadras_espera;
-            this.vista.modificarCiudadCosto += modificarCiudad_costo;
-            this.vista.modificarCiudadEspera += modificarCiudad_espera;
-            this.vista.agregarCiudad += agregar_ciudad ;
-            this.vista.modificarCiudad += modificar_ciudad;
-            this.vista.eliminarCiudad += eliminar_ciudad;
-            this.vista.volver += volver_menu;
+            vista.modificarCuadrasCosto += modificarCuadras_costo;
+            vista.modificarCuadrasCostoMandado += modificarCuadras_mandado;
+            vista.modificarCuadrasEspera += modificarCuadras_espera;
+            vista.modificarCiudadCosto += modificarCiudad_costo;
+            vista.modificarCiudadEspera += modificarCiudad_espera;
+            vista.agregarCiudad += agregar_ciudad;
+            vista.modificarCiudad += modificar_ciudad;
+            vista.eliminarCiudad += eliminar_ciudad;
+            vista.volver += volver_menu;
+
+            cargarDatos();
         }
 
-        private void modificarCuadras_costo(object sender, EventArgs e) { }
-        private void modificarCuadras_mandado(object sender, EventArgs e) { }
-        private void modificarCuadras_espera(object sender, EventArgs e) { }
-        private void modificarCiudad_costo(object sender, EventArgs e) { }
-        private void modificarCiudad_espera(object sender, EventArgs e) { }
-        private void agregar_ciudad(object sender, EventArgs e) { }
-        private void modificar_ciudad(object sender, EventArgs e) { }
-        private void eliminar_ciudad(object sender, EventArgs e) { }
-        private void volver_menu(object sender, EventArgs e) 
+        private void cargarDatos()
         {
-            IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
+            var cuadrasDTO = cuadrasRepo.ObtenerImportes();
+            var ciudadDTO = ciudadImporteRepo.ObtenerImportes();
+            var ciudades = ciudadRepo.ObtenerTodas();
+
+            vista.MostrarImportesCuadras(cuadrasDTO.Minimo, cuadrasDTO.Espera, cuadrasDTO.Mandado);
+            vista.MostrarImportesCiudad(ciudadDTO.Kilometro, ciudadDTO.Espera);
+
+            var tabla = new DataTable();
+            tabla.Columns.Add("Cuadra");
+            tabla.Columns.Add("Importe");
+
+            for (int i = 1; i <= 120; i++)
+            {
+                var row = tabla.NewRow();
+                row["Cuadra"] = i;
+                row["Importe"] = i <= 10 ? cuadrasDTO.Minimo : cuadrasDTO.Minimo + (i - 10) * cuadrasDTO.Cuadras;
+                tabla.Rows.Add(row);
+            }
+
+            tablacuadras.DataSource = tabla;
+            tablaciudades.DataSource = ciudades.ToList();
+
+            vista.SetCuadraBindingSource(tablacuadras);
+            vista.SetCiudadBindingSource(tablaciudades);
+        }
+
+        private void modificarCuadras_costo(object sender, EventArgs e) { /* abrir vista */ }
+        private void modificarCuadras_mandado(object sender, EventArgs e) { /* abrir vista */ }
+        private void modificarCuadras_espera(object sender, EventArgs e) { /* abrir vista */ }
+        private void modificarCiudad_costo(object sender, EventArgs e) { /* abrir vista */ }
+        private void modificarCiudad_espera(object sender, EventArgs e) { /* abrir vista */ }
+        private void agregar_ciudad(object sender, EventArgs e) { /* abrir vista */ }
+        private void modificar_ciudad(object sender, EventArgs e) { /* abrir vista */ }
+        private void eliminar_ciudad(object sender, EventArgs e) { /* abrir vista */ }
+
+        private void volver_menu(object sender, EventArgs e)
+        {
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio, this.rol, this.id);
             ((Form)vista).Close();
         }
     }

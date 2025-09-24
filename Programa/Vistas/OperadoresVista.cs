@@ -47,6 +47,10 @@ namespace Programa.Vistas
         {
             dgvOperadores.DataSource = operadores;
         }
+        public int ObtenerIdOperadorSeleccionado()
+        {
+            return Convert.ToInt32(dgvOperadores.CurrentRow.Cells["ID"].Value);
+        }
 
         // Metodo para el uso del Singleton
         public static OperadoresVista ObtenerInstancia()

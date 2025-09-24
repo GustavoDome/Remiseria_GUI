@@ -20,84 +20,8 @@ namespace Programa.Vistas
             this.Load += BasesVista_Load;
         }
 
-        public void ocultarBotones(string rol) 
-        {
-            if(rol == "Usuario")
-            {
-                btnModificar.Hide();
-                btnEliminar.Hide();
-            }
-        }
-
-        public void asociacionPresentador() 
-        {
-            btnAgregar.Click += delegate
-            {
-                agregarBase?.Invoke(this, EventArgs.Empty);
-            };
-            btnModificar.Click += delegate
-            {
-                modificarBase?.Invoke(this, EventArgs.Empty);
-            };
-            btnComentar.Click += delegate 
-            {
-                comentarBase?.Invoke(this, EventArgs.Empty);
-            };
-            btnEliminar.Click += delegate 
-            {
-                eliminarBase?.Invoke(this, EventArgs.Empty);
-            };
-            btnVolver.Click += delegate 
-            {
-                volver?.Invoke(this, EventArgs.Empty);
-            };
-            dgvMoviles.SelectionChanged += (s, e) =>
-            {
-                if (dgvMoviles.CurrentRow != null && dgvMoviles.CurrentRow.Cells.Count > 0)
-                {
-                    int idMovil;
-                    // Asegurarse que el valor se puede parsear a int
-                    if (int.TryParse(dgvMoviles.CurrentRow.Cells[1].Value?.ToString(), out idMovil))
-                    {
-                        id_movil = idMovil;
-                        // Avisar al Presentador que se seleccionó un móvil
-                        OnMovilSeleccionado?.Invoke(this, EventArgs.Empty);
-                    }
-                }
-            };
-        }
-
-        // Variable que llamaran los otros forms para el comportamiento Singleton
+        // Singleton
         private static BasesVista instancia;
-
-        public event EventHandler agregarBase;
-        public event EventHandler modificarBase;
-        public event EventHandler comentarBase;
-        public event EventHandler eliminarBase;
-        public event EventHandler volver;
-        public event EventHandler OnMovilSeleccionado;
-
-
-        public int id_movil { get; set; }
-
-        public void mostrarMoviles(BindingSource basesVista) 
-        {
-            dgvMoviles.DataSource = basesVista;
-        }
-
-        public void mostrarBases(BindingSource basesVista, int movil) 
-        {
-            dgvBases.DataSource = basesVista;
-        }
-
-        private void BasesVista_Load(object sender, EventArgs e)
-        {
-            dgvMoviles.ClearSelection(); // 🔑 Nada seleccionado
-            dgvBases.DataSource = null;  // 🔑 Arranca vacío
-        }
-
-
-        // Metodo para el uso del Singleton
         public static BasesVista ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)
@@ -108,13 +32,71 @@ namespace Programa.Vistas
             else
             {
                 if (instancia.WindowState == FormWindowState.Minimized)
-                {
                     instancia.WindowState = FormWindowState.Normal;
-                }
+
                 instancia.BringToFront();
                 instancia.Activate();
             }
             return instancia;
+        }
+
+        // Eventos
+        public event EventHandler agregarBase;
+        public event EventHandler modificarBase;
+        public event EventHandler comentarBase;
+        public event EventHandler eliminarBase;
+        public event EventHandler volver;
+        public event EventHandler OnMovilSeleccionado;
+
+        // Propiedades
+        public int id_movil { get; set; }
+
+        // Métodos
+        public void ocultarBotones(string rol)
+        {
+            if (rol == "Usuario")
+            {
+                btnModificar.Hide();
+                btnEliminar.Hide();
+            }
+        }
+
+        public void mostrarMoviles(BindingSource listaMoviles)
+        {
+            dgvMoviles.DataSource = listaMoviles;
+        }
+
+        public void mostrarBases(BindingSource listaBases, int idMovil)
+        {
+            dgvBases.DataSource = listaBases;
+        }
+
+        private void BasesVista_Load(object sender, EventArgs e)
+        {
+            dgvMoviles.ClearSelection();
+            dgvBases.DataSource = null;
+        }
+
+        private void asociacionPresentador()
+        {
+            btnAgregar.Click += (s, e) => agregarBase?.Invoke(this, EventArgs.Empty);
+            btnModificar.Click += (s, e) => modificarBase?.Invoke(this, EventArgs.Empty);
+            btnComentar.Click += (s, e) => comentarBase?.Invoke(this, EventArgs.Empty);
+            btnEliminar.Click += (s, e) => eliminarBase?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+
+            dgvMoviles.SelectionChanged += (s, e) =>
+            {
+                if (dgvMoviles.CurrentRow != null && dgvMoviles.CurrentRow.Cells.Count > 1)
+                {
+                    var valor = dgvMoviles.CurrentRow.Cells[1].Value?.ToString();
+                    if (int.TryParse(valor, out int idMovil))
+                    {
+                        id_movil = idMovil;
+                        OnMovilSeleccionado?.Invoke(this, EventArgs.Empty);
+                    }
+                }
+            };
         }
     }
 }

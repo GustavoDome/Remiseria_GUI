@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,12 +9,9 @@ namespace Programa.Modelos.Interfaces
 {
     public interface IRespuestasRepositorio
     {
-        void agregar(RespuestaModelo respuestaModelo);
-
-        void editar(RespuestaModelo respuestaModelo);
-
-        void eliminar(int id);
-
-        IEnumerable<RespuestaModelo> mostrarTodo();
+        void Agregar(Respuesta respuestaModelo);
+        void Editar(Respuesta respuestaModelo);
+        void Eliminar(int id);
+        IEnumerable<RespuestaDTO> MostrarTodo();
     }
 }

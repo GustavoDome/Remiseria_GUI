@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,13 +9,11 @@ namespace Programa.Modelos.Interfaces
 {
     public interface IBasesRepositorio
     {
-        void agregar(BasesModelo basesModelo);
+        void Agregar(Base entidad);
+        void Editar(Base entidad);
+        void Eliminar(int id);
 
-        void editar(BasesModelo basesModelo);
-
-        void eliminar(int id);
-
-        IEnumerable<MovilModeloId> seleccionarMovil();
-        IEnumerable<BasesModelo> mostrarTodo(int id);
+        IEnumerable<MovilResumenDTO> SeleccionarMovil(); // reemplaza MovilModeloId
+        IEnumerable<BaseDetalleDTO> MostrarTodo(int id_movil);
     }
 }

@@ -1,92 +1,70 @@
 ﻿using Npgsql;
 using Programa.Conexion;
+using Programa.DTOs;
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using System;
+using System.Linq;
+using System.Data.Entity;
 using System.Collections.Generic;
+using static Programa.Conexion.RemiseriaDbContext;
 
 namespace Programa.Repositorios
 {
     public class PreguntaRepositorio : IPreguntaRepositorio
     {
-        private readonly ConexionBD BD = new ConexionBD();
-
-        public void agregar(PreguntaModelo preguntaModelo)
+        public void Agregar(Pregunta preguntaModelo)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"INSERT INTO Pregunta (pregunta, id_categoria) 
-                                 VALUES (@pregunta, @id_categoria);";
+                contexto.Preguntas.Add(preguntaModelo);
+                contexto.SaveChanges();
+            }
+        }
 
-                using (var cmd = new NpgsqlCommand(query, conn))
+        public void Editar(Pregunta preguntaModelo)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var preguntaExistente = contexto.Preguntas.Find(preguntaModelo.IdPregunta);
+                if (preguntaExistente != null)
                 {
-                    cmd.Parameters.AddWithValue("@pregunta", preguntaModelo.Pregunta ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@id_categoria", preguntaModelo.Id_categoria);
+                    preguntaExistente.TextoPregunta = preguntaModelo.TextoPregunta;
+                    preguntaExistente.IdCategoria = preguntaModelo.IdCategoria;
 
-                    cmd.ExecuteNonQuery();
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void editar(PreguntaModelo preguntaModelo)
+        public void Eliminar(int id)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"UPDATE Pregunta SET 
-                                 pregunta = @pregunta, 
-                                 id_categoria = @id_categoria 
-                                 WHERE id_pregunta = @id_pregunta;";
-
-                using (var cmd = new NpgsqlCommand(query, conn))
+                var pregunta = contexto.Preguntas.Find(id);
+                if (pregunta != null)
                 {
-                    cmd.Parameters.AddWithValue("@id_pregunta", preguntaModelo.Id_pregunta);
-                    cmd.Parameters.AddWithValue("@pregunta", preguntaModelo.Pregunta ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@id_categoria", preguntaModelo.Id_categoria);
-
-                    cmd.ExecuteNonQuery();
+                    contexto.Preguntas.Remove(pregunta);
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void eliminar(int id)
+        public IEnumerable<PreguntaDTO> MostrarTodo()
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = "DELETE FROM Pregunta WHERE id_pregunta = @id;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
-                }
+                return contexto.Preguntas
+                    .Include(p => p.Categoria)
+                   .Select(p => new PreguntaDTO
+                   {
+                       IdPregunta = p.IdPregunta,
+                       Texto = p.TextoPregunta,
+                       Categoria = p.Categoria.CategoriaPregunta,
+                       IdCategoria = p.IdCategoria
+                   })
+                    .ToList();
             }
-        }
-
-        public IEnumerable<PreguntaModelo> mostrarTodo()
-        {
-            var lista = new List<PreguntaModelo>();
-            using (var conn = new ConexionBD().ObtenerConexion())
-            {
-                conn.Open();
-                string query = "SELECT * FROM Pregunta;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        lista.Add(new PreguntaModelo
-                        {
-                            Id_pregunta = reader["id_pregunta"] != DBNull.Value ? Convert.ToInt32(reader["id_pregunta"]) : 0,
-                            Pregunta = reader["pregunta"]?.ToString(),
-                            Id_categoria = reader["id_categoria"] != DBNull.Value ? Convert.ToInt32(reader["id_categoria"]) : 0
-                        });
-                    }
-                }
-            }
-
-            return lista;
         }
     }
 }

@@ -69,36 +69,35 @@ namespace Programa.Vistas.Alta
         {
             var moviles = new MovilRepositorio();
             // Obtenemos la lista de móviles desde tu función
-            var listaMoviles = moviles.seleccionarMovil();
+            //var listaMoviles = moviles.seleccionarMovil();
 
             // Limpiamos ítems previos
             clbMoviles.Items.Clear();
 
             // Agregamos cada móvil como un ítem
-            foreach (var movil in listaMoviles)
-            {
-                clbMoviles.Items.Add($"Móvil {movil.Numero_movil}", false); // false = no seleccionado por defecto
-            }
+            //foreach (var movil in listaMoviles)
+            //{
+           //     clbMoviles.Items.Add($"Móvil {movil.Numero_movil}", false); // false = no seleccionado por defecto
+            //}
         }
-        public List<int> obtenermovil()
-        {
-            var movilesrepositorios = new MovilRepositorio();
-            var listaMoviles = movilesrepositorios.seleccionarMovil();
+        //public List<int> obtenermovil()
+       // {
+          //  var movilesrepositorios = new MovilRepositorio();
+           // var listaMoviles = movilesrepositorios.seleccionarMovil();
 
             // IDs reales desde la base de datos
-            var numeroMovilesid = listaMoviles.Select(m => m.Id).ToList();
+            //var numeroMovilesid = listaMoviles.Select(m => m.Numero_movil).ToList();
 
             // IDs seleccionados desde la UI
-            var numeroMoviles = clbMoviles.CheckedItems
-                .Cast<string>()
-                .Select(item => Convert.ToInt32(item.ToString().Split(' ')[1]))
-                .ToList();
+          //  var numeroMoviles = clbMoviles.CheckedItems
+            //    .Cast<string>()
+            //    .Select(item => Convert.ToInt32(item.ToString().Split(' ')[1]))
+             //   .ToList();
 
             // Intersección entre ambos
-            var movilesSeleccionados = numeroMoviles.Intersect(numeroMovilesid).ToList();
-
-            return movilesSeleccionados;
-        }
+           // var movilesSeleccionados = numeroMoviles.Intersect(numeroMovilesid).ToList();
+           // return movilesSeleccionados;
+       // }
 
         public string obtenerOpcion()
         {
@@ -133,45 +132,45 @@ namespace Programa.Vistas.Alta
             return instancia;
         }
 
-        public List<int> obtenerVuelta()
-        {
-            var repositorio = new ViajesRepositorio();
+       // public List<int> obtenerVuelta()
+        //{
+         //   var repositorio = new ViajesRepositorio();
 
             // Móviles seleccionados desde la UI (por ejemplo, CheckedListBox)
-            var movilesSeleccionados = obtenermovil(); // List<int>
+         //   var movilesSeleccionados = obtenermovil(); // List<int>
 
             // Lista de vueltas desde la base
-            var listavueltas = repositorio.seleccionarVuelta(); // IEnumerable<VueltaIdModelo>
+          //  var listavueltas = repositorio.seleccionarVuelta(); // IEnumerable<VueltaIdModelo>
 
             // Filtrar las vueltas que coinciden con los móviles seleccionados
-            var vueltasFiltradas = listavueltas
-                .Where(v => movilesSeleccionados.Contains(v.Numero_movil))
-                .Select(v => v.Vuelta)
-                .ToList();
+          //  var vueltasFiltradas = listavueltas
+          //      .Where(v => movilesSeleccionados.Contains(v.Numero_movil))
+          //      .Select(v => v.Vuelta)
+           //     .ToList();
 
-            return vueltasFiltradas;
-        }
+          //  return vueltasFiltradas;
+       // }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
             var repositorio = new ViajesRepositorio();
-            agregarViajeModelo viaje = new agregarViajeModelo();
+        //    agregarViajeModelo viaje = new agregarViajeModelo();
             TimeSpan hora = DateTime.Now.TimeOfDay;
             DateTime fecha_vuelta = DateTime.Today;
-            viaje.Id = this.id;
-            viaje.Hora_viaje = hora;
-            viaje.Direccion = txtDirecciones;
-            viaje.Vuelta = obtenerVuelta();
-            viaje.Estado_vuelta = "X";
-            viaje.Vuelta_fecha = fecha_vuelta;
-            viaje.Estado_viaje = "·";
-            viaje.Comentario = obtenerOpcion();
-            viaje.Id_movil = obtenermovil();
-            viaje.Id_operador = this.idusuario; 
+          //  viaje.Id = this.id;
+          //  viaje.Hora_viaje = hora;
+          //  viaje.Direccion = txtDirecciones;
+          //  viaje.Vuelta = obtenerVuelta();
+          //  viaje.Estado_vuelta = "X";
+          //  viaje.Vuelta_fecha = fecha_vuelta;
+          //  viaje.Estado_viaje = "·";
+          //  viaje.Comentario = obtenerOpcion();
+          //  viaje.Id_movil = obtenermovil();
+          //  viaje.Id_operador = this.idusuario;
 
             try
             {
-                repositorio.agregar(viaje);
+           //     repositorio.agregar(viaje);
                 MessageBox.Show("si se pudo agregar el viaje");
             }
             catch (Exception ex) 
@@ -180,10 +179,8 @@ namespace Programa.Vistas.Alta
             }
             finally
             {
-                this.Close();
-                IViajesRepositorio viajes = new ViajesRepositorio();
                 IViajesVista viajesvista = ViajesVista.ObtenerInstancia(this.rol, this.id);
-                new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
+                this.Close();
             }
         }
     }

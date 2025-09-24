@@ -14,14 +14,14 @@ namespace Programa.Presentadores
 {
     public class ConfiguracionesPresentador
     {
-        private IUsuarioRepositorio repositorio;
+        private IOperadorRepositorio repositorio;
         private IConfiguracionesVista vista;
-        private IEnumerable<UsuarioModelo> usuarioModelos;
+        private IEnumerable<Operador> usuarioModelos;
         private BindingSource filtrador;
         private string rol;
         private int id;
 
-        public ConfiguracionesPresentador(IConfiguracionesVista vista, IUsuarioRepositorio repositorio, string rol, int id)
+        public ConfiguracionesPresentador(IConfiguracionesVista vista, IOperadorRepositorio repositorio, string rol, int id)
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
@@ -35,9 +35,7 @@ namespace Programa.Presentadores
         private void guardar_configuracion(object sender, EventArgs e) { }
         private void volver_menu(object sender, EventArgs e) 
         {
-            IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
             IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio, this.rol, this.id);
             ((Form)vista).Close();
         }
     }

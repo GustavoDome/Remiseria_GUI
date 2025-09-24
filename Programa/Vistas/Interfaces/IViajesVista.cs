@@ -17,9 +17,14 @@ namespace Programa.Vistas.Interfaces
         event EventHandler adelantar;
         event EventHandler ingresarVuelta;
         event EventHandler volver;
+        event EventHandler recargar;
 
+        int ObtenerIdViajeSeleccionado();
         void ocultarBotones(string rol);
         void SetViajesBindingSource(BindingSource viajes);
         void congelarVista();
+        void SetFecha(DateTime fecha);
+        void OcultarIdViaje();
+
     }
 }

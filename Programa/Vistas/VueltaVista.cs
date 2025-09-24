@@ -72,6 +72,10 @@ namespace Programa.Vistas
         {
             dgvVuelta.DataSource = viajes;
         }
+        public void SetFecha(DateTime fecha)
+        {
+            dateTimePicker1.Value = fecha;
+        }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static VueltaVista instancia;

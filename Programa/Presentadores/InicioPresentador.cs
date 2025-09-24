@@ -17,7 +17,7 @@ namespace Programa.Presentadores
     {
         private IRecordatorioRepositorio repositorio;
         private IInicioVista vista;
-        private IEnumerable<RecordatorioModelo> modelosRecordatorio;
+        private IEnumerable<Recordatorio> modelosRecordatorio;
         private BindingSource filtrador;
         private string rol;
         private int id;
@@ -54,7 +54,7 @@ namespace Programa.Presentadores
 
         private void cargarRecordatorio() 
         {
-            var lista = this.repositorio.mostrarTodo().ToList();
+            var lista = this.repositorio.ObtenerTodos().ToList();
             this.filtrador.DataSource = lista;
         }
 
@@ -76,47 +76,47 @@ namespace Programa.Presentadores
         }
         private void ingresarAyuda(object sender, EventArgs e)
         {
+            IAyudaVista ayuda = AyudaVista.ObtenerInstancia();
             ICategoriaRepositorio categoria = new CategoriaRepositorio();
             IPreguntaRepositorio pregunta = new PreguntaRepositorio();
             IRespuestasRepositorio respuesta = new RespuestaRepositorio();
-            IAyudaVista ayuda = AyudaVista.ObtenerInstancia();
             new AyudaPresentador(ayuda, categoria, pregunta, respuesta, this.rol, this.id);
         }
         private void ingresarConfiguracion(object sender, EventArgs e) 
         {
-            IUsuarioRepositorio usuario = new UsuarioRepositorio();
             IConfiguracionesVista configuracion = ConfiguracionesVista.ObtenerInstancia();
+            IOperadorRepositorio usuario = new OperadorRepositorio();
             new ConfiguracionesPresentador(configuracion, usuario, this.rol, this.id);
             ((Form)vista).Close();
         }
         private void ingresarOperadores(object sender, EventArgs e) 
         {
-            IUsuarioRepositorio usuario = new UsuarioRepositorio();
             IOperadoresVista operadores = OperadoresVista.ObtenerInstancia();
+            IOperadorRepositorio usuario = new OperadorRepositorio();
             new OperadoresPresentador(operadores, usuario, this.id);
         }
         private void ingresarMoviles(object sender, EventArgs e) 
         {
-            IMovilRepositorio movilrepositorio = new MovilRepositorio();
             IMovilesVista movilVista = MovilesVista.ObtenerInstancia();
+            IMovilRepositorio movilrepositorio = new MovilRepositorio();
             new MovilesPresentador(movilVista, movilrepositorio, this.id);
         }
         private void ingresarViajes(object sender, EventArgs e) 
         {
-            IViajesRepositorio viajes = new ViajesRepositorio();
             IViajesVista viajesvista = ViajesVista.ObtenerInstancia(this.rol, this.id);
+            IViajesRepositorio viajes = new ViajesRepositorio();
             new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
         }
         private void ingresarVueltas(object sender, EventArgs e) 
         {
-            IViajesRepositorio viajes = new ViajesRepositorio();
             IVueltaVista vuelta = VueltaVista.ObtenerInstancia();
+            IViajesRepositorio viajes = new ViajesRepositorio();
             new VueltaPresentador(vuelta, viajes, this.rol, this.id);
         }
         private void ingresarBases(object sender, EventArgs e) 
         {
-            IBasesRepositorio bases = new BasesRepositorio();
             IBasesVista basesvista = BasesVista.ObtenerInstancia();
+            IBasesRepositorio bases = new BaseRepositorio();
             new BasesPresentador(basesvista, bases, this.rol, this.id);
         }
     }

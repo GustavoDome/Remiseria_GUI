@@ -1,21 +1,14 @@
-﻿using System;
+﻿using Programa.DTOs;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Programa.Modelos.Interfaces
 {
     public interface IMovilRepositorio
     {
-        void agregar(MovilModelo movilModelo);
-
-        void editar(MovilModelo movilModelo);
-
-        void eliminar(int id);
-
-        IEnumerable<MovilModelo> mostrarTodo();
-        IEnumerable<MovilModeloId> seleccionarMovil();
-
+        void Agregar(Movil movil);
+        void Editar(Movil movil);
+        void Eliminar(int id);
+        IEnumerable<MovilDetalleDTO> ObtenerTodos();
+        IEnumerable<MovilResumenDTO> ObtenerMovilesReducidos();
     }
 }

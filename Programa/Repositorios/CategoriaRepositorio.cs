@@ -1,81 +1,64 @@
 ﻿using Npgsql;
 using Programa.Conexion;
-using Programa.Modelos.Interfaces;
+using Programa.DTOs;
 using Programa.Modelos;
+using Programa.Modelos.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using static Programa.Conexion.RemiseriaDbContext;
 
 namespace Programa.Repositorios
 {
     public class CategoriaRepositorio : ICategoriaRepositorio
     {
-        private readonly ConexionBD BD = new ConexionBD();
-
-        public void agregar(CategoriaModelo categoriaModelo)
+        public void Agregar(Categoria nuevaCategoria)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"INSERT INTO Categoria(Categoria_pregunta) VALUES (@Categoria_pregunta);";
-                using (var cmd = new NpgsqlCommand(query, conn))
+                contexto.Categorias.Add(nuevaCategoria);
+                contexto.SaveChanges();
+            }
+        }
+
+        public void Editar(Categoria categoriaEditada)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var categoriaExistente = contexto.Categorias.Find(categoriaEditada.IdCategoria);
+                if (categoriaExistente != null)
                 {
-                    cmd.Parameters.AddWithValue("@Categoria_pregunta", categoriaModelo.Categoria_pregunta ?? (object)DBNull.Value);
-                    cmd.ExecuteNonQuery();
+                    categoriaExistente.CategoriaPregunta = categoriaEditada.CategoriaPregunta;
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void editar(CategoriaModelo categoriaModelo)
+        public void Eliminar(int id)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"UPDATE Categoria SET Categoria_pregunta = @Categoria_pregunta WHERE id_categoria = @id_categoria;";
-                using (var cmd = new NpgsqlCommand(query, conn))
+                var categoria = contexto.Categorias.Find(id);
+                if (categoria != null)
                 {
-                    cmd.Parameters.AddWithValue("@id_categoria", categoriaModelo.Id_categoria);
-                    cmd.Parameters.AddWithValue("@Categoria_pregunta", categoriaModelo.Categoria_pregunta ?? (object)DBNull.Value);
-                    cmd.ExecuteNonQuery();
+                    contexto.Categorias.Remove(categoria);
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void eliminar(int id)
+        public IEnumerable<CategoriaDTO> ObtenerTodas()
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = "DELETE FROM Categoria WHERE id_categoria = @id;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public IEnumerable<CategoriaModelo> mostrarTodo()
-        {
-            var lista = new List<CategoriaModelo>();
-
-            using (var conn = new ConexionBD().ObtenerConexion())
-            {
-                conn.Open();
-                string query = "SELECT * FROM Categoria;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
+                return contexto.Categorias
+                    .Select(c => new CategoriaDTO
                     {
-                        lista.Add(new CategoriaModelo
-                        {
-                            Categoria_pregunta = reader["Categoria_pregunta"] != DBNull.Value ? reader["Categoria_pregunta"].ToString() : string.Empty
-                        });
-                    }
-                }
+                        IdCategoria = c.IdCategoria,
+                        NombreCategoria = c.CategoriaPregunta
+                    })
+                    .ToList();
             }
-
-            return lista;
         }
     }
 }

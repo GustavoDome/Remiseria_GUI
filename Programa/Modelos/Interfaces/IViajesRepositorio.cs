@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -9,15 +10,12 @@ namespace Programa.Modelos.Interfaces
 {
     public interface IViajesRepositorio
     {
-        void agregar(agregarViajeModelo viajesModelo);
+        void Agregar(AgregarViajeDTO viaje);
+        void Editar(AgregarViajeDTO viaje);
+        void Eliminar(int id);
 
-        void editar(agregarViajeModelo viajesModelo);
-
-        void eliminar(int id);
-
-        IEnumerable<MovilModeloId> seleccionarMovil();
-        DataTable mostrarTodo();
-        IEnumerable<VueltaModelo> mostrarVuelta();
-        IEnumerable<VueltaIdModelo> seleccionarVuelta();
+        IEnumerable<MovilResumenDTO> SeleccionarMovil();
+        DataTable MostrarTodo(DateTime fecha);
+        DataTable MostrarVuelta(DateTime fecha);
     }
 }

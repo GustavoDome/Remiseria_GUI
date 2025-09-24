@@ -1,6 +1,6 @@
 ﻿namespace Programa.Vistas
 {
-    partial class ViajesVista
+    public partial class ViajesVista
     {
         /// <summary>
         /// Required designer variable.

@@ -1,108 +1,73 @@
 ﻿using Npgsql;
 using Programa.Conexion;
+using Programa.DTOs;
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using System;
+using System.Linq;
 using System.Collections.Generic;
+using static Programa.Conexion.RemiseriaDbContext;
 
 namespace Programa.Repositorios
 {
     public class DuenoAutoRepositorio : IDuenoAutoRepositorio
     {
-        private readonly ConexionBD BD = new ConexionBD();
-
-        public void agregar(DuenoAutoModelo duenoAutoModelo)
+        public void Agregar(DuenoAuto nuevoDueno)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"INSERT INTO Dueño_auto(nombre, apellido, direccion, chofer, telefono, activo)
-                                 VALUES (@nombre, @apellido, @direccion, @chofer, @telefono, @activo);";
+                contexto.DuenoAutos.Add(nuevoDueno);
+                contexto.SaveChanges();
+            }
+        }
 
-                using (var cmd = new NpgsqlCommand(query, conn))
+        public void Editar(DuenoAuto duenoEditado)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var duenoExistente = contexto.DuenoAutos.Find(duenoEditado.IdDueno);
+                if (duenoExistente != null)
                 {
-                    cmd.Parameters.AddWithValue("@nombre", duenoAutoModelo.Nombre ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@apellido", duenoAutoModelo.Apellido ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@direccion", duenoAutoModelo.Direccion ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@chofer", duenoAutoModelo.Chofer);
-                    cmd.Parameters.AddWithValue("@telefono", duenoAutoModelo.Telefono ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@activo", duenoAutoModelo.Activo);
+                    duenoExistente.Nombre = duenoEditado.Nombre;
+                    duenoExistente.Apellido = duenoEditado.Apellido;
+                    duenoExistente.Direccion = duenoEditado.Direccion;
+                    duenoExistente.Chofer = duenoEditado.Chofer;
+                    duenoExistente.Telefono = duenoEditado.Telefono;
 
-                    cmd.ExecuteNonQuery();
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void editar(DuenoAutoModelo duenoAutoModelo)
+        public void Eliminar(int id)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"UPDATE Dueño_auto SET 
-                                 nombre = @nombre, 
-                                 apellido = @apellido, 
-                                 direccion = @direccion, 
-                                 chofer = @chofer, 
-                                 telefono = @telefono 
-                                 WHERE id_dueño = @id_dueño;";
-
-                using (var cmd = new NpgsqlCommand(query, conn))
+                var dueno = contexto.DuenoAutos.Find(id);
+                if (dueno != null)
                 {
-                    cmd.Parameters.AddWithValue("@id_dueño", duenoAutoModelo.Id);
-                    cmd.Parameters.AddWithValue("@nombre", duenoAutoModelo.Nombre ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@apellido", duenoAutoModelo.Apellido ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@direccion", duenoAutoModelo.Direccion ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@chofer", duenoAutoModelo.Chofer);
-                    cmd.Parameters.AddWithValue("@telefono", duenoAutoModelo.Telefono ?? (object)DBNull.Value);
-
-                    cmd.ExecuteNonQuery();
+                    dueno.Activo = false;
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void eliminar(int id)
+        public IEnumerable<DuenoAutoDTO> ObtenerTodos()
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"UPDATE Dueño_auto SET activo = FALSE WHERE id_dueño = @id;";
-
-                using (var cmd = new NpgsqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public IEnumerable<DuenoAutoModelo> mostrarTodo()
-        {
-            var lista = new List<DuenoAutoModelo>();
-
-            using (var conn = new ConexionBD().ObtenerConexion())
-            {
-                conn.Open();
-                string query = "SELECT * FROM Dueño_auto WHERE activo = TRUE;";
-
-                using (var cmd = new NpgsqlCommand(query, conn))
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
+                return contexto.DuenoAutos
+                    .Where(d => d.Activo)
+                    .Select(d => new DuenoAutoDTO
                     {
-                        lista.Add(new DuenoAutoModelo
-                        {
-                            Id = reader["id_dueño"] != DBNull.Value ? Convert.ToInt32(reader["id_dueño"]) : 0,
-                            Nombre = reader["nombre"]?.ToString(),
-                            Apellido = reader["apellido"]?.ToString(),
-                            Direccion = reader["direccion"]?.ToString(),
-                            Telefono = reader["telefono"]?.ToString(),
-                            Chofer = reader["chofer"] != DBNull.Value && Convert.ToBoolean(reader["chofer"])
-                        });
-                    }
-                }
+                        IdDueno = d.IdDueno,
+                        Nombre = d.Nombre,
+                        Apellido = d.Apellido,
+                        Telefono = d.Telefono,
+                        Chofer = d.Chofer
+                    })
+                    .ToList();
             }
-
-            return lista;
         }
     }
 }

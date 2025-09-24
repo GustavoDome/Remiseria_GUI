@@ -1,98 +1,71 @@
 ﻿using Npgsql;
 using Programa.Conexion;
+using Programa.DTOs;
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using static Programa.Conexion.RemiseriaDbContext;
 
 namespace Programa.Repositorios
 {
     public class RecordatorioRepositorio : IRecordatorioRepositorio
     {
-        private readonly ConexionBD BD = new ConexionBD();
+        private readonly Conexion.RemiseriaDbContext BD = new Conexion.RemiseriaDbContext();
 
-        public void agregar(RecordatorioModelo recordatorioModelo)
+        public void Agregar(Recordatorio nuevoRecordatorio)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"INSERT INTO Recordatorio (id_viaje, ubicacion, fecha_dia, fecha_hora) 
-                                 VALUES (@id_viaje, @ubicacion, @fecha_dia, @fecha_hora);";
+                contexto.Recordatorios.Add(nuevoRecordatorio);
+                contexto.SaveChanges();
+            }
+        }
 
-                using (var cmd = new NpgsqlCommand(query, conn))
+        public void Editar(Recordatorio recordatorioEditado)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var recordatorioExistente = contexto.Recordatorios.Find(recordatorioEditado.IdRecordatorio);
+                if (recordatorioExistente != null)
                 {
-                    cmd.Parameters.AddWithValue("@ubicacion", recordatorioModelo.Ubicacion ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@fecha_dia", recordatorioModelo.Fecha_dia ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@fecha_hora", recordatorioModelo.Fecha_hora ?? (object)DBNull.Value);
+                    recordatorioExistente.Ubicacion = recordatorioEditado.Ubicacion;
+                    recordatorioExistente.FechaDia = recordatorioEditado.FechaDia;
+                    recordatorioExistente.FechaHora = recordatorioEditado.FechaHora;
 
-                    cmd.ExecuteNonQuery();
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void editar(RecordatorioModelo recordatorioModelo)
+        public void Eliminar(int id)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"UPDATE Recordatorio SET 
-                                 id_viaje = @id_viaje, 
-                                 ubicacion = @ubicacion, 
-                                 fecha_dia = @fecha_dia, 
-                                 fecha_hora = @fecha_hora 
-                                 WHERE id_recordatorio = @id_recordatorio;";
-
-                using (var cmd = new NpgsqlCommand(query, conn))
+                var recordatorio = contexto.Recordatorios.Find(id);
+                if (recordatorio != null)
                 {
-                    cmd.Parameters.AddWithValue("@id_recordatorio", recordatorioModelo.Id_recordatorio);
-                    cmd.Parameters.AddWithValue("@ubicacion", recordatorioModelo.Ubicacion ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@fecha_dia", recordatorioModelo.Fecha_dia ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@fecha_hora", recordatorioModelo.Fecha_hora ?? (object)DBNull.Value);
-
-                    cmd.ExecuteNonQuery();
+                    contexto.Recordatorios.Remove(recordatorio);
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void eliminar(int id)
+        public IEnumerable<RecordatorioDTO> ObtenerTodos()
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = "DELETE FROM Recordatorio WHERE id_recordatorio = @id;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public IEnumerable<RecordatorioModelo> mostrarTodo()
-        {
-            var lista = new List<RecordatorioModelo>();
-
-            using (var conn = new ConexionBD().ObtenerConexion())
-            {
-                conn.Open();
-                string query = "SELECT * FROM Recordatorio;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
+                return contexto.Recordatorios
+                    .Select(r => new RecordatorioDTO
                     {
-                        lista.Add(new RecordatorioModelo
-                        {
-                            Id_recordatorio = reader["id_recordatorio"] != DBNull.Value ? Convert.ToInt32(reader["id_recordatorio"]) : 0,
-                            Ubicacion = reader["ubicacion"]?.ToString(),
-                            Fecha_dia = reader["fecha_dia"]?.ToString(),
-                            Fecha_hora = reader["fecha_hora"]?.ToString()
-                        });
-                    }
-                }
+                        Ubicacion = r.Ubicacion,
+                        FechaDia = r.FechaDia ?? DateTime.MinValue,
+                        FechaHora = r.FechaHora ?? DateTime.MinValue,
+                        NombreOperador = "" // Si querés incluirlo, habría que hacer un join con Operador
+                    })
+                    .ToList();
             }
-
-            return lista;
         }
     }
 }

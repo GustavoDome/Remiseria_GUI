@@ -19,46 +19,6 @@ namespace Programa.Vistas
             asociarPresentador();
         }
 
-        public void asociarPresentador() 
-        {
-            btnPrecioCuadra.Click += delegate 
-            {
-                modificarCuadrasCosto?.Invoke(this, EventArgs.Empty);
-            };
-            btnPrecioCuadraMandado.Click += delegate 
-            {
-                modificarCuadrasCostoMandado?.Invoke(this, EventArgs.Empty);
-            };
-            btnPrecioCuadraEspera.Click += delegate 
-            {
-                modificarCuadrasEspera?.Invoke(this, EventArgs.Empty);
-            };
-            btnPrecioCiudad.Click += delegate 
-            {
-                modificarCiudadCosto?.Invoke(this, EventArgs.Empty); 
-            };
-            btnPrecioCiudadEspera.Click += delegate 
-            {
-                modificarCiudadEspera?.Invoke(this, EventArgs.Empty);
-            };
-            btnAgregarCiudad.Click += delegate 
-            {
-                agregarCiudad?.Invoke(this, EventArgs.Empty);
-            };
-            btnModificarCiudad.Click += delegate
-            {
-                modificarCiudad?.Invoke(this, EventArgs.Empty); 
-            };
-            btnEliminarCiudad.Click += delegate
-            {
-                eliminarCiudad?.Invoke(this, EventArgs.Empty); 
-            };
-            btnVolver.Click += delegate 
-            {
-                volver?.Invoke(this, EventArgs.Empty);
-            };
-        }
-
         public event EventHandler modificarCuadrasCosto;
         public event EventHandler modificarCuadrasCostoMandado;
         public event EventHandler modificarCuadrasEspera;
@@ -68,13 +28,45 @@ namespace Programa.Vistas
         public event EventHandler modificarCiudad;
         public event EventHandler eliminarCiudad;
         public event EventHandler volver;
-        public void SetCuadraBindingSource(BindingSource cuadras) { }
-        public void SetCiudadBindingSource(BindingSource ciudades) { }
 
-        // Variable que llamaran los otros forms para el comportamiento Singleton
+        public void asociarPresentador()
+        {
+            btnPrecioCuadra.Click += (s, e) => modificarCuadrasCosto?.Invoke(this, EventArgs.Empty);
+            btnPrecioCuadraMandado.Click += (s, e) => modificarCuadrasCostoMandado?.Invoke(this, EventArgs.Empty);
+            btnPrecioCuadraEspera.Click += (s, e) => modificarCuadrasEspera?.Invoke(this, EventArgs.Empty);
+            btnPrecioCiudad.Click += (s, e) => modificarCiudadCosto?.Invoke(this, EventArgs.Empty);
+            btnPrecioCiudadEspera.Click += (s, e) => modificarCiudadEspera?.Invoke(this, EventArgs.Empty);
+            btnAgregarCiudad.Click += (s, e) => agregarCiudad?.Invoke(this, EventArgs.Empty);
+            btnModificarCiudad.Click += (s, e) => modificarCiudad?.Invoke(this, EventArgs.Empty);
+            btnEliminarCiudad.Click += (s, e) => eliminarCiudad?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void SetCuadraBindingSource(BindingSource cuadras)
+        {
+            dgvCuadras.DataSource = cuadras;
+        }
+
+        public void SetCiudadBindingSource(BindingSource ciudades)
+        {
+            dgvCiudad.DataSource = ciudades;
+        }
+
+        public void MostrarImportesCuadras(int minimo, int espera, int mandado)
+        {
+            label3.Text = $"Monto de cuadras: {minimo}";
+            label4.Text = $"Espera por 5m: {espera}";
+            label5.Text = $"Monto por Mandado: {mandado}";
+        }
+
+        public void MostrarImportesCiudad(int kilometro, int espera)
+        {
+            label1.Text = $"Costo del KM: {kilometro}";
+            label2.Text = $"Espera fuera de la ciudad: {espera}";
+        }
+
+        // Singleton
         private static PlanillaCostoVista instancia;
-
-        // Metodo para el uso del Singleton
         public static PlanillaCostoVista ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)
@@ -85,9 +77,8 @@ namespace Programa.Vistas
             else
             {
                 if (instancia.WindowState == FormWindowState.Minimized)
-                {
                     instancia.WindowState = FormWindowState.Normal;
-                }
+
                 instancia.BringToFront();
                 instancia.Activate();
             }

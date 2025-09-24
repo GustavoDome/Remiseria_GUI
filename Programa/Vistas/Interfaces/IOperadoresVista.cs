@@ -14,6 +14,7 @@ namespace Programa.Vistas.Interfaces
         event EventHandler eliminarOperador;
         event EventHandler volver;
 
+        int ObtenerIdOperadorSeleccionado();
         void SetOperadoresBindingSource(BindingSource operadores);
     }
 }

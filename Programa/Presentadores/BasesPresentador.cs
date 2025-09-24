@@ -1,4 +1,5 @@
-﻿using Programa.Modelos;
+﻿using Programa.DTOs;
+using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using Programa.Repositorios;
 using Programa.Vistas;
@@ -16,110 +17,106 @@ namespace Programa.Presentadores
 {
     public class BasesPresentador
     {
-        private IBasesRepositorio repositorio;
-        private IBasesVista vista;
-        private IEnumerable<BasesModelo> movilModelos;
-        private BindingSource filtrador;
-        private BindingSource tablaMoviles;
-        private string rol;
-        private int id;
+        private readonly IBasesVista vista;
+        private readonly IBasesRepositorio repositorio;
+        private readonly BindingSource filtrador;
+        private readonly BindingSource tablaBases;
+        private readonly string rol;
+        private readonly int id;
 
         public BasesPresentador(IBasesVista vista, IBasesRepositorio repositorio, string rol, int id)
         {
-            this.filtrador = new BindingSource();
-            this.tablaMoviles = new BindingSource();
             this.vista = vista;
             this.repositorio = repositorio;
             this.rol = rol;
             this.id = id;
+            this.filtrador = new BindingSource();
+            this.tablaBases = new BindingSource();
 
-            this.vista.ocultarBotones(this.rol);
-            this.vista.mostrarMoviles(this.filtrador);
-            mostrarMoviles();
+            vista.ocultarBotones(rol);
+            vista.mostrarMoviles(filtrador);
+            cargarMoviles();
 
-            this.vista.agregarBase += agregar_base;
-            this.vista.modificarBase += modificar_base;
-            this.vista.comentarBase += comentar_base;
-            this.vista.eliminarBase += eliminar_base;
-            this.vista.volver += voler_menu;
-            this.vista.OnMovilSeleccionado += vista_OnMovilSeleccionado;
-            this.id = id;
+            vista.agregarBase += agregar_base;
+            vista.modificarBase += modificar_base;
+            vista.comentarBase += comentar_base;
+            vista.eliminarBase += eliminar_base;
+            vista.volver += volver_menu;
+            vista.OnMovilSeleccionado += vista_OnMovilSeleccionado;
         }
-        public DataTable ConvertListToDataTable(IEnumerable<MovilModeloId> lista)
+
+        private void cargarMoviles()
+        {
+            var listaIds = repositorio.SeleccionarMovil().ToList();
+            var dtOriginal = ConvertListToDataTable(listaIds);
+            var dtTranspuesta = TransponerDataTable(dtOriginal);
+            filtrador.DataSource = dtTranspuesta;
+        }
+
+        private void vista_OnMovilSeleccionado(object sender, EventArgs e)
+        {
+            int idMovil = vista.id_movil;
+            var listaBases = repositorio.MostrarTodo(idMovil).ToList(); // ahora devuelve DTO
+            tablaBases.DataSource = listaBases;
+            vista.mostrarBases(tablaBases, idMovil);
+        }
+
+        private void agregar_base(object sender, EventArgs e)
+        {
+            // futuro: abrir vista de alta
+        }
+
+        private void modificar_base(object sender, EventArgs e)
+        {
+            // futuro: abrir vista de edición
+        }
+
+        private void comentar_base(object sender, EventArgs e)
+        {
+            // futuro: abrir vista de comentarios
+        }
+
+        private void eliminar_base(object sender, EventArgs e)
+        {
+            // futuro: aplicar borrado lógico
+        }
+
+        private void volver_menu(object sender, EventArgs e)
+        {
+            IInicioVista inicio = InicioVista.ObtenerInstancia();
+            ((Form)vista).Close();
+        }
+
+        private DataTable ConvertListToDataTable(IEnumerable<MovilResumenDTO> lista)
         {
             var dt = new DataTable();
             dt.Columns.Add("numero_movil");
-
             foreach (var item in lista)
             {
                 var row = dt.NewRow();
-                row["numero_movil"] = item.Numero_movil;
+                row["numero_movil"] = item.NumeroMovil;
                 dt.Rows.Add(row);
             }
-
             return dt;
         }
 
-        public DataTable TransponerDataTable(DataTable original)
+        private DataTable TransponerDataTable(DataTable original)
         {
             DataTable transpuesta = new DataTable();
-
-            // La primera columna es el nombre de la propiedad
             transpuesta.Columns.Add("Propiedad");
-
-            // Cada fila del DataTable original será una columna en el nuevo DataTable
             for (int i = 0; i < original.Rows.Count; i++)
-            {
                 transpuesta.Columns.Add($"Valor {i + 1}");
-            }
 
-            // Por cada columna en original (solo 1 en este caso: "Id_movil")
             foreach (DataColumn col in original.Columns)
             {
                 DataRow newRow = transpuesta.NewRow();
                 newRow[0] = col.ColumnName;
-
-                // Agregar el valor de cada fila original como columna en la fila transpuesta
                 for (int i = 0; i < original.Rows.Count; i++)
-                {
                     newRow[i + 1] = original.Rows[i][col];
-                }
 
                 transpuesta.Rows.Add(newRow);
             }
-
             return transpuesta;
-        }
-
-        private void mostrarMoviles()
-        {
-            var listaIds = this.repositorio.seleccionarMovil().ToList();
-            DataTable dtOriginal = ConvertListToDataTable(listaIds);
-            DataTable dtTranspuesta = TransponerDataTable(dtOriginal);
-            this.filtrador.DataSource = dtTranspuesta;
-        }
-        private void vista_OnMovilSeleccionado(object sender, EventArgs e)
-        {
-            int id = vista.id_movil;
-            var listaBases = this.repositorio.mostrarTodo(id).ToList();
-
-            this.tablaMoviles.DataSource = null; // 🔑 Limpio primero
-            this.tablaMoviles.DataSource = listaBases;
-            this.vista.mostrarBases(this.tablaMoviles, id);
-        }
-
-
-
-        private void agregar_base(object sender, EventArgs e) { }
-        private void modificar_base(object sender, EventArgs e) { }
-        private void comentar_base(object sender, EventArgs e) { }
-        private void eliminar_base(object sender, EventArgs e) { }
-        private void voler_menu(object sender, EventArgs e) 
-        {
-            IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
-            IInicioVista inicio = InicioVista.ObtenerInstancia();
-            new InicioPresentador(inicio, recordatorio, this.rol, this.id);
-            ((Form)vista).Close();
         }
     }
 }

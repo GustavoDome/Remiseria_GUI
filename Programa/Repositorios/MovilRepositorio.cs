@@ -1,133 +1,105 @@
 ﻿using Npgsql;
 using Programa.Conexion;
+using Programa.DTOs;
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using System;
+using System.Data.Entity;
 using System.Collections.Generic;
+using System.Linq;
+using static Programa.Conexion.RemiseriaDbContext;
 
 namespace Programa.Repositorios
 {
     public class MovilRepositorio : IMovilRepositorio
     {
-        private readonly ConexionBD BD = new ConexionBD();
+        private readonly Conexion.RemiseriaDbContext BD = new Conexion.RemiseriaDbContext();
 
-        public void agregar(MovilModelo movilmodelo)
+        public void Agregar(Movil nuevoMovil)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"INSERT INTO Movil(numero_movil, marca_auto, modelo_auto, año_auto, color_auto, id_dueño, activo)
-                                 VALUES (@numero_movil, @marca_auto, @modelo_auto, @año_auto, @color_auto, @id_dueño, @activo);";
+                nuevoMovil.Activo = true; // Aseguramos que se registre como activo
+                contexto.Moviles.Add(nuevoMovil);
+                contexto.SaveChanges();
+            }
+        }
 
-                using (var cmd = new NpgsqlCommand(query, conn))
+        public void Editar(Movil movilEditado)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var movilExistente = contexto.Moviles.Find(movilEditado.IdMovil);
+                if (movilExistente != null)
                 {
-                    cmd.Parameters.AddWithValue("@numero_movil", movilmodelo.Numero_movil);
-                    cmd.Parameters.AddWithValue("@marca_auto", movilmodelo.Marca_auto ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@modelo_auto", movilmodelo.Modelo_auto ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@año_auto", movilmodelo.Ano_auto ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@color_auto", movilmodelo.Color_auto ?? (object)DBNull.Value);
+                    movilExistente.NumeroMovil = movilEditado.NumeroMovil;
+                    movilExistente.MarcaAuto = movilEditado.MarcaAuto;
+                    movilExistente.ModeloAuto = movilEditado.ModeloAuto;
+                    movilExistente.AnoAuto = movilEditado.AnoAuto;
+                    movilExistente.ColorAuto = movilEditado.ColorAuto;
+                    movilExistente.IdDueno = movilEditado.IdDueno;
+                    movilExistente.Activo = movilEditado.Activo;
 
-                    cmd.ExecuteNonQuery();
+                    contexto.SaveChanges();
                 }
             }
         }
 
-        public void editar(MovilModelo movilmodelo)
+        public void Eliminar(int id)
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"UPDATE Movil SET 
-                                 numero_movil = @numero_movil, 
-                                 marca_auto = @marca_auto, 
-                                 modelo_auto = @modelo_auto, 
-                                 año_auto = @año_auto, 
-                                 color_auto = @color_auto, 
-                                 id_dueño = @id_dueño, 
-                                 activo = @activo 
-                                 WHERE id_movil = @id;";
-
-                using (var cmd = new NpgsqlCommand(query, conn))
+                var movil = contexto.Moviles.Find(id);
+                if (movil != null)
                 {
-                    cmd.Parameters.AddWithValue("@numero_movil", movilmodelo.Numero_movil);
-                    cmd.Parameters.AddWithValue("@marca_auto", movilmodelo.Marca_auto ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@modelo_auto", movilmodelo.Modelo_auto ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@año_auto", movilmodelo.Ano_auto ?? (object)DBNull.Value);
-                    cmd.Parameters.AddWithValue("@color_auto", movilmodelo.Color_auto ?? (object)DBNull.Value);
-
-                    cmd.ExecuteNonQuery();
+                    movil.Activo = false;
+                    contexto.SaveChanges();
+                } 
+                else if (movil == null) 
+                {
+                    return;
                 }
             }
         }
 
-        public void eliminar(int id)
+        public IEnumerable<MovilResumenDTO> ObtenerMovilesReducidos()
         {
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = @"UPDATE Movil SET activo = FALSE WHERE id_movil = @id;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                {
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        public IEnumerable<MovilModeloId> seleccionarMovil()
-        {
-            var lista = new List<MovilModeloId>();
-            using (var conn = new ConexionBD().ObtenerConexion())
-            {
-                conn.Open();
-                string query = "SELECT id_movil, numero_movil FROM Movil where activo = TRUE;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
+                return contexto.Moviles
+                    .Where(m => m.Activo)
+                    .Select(m => new MovilResumenDTO
                     {
-                        lista.Add(new MovilModeloId
-                        {
-                            Id = Convert.ToInt32(reader["id_movil"]),
-                            Numero_movil = reader["numero_movil"] != DBNull.Value ? Convert.ToInt32(reader["numero_movil"]) : 0,
-                        });
-                    }
-                }
+                        IdMovil = m.IdMovil,
+                        NumeroMovil = m.NumeroMovil
+                    })
+                    .ToList();
             }
-
-            return lista;
         }
 
-        public IEnumerable<MovilModelo> mostrarTodo()
+        public IEnumerable<MovilDetalleDTO> ObtenerTodos()
         {
-            var lista = new List<MovilModelo>();
-
-            using (var conn = new ConexionBD().ObtenerConexion())
+            using (var contexto = new RemiseriaDbContext())
             {
-                conn.Open();
-                string query = "SELECT numero_movil,marca_auto,modelo_auto,ano_auto,color_auto,nombre,apellido, chofer, telefono  FROM Movil join dueno_auto on Movil.id_dueno = dueno_auto.id_dueno WHERE Movil.Activo = TRUE;";
-                using (var cmd = new NpgsqlCommand(query, conn))
-                using (var reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
+                return contexto.Moviles
+                    .Include(m => m.Dueno) // Asegura que se cargue la relación
+                    .Where(m => m.Activo)
+                    .Select(m => new MovilDetalleDTO
                     {
-                        lista.Add(new MovilModelo
-                        {
-                            Numero_movil = Convert.ToInt32(reader["numero_movil"]),
-                            Marca_auto = reader["marca_auto"]?.ToString(),
-                            Modelo_auto = reader["modelo_auto"]?.ToString(),
-                            Ano_auto = reader["ano_auto"]?.ToString(),
-                            Color_auto = reader["color_auto"]?.ToString(),
-                            Nombre = reader["nombre"]?.ToString(),
-                            Apellido = reader["apellido"]?.ToString(),
-                            Chofer = Convert.ToBoolean(reader["chofer"]),
-                            Telefono = reader["telefono"]?.ToString(),
-                        });
-                    }
-                }
+                        IdMovil = m.IdMovil,
+                        NumeroMovil = m.NumeroMovil,
+                        Marca = m.MarcaAuto,
+                        Modelo = m.ModeloAuto,
+                        Ano = m.AnoAuto,
+                        Color = m.ColorAuto,
+                        IdDueno = m.Dueno.IdDueno,
+                        NombreDueno = m.Dueno.Nombre,
+                        ApellidoDueno = m.Dueno.Apellido,
+                        TelefonoDueno = m.Dueno.Telefono,
+                        EsChofer = m.Dueno.Chofer
+                    })
+                    .ToList();
             }
-
-            return lista;
         }
     }
 }
