@@ -1,4 +1,5 @@
 ﻿using Programa.DTOs;
+using Programa.Estilos;
 using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,14 @@ namespace Programa.Vistas
         public AyudaVista()
         {
             InitializeComponent();
+            this.Load += new System.EventHandler(this.AyudaVista_Load);
             asociarPresentador();
+        }
+
+        private void AyudaVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
 
         public void asociarPresentador()
@@ -59,13 +67,13 @@ namespace Programa.Vistas
             var lista = categorias.DataSource as IEnumerable<CategoriaDTO>;
             if (lista != null)
             {
-                int y = 10;
+                int y = 20;
                 foreach (var dto in lista)
                 {
                     var boton = new Button
                     {
                         Text = dto.NombreCategoria,
-                        Width = 160,
+                        Width = 230,
                         Height = 40,
                         Location = new Point(10, y),
                         Tag = dto.IdCategoria
@@ -83,7 +91,7 @@ namespace Programa.Vistas
             var lista = preguntas.DataSource as IEnumerable<PreguntaDTO>;
             if (lista != null)
             {
-                int y = 10;
+                int y = 20;
                 foreach (var dto in lista)
                 {
                     var boton = new Button
@@ -123,13 +131,13 @@ namespace Programa.Vistas
             var lista = respuestas.DataSource as IEnumerable<RespuestaDTO>;
             if (lista != null)
             {
-                int y = 10;
+                int y = 20;
                 foreach (var dto in lista)
                 {
                     var label = new Label
                     {
                         Text = dto.TextoRespuesta,
-                        Width = 300,
+                        Width = 350,
                         Height = 30,
                         Location = new Point(10, y)
                     };

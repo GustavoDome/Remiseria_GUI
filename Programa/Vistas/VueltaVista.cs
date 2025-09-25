@@ -1,5 +1,6 @@
 ﻿using Programa.Vistas.Interfaces;
 using System;
+using Programa.Commons;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Programa.Estilos;
 
 namespace Programa.Vistas
 {
@@ -16,6 +18,7 @@ namespace Programa.Vistas
         public VueltaVista()
         {
             InitializeComponent();
+            this.Load += new System.EventHandler(this.VueltaVista_Load);
             asociarPresentador();
         }
 
@@ -28,6 +31,11 @@ namespace Programa.Vistas
                 btnAnterior.Hide();
                 btnSiguiente.Hide();
             }
+        }
+        private void VueltaVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
         public void asociarPresentador() 
         {

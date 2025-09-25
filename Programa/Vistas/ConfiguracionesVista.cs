@@ -1,4 +1,5 @@
-﻿using Programa.Vistas.Interfaces;
+﻿using Programa.Estilos;
+using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,9 +17,33 @@ namespace Programa.Vistas
         public ConfiguracionesVista()
         {
             InitializeComponent();
+            this.Load += new System.EventHandler(this.ConfiguracionVista_Load);
+            tbTamanoFuente.TextChanged += tbTamanoFuente_TextChanged;
             asociacionPresentador();
         }
+        private void tbTamanoFuente_TextChanged(object sender, EventArgs e)
+        {
+            if (!int.TryParse(tbTamanoFuente.Text, out int valor) || valor < 7 || valor > 18)
+            {
+                tbTamanoFuente.BackColor = Color.LightCoral;
+            }
+            else
+            {
+                var tema = GestorEstilosGlobal.Instance.ObtenerTemaActual();
+                tbTamanoFuente.BackColor = tema == "oscuro" ? Color.DimGray : Color.White;
+                tbTamanoFuente.ForeColor = tema == "oscuro" ? Color.White : Color.Black;
+            }
+        }
 
+        private void ConfiguracionVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this); // ← esto ya invoca el método recursivo
+        }
+        public void RefrescarEstilos()
+        {
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+        }
         public void asociacionPresentador() 
         {
             btnGuardar.Click += delegate 
@@ -55,10 +80,26 @@ namespace Programa.Vistas
         public event EventHandler volver;
         public event EventHandler guardar;
 
-        public void SetTipoFuenteBindingSource(BindingSource tipoFuentes) { }
-        public void SetTamanoFuenteBindingSource(BindingSource tamanoFuentes) { }
-        public void SetTemaSistemaBindingSource(BindingSource temaSistemas) { }
-        public void SetTipoAlarmaBindingSource(BindingSource tipoAlarmas) { }
+        public void SetTipoFuenteBindingSource(BindingSource tipoFuentes)
+        {
+            cbTipoFuente.DataSource = tipoFuentes;
+        }
+
+        public void SetTamanoFuenteBindingSource(BindingSource tamanoFuentes)
+        {
+            tbTamanoFuente.DataBindings.Clear();
+            tbTamanoFuente.DataBindings.Add("Text", tamanoFuentes, "TamanoFuente");
+        }
+
+        public void SetTemaSistemaBindingSource(BindingSource temaSistemas)
+        {
+            cbTema.DataSource = temaSistemas;
+        }
+
+        public void SetTipoAlarmaBindingSource(BindingSource tipoAlarmas)
+        {
+            cbAlarma.DataSource = tipoAlarmas;
+        }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static ConfiguracionesVista instancia;

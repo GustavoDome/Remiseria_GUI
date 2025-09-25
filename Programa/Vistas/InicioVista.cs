@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Programa.Estilos;
+using Programa.Vistas.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +9,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Programa.Vistas.Interfaces;
 
 namespace Programa.Vistas
 {
@@ -15,6 +16,7 @@ namespace Programa.Vistas
     {
         public InicioVista()
         {
+            this.Load += new System.EventHandler(this.InicioVista_Load);
             InitializeComponent();
             asociacionPresentador();
             this.FormClosed += (s, e) => Application.Exit();
@@ -28,6 +30,16 @@ namespace Programa.Vistas
                 btnOperadores.Hide();
                 btnRecEliminar.Hide();
             }
+        }
+        private void InicioVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+        }
+        public void RefrescarEstilos()
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
         public void asociacionPresentador()
         {
@@ -99,10 +111,12 @@ namespace Programa.Vistas
             if (instancia == null || instancia.IsDisposed)
             {
                 instancia = new InicioVista();
+                instancia.RefrescarEstilos();
                 instancia.Show();
             }
             else
             {
+                instancia.RefrescarEstilos();
                 if (instancia.WindowState == FormWindowState.Minimized)
                 {
                     instancia.WindowState = FormWindowState.Normal;

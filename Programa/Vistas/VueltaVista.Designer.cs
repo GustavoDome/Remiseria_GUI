@@ -45,41 +45,41 @@
             this.dgvVuelta.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVuelta.Location = new System.Drawing.Point(12, 36);
             this.dgvVuelta.Name = "dgvVuelta";
-            this.dgvVuelta.Size = new System.Drawing.Size(906, 449);
+            this.dgvVuelta.Size = new System.Drawing.Size(1138, 449);
             this.dgvVuelta.TabIndex = 0;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(12, 491);
+            this.btnAgregar.Location = new System.Drawing.Point(12, 512);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(80, 40);
+            this.btnAgregar.Size = new System.Drawing.Size(130, 40);
             this.btnAgregar.TabIndex = 1;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(838, 491);
+            this.btnVolver.Location = new System.Drawing.Point(1020, 512);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(80, 40);
+            this.btnVolver.Size = new System.Drawing.Size(130, 40);
             this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnViajes
             // 
-            this.btnViajes.Location = new System.Drawing.Point(752, 491);
+            this.btnViajes.Location = new System.Drawing.Point(884, 512);
             this.btnViajes.Name = "btnViajes";
-            this.btnViajes.Size = new System.Drawing.Size(80, 40);
+            this.btnViajes.Size = new System.Drawing.Size(130, 40);
             this.btnViajes.TabIndex = 3;
             this.btnViajes.Text = "Viajes";
             this.btnViajes.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(98, 491);
+            this.btnModificar.Location = new System.Drawing.Point(148, 512);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(80, 40);
+            this.btnModificar.Size = new System.Drawing.Size(130, 40);
             this.btnModificar.TabIndex = 4;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -87,27 +87,27 @@
             // btnEliminar
             // 
             this.btnEliminar.Enabled = false;
-            this.btnEliminar.Location = new System.Drawing.Point(184, 491);
+            this.btnEliminar.Location = new System.Drawing.Point(284, 512);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(80, 40);
+            this.btnEliminar.Size = new System.Drawing.Size(130, 40);
             this.btnEliminar.TabIndex = 5;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             // 
             // btnAnterior
             // 
-            this.btnAnterior.Location = new System.Drawing.Point(378, 491);
+            this.btnAnterior.Location = new System.Drawing.Point(515, 512);
             this.btnAnterior.Name = "btnAnterior";
-            this.btnAnterior.Size = new System.Drawing.Size(80, 40);
+            this.btnAnterior.Size = new System.Drawing.Size(130, 40);
             this.btnAnterior.TabIndex = 6;
             this.btnAnterior.Text = "Anterior";
             this.btnAnterior.UseVisualStyleBackColor = true;
             // 
             // btnSiguiente
             // 
-            this.btnSiguiente.Location = new System.Drawing.Point(464, 491);
+            this.btnSiguiente.Location = new System.Drawing.Point(651, 512);
             this.btnSiguiente.Name = "btnSiguiente";
-            this.btnSiguiente.Size = new System.Drawing.Size(80, 40);
+            this.btnSiguiente.Size = new System.Drawing.Size(130, 40);
             this.btnSiguiente.TabIndex = 7;
             this.btnSiguiente.Text = "Siguiente";
             this.btnSiguiente.UseVisualStyleBackColor = true;
@@ -117,14 +117,13 @@
             this.dateTimePicker1.Enabled = false;
             this.dateTimePicker1.Location = new System.Drawing.Point(12, 13);
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(906, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(1138, 20);
             this.dateTimePicker1.TabIndex = 8;
             // 
             // VueltaVista
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(930, 543);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(1162, 564);
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.btnSiguiente);
             this.Controls.Add(this.btnAnterior);

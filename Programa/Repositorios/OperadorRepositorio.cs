@@ -70,6 +70,44 @@ namespace Programa.Repositorios
         {
             return ObtenerTodos(); // reutiliza el método existente
         }
+        public ConfiguracionDTO ObtenerConfiguracion(int id)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var operador = contexto.Operadores
+                    .FirstOrDefault(ID => ID.IdOperador == id && ID.Activo);
+
+                if (operador != null)
+                {
+                    return new ConfiguracionDTO
+                    {
+                        Fuente = operador.Fuente,
+                        TamanoFuente = operador.TamanoFuente,
+                        TemaColor = operador.TemaSistema,
+                        TipoAlarma = operador.TipoAlarma
+                    };
+                }
+
+                return null;
+            }
+        }
+        public void EditarConfiguracion(int id, ConfiguracionDTO config)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var operador = contexto.Operadores.FirstOrDefault(o => o.IdOperador == id && o.Activo);
+
+                if (operador != null)
+                {
+                    operador.Fuente = config.Fuente;
+                    operador.TamanoFuente = config.TamanoFuente;
+                    operador.TemaSistema = config.TemaColor;
+                    operador.TipoAlarma = config.TipoAlarma;
+
+                    contexto.SaveChanges();
+                }
+            }
+        }
         public OperadorLoginDTO Autenticar(string nombre, string contrasena)
         {
             using (var contexto = new RemiseriaDbContext())

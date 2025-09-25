@@ -67,10 +67,12 @@
             this.tcInternet.Controls.Add(this.WebWhatsapp);
             this.tcInternet.Controls.Add(this.WebGoogleMaps);
             this.tcInternet.Controls.Add(this.WebInternet);
+            this.tcInternet.ItemSize = new System.Drawing.Size(150, 18);
             this.tcInternet.Location = new System.Drawing.Point(12, 12);
             this.tcInternet.Name = "tcInternet";
             this.tcInternet.SelectedIndex = 0;
-            this.tcInternet.Size = new System.Drawing.Size(429, 486);
+            this.tcInternet.Size = new System.Drawing.Size(518, 497);
+            this.tcInternet.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
             this.tcInternet.TabIndex = 0;
             // 
             // WebWhatsapp
@@ -79,7 +81,7 @@
             this.WebWhatsapp.Location = new System.Drawing.Point(4, 22);
             this.WebWhatsapp.Name = "WebWhatsapp";
             this.WebWhatsapp.Padding = new System.Windows.Forms.Padding(3);
-            this.WebWhatsapp.Size = new System.Drawing.Size(421, 460);
+            this.WebWhatsapp.Size = new System.Drawing.Size(510, 471);
             this.WebWhatsapp.TabIndex = 0;
             this.WebWhatsapp.Text = "Whatsapp";
             this.WebWhatsapp.UseVisualStyleBackColor = true;
@@ -94,7 +96,7 @@
             this.wbWhatsapp.DefaultBackgroundColor = System.Drawing.Color.White;
             this.wbWhatsapp.Location = new System.Drawing.Point(0, 0);
             this.wbWhatsapp.Name = "wbWhatsapp";
-            this.wbWhatsapp.Size = new System.Drawing.Size(421, 464);
+            this.wbWhatsapp.Size = new System.Drawing.Size(510, 471);
             this.wbWhatsapp.Source = new System.Uri("https://web.whatsapp.com/", System.UriKind.Absolute);
             this.wbWhatsapp.TabIndex = 0;
             this.wbWhatsapp.ZoomFactor = 0.8D;
@@ -105,7 +107,7 @@
             this.WebGoogleMaps.Location = new System.Drawing.Point(4, 22);
             this.WebGoogleMaps.Name = "WebGoogleMaps";
             this.WebGoogleMaps.Padding = new System.Windows.Forms.Padding(3);
-            this.WebGoogleMaps.Size = new System.Drawing.Size(421, 460);
+            this.WebGoogleMaps.Size = new System.Drawing.Size(510, 471);
             this.WebGoogleMaps.TabIndex = 1;
             this.WebGoogleMaps.Text = "Google Maps";
             this.WebGoogleMaps.UseVisualStyleBackColor = true;
@@ -120,7 +122,7 @@
             this.wbGoogleMaps.DefaultBackgroundColor = System.Drawing.Color.White;
             this.wbGoogleMaps.Location = new System.Drawing.Point(0, 0);
             this.wbGoogleMaps.Name = "wbGoogleMaps";
-            this.wbGoogleMaps.Size = new System.Drawing.Size(421, 460);
+            this.wbGoogleMaps.Size = new System.Drawing.Size(510, 460);
             this.wbGoogleMaps.Source = new System.Uri("https://www.google.com/maps", System.UriKind.Absolute);
             this.wbGoogleMaps.TabIndex = 0;
             this.wbGoogleMaps.ZoomFactor = 1D;
@@ -130,7 +132,7 @@
             this.WebInternet.Controls.Add(this.wbGoogle);
             this.WebInternet.Location = new System.Drawing.Point(4, 22);
             this.WebInternet.Name = "WebInternet";
-            this.WebInternet.Size = new System.Drawing.Size(421, 460);
+            this.WebInternet.Size = new System.Drawing.Size(510, 471);
             this.WebInternet.TabIndex = 2;
             this.WebInternet.Text = "Internet";
             this.WebInternet.UseVisualStyleBackColor = true;
@@ -145,7 +147,7 @@
             this.wbGoogle.DefaultBackgroundColor = System.Drawing.Color.White;
             this.wbGoogle.Location = new System.Drawing.Point(0, 0);
             this.wbGoogle.Name = "wbGoogle";
-            this.wbGoogle.Size = new System.Drawing.Size(421, 460);
+            this.wbGoogle.Size = new System.Drawing.Size(510, 475);
             this.wbGoogle.Source = new System.Uri("https://www.google.com/?hl=es", System.UriKind.Absolute);
             this.wbGoogle.TabIndex = 0;
             this.wbGoogle.ZoomFactor = 1D;
@@ -153,9 +155,9 @@
             // btnViajes
             // 
             this.btnViajes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnViajes.Location = new System.Drawing.Point(443, 12);
+            this.btnViajes.Location = new System.Drawing.Point(540, 12);
             this.btnViajes.Name = "btnViajes";
-            this.btnViajes.Size = new System.Drawing.Size(96, 57);
+            this.btnViajes.Size = new System.Drawing.Size(119, 57);
             this.btnViajes.TabIndex = 1;
             this.btnViajes.Text = "Viajes";
             this.btnViajes.UseVisualStyleBackColor = true;
@@ -163,9 +165,9 @@
             // btnVuelta
             // 
             this.btnVuelta.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnVuelta.Location = new System.Drawing.Point(565, 12);
+            this.btnVuelta.Location = new System.Drawing.Point(667, 12);
             this.btnVuelta.Name = "btnVuelta";
-            this.btnVuelta.Size = new System.Drawing.Size(96, 57);
+            this.btnVuelta.Size = new System.Drawing.Size(119, 57);
             this.btnVuelta.TabIndex = 2;
             this.btnVuelta.Text = "Vuelta";
             this.btnVuelta.UseVisualStyleBackColor = true;
@@ -173,9 +175,9 @@
             // btnOperadores
             // 
             this.btnOperadores.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOperadores.Location = new System.Drawing.Point(443, 85);
+            this.btnOperadores.Location = new System.Drawing.Point(540, 86);
             this.btnOperadores.Name = "btnOperadores";
-            this.btnOperadores.Size = new System.Drawing.Size(96, 57);
+            this.btnOperadores.Size = new System.Drawing.Size(151, 57);
             this.btnOperadores.TabIndex = 3;
             this.btnOperadores.Text = "Operadores";
             this.btnOperadores.UseVisualStyleBackColor = true;
@@ -183,9 +185,9 @@
             // btnMoviles
             // 
             this.btnMoviles.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnMoviles.Location = new System.Drawing.Point(565, 85);
+            this.btnMoviles.Location = new System.Drawing.Point(697, 86);
             this.btnMoviles.Name = "btnMoviles";
-            this.btnMoviles.Size = new System.Drawing.Size(96, 57);
+            this.btnMoviles.Size = new System.Drawing.Size(119, 57);
             this.btnMoviles.TabIndex = 4;
             this.btnMoviles.Text = "Moviles";
             this.btnMoviles.UseVisualStyleBackColor = true;
@@ -193,9 +195,9 @@
             // btnBases
             // 
             this.btnBases.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnBases.Location = new System.Drawing.Point(696, 12);
+            this.btnBases.Location = new System.Drawing.Point(799, 12);
             this.btnBases.Name = "btnBases";
-            this.btnBases.Size = new System.Drawing.Size(96, 57);
+            this.btnBases.Size = new System.Drawing.Size(119, 57);
             this.btnBases.TabIndex = 5;
             this.btnBases.Text = "Bases";
             this.btnBases.UseVisualStyleBackColor = true;
@@ -203,18 +205,18 @@
             // btnAyuda
             // 
             this.btnAyuda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAyuda.Location = new System.Drawing.Point(839, 352);
+            this.btnAyuda.Location = new System.Drawing.Point(536, 230);
             this.btnAyuda.Name = "btnAyuda";
-            this.btnAyuda.Size = new System.Drawing.Size(82, 62);
+            this.btnAyuda.Size = new System.Drawing.Size(509, 76);
             this.btnAyuda.TabIndex = 6;
             this.btnAyuda.TabStop = false;
             // 
             // btnRecAgregar
             // 
             this.btnRecAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRecAgregar.Location = new System.Drawing.Point(585, 365);
+            this.btnRecAgregar.Location = new System.Drawing.Point(540, 352);
             this.btnRecAgregar.Name = "btnRecAgregar";
-            this.btnRecAgregar.Size = new System.Drawing.Size(76, 24);
+            this.btnRecAgregar.Size = new System.Drawing.Size(120, 37);
             this.btnRecAgregar.TabIndex = 8;
             this.btnRecAgregar.Text = "Agregar";
             this.btnRecAgregar.UseVisualStyleBackColor = true;
@@ -222,9 +224,9 @@
             // btnRecModificar
             // 
             this.btnRecModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRecModificar.Location = new System.Drawing.Point(667, 365);
+            this.btnRecModificar.Location = new System.Drawing.Point(723, 352);
             this.btnRecModificar.Name = "btnRecModificar";
-            this.btnRecModificar.Size = new System.Drawing.Size(76, 24);
+            this.btnRecModificar.Size = new System.Drawing.Size(138, 37);
             this.btnRecModificar.TabIndex = 9;
             this.btnRecModificar.Text = "Modificar";
             this.btnRecModificar.UseVisualStyleBackColor = true;
@@ -232,9 +234,9 @@
             // btnRecEliminar
             // 
             this.btnRecEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRecEliminar.Location = new System.Drawing.Point(749, 365);
+            this.btnRecEliminar.Location = new System.Drawing.Point(926, 352);
             this.btnRecEliminar.Name = "btnRecEliminar";
-            this.btnRecEliminar.Size = new System.Drawing.Size(76, 24);
+            this.btnRecEliminar.Size = new System.Drawing.Size(119, 37);
             this.btnRecEliminar.TabIndex = 10;
             this.btnRecEliminar.Text = "Eliminar";
             this.btnRecEliminar.UseVisualStyleBackColor = true;
@@ -242,9 +244,9 @@
             // btnConfiguracion
             // 
             this.btnConfiguracion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnConfiguracion.Location = new System.Drawing.Point(839, 442);
+            this.btnConfiguracion.Location = new System.Drawing.Point(540, 149);
             this.btnConfiguracion.Name = "btnConfiguracion";
-            this.btnConfiguracion.Size = new System.Drawing.Size(82, 49);
+            this.btnConfiguracion.Size = new System.Drawing.Size(505, 62);
             this.btnConfiguracion.TabIndex = 11;
             this.btnConfiguracion.Text = "Configuracion";
             this.btnConfiguracion.UseVisualStyleBackColor = true;
@@ -254,7 +256,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label1.Location = new System.Drawing.Point(447, 366);
+            this.label1.Location = new System.Drawing.Point(730, 320);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 20);
             this.label1.TabIndex = 12;
@@ -263,9 +265,9 @@
             // btnVolver
             // 
             this.btnVolver.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnVolver.Location = new System.Drawing.Point(816, 12);
+            this.btnVolver.Location = new System.Drawing.Point(926, 12);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(96, 57);
+            this.btnVolver.Size = new System.Drawing.Size(119, 57);
             this.btnVolver.TabIndex = 13;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -274,17 +276,15 @@
             // 
             this.dgvRecordatorio.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvRecordatorio.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvRecordatorio.Location = new System.Drawing.Point(443, 389);
+            this.dgvRecordatorio.Location = new System.Drawing.Point(536, 395);
             this.dgvRecordatorio.Name = "dgvRecordatorio";
-            this.dgvRecordatorio.Size = new System.Drawing.Size(382, 109);
+            this.dgvRecordatorio.Size = new System.Drawing.Size(509, 110);
             this.dgvRecordatorio.TabIndex = 14;
             // 
             // InicioVista
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(941, 510);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(1057, 510);
             this.Controls.Add(this.dgvRecordatorio);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.label1);

@@ -37,7 +37,7 @@ namespace Programa.Modelos
         public string TemaSistema { get; set; }
 
         [Column("tamanofuente")]
-        public string TamanoFuente { get; set; }
+        public int TamanoFuente { get; set; }
 
         [Column("tipoalarma")]
         public string TipoAlarma { get; set; }

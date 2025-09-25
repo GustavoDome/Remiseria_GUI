@@ -58,10 +58,11 @@
             // 
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
+            this.tabControl1.ItemSize = new System.Drawing.Size(200, 30);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(842, 465);
+            this.tabControl1.Size = new System.Drawing.Size(992, 484);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -73,10 +74,10 @@
             this.tabPage1.Controls.Add(this.btnPrecioCuadraEspera);
             this.tabPage1.Controls.Add(this.btnPrecioCuadra);
             this.tabPage1.Controls.Add(this.dgvCuadras);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
+            this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(834, 439);
+            this.tabPage1.Size = new System.Drawing.Size(984, 446);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dentro de la ciudad";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -85,7 +86,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label5.Location = new System.Drawing.Point(351, 365);
+            this.label5.Location = new System.Drawing.Point(426, 355);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(147, 18);
             this.label5.TabIndex = 7;
@@ -93,18 +94,19 @@
             // 
             // btnPrecioCuadraMandado
             // 
-            this.btnPrecioCuadraMandado.Location = new System.Drawing.Point(354, 403);
+            this.btnPrecioCuadraMandado.Location = new System.Drawing.Point(391, 386);
             this.btnPrecioCuadraMandado.Name = "btnPrecioCuadraMandado";
-            this.btnPrecioCuadraMandado.Size = new System.Drawing.Size(144, 30);
+            this.btnPrecioCuadraMandado.Size = new System.Drawing.Size(215, 54);
             this.btnPrecioCuadraMandado.TabIndex = 6;
             this.btnPrecioCuadraMandado.Text = "Modificar Precio Mandado";
+            this.btnPrecioCuadraMandado.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrecioCuadraMandado.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(689, 365);
+            this.label4.Location = new System.Drawing.Point(796, 355);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(110, 18);
             this.label4.TabIndex = 5;
@@ -114,7 +116,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label3.Location = new System.Drawing.Point(6, 365);
+            this.label3.Location = new System.Drawing.Point(38, 355);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(132, 18);
             this.label3.TabIndex = 4;
@@ -122,20 +124,22 @@
             // 
             // btnPrecioCuadraEspera
             // 
-            this.btnPrecioCuadraEspera.Location = new System.Drawing.Point(692, 403);
+            this.btnPrecioCuadraEspera.Location = new System.Drawing.Point(763, 386);
             this.btnPrecioCuadraEspera.Name = "btnPrecioCuadraEspera";
-            this.btnPrecioCuadraEspera.Size = new System.Drawing.Size(126, 30);
+            this.btnPrecioCuadraEspera.Size = new System.Drawing.Size(215, 54);
             this.btnPrecioCuadraEspera.TabIndex = 3;
             this.btnPrecioCuadraEspera.Text = "Modificar Espera";
+            this.btnPrecioCuadraEspera.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrecioCuadraEspera.UseVisualStyleBackColor = true;
             // 
             // btnPrecioCuadra
             // 
-            this.btnPrecioCuadra.Location = new System.Drawing.Point(6, 403);
+            this.btnPrecioCuadra.Location = new System.Drawing.Point(6, 386);
             this.btnPrecioCuadra.Name = "btnPrecioCuadra";
-            this.btnPrecioCuadra.Size = new System.Drawing.Size(140, 30);
+            this.btnPrecioCuadra.Size = new System.Drawing.Size(218, 54);
             this.btnPrecioCuadra.TabIndex = 2;
             this.btnPrecioCuadra.Text = "Modificar Precio Cuadras";
+            this.btnPrecioCuadra.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrecioCuadra.UseVisualStyleBackColor = true;
             // 
             // dgvCuadras
@@ -143,7 +147,7 @@
             this.dgvCuadras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCuadras.Location = new System.Drawing.Point(6, 6);
             this.dgvCuadras.Name = "dgvCuadras";
-            this.dgvCuadras.Size = new System.Drawing.Size(822, 334);
+            this.dgvCuadras.Size = new System.Drawing.Size(972, 334);
             this.dgvCuadras.TabIndex = 0;
             // 
             // tabPage2
@@ -156,10 +160,10 @@
             this.tabPage2.Controls.Add(this.btnPrecioCiudadEspera);
             this.tabPage2.Controls.Add(this.btnPrecioCiudad);
             this.tabPage2.Controls.Add(this.dgvCiudad);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(834, 439);
+            this.tabPage2.Size = new System.Drawing.Size(984, 446);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Fuera de la ciudad";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -168,7 +172,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label2.Location = new System.Drawing.Point(550, 364);
+            this.label2.Location = new System.Drawing.Point(634, 355);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(182, 18);
             this.label2.TabIndex = 8;
@@ -178,7 +182,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label1.Location = new System.Drawing.Point(44, 364);
+            this.label1.Location = new System.Drawing.Point(76, 355);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(103, 18);
             this.label1.TabIndex = 7;
@@ -186,47 +190,52 @@
             // 
             // btnEliminarCiudad
             // 
-            this.btnEliminarCiudad.Location = new System.Drawing.Point(722, 403);
+            this.btnEliminarCiudad.Location = new System.Drawing.Point(822, 385);
             this.btnEliminarCiudad.Name = "btnEliminarCiudad";
-            this.btnEliminarCiudad.Size = new System.Drawing.Size(106, 30);
+            this.btnEliminarCiudad.Size = new System.Drawing.Size(156, 55);
             this.btnEliminarCiudad.TabIndex = 6;
             this.btnEliminarCiudad.Text = "Eliminar Ciudad";
+            this.btnEliminarCiudad.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnEliminarCiudad.UseVisualStyleBackColor = true;
             // 
             // btnModificarCiudad
             // 
-            this.btnModificarCiudad.Location = new System.Drawing.Point(610, 403);
+            this.btnModificarCiudad.Location = new System.Drawing.Point(660, 385);
             this.btnModificarCiudad.Name = "btnModificarCiudad";
-            this.btnModificarCiudad.Size = new System.Drawing.Size(106, 30);
+            this.btnModificarCiudad.Size = new System.Drawing.Size(156, 55);
             this.btnModificarCiudad.TabIndex = 5;
             this.btnModificarCiudad.Text = "Modificar Ciudad";
+            this.btnModificarCiudad.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnModificarCiudad.UseVisualStyleBackColor = true;
             // 
             // btnAgregarCiudad
             // 
-            this.btnAgregarCiudad.Location = new System.Drawing.Point(498, 403);
+            this.btnAgregarCiudad.Location = new System.Drawing.Point(498, 385);
             this.btnAgregarCiudad.Name = "btnAgregarCiudad";
-            this.btnAgregarCiudad.Size = new System.Drawing.Size(106, 30);
+            this.btnAgregarCiudad.Size = new System.Drawing.Size(156, 55);
             this.btnAgregarCiudad.TabIndex = 4;
             this.btnAgregarCiudad.Text = "Agregar Ciudad";
+            this.btnAgregarCiudad.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnAgregarCiudad.UseVisualStyleBackColor = true;
             // 
             // btnPrecioCiudadEspera
             // 
-            this.btnPrecioCiudadEspera.Location = new System.Drawing.Point(152, 403);
+            this.btnPrecioCiudadEspera.Location = new System.Drawing.Point(234, 385);
             this.btnPrecioCiudadEspera.Name = "btnPrecioCiudadEspera";
-            this.btnPrecioCiudadEspera.Size = new System.Drawing.Size(106, 30);
+            this.btnPrecioCiudadEspera.Size = new System.Drawing.Size(225, 55);
             this.btnPrecioCiudadEspera.TabIndex = 3;
             this.btnPrecioCiudadEspera.Text = "Modificar Espera";
+            this.btnPrecioCiudadEspera.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnPrecioCiudadEspera.UseVisualStyleBackColor = true;
             // 
             // btnPrecioCiudad
             // 
-            this.btnPrecioCiudad.Location = new System.Drawing.Point(6, 403);
+            this.btnPrecioCiudad.Location = new System.Drawing.Point(3, 385);
             this.btnPrecioCiudad.Name = "btnPrecioCiudad";
-            this.btnPrecioCiudad.Size = new System.Drawing.Size(128, 30);
+            this.btnPrecioCiudad.Size = new System.Drawing.Size(225, 55);
             this.btnPrecioCiudad.TabIndex = 2;
             this.btnPrecioCiudad.Text = "Modificar Kilometros";
+            this.btnPrecioCiudad.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnPrecioCiudad.UseVisualStyleBackColor = true;
             // 
             // dgvCiudad
@@ -234,23 +243,22 @@
             this.dgvCiudad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCiudad.Location = new System.Drawing.Point(6, 6);
             this.dgvCiudad.Name = "dgvCiudad";
-            this.dgvCiudad.Size = new System.Drawing.Size(822, 334);
+            this.dgvCiudad.Size = new System.Drawing.Size(972, 334);
             this.dgvCiudad.TabIndex = 0;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 483);
+            this.btnVolver.Location = new System.Drawing.Point(12, 498);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(842, 30);
+            this.btnVolver.Size = new System.Drawing.Size(992, 43);
             this.btnVolver.TabIndex = 1;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // PlanillaCostoVista
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(866, 525);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(1016, 544);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.tabControl1);
             this.Name = "PlanillaCostoVista";

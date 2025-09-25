@@ -1,4 +1,5 @@
-﻿using Programa.Vistas.Interfaces;
+﻿using Programa.Estilos;
+using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,8 +17,15 @@ namespace Programa.Vistas
         public BasesVista()
         {
             InitializeComponent();
+            this.Load += new System.EventHandler(this.BasesTemaVista_Load);
             asociacionPresentador();
             this.Load += BasesVista_Load;
+        }
+
+        private void BasesTemaVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
 
         // Singleton

@@ -42,18 +42,18 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(396, 300);
+            this.btnVolver.Location = new System.Drawing.Point(380, 300);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(84, 44);
+            this.btnVolver.Size = new System.Drawing.Size(121, 44);
             this.btnVolver.TabIndex = 0;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(172, 300);
+            this.btnGuardar.Location = new System.Drawing.Point(123, 300);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(84, 44);
+            this.btnGuardar.Size = new System.Drawing.Size(172, 44);
             this.btnGuardar.TabIndex = 1;
             this.btnGuardar.Text = "Guardar";
             this.btnGuardar.UseVisualStyleBackColor = true;
@@ -72,6 +72,7 @@
             this.tbTamanoFuente.Name = "tbTamanoFuente";
             this.tbTamanoFuente.Size = new System.Drawing.Size(226, 20);
             this.tbTamanoFuente.TabIndex = 3;
+            this.tbTamanoFuente.Text = " ";
             // 
             // cbTema
             // 
@@ -131,8 +132,7 @@
             // 
             // ConfiguracionesVista
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(513, 356);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);

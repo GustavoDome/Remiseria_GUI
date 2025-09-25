@@ -1,4 +1,5 @@
-﻿using Programa.Presentadores;
+﻿using Programa.Estilos;
+using Programa.Presentadores;
 using Programa.Repositorios;
 using Programa.Vistas.Interfaces;
 using System;
@@ -18,6 +19,7 @@ namespace Programa.Vistas
         public ViajesVista()
         {
             InitializeComponent();
+            this.Load += new System.EventHandler(this.ViajeVista_Load);
             asociarPresentador();
         }
 
@@ -31,7 +33,11 @@ namespace Programa.Vistas
                 dtpFecha.Enabled = false;
             }
         }
-
+        private void ViajeVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+        }
         public void asociarPresentador() 
         {
             btnAgregar.Click += delegate 
@@ -67,6 +73,7 @@ namespace Programa.Vistas
                 volver?.Invoke(this, EventArgs.Empty); 
             };
         }
+
 
         public event EventHandler agregarViaje;
         public event EventHandler modificarViaje;

@@ -11,6 +11,10 @@ namespace Programa.Modelos.Interfaces
         IEnumerable<Operador> ObtenerTodos(); // ya filtra por Activo
         OperadorLoginDTO Autenticar(string nombre, string contrasena);
 
+        ConfiguracionDTO ObtenerConfiguracion(int id);
+
+        void EditarConfiguracion(int id, ConfiguracionDTO config);
+
         // Alias más claro para el presentador
         IEnumerable<Operador> MostrarActivos(); // opcional
     }

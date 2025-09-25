@@ -65,53 +65,52 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(12, 462);
+            this.btnAgregar.Location = new System.Drawing.Point(12, 461);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 37);
+            this.btnAgregar.Size = new System.Drawing.Size(130, 37);
             this.btnAgregar.TabIndex = 2;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(255, 462);
+            this.btnEliminar.Location = new System.Drawing.Point(418, 462);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(75, 37);
+            this.btnEliminar.Size = new System.Drawing.Size(130, 37);
             this.btnEliminar.TabIndex = 3;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             // 
             // btnComentar
             // 
-            this.btnComentar.Location = new System.Drawing.Point(174, 461);
+            this.btnComentar.Location = new System.Drawing.Point(282, 462);
             this.btnComentar.Name = "btnComentar";
-            this.btnComentar.Size = new System.Drawing.Size(75, 37);
+            this.btnComentar.Size = new System.Drawing.Size(130, 37);
             this.btnComentar.TabIndex = 4;
             this.btnComentar.Text = "Comentar";
             this.btnComentar.UseVisualStyleBackColor = true;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(828, 462);
+            this.btnVolver.Location = new System.Drawing.Point(773, 462);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 37);
+            this.btnVolver.Size = new System.Drawing.Size(130, 37);
             this.btnVolver.TabIndex = 5;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(93, 462);
+            this.btnModificar.Location = new System.Drawing.Point(146, 461);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 37);
+            this.btnModificar.Size = new System.Drawing.Size(130, 37);
             this.btnModificar.TabIndex = 6;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // BasesVista
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(915, 511);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVolver);

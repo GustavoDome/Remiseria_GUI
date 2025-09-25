@@ -47,9 +47,9 @@
             // GBCategorias
             // 
             this.GBCategorias.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.GBCategorias.Location = new System.Drawing.Point(273, 12);
+            this.GBCategorias.Location = new System.Drawing.Point(231, 12);
             this.GBCategorias.Name = "GBCategorias";
-            this.GBCategorias.Size = new System.Drawing.Size(194, 548);
+            this.GBCategorias.Size = new System.Drawing.Size(247, 548);
             this.GBCategorias.TabIndex = 0;
             this.GBCategorias.TabStop = false;
             this.GBCategorias.Text = "Categorias";
@@ -57,7 +57,7 @@
             // GBPreguntas
             // 
             this.GBPreguntas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.GBPreguntas.Location = new System.Drawing.Point(473, 12);
+            this.GBPreguntas.Location = new System.Drawing.Point(484, 12);
             this.GBPreguntas.Name = "GBPreguntas";
             this.GBPreguntas.Size = new System.Drawing.Size(486, 223);
             this.GBPreguntas.TabIndex = 1;
@@ -67,7 +67,7 @@
             // GBRespuestas
             // 
             this.GBRespuestas.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.GBRespuestas.Location = new System.Drawing.Point(473, 241);
+            this.GBRespuestas.Location = new System.Drawing.Point(484, 241);
             this.GBRespuestas.Name = "GBRespuestas";
             this.GBRespuestas.Size = new System.Drawing.Size(486, 319);
             this.GBRespuestas.TabIndex = 2;
@@ -78,7 +78,7 @@
             // 
             this.btnAgregarPregunta.Location = new System.Drawing.Point(12, 64);
             this.btnAgregarPregunta.Name = "btnAgregarPregunta";
-            this.btnAgregarPregunta.Size = new System.Drawing.Size(112, 44);
+            this.btnAgregarPregunta.Size = new System.Drawing.Size(193, 44);
             this.btnAgregarPregunta.TabIndex = 3;
             this.btnAgregarPregunta.Text = "Agregar Pregunta";
             this.btnAgregarPregunta.UseVisualStyleBackColor = true;
@@ -87,16 +87,17 @@
             // 
             this.btnPlanillaCostos.Location = new System.Drawing.Point(12, 14);
             this.btnPlanillaCostos.Name = "btnPlanillaCostos";
-            this.btnPlanillaCostos.Size = new System.Drawing.Size(112, 44);
+            this.btnPlanillaCostos.Size = new System.Drawing.Size(213, 44);
             this.btnPlanillaCostos.TabIndex = 4;
             this.btnPlanillaCostos.Text = "Planilla de costos";
+            this.btnPlanillaCostos.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPlanillaCostos.UseVisualStyleBackColor = true;
             // 
             // btnModificarPregunta
             // 
             this.btnModificarPregunta.Location = new System.Drawing.Point(12, 114);
             this.btnModificarPregunta.Name = "btnModificarPregunta";
-            this.btnModificarPregunta.Size = new System.Drawing.Size(112, 44);
+            this.btnModificarPregunta.Size = new System.Drawing.Size(193, 44);
             this.btnModificarPregunta.TabIndex = 5;
             this.btnModificarPregunta.Text = "Modificar Pregunta";
             this.btnModificarPregunta.UseVisualStyleBackColor = true;
@@ -105,7 +106,7 @@
             // 
             this.btnEliminarPregunta.Location = new System.Drawing.Point(12, 164);
             this.btnEliminarPregunta.Name = "btnEliminarPregunta";
-            this.btnEliminarPregunta.Size = new System.Drawing.Size(112, 44);
+            this.btnEliminarPregunta.Size = new System.Drawing.Size(193, 44);
             this.btnEliminarPregunta.TabIndex = 6;
             this.btnEliminarPregunta.Text = "Eliminar Pregunta";
             this.btnEliminarPregunta.UseVisualStyleBackColor = true;
@@ -114,7 +115,7 @@
             // 
             this.btnAgregarRespuesta.Location = new System.Drawing.Point(12, 214);
             this.btnAgregarRespuesta.Name = "btnAgregarRespuesta";
-            this.btnAgregarRespuesta.Size = new System.Drawing.Size(112, 44);
+            this.btnAgregarRespuesta.Size = new System.Drawing.Size(193, 44);
             this.btnAgregarRespuesta.TabIndex = 7;
             this.btnAgregarRespuesta.Text = "Agregar Respuesta";
             this.btnAgregarRespuesta.UseVisualStyleBackColor = true;
@@ -123,7 +124,7 @@
             // 
             this.btnModificarRespuesta.Location = new System.Drawing.Point(12, 264);
             this.btnModificarRespuesta.Name = "btnModificarRespuesta";
-            this.btnModificarRespuesta.Size = new System.Drawing.Size(112, 44);
+            this.btnModificarRespuesta.Size = new System.Drawing.Size(193, 44);
             this.btnModificarRespuesta.TabIndex = 8;
             this.btnModificarRespuesta.Text = "Modificar Respuesta";
             this.btnModificarRespuesta.UseVisualStyleBackColor = true;
@@ -132,7 +133,7 @@
             // 
             this.btnEliminarRespuesta.Location = new System.Drawing.Point(12, 314);
             this.btnEliminarRespuesta.Name = "btnEliminarRespuesta";
-            this.btnEliminarRespuesta.Size = new System.Drawing.Size(112, 44);
+            this.btnEliminarRespuesta.Size = new System.Drawing.Size(193, 44);
             this.btnEliminarRespuesta.TabIndex = 9;
             this.btnEliminarRespuesta.Text = "Eliminar Respuesta";
             this.btnEliminarRespuesta.UseVisualStyleBackColor = true;
@@ -141,7 +142,7 @@
             // 
             this.btnAgregarCategoria.Location = new System.Drawing.Point(12, 364);
             this.btnAgregarCategoria.Name = "btnAgregarCategoria";
-            this.btnAgregarCategoria.Size = new System.Drawing.Size(112, 44);
+            this.btnAgregarCategoria.Size = new System.Drawing.Size(193, 44);
             this.btnAgregarCategoria.TabIndex = 10;
             this.btnAgregarCategoria.Text = "Agregar Categoria";
             this.btnAgregarCategoria.UseVisualStyleBackColor = true;
@@ -150,7 +151,7 @@
             // 
             this.btnModificarCategoria.Location = new System.Drawing.Point(12, 414);
             this.btnModificarCategoria.Name = "btnModificarCategoria";
-            this.btnModificarCategoria.Size = new System.Drawing.Size(112, 44);
+            this.btnModificarCategoria.Size = new System.Drawing.Size(193, 44);
             this.btnModificarCategoria.TabIndex = 11;
             this.btnModificarCategoria.Text = "Modificar Categoria";
             this.btnModificarCategoria.UseVisualStyleBackColor = true;
@@ -159,7 +160,7 @@
             // 
             this.btnEliminarCategoria.Location = new System.Drawing.Point(12, 464);
             this.btnEliminarCategoria.Name = "btnEliminarCategoria";
-            this.btnEliminarCategoria.Size = new System.Drawing.Size(112, 44);
+            this.btnEliminarCategoria.Size = new System.Drawing.Size(193, 44);
             this.btnEliminarCategoria.TabIndex = 12;
             this.btnEliminarCategoria.Text = "Eliminar Categoria";
             this.btnEliminarCategoria.UseVisualStyleBackColor = true;
@@ -168,16 +169,15 @@
             // 
             this.btnVolver.Location = new System.Drawing.Point(12, 514);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(112, 46);
+            this.btnVolver.Size = new System.Drawing.Size(213, 46);
             this.btnVolver.TabIndex = 13;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // AyudaVista
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(971, 572);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(982, 572);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnEliminarCategoria);
             this.Controls.Add(this.btnModificarCategoria);

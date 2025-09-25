@@ -48,42 +48,41 @@
             // 
             this.btnAgregar.Location = new System.Drawing.Point(12, 452);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(90, 40);
+            this.btnAgregar.Size = new System.Drawing.Size(130, 40);
             this.btnAgregar.TabIndex = 2;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(108, 452);
+            this.btnModificar.Location = new System.Drawing.Point(148, 452);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(90, 40);
+            this.btnModificar.Size = new System.Drawing.Size(130, 40);
             this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // btnEliminar
             // 
-            this.btnEliminar.Location = new System.Drawing.Point(204, 452);
+            this.btnEliminar.Location = new System.Drawing.Point(284, 454);
             this.btnEliminar.Name = "btnEliminar";
-            this.btnEliminar.Size = new System.Drawing.Size(90, 40);
+            this.btnEliminar.Size = new System.Drawing.Size(130, 37);
             this.btnEliminar.TabIndex = 4;
             this.btnEliminar.Text = "Eliminar";
             this.btnEliminar.UseVisualStyleBackColor = true;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(834, 452);
+            this.btnVolver.Location = new System.Drawing.Point(794, 454);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(90, 40);
+            this.btnVolver.Size = new System.Drawing.Size(130, 40);
             this.btnVolver.TabIndex = 5;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // MovilesVista
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(936, 504);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnEliminar);

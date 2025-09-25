@@ -17,6 +17,7 @@ namespace Programa.Vistas.Interfaces
         event EventHandler volver;
         event EventHandler guardar;
 
+        void RefrescarEstilos();
         void SetTipoFuenteBindingSource(BindingSource tipoFuentes);
         void SetTamanoFuenteBindingSource(BindingSource tamanoFuentes);
         void SetTemaSistemaBindingSource(BindingSource temaSistemas);

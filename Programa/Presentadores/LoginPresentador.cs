@@ -1,4 +1,5 @@
 ﻿using Programa.Conexion;
+using Programa.Estilos;
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using Programa.Repositorios;
@@ -25,41 +26,28 @@ namespace Programa.Presentadores
 
             this.vista.buscarUsuario += buscar_usuario;
         }
-        private void test()
-        {
-            try
-            {
-                using (var contexto = new RemiseriaDbContext())
-                {
-                    var test = contexto.Operadores.FirstOrDefault();
-                    MessageBox.Show("Conexión exitosa");
-                }
-            }
-            catch (Exception ex)
-            {
-                string mensaje = "Error: " + ex.Message;
-                if (ex.InnerException != null)
-                {
-                    mensaje += "\n\nDetalle interno: " + ex.InnerException.Message;
-                }
-                MessageBox.Show(mensaje);
-            }
-
-        }
 
         private void buscar_usuario(object sender, EventArgs e)
         {
-            test();
             try
             {
                 var usuario = repositorio.Autenticar(vista.txtUsuarios, vista.txtContrasenas);
 
                 if (usuario != null)
                 {
+                    // 1. Cargar configuración visual del operador
+                    var config = repositorio.ObtenerConfiguracion(usuario.IdOperador);
+                    GestorEstilosGlobal.Instance.AplicarConfiguracion(config);
+
+                    // 2. Crear vista y presentador de inicio
                     IRecordatorioRepositorio recordatorio = new RecordatorioRepositorio();
                     IInicioVista inicio = InicioVista.ObtenerInstancia();
                     new InicioPresentador(inicio, recordatorio, usuario.RolUsuario, usuario.IdOperador);
 
+                    // 3. Aplicar estilos visuales en tiempo real
+                    inicio.RefrescarEstilos();
+
+                    // 4. Ocultar login
                     ((Form)vista).Hide();
                 }
                 else

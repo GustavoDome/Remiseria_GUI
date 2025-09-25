@@ -87,7 +87,6 @@ namespace Programa.Presentadores
             IConfiguracionesVista configuracion = ConfiguracionesVista.ObtenerInstancia();
             IOperadorRepositorio usuario = new OperadorRepositorio();
             new ConfiguracionesPresentador(configuracion, usuario, this.rol, this.id);
-            ((Form)vista).Close();
         }
         private void ingresarOperadores(object sender, EventArgs e) 
         {
