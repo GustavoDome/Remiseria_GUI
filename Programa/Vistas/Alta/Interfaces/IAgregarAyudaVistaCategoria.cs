@@ -8,5 +8,9 @@ namespace Programa.Vistas.Alta.Interfaces
 {
     public interface IAgregarAyudaVistaCategoria
     {
+        string categorianombre { get; set; }
+
+        event EventHandler agregar;
+        event EventHandler volver;
     }
 }

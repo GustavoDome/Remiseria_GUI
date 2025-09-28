@@ -74,6 +74,11 @@ namespace Programa.Estilos
                 cuadroTexto.BackColor = fuenteColor == Color.White ? Color.DimGray : Color.White;
                 cuadroTexto.ForeColor = fuenteColor;
             }
+            if(control is RichTextBox cuadroTextoGrande)
+            {
+                cuadroTextoGrande.BackColor = fuenteColor == Color.White ? Color.DimGray : Color.White;
+                cuadroTextoGrande.ForeColor = fuenteColor;
+            }
             if (control is Label label)
             {
                 string tema = ObtenerTemaActual();

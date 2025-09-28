@@ -1,16 +1,22 @@
 ﻿using Programa.DTOs;
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
+using Programa.Presentadores.CUPresentador;
 using Programa.Repositorios;
 using Programa.Vistas;
+using Programa.Vistas.Alta;
+using Programa.Vistas.Alta.Interfaces;
 using Programa.Vistas.Interfaces;
+using Programa.Vistas.Modificacion;
+using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data.Entity;
+using static Programa.Presentadores.CUPresentador.CUAyudaPresentador;
 
 namespace Programa.Presentadores
 {
@@ -27,6 +33,9 @@ namespace Programa.Presentadores
         private List<CategoriaDTO> modeloCategoria;
         private List<PreguntaDTO> modeloPregunta;
         private List<RespuestaDTO> modeloRespuesta;
+
+        public int? IdCategoriaSeleccionada { get; private set; }
+        public int? IdPreguntaSeleccionada { get; private set; }
 
         public AyudaPresentador(
             IAyudaVista vista,
@@ -45,7 +54,6 @@ namespace Programa.Presentadores
             this.filtrador = new BindingSource();
 
             vista.ocultarBotones(rol);
-
             // Cargar categorías y vincular eventos
             modeloCategoria = repositorioCategoria.ObtenerTodas().ToList();
             vista.SetCategoriaBindingSource(new BindingSource { DataSource = modeloCategoria });
@@ -55,8 +63,6 @@ namespace Programa.Presentadores
             vista.modificarPregunta += modificar_pregunta;
             vista.eliminarPregunta += eliminar_pregunta;
             vista.agregarRespuesta += agregar_respuesta;
-            vista.modificarRespuesta += modificar_respuesta;
-            vista.eliminarRespuesta += eliminar_respuesta;
             vista.agregarCategoria += agregar_categoria;
             vista.modificarCategoria += modificar_categoria;
             vista.eliminarCategoria += eliminar_categoria;
@@ -67,11 +73,15 @@ namespace Programa.Presentadores
             {
                 vistaConEventos.categoriaSeleccionada += cargar_preguntas;
                 vistaConEventos.preguntaSeleccionada += cargar_respuestas;
+                vistaConEventos.respuestaModificarSeleccionada += modificar_respuesta;
+                vistaConEventos.respuestaEliminarSeleccionada += eliminar_respuesta;
             }
         }
 
         private void cargar_preguntas(int idCategoria)
         {
+            IdCategoriaSeleccionada = idCategoria;
+
             var nombreCategoria = modeloCategoria.FirstOrDefault(c => c.IdCategoria == idCategoria)?.NombreCategoria;
             if (string.IsNullOrEmpty(nombreCategoria)) return;
 
@@ -85,6 +95,8 @@ namespace Programa.Presentadores
 
         private void cargar_respuestas(int idPregunta)
         {
+            IdPreguntaSeleccionada = idPregunta;
+
             modeloRespuesta = repositorioRespuesta.MostrarTodo()
                 .Where(r => r.IdPregunta == idPregunta)
                 .ToList();
@@ -102,23 +114,183 @@ namespace Programa.Presentadores
             ((Form)vista).Close();
         }
 
-        public void agregar_pregunta(object sender, EventArgs e) { }
+        public void agregar_pregunta(object sender, EventArgs e)
+        {
+            if (IdCategoriaSeleccionada == null)
+            {
+                MessageBox.Show("Debe seleccionar una categoría antes de agregar una pregunta.");
+                return;
+            }
 
-        public void modificar_pregunta(object sender, EventArgs e) { }
+            IAgregarAyudaVistaPregunta vistaAgregar = AgregarAyudaVistaPregunta.ObtenerInstancia();
+            new CUAyudaPresentador.CUAgregarPreguntaPresentador(this.repositorioPregunta, vistaAgregar, this.vista, IdCategoriaSeleccionada.Value);
+        }
 
-        public void eliminar_pregunta(object sender, EventArgs e) { }
+        public void modificar_pregunta(object sender, EventArgs e)
+        {
+            if (IdPreguntaSeleccionada == null)
+            {
+                MessageBox.Show("Debe seleccionar una pregunta para modificar.");
+                return;
+            }
 
-        public void agregar_respuesta(object sender, EventArgs e) { }
+            var preguntaDTO = modeloPregunta.FirstOrDefault(p => p.IdPregunta == IdPreguntaSeleccionada.Value);
+            if (preguntaDTO == null)
+            {
+                MessageBox.Show("La pregunta seleccionada no existe.");
+                return;
+            }
 
-        public void modificar_respuesta(object sender, EventArgs e) { }
+            IModificarAyudaVistaPregunta vistaModificar = ModificarAyudaVistaPregunta.ObtenerInstancia();
+            new CUAyudaPresentador.CUModificarPreguntaPresentador(this.repositorioPregunta, vistaModificar, this.vista, preguntaDTO);
+        }
 
-        public void eliminar_respuesta(object sender, EventArgs e) { }
+        public void eliminar_pregunta(object sender, EventArgs e)
+        {
+            if (IdPreguntaSeleccionada == null)
+            {
+                MessageBox.Show("Debe seleccionar una pregunta para eliminar.");
+                return;
+            }
 
-        public void agregar_categoria(object sender, EventArgs e) { }
+            var confirmacion = MessageBox.Show("¿Está seguro que desea eliminar esta pregunta y sus respuestas?", "Confirmar", MessageBoxButtons.YesNo);
+            if (confirmacion == DialogResult.Yes)
+            {
+                var respuestas = this.repositorioRespuesta.MostrarTodo()
+                    .Where(r => r.IdPregunta == IdPreguntaSeleccionada.Value)
+                    .ToList();
 
-        public void modificar_categoria(object sender, EventArgs e) { }
+                foreach (var respuesta in respuestas)
+                    this.repositorioRespuesta.Eliminar(respuesta.IdRespuesta);
 
-        public void eliminar_categoria(object sender, EventArgs e) { }
+                this.repositorioPregunta.Eliminar(IdPreguntaSeleccionada.Value);
+
+                modeloPregunta = this.repositorioPregunta.MostrarTodo()
+                    .Where(p => p.IdCategoria == IdCategoriaSeleccionada)
+                    .ToList();
+                vista.SetPreguntaBindingSource(new BindingSource { DataSource = modeloPregunta });
+
+                modeloRespuesta.Clear();
+                vista.SetRespuestaBindingSource(new BindingSource());
+
+                IdPreguntaSeleccionada = null;
+            }
+        }
+
+        public void agregar_respuesta(object sender, EventArgs e)
+        {
+            if (IdPreguntaSeleccionada == null)
+            {
+                MessageBox.Show("Debe seleccionar una pregunta antes de agregar una respuesta.");
+                return;
+            }
+
+            IAgregarAyudaVistaRespuesta vistaAgregar = AgregarAyudaVistaRespuesta.ObtenerInstancia();
+            new CUAyudaPresentador.CUAgregarRespuestaPresentador(this.repositorioRespuesta, vistaAgregar, this.vista, IdPreguntaSeleccionada.Value);
+        }
+
+        private void modificar_respuesta(int idRespuesta)
+        {
+            var dto = modeloRespuesta.FirstOrDefault(r => r.IdRespuesta == idRespuesta);
+            if (dto == null)
+            {
+                MessageBox.Show("La respuesta seleccionada no existe.");
+                return;
+            }
+
+            IModificarAyudaVistaRespuesta vistaModificar = ModificarAyudaVistaRespuesta.ObtenerInstancia();
+            new CUAyudaPresentador.CUModificarRespuestaPresentador(this.repositorioRespuesta, vistaModificar, this.vista, dto);
+        }
+
+        private void eliminar_respuesta(int idRespuesta)
+        {
+            var dto = modeloRespuesta.FirstOrDefault(r => r.IdRespuesta == idRespuesta);
+            if (dto == null)
+            {
+                MessageBox.Show("La respuesta seleccionada no existe.");
+                return;
+            }
+
+            var confirmacion = MessageBox.Show("¿Está seguro que desea eliminar esta respuesta?", "Confirmar", MessageBoxButtons.YesNo);
+            if (confirmacion == DialogResult.Yes)
+            {
+                this.repositorioRespuesta.Eliminar(idRespuesta);
+
+                var modeloActualizado = this.repositorioRespuesta.MostrarTodo()
+                    .Where(r => r.IdPregunta == dto.IdPregunta)
+                    .ToList();
+
+                vista.SetRespuestaBindingSource(new BindingSource { DataSource = modeloActualizado });
+            }
+        }
+
+        public void agregar_categoria(object sender, EventArgs e) 
+        {
+            IAgregarAyudaVistaCategoria agregarCategoria = AgregarAyudaVistaCategoria.ObtenerInstancia();
+            new CUAgregarCategoriaPresentador(this.repositorioCategoria, agregarCategoria,this.vista);
+        }
+
+        public void modificar_categoria(object sender, EventArgs e)
+        {
+            if (IdCategoriaSeleccionada == null)
+            {
+                MessageBox.Show("Debe seleccionar una categoría para modificar.");
+                return;
+            }
+
+            var categoriaDTO = modeloCategoria.FirstOrDefault(c => c.IdCategoria == IdCategoriaSeleccionada.Value);
+            if (categoriaDTO == null)
+            {
+                MessageBox.Show("La categoría seleccionada no existe.");
+                return;
+            }
+
+            IModificarAyudaVistaCategoria vistaModificar = ModificarAyudaVistaCategoria.ObtenerInstancia();
+            new CUAyudaPresentador.CUModificarCategoriaPresentador(this.repositorioCategoria, vistaModificar, ayudavista: this.vista, categoriaDTO);
+        }
+
+        public void eliminar_categoria(object sender, EventArgs e)
+        {
+            if (IdCategoriaSeleccionada == null)
+            {
+                MessageBox.Show("Debe seleccionar una categoría para eliminar.");
+                return;
+            }
+
+            var confirmacion = MessageBox.Show("¿Está seguro que desea eliminar esta categoría y todo su contenido?", "Confirmar", MessageBoxButtons.YesNo);
+            if (confirmacion == DialogResult.Yes)
+            {
+                var preguntas = this.repositorioPregunta.MostrarTodo()
+                    .Where(p => p.IdCategoria == IdCategoriaSeleccionada.Value)
+                    .ToList();
+
+                foreach (var pregunta in preguntas)
+                {
+                    var respuestas = this.repositorioRespuesta.MostrarTodo()
+                        .Where(r => r.IdPregunta == pregunta.IdPregunta)
+                        .ToList();
+
+                    foreach (var respuesta in respuestas)
+                        this.repositorioRespuesta.Eliminar(respuesta.IdRespuesta);
+
+                    this.repositorioPregunta.Eliminar(pregunta.IdPregunta);
+                }
+
+                this.repositorioCategoria.Eliminar(IdCategoriaSeleccionada.Value);
+
+                modeloCategoria = this.repositorioCategoria.ObtenerTodas().ToList();
+                vista.SetCategoriaBindingSource(new BindingSource { DataSource = modeloCategoria });
+
+                modeloPregunta.Clear();
+                vista.SetPreguntaBindingSource(new BindingSource());
+
+                modeloRespuesta.Clear();
+                vista.SetRespuestaBindingSource(new BindingSource());
+
+                IdCategoriaSeleccionada = null;
+                IdPreguntaSeleccionada = null;
+            }
+        }
 
         public void volver_menu(object sender, EventArgs e)
         {

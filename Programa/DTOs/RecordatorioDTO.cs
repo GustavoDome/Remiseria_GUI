@@ -8,10 +8,10 @@ namespace Programa.DTOs
 {
     public class RecordatorioDTO
     {
-        public string Ubicacion { get; set; }
+        public int IdRecordatorio { get; set; }
+        public string Direccion { get; set; }
         public DateTime? FechaDia { get; set; }
         public DateTime? FechaHora { get; set; }
-        public string FechaCompleta => $"{FechaDia:dd/MM/yyyy} {FechaHora:HH:mm}";
         public string NombreOperador { get; set; }
     }
 }

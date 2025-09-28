@@ -16,9 +16,9 @@ namespace Programa.Vistas
     {
         public InicioVista()
         {
-            this.Load += new System.EventHandler(this.InicioVista_Load);
             InitializeComponent();
             asociacionPresentador();
+            this.Load += new System.EventHandler(this.InicioVista_Load);
             this.FormClosed += (s, e) => Application.Exit();
         }
 
@@ -87,6 +87,38 @@ namespace Programa.Vistas
             {
                 ingresarBases?.Invoke(this, EventArgs.Empty);
             };
+        }
+        public void ConfigurarGrilla()
+        {
+            dgvRecordatorio.Columns["FechaDia"].HeaderText = "Fecha Día";
+            dgvRecordatorio.Columns["FechaHora"].HeaderText = "Hora";
+            dgvRecordatorio.Columns["Direccion"].HeaderText = "Dirección";
+            dgvRecordatorio.Columns["NombreOperador"].HeaderText = "Operador";
+
+            if (dgvRecordatorio.Columns.Contains("IdRecordatorio"))
+            {
+                dgvRecordatorio.Columns["IdRecordatorio"].Visible = false;
+            }
+            if (dgvRecordatorio.Columns.Contains("FechaDia"))
+            {
+                dgvRecordatorio.Columns["FechaDia"].DefaultCellStyle.Format = "dd/MM/yyyy";
+            }
+            if (dgvRecordatorio.Columns.Contains("FechaHora"))
+            {
+                dgvRecordatorio.Columns["FechaHora"].DefaultCellStyle.Format = "HH:mm";
+            }
+            foreach (DataGridViewColumn col in dgvRecordatorio.Columns)
+            {
+                if (col.Name == "Direccion") // ajustá al nombre real
+                {
+                    col.Width = 300; // ancho personalizado
+                }
+                else if (col.Visible)
+                {
+                    col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                    col.MinimumWidth = 150;
+                }
+            }
         }
 
 

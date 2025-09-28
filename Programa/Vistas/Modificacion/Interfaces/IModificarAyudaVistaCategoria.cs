@@ -8,5 +8,9 @@ namespace Programa.Vistas.Modificacion.Interfaces
 {
     public interface IModificarAyudaVistaCategoria
     {
+        string categorianombre { get; set; }
+
+        event EventHandler modificar;
+        event EventHandler volver;
     }
 }

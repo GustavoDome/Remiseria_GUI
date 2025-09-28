@@ -214,9 +214,9 @@
             // btnRecAgregar
             // 
             this.btnRecAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRecAgregar.Location = new System.Drawing.Point(540, 352);
+            this.btnRecAgregar.Location = new System.Drawing.Point(540, 343);
             this.btnRecAgregar.Name = "btnRecAgregar";
-            this.btnRecAgregar.Size = new System.Drawing.Size(120, 37);
+            this.btnRecAgregar.Size = new System.Drawing.Size(120, 46);
             this.btnRecAgregar.TabIndex = 8;
             this.btnRecAgregar.Text = "Agregar";
             this.btnRecAgregar.UseVisualStyleBackColor = true;
@@ -224,9 +224,9 @@
             // btnRecModificar
             // 
             this.btnRecModificar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRecModificar.Location = new System.Drawing.Point(723, 352);
+            this.btnRecModificar.Location = new System.Drawing.Point(723, 343);
             this.btnRecModificar.Name = "btnRecModificar";
-            this.btnRecModificar.Size = new System.Drawing.Size(138, 37);
+            this.btnRecModificar.Size = new System.Drawing.Size(138, 46);
             this.btnRecModificar.TabIndex = 9;
             this.btnRecModificar.Text = "Modificar";
             this.btnRecModificar.UseVisualStyleBackColor = true;
@@ -234,9 +234,9 @@
             // btnRecEliminar
             // 
             this.btnRecEliminar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRecEliminar.Location = new System.Drawing.Point(926, 352);
+            this.btnRecEliminar.Location = new System.Drawing.Point(926, 343);
             this.btnRecEliminar.Name = "btnRecEliminar";
-            this.btnRecEliminar.Size = new System.Drawing.Size(119, 37);
+            this.btnRecEliminar.Size = new System.Drawing.Size(119, 46);
             this.btnRecEliminar.TabIndex = 10;
             this.btnRecEliminar.Text = "Eliminar";
             this.btnRecEliminar.UseVisualStyleBackColor = true;
@@ -256,7 +256,7 @@
             this.label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.25F);
-            this.label1.Location = new System.Drawing.Point(730, 320);
+            this.label1.Location = new System.Drawing.Point(737, 320);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(105, 20);
             this.label1.TabIndex = 12;

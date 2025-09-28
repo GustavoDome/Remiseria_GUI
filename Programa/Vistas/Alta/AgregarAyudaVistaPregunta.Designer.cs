@@ -28,20 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnIngresar = new System.Windows.Forms.Button();
+            this.btnAgregar = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.rtbPregunta = new System.Windows.Forms.RichTextBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // btnIngresar
+            // btnAgregar
             // 
-            this.btnIngresar.Location = new System.Drawing.Point(151, 202);
-            this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(75, 23);
-            this.btnIngresar.TabIndex = 0;
-            this.btnIngresar.Text = "Ingresar";
-            this.btnIngresar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Location = new System.Drawing.Point(151, 202);
+            this.btnAgregar.Name = "btnAgregar";
+            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.TabIndex = 0;
+            this.btnAgregar.Text = "Agregar";
+            this.btnAgregar.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -78,7 +78,7 @@
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.rtbPregunta);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.btnIngresar);
+            this.Controls.Add(this.btnAgregar);
             this.Name = "AgregarAyudaVistaPregunta";
             this.Text = "Agregar Pregunta";
             this.ResumeLayout(false);
@@ -88,7 +88,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnIngresar;
+        private System.Windows.Forms.Button btnAgregar;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox rtbPregunta;
         private System.Windows.Forms.Button btnVolver;

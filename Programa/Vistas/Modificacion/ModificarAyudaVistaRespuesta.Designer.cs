@@ -32,7 +32,7 @@
             this.trbRespuesta = new System.Windows.Forms.RichTextBox();
             this.btnAgregarArchivo = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.ofdBuscarArchivo = new System.Windows.Forms.OpenFileDialog();
             this.SuspendLayout();
             // 
@@ -72,14 +72,14 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
-            // btnAgregar
+            // btnModificar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(275, 196);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(91, 23);
-            this.btnAgregar.TabIndex = 9;
-            this.btnAgregar.Text = "Agregar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnModificar.Location = new System.Drawing.Point(275, 196);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(91, 23);
+            this.btnModificar.TabIndex = 9;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // ofdBuscarArchivo
             // 
@@ -90,7 +90,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(382, 231);
-            this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAgregarArchivo);
             this.Controls.Add(this.trbRespuesta);
@@ -108,7 +108,7 @@
         private System.Windows.Forms.RichTextBox trbRespuesta;
         private System.Windows.Forms.Button btnAgregarArchivo;
         private System.Windows.Forms.Button btnVolver;
-        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.OpenFileDialog ofdBuscarArchivo;
     }
 }

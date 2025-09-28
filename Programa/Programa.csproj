@@ -180,6 +180,14 @@
     <Compile Include="Presentadores\AyudaPresentador.cs" />
     <Compile Include="Presentadores\BasesPresentador.cs" />
     <Compile Include="Presentadores\ConfiguracionesPresentador.cs" />
+    <Compile Include="Presentadores\CUPresentador\CUAyudaPresentador.cs" />
+    <Compile Include="Presentadores\CUPresentador\CUBasesPresentador.cs" />
+    <Compile Include="Presentadores\CUPresentador\CUInicioPresentador.cs" />
+    <Compile Include="Presentadores\CUPresentador\CUMovilesPresentador.cs" />
+    <Compile Include="Presentadores\CUPresentador\CUOperadorPresentador.cs" />
+    <Compile Include="Presentadores\CUPresentador\CUPlanillaCostoVistaPresentador.cs" />
+    <Compile Include="Presentadores\CUPresentador\CUViajesPresentador.cs" />
+    <Compile Include="Presentadores\CUPresentador\CUVueltaPresentador.cs" />
     <Compile Include="Presentadores\InicioPresentador.cs" />
     <Compile Include="Presentadores\LoginPresentador.cs" />
     <Compile Include="Presentadores\MovilesPresentador.cs" />
@@ -567,9 +575,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Presentadores\NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

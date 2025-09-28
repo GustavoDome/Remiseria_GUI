@@ -8,5 +8,9 @@ namespace Programa.Vistas.Alta.Interfaces
 {
     public interface IAgregarAyudaVistaPregunta
     {
+        string preguntatexto { get; set; }
+
+        event EventHandler agregar;
+        event EventHandler volver;
     }
 }

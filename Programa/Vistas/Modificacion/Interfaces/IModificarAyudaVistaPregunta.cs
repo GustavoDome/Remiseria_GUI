@@ -8,5 +8,9 @@ namespace Programa.Vistas.Modificacion.Interfaces
 {
     public interface IModificarAyudaVistaPregunta
     {
+        string preguntatexto { get; set; }
+
+        event EventHandler modificar;
+        event EventHandler volver;
     }
 }

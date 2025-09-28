@@ -1,15 +1,18 @@
-﻿using Programa.Modelos;
+﻿using Programa.DTOs;
+using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using Programa.Repositorios;
 using Programa.Vistas;
+using Programa.Vistas.Alta;
+using Programa.Vistas.Alta.Interfaces;
 using Programa.Vistas.Interfaces;
+using Programa.Vistas.Modificacion;
+using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.Web.WebView2.WinForms;
+using static Programa.Presentadores.CUPresentador.CUInicioPresentador;
 
 namespace Programa.Presentadores
 {
@@ -17,14 +20,13 @@ namespace Programa.Presentadores
     {
         private IRecordatorioRepositorio repositorio;
         private IInicioVista vista;
-        private IEnumerable<Recordatorio> modelosRecordatorio;
         private BindingSource filtrador;
         private string rol;
         private int id;
 
 
         //constructor
-        public InicioPresentador (IInicioVista vista, IRecordatorioRepositorio repositorio, string rol, int id)
+        public InicioPresentador(IInicioVista vista, IRecordatorioRepositorio repositorio, string rol, int id)
         {
             this.filtrador = new BindingSource();
             this.vista = vista;
@@ -52,25 +54,55 @@ namespace Programa.Presentadores
 
         }
 
-        private void cargarRecordatorio() 
+        public void cargarRecordatorio()
         {
             var lista = this.repositorio.ObtenerTodos().ToList();
             this.filtrador.DataSource = lista;
+
+            // Configurar columnas después de asignar el DataSource
+            if (vista is InicioVista vistaConcreta)
+            {
+                vistaConcreta.ConfigurarGrilla();
+            }
         }
 
+        public int? ObtenerIdRecordatorioSeleccionado()
+        {
+            if (filtrador.Current is RecordatorioDTO seleccionado)
+            {
+                return seleccionado.IdRecordatorio;
+            }
+            return null;
+        }
         private void agregarRecordatorio(object sender, EventArgs e)
         {
-
+            IAgregarInicioVistaRecordatorio agregarRecordatorio = AgregarInicioVistaRecordatorio.ObtenerInstancia();
+            new CUAgregarRecordatorio(this.repositorio, agregarRecordatorio, this.id, this);
         }
-        private void modificarRecordatorio(object sender, EventArgs e) 
+        private void modificarRecordatorio(object sender, EventArgs e)
         {
-            
+            int? idrecordatorio = ObtenerIdRecordatorioSeleccionado();
+            if (idrecordatorio != null)
+            {
+                IModificarInicioVistaRecordatorio modificarRecordatorio = ModificarInicioVistaRecordatorio.ObtenerInstancia();
+                new CUModificarRecordatorio(modificarRecordatorio, this.repositorio, idrecordatorio, this.id, this);
+            }
+            else
+            {
+                MessageBox.Show("Porfavor seleccione el recordatorio a modificar");
+            }
         }
-        private void eliminarRecordatorio(object sender, EventArgs e) 
+        private void eliminarRecordatorio(object sender, EventArgs e)
         {
-
+            int? idrecordatorio = ObtenerIdRecordatorioSeleccionado();
+            DialogResult resultado = MessageBox.Show("¿Está seguro que desea eliminar este recordatorio?", "Confirmar eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (resultado == DialogResult.Yes)
+            {
+                this.repositorio.Eliminar(idrecordatorio.Value);
+                cargarRecordatorio();
+            }
         }
-        private void volver_menu(object sender, EventArgs e) 
+        private void volver_menu(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -82,37 +114,37 @@ namespace Programa.Presentadores
             IRespuestasRepositorio respuesta = new RespuestaRepositorio();
             new AyudaPresentador(ayuda, categoria, pregunta, respuesta, this.rol, this.id);
         }
-        private void ingresarConfiguracion(object sender, EventArgs e) 
+        private void ingresarConfiguracion(object sender, EventArgs e)
         {
             IConfiguracionesVista configuracion = ConfiguracionesVista.ObtenerInstancia();
             IOperadorRepositorio usuario = new OperadorRepositorio();
             new ConfiguracionesPresentador(configuracion, usuario, this.rol, this.id);
         }
-        private void ingresarOperadores(object sender, EventArgs e) 
+        private void ingresarOperadores(object sender, EventArgs e)
         {
             IOperadoresVista operadores = OperadoresVista.ObtenerInstancia();
             IOperadorRepositorio usuario = new OperadorRepositorio();
             new OperadoresPresentador(operadores, usuario, this.id);
         }
-        private void ingresarMoviles(object sender, EventArgs e) 
+        private void ingresarMoviles(object sender, EventArgs e)
         {
             IMovilesVista movilVista = MovilesVista.ObtenerInstancia();
             IMovilRepositorio movilrepositorio = new MovilRepositorio();
             new MovilesPresentador(movilVista, movilrepositorio, this.id);
         }
-        private void ingresarViajes(object sender, EventArgs e) 
+        private void ingresarViajes(object sender, EventArgs e)
         {
             IViajesVista viajesvista = ViajesVista.ObtenerInstancia(this.rol, this.id);
             IViajesRepositorio viajes = new ViajesRepositorio();
             new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
         }
-        private void ingresarVueltas(object sender, EventArgs e) 
+        private void ingresarVueltas(object sender, EventArgs e)
         {
             IVueltaVista vuelta = VueltaVista.ObtenerInstancia();
             IViajesRepositorio viajes = new ViajesRepositorio();
             new VueltaPresentador(vuelta, viajes, this.rol, this.id);
         }
-        private void ingresarBases(object sender, EventArgs e) 
+        private void ingresarBases(object sender, EventArgs e)
         {
             IBasesVista basesvista = BasesVista.ObtenerInstancia();
             IBasesRepositorio bases = new BaseRepositorio();

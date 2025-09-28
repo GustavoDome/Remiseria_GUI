@@ -6,6 +6,7 @@ using Programa.Modelos.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using static Programa.Conexion.RemiseriaDbContext;
 
 namespace Programa.Repositorios
@@ -18,8 +19,20 @@ namespace Programa.Repositorios
         {
             using (var contexto = new RemiseriaDbContext())
             {
-                contexto.Recordatorios.Add(nuevoRecordatorio);
-                contexto.SaveChanges();
+                try
+                {
+                    // Crear una entidad mínima del operador con solo el ID
+                    var operadorStub = new Operador { IdOperador = nuevoRecordatorio.IdOperador };
+                    contexto.Operadores.Attach(operadorStub);
+                    nuevoRecordatorio.Operador = operadorStub;
+
+                    contexto.Recordatorios.Add(nuevoRecordatorio);
+                    contexto.SaveChanges();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error al guardar el recordatorio: " + ex.InnerException?.Message ?? ex.Message);
+                }
             }
         }
 
@@ -51,18 +64,36 @@ namespace Programa.Repositorios
                 }
             }
         }
+        public RecordatorioDTO ObtenerPorId(int id)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var r = contexto.Recordatorios.FirstOrDefault(x => x.IdRecordatorio == id);
+                if (r == null) return null;
 
+                return new RecordatorioDTO
+                {
+                    IdRecordatorio = r.IdRecordatorio,
+                    Direccion = r.Ubicacion,
+                    FechaDia = r.FechaDia ?? DateTime.MinValue,
+                    FechaHora = r.FechaHora ?? DateTime.MinValue,
+                    NombreOperador = "" // opcional
+                };
+            }
+        }
         public IEnumerable<RecordatorioDTO> ObtenerTodos()
         {
             using (var contexto = new RemiseriaDbContext())
             {
                 return contexto.Recordatorios
+                    .OrderBy(r => r.IdRecordatorio)
                     .Select(r => new RecordatorioDTO
                     {
-                        Ubicacion = r.Ubicacion,
+                        IdRecordatorio = r.IdRecordatorio,
+                        Direccion = r.Ubicacion,
                         FechaDia = r.FechaDia ?? DateTime.MinValue,
                         FechaHora = r.FechaHora ?? DateTime.MinValue,
-                        NombreOperador = "" // Si querés incluirlo, habría que hacer un join con Operador
+                        NombreOperador = r.Operador != null ? r.Operador.Nombre : "(Sin nombre)"
                     })
                     .ToList();
             }

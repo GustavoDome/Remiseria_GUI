@@ -20,6 +20,8 @@ namespace Programa.Vistas.Interfaces
         event EventHandler modificarCategoria;
         event EventHandler eliminarCategoria;
         event EventHandler volver;
+        event Action<int> respuestaModificarSeleccionada;
+        event Action<int> respuestaEliminarSeleccionada;
 
         void ocultarBotones(string rol);
         void SetCategoriaBindingSource(BindingSource categorias);

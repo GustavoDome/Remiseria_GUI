@@ -8,5 +8,10 @@ namespace Programa.Vistas.Alta.Interfaces
 {
     public interface IAgregarAyudaVistaRespuesta
     {
+        string respuestatexto { get; set; }
+        byte[] multimedia { get; set; }
+
+        event EventHandler agregar;
+        event EventHandler volver;
     }
 }

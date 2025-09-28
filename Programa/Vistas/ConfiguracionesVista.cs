@@ -23,7 +23,7 @@ namespace Programa.Vistas
         }
         private void tbTamanoFuente_TextChanged(object sender, EventArgs e)
         {
-            if (!int.TryParse(tbTamanoFuente.Text, out int valor) || valor < 7 || valor > 18)
+            if (!int.TryParse(tbTamanoFuente.Text, out int valor) || valor < 7 || valor > 13)
             {
                 tbTamanoFuente.BackColor = Color.LightCoral;
             }

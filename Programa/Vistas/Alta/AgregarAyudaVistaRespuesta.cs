@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Programa.Vistas.Alta.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,18 +12,53 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
-    public partial class AgregarAyudaVistaRespuesta : Form
+    public partial class AgregarAyudaVistaRespuesta : Form, IAgregarAyudaVistaRespuesta
     {
         public AgregarAyudaVistaRespuesta()
         {
             InitializeComponent();
+            asociarEventos();
         }
 
+        public string respuestatexto
+        {
+            get => trbRespuesta.Text;
+            set => trbRespuesta.Text = value;
+        }
 
-        // Variable que llamaran los otros forms para el comportamiento Singleton
+        public byte[] multimedia
+        {
+            get => multimediaData;
+            set => multimediaData = value;
+        }
+
+        public event EventHandler agregar;
+        public event EventHandler volver;
+
+        private byte[] multimediaData;
+
+        private void asociarEventos()
+        {
+            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+            btnAgregarArchivo.Click += (s, e) => cargarMultimedia();
+        }
+
+        private void cargarMultimedia()
+        {
+            using (OpenFileDialog dialogo = new OpenFileDialog())
+            {
+                dialogo.Filter = "Archivos multimedia|*.mp4;*.mp3;*.wav";
+                if (dialogo.ShowDialog() == DialogResult.OK)
+                {
+                    multimediaData = File.ReadAllBytes(dialogo.FileName);
+                    MessageBox.Show("Multimedia cargada correctamente.");
+                }
+            }
+        }
+
+        // Singleton
         private static AgregarAyudaVistaRespuesta instancia;
-
-        // Metodo para el uso del Singleton
         public static AgregarAyudaVistaRespuesta ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)
@@ -32,9 +69,8 @@ namespace Programa.Vistas.Alta
             else
             {
                 if (instancia.WindowState == FormWindowState.Minimized)
-                {
                     instancia.WindowState = FormWindowState.Normal;
-                }
+
                 instancia.BringToFront();
                 instancia.Activate();
             }

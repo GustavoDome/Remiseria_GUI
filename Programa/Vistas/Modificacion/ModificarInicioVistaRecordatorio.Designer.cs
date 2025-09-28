@@ -37,7 +37,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.rtbComentario = new System.Windows.Forms.RichTextBox();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -122,21 +122,21 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
-            // btnAgregar
+            // btnModificar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(602, 349);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(82, 31);
-            this.btnAgregar.TabIndex = 13;
-            this.btnAgregar.Text = "Modificar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnModificar.Location = new System.Drawing.Point(602, 349);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(82, 31);
+            this.btnModificar.TabIndex = 13;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // ModificarInicioVistaRecordatorio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(696, 392);
-            this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.rtbComentario);
             this.Controls.Add(this.label4);
@@ -164,6 +164,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.RichTextBox rtbComentario;
         private System.Windows.Forms.Button btnVolver;
-        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnModificar;
     }
 }

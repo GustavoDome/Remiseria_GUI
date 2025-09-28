@@ -26,6 +26,6 @@ namespace Programa.Vistas.Interfaces
         void RefrescarEstilos();
         void ocultarBotones(string rol);
         void SetRecordatoriosBindingSource(BindingSource RecordatorioLista);
-        void Mostrar();
+        void ConfigurarGrilla();
     }
 }

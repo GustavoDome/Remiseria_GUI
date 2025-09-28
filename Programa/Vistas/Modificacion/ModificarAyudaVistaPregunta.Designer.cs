@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.rtbPregunta = new System.Windows.Forms.RichTextBox();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.btnIngresar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -61,21 +61,21 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
-            // btnIngresar
+            // btnModificar
             // 
-            this.btnIngresar.Location = new System.Drawing.Point(151, 202);
-            this.btnIngresar.Name = "btnIngresar";
-            this.btnIngresar.Size = new System.Drawing.Size(75, 23);
-            this.btnIngresar.TabIndex = 6;
-            this.btnIngresar.Text = "Ingresar";
-            this.btnIngresar.UseVisualStyleBackColor = true;
+            this.btnModificar.Location = new System.Drawing.Point(151, 202);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 6;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // ModificarAyudaVistaPregunta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(238, 237);
-            this.Controls.Add(this.btnIngresar);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.rtbPregunta);
             this.Controls.Add(this.label1);
@@ -91,6 +91,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.RichTextBox rtbPregunta;
         private System.Windows.Forms.Button btnVolver;
-        private System.Windows.Forms.Button btnIngresar;
+        private System.Windows.Forms.Button btnModificar;
     }
 }
