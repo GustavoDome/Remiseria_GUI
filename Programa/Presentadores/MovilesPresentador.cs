@@ -1,5 +1,7 @@
-﻿using Programa.Modelos;
+﻿using Programa.DTOs;
+using Programa.Modelos;
 using Programa.Modelos.Interfaces;
+using Programa.Presentadores.CUPresentador;
 using Programa.Repositorios;
 using Programa.Vistas;
 using Programa.Vistas.Alta;
@@ -13,6 +15,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Programa.Presentadores.CUPresentador.CUMovilesPresentador;
 
 namespace Programa.Presentadores
 {
@@ -44,25 +47,58 @@ namespace Programa.Presentadores
             var lista = repositorio.ObtenerTodos().ToList(); // usa DTO
             filtrador.DataSource = lista;
         }
+        public void Recargar()
+        {
+            cargar_moviles();
+        }
 
         private void agregar_movil(object sender, EventArgs e)
         {
-            //IAgregarMovilVista agregarVista = AgregarMovilVista.ObtenerInstancia(id);
-            //new AgregarMovilPresentador(agregarVista, repositorio, id);
+            IAgregarMovilesVista vistaAgregar = AgregarMovilesVista.ObtenerInstancia();
+            new CUMovilesPresentador.CUAgregarMovilesPresentador(vistaAgregar, repositorio, this);
         }
 
         private void modificar_movil(object sender, EventArgs e)
         {
             int idMovil = vista.ObtenerIdMovilSeleccionado();
-            //IModificarMovilVista modificarVista = ModificarMovilVista.ObtenerInstancia(idMovil);
-            //new ModificarMovilPresentador(modificarVista, repositorio, idMovil);
-            cargar_moviles();
+            var movilSeleccionado = repositorio.ObtenerTodos().FirstOrDefault(m => m.IdMovil == idMovil);
+            if (movilSeleccionado == null)
+            {
+                MessageBox.Show("Debe seleccionar un móvil para modificar.");
+                return;
+            }
+
+            if (!repositorio.ObtenerTodos().Any(m => m.IdMovil == movilSeleccionado.IdMovil))
+            {
+                MessageBox.Show("El móvil seleccionado no está activo y no puede ser modificado.");
+                return;
+            }
+
+            IModificarMovilesVista vistaModificar = ModificarMovilesVista.ObtenerInstancia();
+            new CUModificarMovilPresentador(vistaModificar, repositorio, movilSeleccionado, this);
         }
 
         private void eliminar_movil(object sender, EventArgs e)
         {
             int idMovil = vista.ObtenerIdMovilSeleccionado();
-            repositorio.Eliminar(idMovil); // si usás borrado lógico, ajustá aquí
+            var movil = repositorio.ObtenerTodos().FirstOrDefault(m => m.IdMovil == idMovil);
+
+            if (movil == null)
+            {
+                MessageBox.Show("Debe seleccionar un móvil válido para eliminar.");
+                return;
+            }
+
+            var confirmacion = MessageBox.Show(
+                $"¿Está seguro que desea eliminar el móvil número {movil.NumeroMovil}?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirmacion != DialogResult.Yes)
+                return;
+
+            repositorio.Eliminar(idMovil);
             cargar_moviles();
         }
 

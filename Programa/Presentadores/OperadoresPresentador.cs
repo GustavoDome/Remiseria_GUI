@@ -1,5 +1,6 @@
 ﻿using Programa.Modelos;
 using Programa.Modelos.Interfaces;
+using Programa.Presentadores.CUPresentador;
 using Programa.Repositorios;
 using Programa.Vistas;
 using Programa.Vistas.Alta;
@@ -13,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Programa.Presentadores.CUPresentador.CUOperadorPresentador;
 
 namespace Programa.Presentadores
 {
@@ -44,26 +46,60 @@ namespace Programa.Presentadores
             var lista = repositorio.MostrarActivos().ToList(); // solo operadores activos
             filtrador.DataSource = lista;
         }
-
+        public void Recargar()
+        {
+            cargar_operadores();
+        }
         private void agregar_operador(object sender, EventArgs e)
         {
-            //IAgregarOperadorVista agregarVista = AgregarOperadorVista.ObtenerInstancia(id);
-            //new AgregarOperadorPresentador(agregarVista, repositorio, id);
+            IAgregarOperadoresVista vistaAgregar = AgregarOperadoresVista.ObtenerInstancia();
+            new CUOperadorPresentador.CUAgregarOperadorPresentador(vistaAgregar, repositorio, this);
         }
 
         private void modificar_operador(object sender, EventArgs e)
         {
             int idOperador = vista.ObtenerIdOperadorSeleccionado();
-            //IModificarOperadorVista modificarVista = ModificarOperadorVista.ObtenerInstancia(idOperador);
-            //new ModificarOperadorPresentador(modificarVista, repositorio, idOperador);
-            //cargar_operadores();
+
+            if (idOperador == this.id)
+            {
+                MessageBox.Show("No puede modificar el operador que está actualmente en uso.");
+                return;
+            }
+            var operador = repositorio.ObtenerTodos().FirstOrDefault(o => o.IdOperador == idOperador);
+            if (operador == null)
+            {
+                MessageBox.Show("Debe seleccionar un operador válido.");
+                return;
+            }
+
+            IModificarOperadorVista vistaModificar = ModificarOperadorVista.ObtenerInstancia();
+            new CUModificarOperadorPresentador(vistaModificar, repositorio, operador, this);
         }
 
         private void eliminar_operador(object sender, EventArgs e)
         {
             int idOperador = vista.ObtenerIdOperadorSeleccionado();
-            repositorio.Eliminar(idOperador);
-            cargar_operadores();
+
+            if (idOperador == this.id)
+            {
+                MessageBox.Show("No puede eliminar el operador que está actualmente en uso.");
+                return;
+            }
+
+            var operador = repositorio.ObtenerTodos().FirstOrDefault(o => o.IdOperador == idOperador);
+            var nombre = operador?.Nombre ?? "el operador seleccionado";
+
+            var confirmacion = MessageBox.Show(
+                $"¿Está seguro que desea eliminar a {nombre}?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirmacion == DialogResult.Yes)
+            {
+                repositorio.Eliminar(idOperador);
+                cargar_operadores();
+            }
         }
 
         private void volver_menu(object sender, EventArgs e)

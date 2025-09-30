@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.Vistas.Alta.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,17 +11,50 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
-    public partial class AgregarOperadoresVista : Form
+    public partial class AgregarOperadoresVista : Form, IAgregarOperadoresVista
     {
         public AgregarOperadoresVista()
         {
             InitializeComponent();
+            asociarEventos();
         }
 
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static AgregarOperadoresVista instancia;
+        public string Nombre
+        {
+            get => txtNombre.Text;
+            set => txtNombre.Text = value;
+        }
 
-        // Metodo para el uso del Singleton
+        public string Direccion
+        {
+            get => txtDireccion.Text;
+            set => txtDireccion.Text = value;
+        }
+
+        public string Telefono
+        {
+            get => txtTelefono.Text;
+            set => txtTelefono.Text = value;
+        }
+
+        public string Contrasena
+        {
+            get => textBox1.Text;
+            set => textBox1.Text = value;
+        }
+
+        public string Rol => rbtnGerente.Checked ? "Gerente" : "Operador";
+
+        public event EventHandler agregar;
+        public event EventHandler volver;
+
+        private void asociarEventos()
+        {
+            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
+        private static AgregarOperadoresVista instancia;
         public static AgregarOperadoresVista ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)
@@ -31,9 +65,8 @@ namespace Programa.Vistas.Alta
             else
             {
                 if (instancia.WindowState == FormWindowState.Minimized)
-                {
                     instancia.WindowState = FormWindowState.Normal;
-                }
+
                 instancia.BringToFront();
                 instancia.Activate();
             }

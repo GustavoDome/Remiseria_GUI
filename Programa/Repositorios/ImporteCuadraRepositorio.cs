@@ -29,18 +29,53 @@ namespace Programa.Repositorios
             }
         }
 
-        public void ModificarImportesCuadras(CuadrasImporteDTO dto)
+        public void ModificarMinimo(int nuevoMinimo)
         {
             using (var contexto = new RemiseriaDbContext())
             {
-                var entidad = contexto.ImportesCuadras.Find(1); // Asumiendo que siempre modificás la fila con ID 1
+                var entidad = contexto.ImportesCuadras.Find(1);
                 if (entidad != null)
                 {
-                    entidad.Cuadras = dto.Cuadras;
-                    entidad.Mandado = dto.Mandado;
-                    entidad.Espera = dto.Espera;
-                    entidad.Minimo = dto.Minimo;
+                    entidad.Minimo = nuevoMinimo;
+                    contexto.SaveChanges();
+                }
+            }
+        }
 
+        public void ModificarCuadras(int nuevoValor)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var entidad = contexto.ImportesCuadras.Find(1);
+                if (entidad != null)
+                {
+                    entidad.Cuadras = nuevoValor;
+                    contexto.SaveChanges();
+                }
+            }
+        }
+
+        public void ModificarMandado(int nuevoValor)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var entidad = contexto.ImportesCuadras.Find(1);
+                if (entidad != null)
+                {
+                    entidad.Mandado = nuevoValor;
+                    contexto.SaveChanges();
+                }
+            }
+        }
+
+        public void ModificarEspera(int nuevoValor)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var entidad = contexto.ImportesCuadras.Find(1);
+                if (entidad != null)
+                {
+                    entidad.Espera = nuevoValor;
                     contexto.SaveChanges();
                 }
             }

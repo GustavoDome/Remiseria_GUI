@@ -279,9 +279,11 @@
     <Compile Include="Vistas\Alta\Interfaces\IAgregarAyudaVistaPregunta.cs" />
     <Compile Include="Vistas\Alta\Interfaces\IAgregarAyudaVistaRespuesta.cs" />
     <Compile Include="Vistas\Alta\Interfaces\IAgregarBasesVista.cs" />
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarBasesVistaComentario.cs" />
     <Compile Include="Vistas\Alta\Interfaces\IAgregarInicioVistaRecordatorio.cs" />
     <Compile Include="Vistas\Alta\Interfaces\IAgregarMovilesVista.cs" />
     <Compile Include="Vistas\Alta\Interfaces\IAgregarOperadoresVista.cs" />
+    <Compile Include="Vistas\Alta\Interfaces\IAgregarPlanillaCostoVista.cs" />
     <Compile Include="Vistas\Alta\Interfaces\IAgregarViajesVista.cs" />
     <Compile Include="Vistas\Alta\Interfaces\IAgregarVueltaVista.cs" />
     <Compile Include="Vistas\AyudaVista.cs">
@@ -331,6 +333,12 @@
     <Compile Include="Vistas\Modificacion\Interfaces\IModificarInicioVistaRecordatorio.cs" />
     <Compile Include="Vistas\Modificacion\Interfaces\IModificarMovilesVista.cs" />
     <Compile Include="Vistas\Modificacion\Interfaces\IModificarOperadoresVista.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarPlanillaCostoVistaCiudad.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarPlanillaCostoVistaCiudadPrecio.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarPlanillaCostoVistaCuadraMandado.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarPlanillaCostoVistaCuadraPrecio.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarPlanillaCostoVistaEsperaCiudad.cs" />
+    <Compile Include="Vistas\Modificacion\Interfaces\IModificarPlanillaCostoVistaEsperaCuadra.cs" />
     <Compile Include="Vistas\Modificacion\Interfaces\IModificarViajesVista.cs" />
     <Compile Include="Vistas\Modificacion\Interfaces\IModificarVueltaVista.cs" />
     <Compile Include="Vistas\Modificacion\ModificarAyudaVistaCategoria.cs">
@@ -386,6 +394,12 @@
     </Compile>
     <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCiudadPrecio.Designer.cs">
       <DependentUpon>ModificarPlanillaCostoVistaCiudadPrecio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCuadraMandado.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCuadraMandado.Designer.cs">
+      <DependentUpon>ModificarPlanillaCostoVistaCuadraMandado.cs</DependentUpon>
     </Compile>
     <Compile Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCuadraPrecio.cs">
       <SubType>Form</SubType>
@@ -530,6 +544,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCiudadPrecio.resx">
       <DependentUpon>ModificarPlanillaCostoVistaCiudadPrecio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCuadraMandado.resx">
+      <DependentUpon>ModificarPlanillaCostoVistaCuadraMandado.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Vistas\Modificacion\ModificarPlanillaCostoVistaCuadraPrecio.resx">
       <DependentUpon>ModificarPlanillaCostoVistaCuadraPrecio.cs</DependentUpon>

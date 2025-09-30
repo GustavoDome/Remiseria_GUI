@@ -76,7 +76,13 @@ namespace Programa.Repositorios
                     .ToList();
             }
         }
-
+        public IEnumerable<Movil> ObtenerTodosDesdeBD()
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                return contexto.Moviles.Include(m => m.Dueno).ToList();
+            }
+        }
         public IEnumerable<MovilDetalleDTO> ObtenerTodos()
         {
             using (var contexto = new RemiseriaDbContext())

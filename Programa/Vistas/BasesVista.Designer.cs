@@ -50,6 +50,8 @@
             // dgvMoviles
             // 
             this.dgvMoviles.AllowUserToAddRows = false;
+            this.dgvMoviles.AllowUserToResizeColumns = false;
+            this.dgvMoviles.AllowUserToResizeRows = false;
             this.dgvMoviles.BackgroundColor = System.Drawing.SystemColors.ActiveBorder;
             this.dgvMoviles.ColumnHeadersHeight = 50;
             this.dgvMoviles.ColumnHeadersVisible = false;

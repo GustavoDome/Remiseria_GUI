@@ -11,7 +11,7 @@ namespace Programa.DTOs
         public int IdBase { get; set; }
         public DateTime Fecha_base { get; set; }
         public bool EstadoBase { get; set; }
-
+        public string Comentario { get; set; }
         // Opcional: si querés mostrar quién la registró
         public string NombreOperador { get; set; }
         public string RolOperador { get; set; }

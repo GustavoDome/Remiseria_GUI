@@ -31,6 +31,7 @@ namespace Programa.Repositorios
                 {
                     baseExistente.EstadoBase = baseEditada.EstadoBase;
                     baseExistente.Fecha_base = baseEditada.Fecha_base;
+                    baseExistente.Comentario = baseEditada.Comentario;
                     baseExistente.IdMovil = baseEditada.IdMovil;
                     baseExistente.IdOperador = baseEditada.IdOperador;
 
@@ -50,6 +51,18 @@ namespace Programa.Repositorios
                 }
             }
         }
+        public void EditarComentario(Base baseEditada)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var baseExistente = contexto.Bases.Find(baseEditada.IdBase);
+                if (baseExistente != null)
+                {
+                    baseExistente.Comentario = baseEditada.Comentario;
+                    contexto.SaveChanges();
+                }
+            }
+        }
         public IEnumerable<MovilResumenDTO> SeleccionarMovil()
         {
             using (var contexto = new RemiseriaDbContext())
@@ -64,7 +77,6 @@ namespace Programa.Repositorios
                     .ToList();
             }
         }
-
         public IEnumerable<BaseDetalleDTO> MostrarTodo(int id_movil)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -72,11 +84,13 @@ namespace Programa.Repositorios
                 return contexto.Bases
                     .Include(b => b.Operador)
                     .Where(b => b.Activo && b.IdMovil == id_movil)
+                    .OrderBy(b => b.Fecha_base)
                     .Select(b => new BaseDetalleDTO
                     {
                         IdBase = b.IdBase,
                         Fecha_base = b.Fecha_base,
                         EstadoBase = b.EstadoBase,
+                        Comentario = b.Comentario,
                         NombreOperador = b.Operador.Nombre,
                         RolOperador = b.Operador.RolUsuario
                     })

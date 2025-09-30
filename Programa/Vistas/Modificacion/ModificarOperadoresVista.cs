@@ -1,41 +1,65 @@
-﻿using Programa.Vistas.Alta;
+﻿using Programa.Vistas.Modificacion.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
-    public partial class ModificarOperadoresVista : Form
+    public partial class ModificarOperadorVista : Form, IModificarOperadorVista
     {
-        public ModificarOperadoresVista()
+        public ModificarOperadorVista()
         {
             InitializeComponent();
+            asociarEventos();
         }
 
+        public string Nombre
+        {
+            get => txtNombre.Text;
+            set => txtNombre.Text = value;
+        }
 
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static ModificarOperadoresVista instancia;
+        public string Direccion
+        {
+            get => txtDireccion.Text;
+            set => txtDireccion.Text = value;
+        }
 
-        // Metodo para el uso del Singleton
-        public static ModificarOperadoresVista ObtenerInstancia()
+        public string Telefono
+        {
+            get => txtTelefono.Text;
+            set => txtTelefono.Text = value;
+        }
+
+        public string Contrasena
+        {
+            get => textBox1.Text;
+            set => textBox1.Text = value;
+        }
+
+        public string Rol => rbtnGerente.Checked ? "Gerente" : "Operador";
+
+        public event EventHandler modificar;
+        public event EventHandler volver;
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
+        private static ModificarOperadorVista instancia;
+        public static ModificarOperadorVista ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)
             {
-                instancia = new ModificarOperadoresVista();
+                instancia = new ModificarOperadorVista();
                 instancia.Show();
             }
             else
             {
                 if (instancia.WindowState == FormWindowState.Minimized)
-                {
                     instancia.WindowState = FormWindowState.Normal;
-                }
+
                 instancia.BringToFront();
                 instancia.Activate();
             }

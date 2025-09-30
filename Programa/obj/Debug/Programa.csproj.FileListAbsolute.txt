@@ -68,7 +68,6 @@ C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Program
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.Vistas.Modificacion.ModificarBasesVista.resources
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.Vistas.Modificacion.ModificarInicioVistaRecordatorio.resources
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.Vistas.Modificacion.ModificarMovilesVista.resources
-C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.Vistas.Modificacion.ModificarOperadoresVista.resources
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.Vistas.Modificacion.ModificarPlanillaCostoVistaCiudad.resources
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.Vistas.Modificacion.ModificarPlanillaCostoVistaCiudadPrecio.resources
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.Vistas.Modificacion.ModificarPlanillaCostoVistaCuadraPrecio.resources
@@ -99,3 +98,5 @@ C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Program
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\bin\Debug\EntityFramework.xml
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\bin\Debug\EntityFramework6.Npgsql.xml
+C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.Vistas.Modificacion.ModificarOperadorVista.resources
+C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.Vistas.Modificacion.ModificarPlanillaCostoVistaCuadraMandado.resources

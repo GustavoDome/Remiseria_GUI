@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.Vistas.Modificacion.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,17 +11,37 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
-    public partial class ModificarBasesVista : Form
+    public partial class ModificarBasesVista : Form, IModificarBasesVista
     {
         public ModificarBasesVista()
         {
             InitializeComponent();
+            asociarEventos();
         }
 
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static ModificarBasesVista instancia;
+        public DateTime fecha
+        {
+            get => dtpFecha.Value;
+            set => dtpFecha.Value = value;
+        }
 
-        // Metodo para el uso del Singleton
+        public string comentario
+        {
+            get => textBox1.Text;
+            set => textBox1.Text = value;
+        }
+
+        public event EventHandler modificar;
+        public event EventHandler volver;
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
+        // Singleton
+        private static ModificarBasesVista instancia;
         public static ModificarBasesVista ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)
@@ -31,9 +52,8 @@ namespace Programa.Vistas.Modificacion
             else
             {
                 if (instancia.WindowState == FormWindowState.Minimized)
-                {
                     instancia.WindowState = FormWindowState.Normal;
-                }
+
                 instancia.BringToFront();
                 instancia.Activate();
             }

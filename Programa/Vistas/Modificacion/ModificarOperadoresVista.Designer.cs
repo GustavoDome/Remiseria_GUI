@@ -1,6 +1,6 @@
 ﻿namespace Programa.Vistas.Modificacion
 {
-    partial class ModificarOperadoresVista
+    partial class ModificarOperadorVista
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtTelefono = new System.Windows.Forms.TextBox();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.btnAgregar = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.txtcontrasena = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
@@ -140,14 +140,14 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
-            // btnAgregar
+            // btnModificar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(467, 311);
-            this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(94, 33);
-            this.btnAgregar.TabIndex = 19;
-            this.btnAgregar.Text = "Modificar";
-            this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnModificar.Location = new System.Drawing.Point(467, 311);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(94, 33);
+            this.btnModificar.TabIndex = 19;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // txtcontrasena
             // 
@@ -167,14 +167,14 @@
             this.textBox1.Size = new System.Drawing.Size(549, 26);
             this.textBox1.TabIndex = 21;
             // 
-            // ModificarOperadoresVista
+            // ModificarOperadorVista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 356);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.txtcontrasena);
-            this.Controls.Add(this.btnAgregar);
+            this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtTelefono);
             this.Controls.Add(this.label4);
@@ -185,7 +185,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.label1);
-            this.Name = "ModificarOperadoresVista";
+            this.Name = "ModificarOperadorVista";
             this.Text = "Modificar Operador";
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -204,7 +204,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtTelefono;
         private System.Windows.Forms.Button btnVolver;
-        private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.Button btnModificar;
         private System.Windows.Forms.Label txtcontrasena;
         private System.Windows.Forms.TextBox textBox1;
     }

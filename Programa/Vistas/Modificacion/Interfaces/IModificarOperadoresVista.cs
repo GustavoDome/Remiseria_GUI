@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Modificacion.Interfaces
 {
-    public interface IModificarOperadoresVista
+    public interface IModificarOperadorVista
     {
+        string Nombre { get; set; }
+        string Direccion { get; set; }
+        string Telefono { get; set; }
+        string Contrasena { get; set; }
+        string Rol { get; }
+
+        event EventHandler modificar;
+        event EventHandler volver;
     }
 }

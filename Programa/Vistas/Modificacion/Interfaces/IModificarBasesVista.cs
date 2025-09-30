@@ -8,5 +8,10 @@ namespace Programa.Vistas.Modificacion.Interfaces
 {
     public interface IModificarBasesVista
     {
+        DateTime fecha { get; set; }
+        string comentario { get; set; }
+
+        event EventHandler modificar;
+        event EventHandler volver;
     }
 }

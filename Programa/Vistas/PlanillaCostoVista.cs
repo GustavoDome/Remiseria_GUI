@@ -24,6 +24,11 @@ namespace Programa.Vistas
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+            dgvCuadras.ScrollBars = ScrollBars.Horizontal;
+            dgvCuadras.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvCuadras.AllowUserToResizeRows = false;
+            dgvCuadras.Height = 334;
+            dgvCuadras.MaximumSize = new Size(972, 334);
         }
 
         public event EventHandler modificarCuadrasCosto;

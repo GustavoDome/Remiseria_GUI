@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.Vistas.Modificacion.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,17 +11,30 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
-    public partial class ModificarPlanillaCostoVistaEsperaCiudad : Form
+    public partial class ModificarPlanillaCostoVistaEsperaCiudad : Form, IModificarPlanillaCostoVistaEsperaCiudad
     {
         public ModificarPlanillaCostoVistaEsperaCiudad()
         {
             InitializeComponent();
+            asociarEventos();
         }
 
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static ModificarPlanillaCostoVistaEsperaCiudad instancia;
+        public int MontoEspera
+        {
+            get => int.TryParse(txtEsperaCiudad.Text, out int m) ? m : 0;
+            set => txtEsperaCiudad.Text = value.ToString();
+        }
 
-        // Metodo para el uso del Singleton
+        public event EventHandler modificar;
+        public event EventHandler volver;
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
+        private static ModificarPlanillaCostoVistaEsperaCiudad instancia;
         public static ModificarPlanillaCostoVistaEsperaCiudad ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)
@@ -31,9 +45,8 @@ namespace Programa.Vistas.Modificacion
             else
             {
                 if (instancia.WindowState == FormWindowState.Minimized)
-                {
                     instancia.WindowState = FormWindowState.Normal;
-                }
+
                 instancia.BringToFront();
                 instancia.Activate();
             }

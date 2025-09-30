@@ -77,6 +77,19 @@ namespace Programa.Presentadores.CUPresentador
                 this.id = id;
                 this.inicioPresentador = inicioPresentador;
 
+                RecordatorioDTO recordatorio = this.repositorio.ObtenerPorId(this.idrecordatorio.Value);
+                if (recordatorio == null)
+                {
+                    MessageBox.Show("No se encontró el recordatorio en la base de datos.");
+                    return;
+                }
+
+                // ✅ Precargar los datos en la vista
+                this.modificarRecordatorio.fecha = recordatorio.FechaDia.Value;
+                this.modificarRecordatorio.hora = recordatorio.FechaHora.Value;
+                this.modificarRecordatorio.direccion = recordatorio.Direccion;
+
+                // Suscripción a eventos
                 this.modificarRecordatorio.modificar += modificar_recordatorio;
                 this.modificarRecordatorio.volver += volver_inicio;
 

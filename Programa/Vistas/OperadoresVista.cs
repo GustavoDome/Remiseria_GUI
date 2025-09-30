@@ -55,7 +55,7 @@ namespace Programa.Vistas
         }
         public int ObtenerIdOperadorSeleccionado()
         {
-            return Convert.ToInt32(dgvOperadores.CurrentRow.Cells["ID"].Value);
+            return Convert.ToInt32(dgvOperadores.CurrentRow.Cells[0].Value);
         }
 
         // Metodo para el uso del Singleton

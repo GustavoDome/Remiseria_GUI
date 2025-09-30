@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.Vistas.Alta.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,17 +11,36 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
-    public partial class AgregarPlanillaCostoVista : Form
+    public partial class AgregarPlanillaCostoVista : Form, IAgregarPlanillaCostoVista
     {
         public AgregarPlanillaCostoVista()
         {
             InitializeComponent();
+            asociarEventos();
         }
 
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static AgregarPlanillaCostoVista instancia;
+        public string NombreCiudad
+        {
+            get => txtCiudad.Text;
+            set => txtCiudad.Text = value;
+        }
 
-        // Metodo para el uso del Singleton
+        public int Kilometros
+        {
+            get => int.TryParse(txtKilometros.Text, out int km) ? km : 0;
+            set => txtKilometros.Text = value.ToString();
+        }
+
+        public event EventHandler agregar;
+        public event EventHandler volver;
+
+        private void asociarEventos()
+        {
+            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
+        private static AgregarPlanillaCostoVista instancia;
         public static AgregarPlanillaCostoVista ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)
@@ -31,9 +51,8 @@ namespace Programa.Vistas.Alta
             else
             {
                 if (instancia.WindowState == FormWindowState.Minimized)
-                {
                     instancia.WindowState = FormWindowState.Normal;
-                }
+
                 instancia.BringToFront();
                 instancia.Activate();
             }

@@ -8,5 +8,9 @@ namespace Programa.Vistas.Alta.Interfaces
 {
     public interface IAgregarBasesVista
     {
+        DateTime fecha { get; set; }
+
+        event EventHandler agregar;
+        event EventHandler volver;
     }
 }

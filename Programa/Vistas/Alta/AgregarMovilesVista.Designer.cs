@@ -45,9 +45,10 @@
             this.label8 = new System.Windows.Forms.Label();
             this.txtApellidoRemisero = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.clbChoferRemisero = new System.Windows.Forms.CheckedListBox();
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
+            this.rbtnDueno = new System.Windows.Forms.RadioButton();
+            this.rbtnChofer = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // txtNumeroMovil
@@ -196,18 +197,6 @@
             this.label9.TabIndex = 19;
             this.label9.Text = "¿El remisero es dueño del auto?";
             // 
-            // clbChoferRemisero
-            // 
-            this.clbChoferRemisero.FormattingEnabled = true;
-            this.clbChoferRemisero.Items.AddRange(new object[] {
-            "SI",
-            "NO"});
-            this.clbChoferRemisero.Location = new System.Drawing.Point(323, 305);
-            this.clbChoferRemisero.MultiColumn = true;
-            this.clbChoferRemisero.Name = "clbChoferRemisero";
-            this.clbChoferRemisero.Size = new System.Drawing.Size(162, 19);
-            this.clbChoferRemisero.TabIndex = 0;
-            // 
             // btnVolver
             // 
             this.btnVolver.Location = new System.Drawing.Point(19, 368);
@@ -226,14 +215,37 @@
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             // 
+            // rbtnDueno
+            // 
+            this.rbtnDueno.AutoSize = true;
+            this.rbtnDueno.Location = new System.Drawing.Point(323, 318);
+            this.rbtnDueno.Name = "rbtnDueno";
+            this.rbtnDueno.Size = new System.Drawing.Size(34, 17);
+            this.rbtnDueno.TabIndex = 22;
+            this.rbtnDueno.TabStop = true;
+            this.rbtnDueno.Text = "Si";
+            this.rbtnDueno.UseVisualStyleBackColor = true;
+            // 
+            // rbtnChofer
+            // 
+            this.rbtnChofer.AutoSize = true;
+            this.rbtnChofer.Location = new System.Drawing.Point(446, 318);
+            this.rbtnChofer.Name = "rbtnChofer";
+            this.rbtnChofer.Size = new System.Drawing.Size(39, 17);
+            this.rbtnChofer.TabIndex = 23;
+            this.rbtnChofer.TabStop = true;
+            this.rbtnChofer.Text = "No";
+            this.rbtnChofer.UseVisualStyleBackColor = true;
+            // 
             // AgregarMovilesVista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(573, 418);
+            this.Controls.Add(this.rbtnChofer);
+            this.Controls.Add(this.rbtnDueno);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnVolver);
-            this.Controls.Add(this.clbChoferRemisero);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtApellidoRemisero);
             this.Controls.Add(this.label8);
@@ -277,8 +289,9 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtApellidoRemisero;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckedListBox clbChoferRemisero;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnAgregar;
+        private System.Windows.Forms.RadioButton rbtnDueno;
+        private System.Windows.Forms.RadioButton rbtnChofer;
     }
 }

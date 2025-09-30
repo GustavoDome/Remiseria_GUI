@@ -144,9 +144,13 @@
             // 
             // dgvCuadras
             // 
+            this.dgvCuadras.AllowUserToResizeColumns = false;
+            this.dgvCuadras.AllowUserToResizeRows = false;
+            this.dgvCuadras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
             this.dgvCuadras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCuadras.Location = new System.Drawing.Point(6, 6);
             this.dgvCuadras.Name = "dgvCuadras";
+            this.dgvCuadras.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
             this.dgvCuadras.Size = new System.Drawing.Size(972, 334);
             this.dgvCuadras.TabIndex = 0;
             // 

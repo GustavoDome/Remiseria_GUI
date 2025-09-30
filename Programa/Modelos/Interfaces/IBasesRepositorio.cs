@@ -13,6 +13,7 @@ namespace Programa.Modelos.Interfaces
         void Editar(Base entidad);
         void Eliminar(int id);
 
+        void EditarComentario(Base baseEditada);
         IEnumerable<MovilResumenDTO> SeleccionarMovil(); // reemplaza MovilModeloId
         IEnumerable<BaseDetalleDTO> MostrarTodo(int id_movil);
     }

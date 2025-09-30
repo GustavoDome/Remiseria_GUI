@@ -29,11 +29,11 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtCuadrasMinimo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.txtCuadrasMonto = new System.Windows.Forms.TextBox();
+            this.btnVolver = new System.Windows.Forms.Button();
+            this.btnModificar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -46,12 +46,12 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Ingrese el monto por cada cuadra";
             // 
-            // textBox1
+            // txtCuadrasMinimo
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 43);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(298, 20);
-            this.textBox1.TabIndex = 3;
+            this.txtCuadrasMinimo.Location = new System.Drawing.Point(12, 43);
+            this.txtCuadrasMinimo.Name = "txtCuadrasMinimo";
+            this.txtCuadrasMinimo.Size = new System.Drawing.Size(298, 20);
+            this.txtCuadrasMinimo.TabIndex = 3;
             // 
             // label2
             // 
@@ -63,41 +63,41 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Ingrese el monto base de las cuadras";
             // 
-            // textBox2
+            // txtCuadrasMonto
             // 
-            this.textBox2.Location = new System.Drawing.Point(12, 120);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(298, 20);
-            this.textBox2.TabIndex = 5;
+            this.txtCuadrasMonto.Location = new System.Drawing.Point(12, 120);
+            this.txtCuadrasMonto.Name = "txtCuadrasMonto";
+            this.txtCuadrasMonto.Size = new System.Drawing.Size(298, 20);
+            this.txtCuadrasMonto.TabIndex = 5;
             // 
-            // button1
+            // btnVolver
             // 
-            this.button1.Location = new System.Drawing.Point(12, 167);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Volver";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnVolver.Location = new System.Drawing.Point(12, 167);
+            this.btnVolver.Name = "btnVolver";
+            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.TabIndex = 6;
+            this.btnVolver.Text = "Volver";
+            this.btnVolver.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnModificar
             // 
-            this.button2.Location = new System.Drawing.Point(239, 167);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 7;
-            this.button2.Text = "Modificar";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnModificar.Location = new System.Drawing.Point(239, 167);
+            this.btnModificar.Name = "btnModificar";
+            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.TabIndex = 7;
+            this.btnModificar.Text = "Modificar";
+            this.btnModificar.UseVisualStyleBackColor = true;
             // 
             // ModificarPlanillaCostoVistaCuadraPrecio
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(326, 202);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.btnModificar);
+            this.Controls.Add(this.btnVolver);
+            this.Controls.Add(this.txtCuadrasMonto);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtCuadrasMinimo);
             this.Controls.Add(this.label1);
             this.Name = "ModificarPlanillaCostoVistaCuadraPrecio";
             this.Text = "Modificar costo de cada cuadra";
@@ -109,10 +109,10 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtCuadrasMinimo;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox txtCuadrasMonto;
+        private System.Windows.Forms.Button btnVolver;
+        private System.Windows.Forms.Button btnModificar;
     }
 }

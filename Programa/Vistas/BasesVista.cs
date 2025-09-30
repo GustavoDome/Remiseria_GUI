@@ -1,4 +1,5 @@
-﻿using Programa.Estilos;
+﻿using Programa.DTOs;
+using Programa.Estilos;
 using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -71,7 +72,20 @@ namespace Programa.Vistas
 
         public void mostrarMoviles(BindingSource listaMoviles)
         {
+            dgvMoviles.AutoGenerateColumns = true;
             dgvMoviles.DataSource = listaMoviles;
+
+            dgvMoviles.RowHeadersVisible = false;
+            dgvMoviles.AllowUserToAddRows = false;
+            dgvMoviles.AllowUserToDeleteRows = false;
+            dgvMoviles.ReadOnly = true;
+
+            // ✅ Ocultar la primera columna ("Propiedad")
+            if (dgvMoviles.Columns.Count > 0)
+                dgvMoviles.Columns[0].Visible = false;
+
+            if (dgvMoviles.Rows.Count > 0)
+                dgvMoviles.Rows[0].Visible = false;
         }
 
         public void mostrarBases(BindingSource listaBases, int idMovil)
@@ -93,16 +107,12 @@ namespace Programa.Vistas
             btnEliminar.Click += (s, e) => eliminarBase?.Invoke(this, EventArgs.Empty);
             btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
 
-            dgvMoviles.SelectionChanged += (s, e) =>
+            dgvMoviles.CellClick += (s, e) =>
             {
-                if (dgvMoviles.CurrentRow != null && dgvMoviles.CurrentRow.Cells.Count > 1)
+                if (e.RowIndex >= 0 && e.ColumnIndex > 0) // ignorar columna "Propiedad"
                 {
-                    var valor = dgvMoviles.CurrentRow.Cells[1].Value?.ToString();
-                    if (int.TryParse(valor, out int idMovil))
-                    {
-                        id_movil = idMovil;
-                        OnMovilSeleccionado?.Invoke(this, EventArgs.Empty);
-                    }
+                    id_movil = e.ColumnIndex; // delegamos el índice de columna como identificador lógico
+                    OnMovilSeleccionado?.Invoke(this, EventArgs.Empty);
                 }
             };
         }

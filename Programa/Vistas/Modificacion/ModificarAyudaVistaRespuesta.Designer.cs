@@ -40,7 +40,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(55, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(354, 20);
             this.label1.TabIndex = 5;
@@ -50,33 +50,33 @@
             // 
             this.trbRespuesta.Location = new System.Drawing.Point(16, 32);
             this.trbRespuesta.Name = "trbRespuesta";
-            this.trbRespuesta.Size = new System.Drawing.Size(350, 138);
+            this.trbRespuesta.Size = new System.Drawing.Size(449, 156);
             this.trbRespuesta.TabIndex = 6;
             this.trbRespuesta.Text = "";
             // 
             // btnAgregarArchivo
             // 
-            this.btnAgregarArchivo.Location = new System.Drawing.Point(16, 196);
+            this.btnAgregarArchivo.Location = new System.Drawing.Point(128, 215);
             this.btnAgregarArchivo.Name = "btnAgregarArchivo";
-            this.btnAgregarArchivo.Size = new System.Drawing.Size(91, 23);
+            this.btnAgregarArchivo.Size = new System.Drawing.Size(225, 44);
             this.btnAgregarArchivo.TabIndex = 7;
             this.btnAgregarArchivo.Text = "Agregar Archivo";
             this.btnAgregarArchivo.UseVisualStyleBackColor = true;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(144, 196);
+            this.btnVolver.Location = new System.Drawing.Point(16, 215);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(91, 23);
+            this.btnVolver.Size = new System.Drawing.Size(106, 44);
             this.btnVolver.TabIndex = 8;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(275, 196);
+            this.btnModificar.Location = new System.Drawing.Point(359, 215);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(91, 23);
+            this.btnModificar.Size = new System.Drawing.Size(106, 44);
             this.btnModificar.TabIndex = 9;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -89,7 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(382, 231);
+            this.ClientSize = new System.Drawing.Size(473, 271);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAgregarArchivo);

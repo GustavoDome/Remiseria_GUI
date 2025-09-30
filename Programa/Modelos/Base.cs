@@ -18,6 +18,9 @@ namespace Programa.Modelos
         [Column("fecha_base")]
         public DateTime Fecha_base { get; set; }
 
+        [Column("comentario")]
+        public string Comentario { get; set; }
+
         [Column("id_movil")]
         public int IdMovil { get; set; }
 

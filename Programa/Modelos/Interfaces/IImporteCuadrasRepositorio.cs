@@ -10,6 +10,9 @@ namespace Programa.Modelos.Interfaces
     public interface IImporteCuadrasRepositorio
     {
         CuadrasImporteDTO ObtenerImportes();
-        void ModificarImportesCuadras(CuadrasImporteDTO dto);
+        void ModificarMinimo(int nuevoMinimo);
+        void ModificarCuadras(int nuevoValor);
+        void ModificarMandado(int nuevoValor);
+        void ModificarEspera(int nuevoValor);
     }
 }

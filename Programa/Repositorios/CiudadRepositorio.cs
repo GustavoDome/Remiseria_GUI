@@ -19,12 +19,15 @@ namespace Programa.Repositorios
         {
             using (var contexto = new RemiseriaDbContext())
             {
+                var precioKm = contexto.ImportesCiudad.Find(1)?.Kilometro ?? 0;
+
                 return contexto.Ciudades
                     .Select(c => new CiudadDTO
                     {
                         IdCiudad = c.IdCiudad,
                         NombreCiudad = c.NombreCiudad,
-                        Kilometros = c.Importe
+                        Kilometros = c.Importe, // este campo representa los KM
+                        Importe = c.Importe * precioKm
                     })
                     .ToList();
             }

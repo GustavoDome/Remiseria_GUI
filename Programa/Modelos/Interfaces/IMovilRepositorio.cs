@@ -8,6 +8,7 @@ namespace Programa.Modelos.Interfaces
         void Agregar(Movil movil);
         void Editar(Movil movil);
         void Eliminar(int id);
+        IEnumerable<Movil> ObtenerTodosDesdeBD();
         IEnumerable<MovilDetalleDTO> ObtenerTodos();
         IEnumerable<MovilResumenDTO> ObtenerMovilesReducidos();
     }
