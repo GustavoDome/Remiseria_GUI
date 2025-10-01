@@ -17,7 +17,7 @@ namespace Programa.Vistas
         public ConfiguracionesVista()
         {
             InitializeComponent();
-            this.Load += new System.EventHandler(this.ConfiguracionVista_Load);
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             tbTamanoFuente.TextChanged += tbTamanoFuente_TextChanged;
             asociacionPresentador();
         }
@@ -35,10 +35,10 @@ namespace Programa.Vistas
             }
         }
 
-        private void ConfiguracionVista_Load(object sender, EventArgs e)
+        private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
-            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this); // ← esto ya invoca el método recursivo
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
         public void RefrescarEstilos()
         {

@@ -75,8 +75,7 @@ namespace Programa.Presentadores
             {
                 this.id_movil = movil.IdMovil;
                 var listaBases = repositorio.MostrarTodo(this.id_movil).ToList();
-                tablaBases.DataSource = listaBases;
-                vista.mostrarBases(tablaBases, this.id_movil);
+                vista.mostrarBases(listaBases);
             }
         }
 
@@ -94,12 +93,14 @@ namespace Programa.Presentadores
 
         private void modificar_base(object sender, EventArgs e)
         {
-            var baseSeleccionada = tablaBases.Current as BaseDetalleDTO;
-            if (baseSeleccionada == null)
+            var baseId = vista.ObtenerBaseSeleccionada();
+            if (baseId == null)
             {
-                MessageBox.Show("Debe seleccionar una base para modificar.");
+                MessageBox.Show("Debe seleccionar una base.");
                 return;
             }
+
+            var baseSeleccionada = repositorio.MostrarTodo(id_movil).FirstOrDefault(b => b.IdBase == baseId.Value);
 
             IModificarBasesVista vistaModificar = ModificarBasesVista.ObtenerInstancia();
             new CUBasesPresentador.CUModificarBasePresentador(repositorio, vistaModificar, id, baseSeleccionada, this);
@@ -107,12 +108,14 @@ namespace Programa.Presentadores
 
         private void comentar_base(object sender, EventArgs e)
         {
-            var baseSeleccionada = tablaBases.Current as BaseDetalleDTO;
-            if (baseSeleccionada == null)
+            var baseId = vista.ObtenerBaseSeleccionada();
+            if (baseId == null)
             {
-                MessageBox.Show("Debe seleccionar una base para comentar.");
+                MessageBox.Show("Debe seleccionar una base.");
                 return;
             }
+
+            var baseSeleccionada = repositorio.MostrarTodo(id_movil).FirstOrDefault(b => b.IdBase == baseId.Value);
 
             IAgregarBasesVistaComentario vistaComentario = AgregarBasesVistaComentario.ObtenerInstancia();
             new CUBasesPresentador.CUComentarioBasePresentador(repositorio, vistaComentario, baseSeleccionada, this);
@@ -120,12 +123,14 @@ namespace Programa.Presentadores
 
         private void eliminar_base(object sender, EventArgs e)
         {
-            var baseSeleccionada = tablaBases.Current as BaseDetalleDTO;
-            if (baseSeleccionada == null)
+            var baseId = vista.ObtenerBaseSeleccionada();
+            if (baseId == null)
             {
-                MessageBox.Show("Debe seleccionar una base para eliminar.");
+                MessageBox.Show("Debe seleccionar una base.");
                 return;
             }
+
+            var baseSeleccionada = repositorio.MostrarTodo(id_movil).FirstOrDefault(b => b.IdBase == baseId.Value);
 
             var confirmacion = MessageBox.Show(
                 "¿Está seguro que desea eliminar esta base?",

@@ -53,27 +53,27 @@
             this.clbMoviles.FormattingEnabled = true;
             this.clbMoviles.HorizontalExtent = 4;
             this.clbMoviles.HorizontalScrollbar = true;
-            this.clbMoviles.Location = new System.Drawing.Point(12, 32);
+            this.clbMoviles.Location = new System.Drawing.Point(12, 41);
             this.clbMoviles.MultiColumn = true;
             this.clbMoviles.Name = "clbMoviles";
             this.clbMoviles.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.clbMoviles.Size = new System.Drawing.Size(444, 319);
+            this.clbMoviles.Size = new System.Drawing.Size(444, 277);
             this.clbMoviles.TabIndex = 22;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 461);
+            this.btnVolver.Location = new System.Drawing.Point(12, 442);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(83, 40);
+            this.btnVolver.Size = new System.Drawing.Size(113, 59);
             this.btnVolver.TabIndex = 23;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(373, 461);
+            this.btnAgregar.Location = new System.Drawing.Point(343, 442);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(83, 40);
+            this.btnAgregar.Size = new System.Drawing.Size(113, 59);
             this.btnAgregar.TabIndex = 24;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -82,7 +82,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(120, 374);
+            this.label1.Location = new System.Drawing.Point(124, 341);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(201, 20);
             this.label1.TabIndex = 25;
@@ -90,7 +90,7 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 397);
+            this.textBox1.Location = new System.Drawing.Point(12, 381);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(444, 20);
             this.textBox1.TabIndex = 26;

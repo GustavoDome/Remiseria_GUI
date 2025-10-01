@@ -18,35 +18,31 @@ namespace Programa.Vistas
         public BasesVista()
         {
             InitializeComponent();
-            this.Load += new System.EventHandler(this.BasesTemaVista_Load);
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             asociacionPresentador();
             this.Load += BasesVista_Load;
         }
+        private void asociacionPresentador()
+        {
+            btnAgregar.Click += (s, e) => agregarBase?.Invoke(this, EventArgs.Empty);
+            btnModificar.Click += (s, e) => modificarBase?.Invoke(this, EventArgs.Empty);
+            btnComentar.Click += (s, e) => comentarBase?.Invoke(this, EventArgs.Empty);
+            btnEliminar.Click += (s, e) => eliminarBase?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
 
-        private void BasesTemaVista_Load(object sender, EventArgs e)
+            dgvMoviles.CellClick += (s, e) =>
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex > 0) // ignorar columna "Propiedad"
+                {
+                    id_movil = e.ColumnIndex; // delegamos el índice de columna como identificador lógico
+                    OnMovilSeleccionado?.Invoke(this, EventArgs.Empty);
+                }
+            };
+        }
+        private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
-        }
-
-        // Singleton
-        private static BasesVista instancia;
-        public static BasesVista ObtenerInstancia()
-        {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new BasesVista();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                    instancia.WindowState = FormWindowState.Normal;
-
-                instancia.BringToFront();
-                instancia.Activate();
-            }
-            return instancia;
         }
 
         // Eventos
@@ -87,34 +83,108 @@ namespace Programa.Vistas
             if (dgvMoviles.Rows.Count > 0)
                 dgvMoviles.Rows[0].Visible = false;
         }
-
-        public void mostrarBases(BindingSource listaBases, int idMovil)
-        {
-            dgvBases.DataSource = listaBases;
-        }
-
         private void BasesVista_Load(object sender, EventArgs e)
         {
             dgvMoviles.ClearSelection();
-            dgvBases.DataSource = null;
+        }
+        public void mostrarBases(List<BaseDetalleDTO> listaBases)
+        {
+            TLPBases.SuspendLayout();
+            TLPBases.Controls.Clear();
+            TLPBases.ColumnStyles.Clear();
+            TLPBases.RowStyles.Clear();
+
+            TLPBases.AutoScroll = false;
+            TLPBases.AutoSize = false;
+            TLPBases.CellBorderStyle = TableLayoutPanelCellBorderStyle.None;
+            TLPBases.Padding = new Padding(0);
+            TLPBases.BackColor = Color.White;
+
+            PBases.AutoScroll = true;
+            PBases.HorizontalScroll.Enabled = true;
+            PBases.VerticalScroll.Enabled = false;
+            PBases.Padding = new Padding(0);
+
+            int altoFila = 30;
+            int anchoCelda = 700;
+            int filasPorColumna = Math.Max(1, PBases.Height / altoFila);
+            int totalBases = listaBases.Count;
+            int columnasNecesarias = (int)Math.Ceiling((double)totalBases / filasPorColumna);
+
+            TLPBases.ColumnCount = columnasNecesarias;
+            TLPBases.RowCount = filasPorColumna;
+
+            for (int c = 0; c < columnasNecesarias; c++)
+                TLPBases.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, anchoCelda));
+
+            for (int r = 0; r < filasPorColumna; r++)
+                TLPBases.RowStyles.Add(new RowStyle(SizeType.Absolute, altoFila));
+
+            foreach (var baseItem in listaBases)
+            {
+                int index = listaBases.IndexOf(baseItem);
+                int columna = index / filasPorColumna;
+                int fila = index % filasPorColumna;
+
+                var lbl = new Label
+                {
+                    Text = $"Fecha: {baseItem.Fecha_base:dd/MM/yyyy} Estado: {(baseItem.EstadoBase ? "Activa" : "Inactiva")} Comentario: {baseItem.Comentario} Operador: {baseItem.NombreOperador}",
+                    Font = TLPBases.Font,
+                    Size = new Size(anchoCelda - 4, altoFila),
+                    BorderStyle = BorderStyle.FixedSingle,
+                    Margin = new Padding(2),
+                    Tag = baseItem.IdBase,
+                    Cursor = Cursors.Hand,
+                    BackColor = Color.LightGray,
+                    AutoEllipsis = true,
+                    TextAlign = ContentAlignment.MiddleCenter
+                };
+
+                lbl.Click += (s, e) =>
+                {
+                    TLPBases.Tag = baseItem.IdBase;
+                    lbl.BackColor = Color.LightBlue;
+                    foreach (Control ctrl in TLPBases.Controls)
+                        if (ctrl != lbl && ctrl is Label l) l.BackColor = Color.LightGray;
+                };
+
+                TLPBases.Controls.Add(lbl, columna, fila);
+            }
+
+            TLPBases.Width = columnasNecesarias * anchoCelda;
+            int margenVertical = 2;
+            int alturaReal = filasPorColumna * (altoFila + margenVertical * 2);
+            TLPBases.Height = Math.Min(PBases.ClientSize.Height - 2, alturaReal);
+            TLPBases.Dock = DockStyle.None;
+            TLPBases.Anchor = AnchorStyles.Top | AnchorStyles.Left;
+
+            ScrollHelper.OcultarScrollVertical(PBases);
+            TLPBases.ResumeLayout();
         }
 
-        private void asociacionPresentador()
+        public int? ObtenerBaseSeleccionada()
         {
-            btnAgregar.Click += (s, e) => agregarBase?.Invoke(this, EventArgs.Empty);
-            btnModificar.Click += (s, e) => modificarBase?.Invoke(this, EventArgs.Empty);
-            btnComentar.Click += (s, e) => comentarBase?.Invoke(this, EventArgs.Empty);
-            btnEliminar.Click += (s, e) => eliminarBase?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+            return TLPBases.Tag is int id ? id : (int?)null;
+        }
 
-            dgvMoviles.CellClick += (s, e) =>
+        // Singleton
+        private static BasesVista instancia;
+        public static BasesVista ObtenerInstancia()
+        {
+            if (instancia == null || instancia.IsDisposed)
             {
-                if (e.RowIndex >= 0 && e.ColumnIndex > 0) // ignorar columna "Propiedad"
-                {
-                    id_movil = e.ColumnIndex; // delegamos el índice de columna como identificador lógico
-                    OnMovilSeleccionado?.Invoke(this, EventArgs.Empty);
-                }
-            };
+                instancia = new BasesVista();
+                instancia.Show();
+            }
+            else
+            {
+                if (instancia.WindowState == FormWindowState.Minimized)
+                    instancia.WindowState = FormWindowState.Normal;
+
+                instancia.BringToFront();
+                instancia.Activate();
+            }
+            return instancia;
         }
     }
 }

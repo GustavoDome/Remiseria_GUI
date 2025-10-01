@@ -1,6 +1,8 @@
-﻿using System.Drawing;
+﻿using Programa.DTOs;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
-using Programa.DTOs;
 
 namespace Programa.Estilos
 {
@@ -186,4 +188,25 @@ namespace Programa.Estilos
             }
         }
     }
+    public static class ScrollHelper
+    {
+        private const int SB_VERT = 1;
+        private const int SB_BOTH = 3;
+        private const int GWL_STYLE = -16;
+        private const int WS_VSCROLL = 0x00200000;
+
+        [DllImport("user32.dll")]
+        private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
+
+        [DllImport("user32.dll")]
+        private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        public static void OcultarScrollVertical(Control control)
+        {
+            int style = GetWindowLong(control.Handle, GWL_STYLE);
+            style &= ~WS_VSCROLL;
+            SetWindowLong(control.Handle, GWL_STYLE, style);
+        }
+    }
+
 }

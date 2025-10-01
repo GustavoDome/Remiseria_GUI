@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtViaje = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.gbMoviles = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.rbtnAfuera = new System.Windows.Forms.RadioButton();
-            this.rdbtnDerivado = new System.Windows.Forms.RadioButton();
+            this.rbtnDerivado = new System.Windows.Forms.RadioButton();
             this.rbtnDesignado = new System.Windows.Forms.RadioButton();
             this.rbtnOtro = new System.Windows.Forms.RadioButton();
             this.lblComentario = new System.Windows.Forms.Label();
@@ -53,13 +53,13 @@
             this.label1.TabIndex = 15;
             this.label1.Text = "Ingrese la direccion del viaje";
             // 
-            // textBox1
+            // txtViaje
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(12, 32);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(289, 26);
-            this.textBox1.TabIndex = 16;
+            this.txtViaje.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtViaje.Location = new System.Drawing.Point(12, 32);
+            this.txtViaje.Name = "txtViaje";
+            this.txtViaje.Size = new System.Drawing.Size(289, 26);
+            this.txtViaje.TabIndex = 16;
             // 
             // label2
             // 
@@ -92,7 +92,7 @@
             // rbtnAfuera
             // 
             this.rbtnAfuera.AutoSize = true;
-            this.rbtnAfuera.Location = new System.Drawing.Point(358, 41);
+            this.rbtnAfuera.Location = new System.Drawing.Point(339, 41);
             this.rbtnAfuera.Name = "rbtnAfuera";
             this.rbtnAfuera.Size = new System.Drawing.Size(81, 17);
             this.rbtnAfuera.TabIndex = 25;
@@ -100,16 +100,16 @@
             this.rbtnAfuera.Text = "Viaje afuera";
             this.rbtnAfuera.UseVisualStyleBackColor = true;
             // 
-            // rdbtnDerivado
+            // rbtnDerivado
             // 
-            this.rdbtnDerivado.AutoSize = true;
-            this.rdbtnDerivado.Location = new System.Drawing.Point(445, 41);
-            this.rdbtnDerivado.Name = "rdbtnDerivado";
-            this.rdbtnDerivado.Size = new System.Drawing.Size(94, 17);
-            this.rdbtnDerivado.TabIndex = 26;
-            this.rdbtnDerivado.TabStop = true;
-            this.rdbtnDerivado.Text = "Viaje Derivado";
-            this.rdbtnDerivado.UseVisualStyleBackColor = true;
+            this.rbtnDerivado.AutoSize = true;
+            this.rbtnDerivado.Location = new System.Drawing.Point(436, 41);
+            this.rbtnDerivado.Name = "rbtnDerivado";
+            this.rbtnDerivado.Size = new System.Drawing.Size(94, 17);
+            this.rbtnDerivado.TabIndex = 26;
+            this.rbtnDerivado.TabStop = true;
+            this.rbtnDerivado.Text = "Viaje Derivado";
+            this.rbtnDerivado.UseVisualStyleBackColor = true;
             // 
             // rbtnDesignado
             // 
@@ -125,7 +125,7 @@
             // rbtnOtro
             // 
             this.rbtnOtro.AutoSize = true;
-            this.rbtnOtro.Location = new System.Drawing.Point(653, 41);
+            this.rbtnOtro.Location = new System.Drawing.Point(667, 41);
             this.rbtnOtro.Name = "rbtnOtro";
             this.rbtnOtro.Size = new System.Drawing.Size(135, 17);
             this.rbtnOtro.TabIndex = 28;
@@ -137,7 +137,7 @@
             // 
             this.lblComentario.AutoSize = true;
             this.lblComentario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblComentario.Location = new System.Drawing.Point(541, 88);
+            this.lblComentario.Location = new System.Drawing.Point(578, 77);
             this.lblComentario.Name = "lblComentario";
             this.lblComentario.Size = new System.Drawing.Size(42, 20);
             this.lblComentario.TabIndex = 29;
@@ -147,7 +147,7 @@
             // rtbComentarios
             // 
             this.rtbComentarios.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbComentarios.Location = new System.Drawing.Point(415, 111);
+            this.rtbComentarios.Location = new System.Drawing.Point(445, 111);
             this.rtbComentarios.Name = "rtbComentarios";
             this.rtbComentarios.Size = new System.Drawing.Size(343, 112);
             this.rtbComentarios.TabIndex = 30;
@@ -156,7 +156,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(415, 278);
+            this.btnAgregar.Location = new System.Drawing.Point(429, 278);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(373, 68);
             this.btnAgregar.TabIndex = 31;
@@ -165,9 +165,9 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 296);
+            this.btnVolver.Location = new System.Drawing.Point(12, 294);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 50);
+            this.btnVolver.Size = new System.Drawing.Size(133, 52);
             this.btnVolver.TabIndex = 32;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -176,19 +176,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 358);
+            this.ClientSize = new System.Drawing.Size(814, 358);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.rtbComentarios);
             this.Controls.Add(this.lblComentario);
             this.Controls.Add(this.rbtnOtro);
             this.Controls.Add(this.rbtnDesignado);
-            this.Controls.Add(this.rdbtnDerivado);
+            this.Controls.Add(this.rbtnDerivado);
             this.Controls.Add(this.rbtnAfuera);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.gbMoviles);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtViaje);
             this.Controls.Add(this.label1);
             this.Name = "ModificarViajesVista";
             this.Text = "Modificar Viaje";
@@ -200,12 +200,12 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtViaje;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.GroupBox gbMoviles;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RadioButton rbtnAfuera;
-        private System.Windows.Forms.RadioButton rdbtnDerivado;
+        private System.Windows.Forms.RadioButton rbtnDerivado;
         private System.Windows.Forms.RadioButton rbtnDesignado;
         private System.Windows.Forms.RadioButton rbtnOtro;
         private System.Windows.Forms.Label lblComentario;

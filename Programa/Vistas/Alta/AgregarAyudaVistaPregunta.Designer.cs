@@ -36,9 +36,9 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(151, 202);
+            this.btnAgregar.Location = new System.Drawing.Point(238, 219);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(108, 46);
             this.btnAgregar.TabIndex = 0;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -47,7 +47,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(44, 30);
+            this.label1.Location = new System.Drawing.Point(101, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(147, 20);
             this.label1.TabIndex = 2;
@@ -55,17 +55,17 @@
             // 
             // rtbPregunta
             // 
-            this.rtbPregunta.Location = new System.Drawing.Point(12, 66);
+            this.rtbPregunta.Location = new System.Drawing.Point(12, 74);
             this.rtbPregunta.Name = "rtbPregunta";
-            this.rtbPregunta.Size = new System.Drawing.Size(214, 96);
+            this.rtbPregunta.Size = new System.Drawing.Size(334, 127);
             this.rtbPregunta.TabIndex = 3;
             this.rtbPregunta.Text = "";
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 202);
+            this.btnVolver.Location = new System.Drawing.Point(12, 219);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(108, 46);
             this.btnVolver.TabIndex = 4;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
@@ -74,7 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(238, 237);
+            this.ClientSize = new System.Drawing.Size(358, 277);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.rtbPregunta);
             this.Controls.Add(this.label1);

@@ -40,7 +40,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(49, 99);
+            this.label1.Location = new System.Drawing.Point(81, 112);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(229, 18);
             this.label1.TabIndex = 2;
@@ -48,16 +48,16 @@
             // 
             // txtCuadrasMinimo
             // 
-            this.txtCuadrasMinimo.Location = new System.Drawing.Point(12, 43);
+            this.txtCuadrasMinimo.Location = new System.Drawing.Point(12, 53);
             this.txtCuadrasMinimo.Name = "txtCuadrasMinimo";
-            this.txtCuadrasMinimo.Size = new System.Drawing.Size(298, 20);
+            this.txtCuadrasMinimo.Size = new System.Drawing.Size(357, 20);
             this.txtCuadrasMinimo.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(37, 22);
+            this.label2.Location = new System.Drawing.Point(67, 19);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(254, 18);
             this.label2.TabIndex = 4;
@@ -65,25 +65,25 @@
             // 
             // txtCuadrasMonto
             // 
-            this.txtCuadrasMonto.Location = new System.Drawing.Point(12, 120);
+            this.txtCuadrasMonto.Location = new System.Drawing.Point(12, 145);
             this.txtCuadrasMonto.Name = "txtCuadrasMonto";
-            this.txtCuadrasMonto.Size = new System.Drawing.Size(298, 20);
+            this.txtCuadrasMonto.Size = new System.Drawing.Size(357, 20);
             this.txtCuadrasMonto.TabIndex = 5;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 167);
+            this.btnVolver.Location = new System.Drawing.Point(12, 208);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(124, 48);
             this.btnVolver.TabIndex = 6;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(239, 167);
+            this.btnModificar.Location = new System.Drawing.Point(245, 208);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.Size = new System.Drawing.Size(124, 48);
             this.btnModificar.TabIndex = 7;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -92,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 202);
+            this.ClientSize = new System.Drawing.Size(381, 268);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtCuadrasMonto);

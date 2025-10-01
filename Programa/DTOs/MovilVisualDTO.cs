@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 
 namespace Programa.DTOs
 {
-    public class MovilResumenDTO
+    public class MovilVisualDTO
     {
         public int IdMovil { get; set; }
-        public int NumeroMovil { get; set; }
+        public string Texto { get; set; }
+
         public override string ToString()
         {
-            return $"Móvil {NumeroMovil}";
+            return Texto;
         }
+
     }
 }

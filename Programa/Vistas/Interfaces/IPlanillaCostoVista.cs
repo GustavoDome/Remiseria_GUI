@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,11 +22,14 @@ namespace Programa.Vistas.Interfaces
         event EventHandler volver;
 
         // Métodos
-        void SetCuadraBindingSource(BindingSource cuadras);
-        void SetCiudadBindingSource(BindingSource ciudades);
+        void MostrarCiudadesEnLayout(List<CiudadDTO> ciudades);
+        void MostrarCuadrasEnLayout(CuadrasImporteDTO dto);
+        int? ObtenerCuadraSeleccionada();
+        int? ObtenerCiudadSeleccionada();
 
         // Labels
         void MostrarImportesCuadras(int minimo, int espera, int mandado);
         void MostrarImportesCiudad(int kilometro, int espera);
+
     }
 }

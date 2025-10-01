@@ -17,10 +17,10 @@ namespace Programa.Vistas
         public MovilesVista()
         {
             InitializeComponent();
-            this.Load += new System.EventHandler(this.MovilesVista_Load);
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             asociacionPresentador();
         }
-        private void MovilesVista_Load(object sender, EventArgs e)
+        private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);

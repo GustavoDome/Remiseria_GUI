@@ -40,7 +40,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(59, 9);
+            this.label2.Location = new System.Drawing.Point(117, 9);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(208, 18);
             this.label2.TabIndex = 5;
@@ -48,16 +48,16 @@
             // 
             // txtCiudad
             // 
-            this.txtCiudad.Location = new System.Drawing.Point(16, 30);
+            this.txtCiudad.Location = new System.Drawing.Point(12, 41);
             this.txtCiudad.Name = "txtCiudad";
-            this.txtCiudad.Size = new System.Drawing.Size(298, 20);
+            this.txtCiudad.Size = new System.Drawing.Size(416, 20);
             this.txtCiudad.TabIndex = 6;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 92);
+            this.label1.Location = new System.Drawing.Point(59, 97);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(300, 18);
             this.label1.TabIndex = 7;
@@ -65,25 +65,25 @@
             // 
             // txtKilometros
             // 
-            this.txtKilometros.Location = new System.Drawing.Point(12, 113);
+            this.txtKilometros.Location = new System.Drawing.Point(12, 132);
             this.txtKilometros.Name = "txtKilometros";
-            this.txtKilometros.Size = new System.Drawing.Size(298, 20);
+            this.txtKilometros.Size = new System.Drawing.Size(416, 20);
             this.txtKilometros.TabIndex = 8;
             // 
             // brnVolver
             // 
-            this.brnVolver.Location = new System.Drawing.Point(12, 167);
+            this.brnVolver.Location = new System.Drawing.Point(12, 194);
             this.brnVolver.Name = "brnVolver";
-            this.brnVolver.Size = new System.Drawing.Size(75, 23);
+            this.brnVolver.Size = new System.Drawing.Size(125, 45);
             this.brnVolver.TabIndex = 9;
             this.brnVolver.Text = "Volver";
             this.brnVolver.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(239, 167);
+            this.btnModificar.Location = new System.Drawing.Point(303, 194);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.Size = new System.Drawing.Size(125, 45);
             this.btnModificar.TabIndex = 10;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -92,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 202);
+            this.ClientSize = new System.Drawing.Size(440, 251);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.brnVolver);
             this.Controls.Add(this.txtKilometros);

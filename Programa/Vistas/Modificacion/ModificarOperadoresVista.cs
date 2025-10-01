@@ -1,4 +1,5 @@
-﻿using Programa.Vistas.Modificacion.Interfaces;
+﻿using Programa.Estilos;
+using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Windows.Forms;
 
@@ -8,10 +9,15 @@ namespace Programa.Vistas.Modificacion
     {
         public ModificarOperadorVista()
         {
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             InitializeComponent();
             asociarEventos();
         }
-
+        private void ModificarVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+        }
         public string Nombre
         {
             get => txtNombre.Text;

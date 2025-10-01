@@ -16,11 +16,11 @@ namespace Programa.Vistas.Alta
     {
         public AgregarBasesVistaComentario()
         {
-            this.Load += new System.EventHandler(this.ModificarBasesTemaVista_Load);
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             InitializeComponent();
             asociarEventos();
         }
-        private void ModificarBasesTemaVista_Load(object sender, EventArgs e)
+        private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);

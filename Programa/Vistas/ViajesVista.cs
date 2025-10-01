@@ -19,7 +19,7 @@ namespace Programa.Vistas
         public ViajesVista()
         {
             InitializeComponent();
-            this.Load += new System.EventHandler(this.ViajeVista_Load);
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             asociarPresentador();
         }
 
@@ -33,7 +33,7 @@ namespace Programa.Vistas
                 dtpFecha.Enabled = false;
             }
         }
-        private void ViajeVista_Load(object sender, EventArgs e)
+        private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
@@ -96,7 +96,10 @@ namespace Programa.Vistas
 
         public void OcultarIdViaje()
         {
-            dgvViajes.Columns["ID Viaje"].Visible = false;
+            if (dgvViajes.Columns.Contains("ID Viaje"))
+            {
+                dgvViajes.Columns["ID Viaje"].Visible = false;
+            }
         }
         public int ObtenerIdViajeSeleccionado()
         {

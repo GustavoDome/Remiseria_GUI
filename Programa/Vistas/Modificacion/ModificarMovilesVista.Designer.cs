@@ -199,18 +199,18 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 368);
+            this.btnVolver.Location = new System.Drawing.Point(12, 365);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 38);
+            this.btnVolver.Size = new System.Drawing.Size(146, 55);
             this.btnVolver.TabIndex = 25;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(486, 368);
+            this.btnAgregar.Location = new System.Drawing.Point(415, 365);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 38);
+            this.btnAgregar.Size = new System.Drawing.Size(146, 55);
             this.btnAgregar.TabIndex = 26;
             this.btnAgregar.Text = "Modificar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -241,7 +241,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 418);
+            this.ClientSize = new System.Drawing.Size(573, 432);
             this.Controls.Add(this.rbtnChofer);
             this.Controls.Add(this.rbtnDueno);
             this.Controls.Add(this.btnAgregar);

@@ -144,8 +144,10 @@
     <Compile Include="DTOs\CuadrasImporteDTO.cs" />
     <Compile Include="DTOs\DuenoAutoDTO.cs" />
     <Compile Include="DTOs\ImporteCiudadDTO.cs" />
+    <Compile Include="DTOs\ModificarViajeDTO.cs" />
     <Compile Include="DTOs\MovilDetalleDTO.cs" />
     <Compile Include="DTOs\MovilResumenDTO.cs" />
+    <Compile Include="DTOs\MovilVisualDTO.cs" />
     <Compile Include="DTOs\OperadorLoginDTO.cs" />
     <Compile Include="DTOs\PreguntaDTO.cs" />
     <Compile Include="DTOs\RecordatorioDTO.cs" />

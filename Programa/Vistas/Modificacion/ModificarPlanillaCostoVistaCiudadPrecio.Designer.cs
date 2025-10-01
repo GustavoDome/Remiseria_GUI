@@ -38,7 +38,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(35, 9);
+            this.label1.Location = new System.Drawing.Point(85, 21);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(240, 18);
             this.label1.TabIndex = 2;
@@ -46,25 +46,25 @@
             // 
             // txtMontoKilometro
             // 
-            this.txtMontoKilometro.Location = new System.Drawing.Point(12, 40);
+            this.txtMontoKilometro.Location = new System.Drawing.Point(12, 57);
             this.txtMontoKilometro.Name = "txtMontoKilometro";
-            this.txtMontoKilometro.Size = new System.Drawing.Size(298, 20);
+            this.txtMontoKilometro.Size = new System.Drawing.Size(408, 20);
             this.txtMontoKilometro.TabIndex = 3;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 84);
+            this.btnVolver.Location = new System.Drawing.Point(12, 110);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(122, 47);
             this.btnVolver.TabIndex = 4;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(239, 84);
+            this.btnModificar.Location = new System.Drawing.Point(298, 110);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.Size = new System.Drawing.Size(122, 47);
             this.btnModificar.TabIndex = 5;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -73,7 +73,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(326, 119);
+            this.ClientSize = new System.Drawing.Size(432, 169);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtMontoKilometro);

@@ -18,7 +18,7 @@ namespace Programa.Vistas
         public VueltaVista()
         {
             InitializeComponent();
-            this.Load += new System.EventHandler(this.VueltaVista_Load);
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             asociarPresentador();
         }
 
@@ -32,7 +32,7 @@ namespace Programa.Vistas
                 btnSiguiente.Hide();
             }
         }
-        private void VueltaVista_Load(object sender, EventArgs e)
+        private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);

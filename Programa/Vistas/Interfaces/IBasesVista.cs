@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,7 @@ namespace Programa.Vistas.Interfaces
         // Métodos
         void ocultarBotones(string rol);
         void mostrarMoviles(BindingSource listaMoviles);
-        void mostrarBases(BindingSource listaBases, int idMovil);
+        void mostrarBases(List<BaseDetalleDTO> listaBases);
+        int? ObtenerBaseSeleccionada();
     }
 }

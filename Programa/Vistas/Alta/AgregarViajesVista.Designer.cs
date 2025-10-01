@@ -56,7 +56,7 @@
             // rbtnAfuera
             // 
             this.rbtnAfuera.AutoSize = true;
-            this.rbtnAfuera.Location = new System.Drawing.Point(357, 38);
+            this.rbtnAfuera.Location = new System.Drawing.Point(345, 44);
             this.rbtnAfuera.Name = "rbtnAfuera";
             this.rbtnAfuera.Size = new System.Drawing.Size(81, 17);
             this.rbtnAfuera.TabIndex = 8;
@@ -67,7 +67,7 @@
             // rdbtnDerivado
             // 
             this.rdbtnDerivado.AutoSize = true;
-            this.rdbtnDerivado.Location = new System.Drawing.Point(444, 38);
+            this.rdbtnDerivado.Location = new System.Drawing.Point(444, 44);
             this.rdbtnDerivado.Name = "rdbtnDerivado";
             this.rdbtnDerivado.Size = new System.Drawing.Size(94, 17);
             this.rdbtnDerivado.TabIndex = 9;
@@ -78,7 +78,7 @@
             // rbtnDesignado
             // 
             this.rbtnDesignado.AutoSize = true;
-            this.rbtnDesignado.Location = new System.Drawing.Point(544, 38);
+            this.rbtnDesignado.Location = new System.Drawing.Point(549, 44);
             this.rbtnDesignado.Name = "rbtnDesignado";
             this.rbtnDesignado.Size = new System.Drawing.Size(102, 17);
             this.rbtnDesignado.TabIndex = 10;
@@ -89,7 +89,7 @@
             // rbtnOtro
             // 
             this.rbtnOtro.AutoSize = true;
-            this.rbtnOtro.Location = new System.Drawing.Point(652, 38);
+            this.rbtnOtro.Location = new System.Drawing.Point(671, 44);
             this.rbtnOtro.Name = "rbtnOtro";
             this.rbtnOtro.Size = new System.Drawing.Size(135, 17);
             this.rbtnOtro.TabIndex = 13;
@@ -101,7 +101,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(38, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(206, 20);
             this.label1.TabIndex = 14;
@@ -112,14 +112,14 @@
             this.txtDireccion.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtDireccion.Location = new System.Drawing.Point(12, 38);
             this.txtDireccion.Name = "txtDireccion";
-            this.txtDireccion.Size = new System.Drawing.Size(289, 26);
+            this.txtDireccion.Size = new System.Drawing.Size(306, 26);
             this.txtDireccion.TabIndex = 15;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 90);
+            this.label2.Location = new System.Drawing.Point(28, 81);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(314, 20);
             this.label2.TabIndex = 16;
@@ -129,7 +129,7 @@
             // 
             this.lblComentario.AutoSize = true;
             this.lblComentario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblComentario.Location = new System.Drawing.Point(496, 90);
+            this.lblComentario.Location = new System.Drawing.Point(609, 81);
             this.lblComentario.Name = "lblComentario";
             this.lblComentario.Size = new System.Drawing.Size(42, 20);
             this.lblComentario.TabIndex = 18;
@@ -139,7 +139,7 @@
             // rtbComentario
             // 
             this.rtbComentario.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rtbComentario.Location = new System.Drawing.Point(444, 122);
+            this.rtbComentario.Location = new System.Drawing.Point(463, 124);
             this.rtbComentario.Name = "rtbComentario";
             this.rtbComentario.Size = new System.Drawing.Size(343, 96);
             this.rtbComentario.TabIndex = 19;
@@ -150,27 +150,26 @@
             // 
             this.btnVolver.Location = new System.Drawing.Point(16, 296);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 50);
+            this.btnVolver.Size = new System.Drawing.Size(151, 50);
             this.btnVolver.TabIndex = 20;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(415, 278);
+            this.btnAgregar.Location = new System.Drawing.Point(433, 278);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(373, 68);
             this.btnAgregar.TabIndex = 21;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
-            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // clbMoviles
             // 
             this.clbMoviles.ColumnWidth = 80;
             this.clbMoviles.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clbMoviles.FormattingEnabled = true;
-            this.clbMoviles.HorizontalExtent = 9;
+            this.clbMoviles.HorizontalExtent = 12;
             this.clbMoviles.HorizontalScrollbar = true;
             this.clbMoviles.Location = new System.Drawing.Point(16, 113);
             this.clbMoviles.MultiColumn = true;
@@ -182,7 +181,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 358);
+            this.ClientSize = new System.Drawing.Size(830, 358);
             this.Controls.Add(this.clbMoviles);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnVolver);

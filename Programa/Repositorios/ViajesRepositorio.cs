@@ -22,6 +22,7 @@ namespace Programa.Repositorios
             {
                 try
                 {
+                    // Crear el viaje
                     var viaje = new Viaje
                     {
                         NumeroViaje = dto.NumeroViaje,
@@ -30,40 +31,68 @@ namespace Programa.Repositorios
                         EstadoViaje = dto.EstadoViaje,
                         Comentario = dto.Comentario,
                         IdOperador = dto.IdOperador,
-                        Vueltas = new List<Vuelta>()
+                        Vueltas = new List<Vuelta>() // inicializamos la colección
                     };
 
-                    contexto.Viajes.Add(viaje);
-                    contexto.SaveChanges(); // genera el ID
+                    var movilesValidos = contexto.Moviles.Select(m => m.IdMovil).ToList();
+                    var movilesInvalidos = dto.IdMoviles.Except(movilesValidos).ToList();
 
+                    if (movilesInvalidos.Any())
+                        throw new Exception("Los siguientes móviles no existen: " + string.Join(", ", movilesInvalidos));
+
+                    // Agregar vueltas directamente a la colección
                     for (int i = 0; i < dto.IdMoviles.Count; i++)
                     {
                         var vuelta = new Vuelta
                         {
-                            IdViaje = viaje.IdViajes,
                             IdMovil = dto.IdMoviles[i],
                             NumeroVuelta = dto.Vueltas[i],
                             VueltaFecha = dto.VueltaFecha,
                             EstadoVuelta = dto.EstadoVuelta
                         };
 
-                        contexto.Vueltas.Add(vuelta);
+                        viaje.Vueltas.Add(vuelta); // EF se encarga de asignar IdViaje
                     }
 
-                    contexto.SaveChanges();
+                    // Guardar todo en cascada
+                    contexto.Viajes.Add(viaje);
+                    contexto.SaveChanges(); // genera el ID y guarda las vueltas
+
                     tran.Commit();
                 }
-                catch
+                catch (Exception ex)
                 {
                     tran.Rollback();
+                    var inner = ex.InnerException;
+                    while (inner?.InnerException != null)
+                        inner = inner.InnerException;
+
+                    MessageBox.Show("Error interno: " + (inner?.Message ?? ex.Message));
                     throw;
                 }
             }
         }
+        public ModificarViajeDTO ObtenerPorId(int idViaje)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var viaje = contexto.Viajes
+                    .Include(v => v.Vueltas)
+                    .FirstOrDefault(v => v.IdViajes == idViaje);
 
+                if (viaje == null)
+                    throw new Exception("Viaje no encontrado.");
 
-
-        public void Editar(AgregarViajeDTO dto)
+                return new ModificarViajeDTO
+                {
+                    IdViaje = viaje.IdViajes,
+                    Direccion = viaje.Direccion,
+                    Comentario = viaje.Comentario,
+                    IdMoviles = viaje.Vueltas.Select(v => v.IdMovil).Distinct().ToList()
+                };
+            }
+        }
+        public void Editar(ModificarViajeDTO dto)
         {
             using (var contexto = new RemiseriaDbContext())
             using (var tran = contexto.Database.BeginTransaction())
@@ -77,24 +106,30 @@ namespace Programa.Repositorios
                     if (viaje == null)
                         throw new Exception("Viaje no encontrado.");
 
-                    viaje.NumeroViaje = dto.NumeroViaje;
-                    viaje.HoraViaje = dto.HoraViaje;
+                    // Actualizar campos editables
                     viaje.Direccion = dto.Direccion;
-                    viaje.EstadoViaje = dto.EstadoViaje;
                     viaje.Comentario = dto.Comentario;
-                    viaje.IdOperador = dto.IdOperador;
 
+                    // Validar móviles
+                    var movilesValidos = contexto.Moviles.Select(m => m.IdMovil).ToList();
+                    var movilesInvalidos = dto.IdMoviles.Except(movilesValidos).ToList();
+
+                    if (movilesInvalidos.Any())
+                        throw new Exception("Los siguientes móviles no existen: " + string.Join(", ", movilesInvalidos));
+
+                    // Eliminar vueltas anteriores
                     contexto.Vueltas.RemoveRange(viaje.Vueltas);
 
+                    // Agregar nuevas vueltas
                     for (int i = 0; i < dto.IdMoviles.Count; i++)
                     {
                         var nuevaVuelta = new Vuelta
                         {
                             IdViaje = viaje.IdViajes,
                             IdMovil = dto.IdMoviles[i],
-                            NumeroVuelta = dto.Vueltas[i],
-                            VueltaFecha = dto.VueltaFecha,
-                            EstadoVuelta = dto.EstadoVuelta
+                            NumeroVuelta = i + 1,
+                            VueltaFecha = DateTime.Today,
+                            EstadoVuelta = "X"
                         };
 
                         contexto.Vueltas.Add(nuevaVuelta);
@@ -103,9 +138,14 @@ namespace Programa.Repositorios
                     contexto.SaveChanges();
                     tran.Commit();
                 }
-                catch
+                catch (Exception ex)
                 {
                     tran.Rollback();
+                    var inner = ex.InnerException;
+                    while (inner?.InnerException != null)
+                        inner = inner.InnerException;
+
+                    MessageBox.Show("Error interno: " + (inner?.Message ?? ex.Message));
                     throw;
                 }
             }
@@ -197,7 +237,7 @@ namespace Programa.Repositorios
                             if (!dt.Columns.Contains(colName))
                                 dt.Columns.Add(colName);
 
-                            filas[viaje.IdViajes][colName] = vuelta.EstadoVuelta;
+                            filas[viaje.IdViajes][colName] = viaje.EstadoViaje;
                         }
                     }
                 }

@@ -32,11 +32,11 @@ namespace Programa.Vistas
         public AyudaVista()
         {
             InitializeComponent();
-            this.Load += new System.EventHandler(this.AyudaVista_Load);
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             asociarPresentador();
         }
 
-        private void AyudaVista_Load(object sender, EventArgs e)
+        private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);

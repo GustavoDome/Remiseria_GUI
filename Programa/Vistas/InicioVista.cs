@@ -18,7 +18,7 @@ namespace Programa.Vistas
         {
             InitializeComponent();
             asociacionPresentador();
-            this.Load += new System.EventHandler(this.InicioVista_Load);
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             this.FormClosed += (s, e) => Application.Exit();
         }
 
@@ -31,7 +31,7 @@ namespace Programa.Vistas
                 btnRecEliminar.Hide();
             }
         }
-        private void InicioVista_Load(object sender, EventArgs e)
+        private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);

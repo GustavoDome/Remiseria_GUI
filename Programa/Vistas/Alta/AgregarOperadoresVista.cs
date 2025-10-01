@@ -1,4 +1,5 @@
-﻿using Programa.Vistas.Alta.Interfaces;
+﻿using Programa.Estilos;
+using Programa.Vistas.Alta.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +16,15 @@ namespace Programa.Vistas.Alta
     {
         public AgregarOperadoresVista()
         {
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             InitializeComponent();
             asociarEventos();
         }
-
+        private void ModificarVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+        }
         public string Nombre
         {
             get => txtNombre.Text;

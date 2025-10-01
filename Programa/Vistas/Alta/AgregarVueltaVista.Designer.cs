@@ -38,7 +38,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(76, 9);
+            this.label2.Location = new System.Drawing.Point(79, 18);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(312, 20);
             this.label2.TabIndex = 17;
@@ -46,18 +46,18 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 369);
+            this.btnVolver.Location = new System.Drawing.Point(12, 360);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(83, 40);
+            this.btnVolver.Size = new System.Drawing.Size(128, 49);
             this.btnVolver.TabIndex = 19;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(373, 369);
+            this.btnAgregar.Location = new System.Drawing.Point(332, 360);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(83, 40);
+            this.btnAgregar.Size = new System.Drawing.Size(128, 49);
             this.btnAgregar.TabIndex = 20;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -69,18 +69,18 @@
             this.clbMoviles.FormattingEnabled = true;
             this.clbMoviles.HorizontalExtent = 4;
             this.clbMoviles.HorizontalScrollbar = true;
-            this.clbMoviles.Location = new System.Drawing.Point(12, 32);
+            this.clbMoviles.Location = new System.Drawing.Point(12, 57);
             this.clbMoviles.MultiColumn = true;
             this.clbMoviles.Name = "clbMoviles";
             this.clbMoviles.SelectionMode = System.Windows.Forms.SelectionMode.None;
-            this.clbMoviles.Size = new System.Drawing.Size(444, 319);
+            this.clbMoviles.Size = new System.Drawing.Size(448, 256);
             this.clbMoviles.TabIndex = 21;
             // 
             // AgregarVueltaVista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(468, 416);
+            this.ClientSize = new System.Drawing.Size(472, 416);
             this.Controls.Add(this.clbMoviles);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnVolver);

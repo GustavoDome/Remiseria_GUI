@@ -16,7 +16,7 @@ namespace Programa.Vistas.Alta
     {
         public AgregarInicioVistaRecordatorio()
         {
-            this.Load += new System.EventHandler(this.AgregarRecordatorioInicioVista_Load);
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             InitializeComponent();
             asociarPresentador();
         }
@@ -32,7 +32,7 @@ namespace Programa.Vistas.Alta
                 agregar?.Invoke(this, EventArgs.Empty);
             };
         }
-        private void AgregarRecordatorioInicioVista_Load(object sender, EventArgs e)
+        private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);

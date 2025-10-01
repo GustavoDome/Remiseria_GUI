@@ -30,13 +30,14 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.PCuadras = new System.Windows.Forms.Panel();
+            this.TLPCuadras = new System.Windows.Forms.TableLayoutPanel();
             this.label5 = new System.Windows.Forms.Label();
             this.btnPrecioCuadraMandado = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.btnPrecioCuadraEspera = new System.Windows.Forms.Button();
             this.btnPrecioCuadra = new System.Windows.Forms.Button();
-            this.dgvCuadras = new System.Windows.Forms.DataGridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,13 +46,14 @@
             this.btnAgregarCiudad = new System.Windows.Forms.Button();
             this.btnPrecioCiudadEspera = new System.Windows.Forms.Button();
             this.btnPrecioCiudad = new System.Windows.Forms.Button();
-            this.dgvCiudad = new System.Windows.Forms.DataGridView();
             this.btnVolver = new System.Windows.Forms.Button();
+            this.PCiudades = new System.Windows.Forms.Panel();
+            this.TLPCiudades = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCuadras)).BeginInit();
+            this.PCuadras.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCiudad)).BeginInit();
+            this.PCiudades.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -61,32 +63,53 @@
             this.tabControl1.ItemSize = new System.Drawing.Size(200, 30);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
+            this.tabControl1.Padding = new System.Drawing.Point(0, 0);
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(992, 484);
+            this.tabControl1.Size = new System.Drawing.Size(992, 505);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.PCuadras);
             this.tabPage1.Controls.Add(this.label5);
             this.tabPage1.Controls.Add(this.btnPrecioCuadraMandado);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.btnPrecioCuadraEspera);
             this.tabPage1.Controls.Add(this.btnPrecioCuadra);
-            this.tabPage1.Controls.Add(this.dgvCuadras);
             this.tabPage1.Location = new System.Drawing.Point(4, 34);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(984, 446);
+            this.tabPage1.Size = new System.Drawing.Size(984, 467);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Dentro de la ciudad";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // PCuadras
+            // 
+            this.PCuadras.Controls.Add(this.TLPCuadras);
+            this.PCuadras.Location = new System.Drawing.Point(0, 0);
+            this.PCuadras.Name = "PCuadras";
+            this.PCuadras.Size = new System.Drawing.Size(984, 349);
+            this.PCuadras.TabIndex = 9;
+            // 
+            // TLPCuadras
+            // 
+            this.TLPCuadras.ColumnCount = 2;
+            this.TLPCuadras.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLPCuadras.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLPCuadras.Location = new System.Drawing.Point(0, 0);
+            this.TLPCuadras.Name = "TLPCuadras";
+            this.TLPCuadras.RowCount = 2;
+            this.TLPCuadras.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 88F));
+            this.TLPCuadras.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12F));
+            this.TLPCuadras.Size = new System.Drawing.Size(984, 346);
+            this.TLPCuadras.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label5.Location = new System.Drawing.Point(426, 355);
+            this.label5.Location = new System.Drawing.Point(420, 370);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(147, 18);
             this.label5.TabIndex = 7;
@@ -94,7 +117,7 @@
             // 
             // btnPrecioCuadraMandado
             // 
-            this.btnPrecioCuadraMandado.Location = new System.Drawing.Point(391, 386);
+            this.btnPrecioCuadraMandado.Location = new System.Drawing.Point(392, 407);
             this.btnPrecioCuadraMandado.Name = "btnPrecioCuadraMandado";
             this.btnPrecioCuadraMandado.Size = new System.Drawing.Size(215, 54);
             this.btnPrecioCuadraMandado.TabIndex = 6;
@@ -106,7 +129,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(796, 355);
+            this.label4.Location = new System.Drawing.Point(810, 370);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(110, 18);
             this.label4.TabIndex = 5;
@@ -116,7 +139,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F);
-            this.label3.Location = new System.Drawing.Point(38, 355);
+            this.label3.Location = new System.Drawing.Point(35, 370);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(132, 18);
             this.label3.TabIndex = 4;
@@ -124,7 +147,7 @@
             // 
             // btnPrecioCuadraEspera
             // 
-            this.btnPrecioCuadraEspera.Location = new System.Drawing.Point(763, 386);
+            this.btnPrecioCuadraEspera.Location = new System.Drawing.Point(763, 407);
             this.btnPrecioCuadraEspera.Name = "btnPrecioCuadraEspera";
             this.btnPrecioCuadraEspera.Size = new System.Drawing.Size(215, 54);
             this.btnPrecioCuadraEspera.TabIndex = 3;
@@ -134,7 +157,7 @@
             // 
             // btnPrecioCuadra
             // 
-            this.btnPrecioCuadra.Location = new System.Drawing.Point(6, 386);
+            this.btnPrecioCuadra.Location = new System.Drawing.Point(6, 407);
             this.btnPrecioCuadra.Name = "btnPrecioCuadra";
             this.btnPrecioCuadra.Size = new System.Drawing.Size(218, 54);
             this.btnPrecioCuadra.TabIndex = 2;
@@ -142,20 +165,9 @@
             this.btnPrecioCuadra.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
             this.btnPrecioCuadra.UseVisualStyleBackColor = true;
             // 
-            // dgvCuadras
-            // 
-            this.dgvCuadras.AllowUserToResizeColumns = false;
-            this.dgvCuadras.AllowUserToResizeRows = false;
-            this.dgvCuadras.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.dgvCuadras.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCuadras.Location = new System.Drawing.Point(6, 6);
-            this.dgvCuadras.Name = "dgvCuadras";
-            this.dgvCuadras.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.dgvCuadras.Size = new System.Drawing.Size(972, 334);
-            this.dgvCuadras.TabIndex = 0;
-            // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.PCiudades);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Controls.Add(this.label1);
             this.tabPage2.Controls.Add(this.btnEliminarCiudad);
@@ -163,11 +175,10 @@
             this.tabPage2.Controls.Add(this.btnAgregarCiudad);
             this.tabPage2.Controls.Add(this.btnPrecioCiudadEspera);
             this.tabPage2.Controls.Add(this.btnPrecioCiudad);
-            this.tabPage2.Controls.Add(this.dgvCiudad);
             this.tabPage2.Location = new System.Drawing.Point(4, 34);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(984, 446);
+            this.tabPage2.Size = new System.Drawing.Size(984, 467);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Fuera de la ciudad";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -242,27 +253,40 @@
             this.btnPrecioCiudad.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.btnPrecioCiudad.UseVisualStyleBackColor = true;
             // 
-            // dgvCiudad
-            // 
-            this.dgvCiudad.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCiudad.Location = new System.Drawing.Point(6, 6);
-            this.dgvCiudad.Name = "dgvCiudad";
-            this.dgvCiudad.Size = new System.Drawing.Size(972, 334);
-            this.dgvCiudad.TabIndex = 0;
-            // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 498);
+            this.btnVolver.Location = new System.Drawing.Point(12, 523);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(992, 43);
             this.btnVolver.TabIndex = 1;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
+            // PCiudades
+            // 
+            this.PCiudades.Controls.Add(this.TLPCiudades);
+            this.PCiudades.Location = new System.Drawing.Point(0, 0);
+            this.PCiudades.Name = "PCiudades";
+            this.PCiudades.Size = new System.Drawing.Size(984, 352);
+            this.PCiudades.TabIndex = 9;
+            // 
+            // TLPCiudades
+            // 
+            this.TLPCiudades.ColumnCount = 2;
+            this.TLPCiudades.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLPCiudades.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLPCiudades.Location = new System.Drawing.Point(0, 0);
+            this.TLPCiudades.Name = "TLPCiudades";
+            this.TLPCiudades.RowCount = 2;
+            this.TLPCiudades.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLPCiudades.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLPCiudades.Size = new System.Drawing.Size(984, 349);
+            this.TLPCiudades.TabIndex = 0;
+            // 
             // PlanillaCostoVista
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(1016, 544);
+            this.ClientSize = new System.Drawing.Size(1016, 578);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.tabControl1);
             this.Name = "PlanillaCostoVista";
@@ -270,10 +294,10 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCuadras)).EndInit();
+            this.PCuadras.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCiudad)).EndInit();
+            this.PCiudades.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -285,12 +309,10 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.Button btnPrecioCuadraEspera;
         private System.Windows.Forms.Button btnPrecioCuadra;
-        private System.Windows.Forms.DataGridView dgvCuadras;
         private System.Windows.Forms.Button btnVolver;
         private System.Windows.Forms.Button btnAgregarCiudad;
         private System.Windows.Forms.Button btnPrecioCiudadEspera;
         private System.Windows.Forms.Button btnPrecioCiudad;
-        private System.Windows.Forms.DataGridView dgvCiudad;
         private System.Windows.Forms.Button btnModificarCiudad;
         private System.Windows.Forms.Button btnEliminarCiudad;
         private System.Windows.Forms.Label label2;
@@ -299,5 +321,9 @@
         private System.Windows.Forms.Button btnPrecioCuadraMandado;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TableLayoutPanel TLPCuadras;
+        private System.Windows.Forms.Panel PCuadras;
+        private System.Windows.Forms.Panel PCiudades;
+        private System.Windows.Forms.TableLayoutPanel TLPCiudades;
     }
 }

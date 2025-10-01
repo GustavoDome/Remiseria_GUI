@@ -133,18 +133,18 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(12, 311);
+            this.btnVolver.Location = new System.Drawing.Point(16, 311);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(94, 33);
+            this.btnVolver.Size = new System.Drawing.Size(135, 54);
             this.btnVolver.TabIndex = 18;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(467, 311);
+            this.btnModificar.Location = new System.Drawing.Point(459, 311);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(94, 33);
+            this.btnModificar.Size = new System.Drawing.Size(135, 54);
             this.btnModificar.TabIndex = 19;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -171,7 +171,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 356);
+            this.ClientSize = new System.Drawing.Size(606, 377);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.txtcontrasena);
             this.Controls.Add(this.btnModificar);

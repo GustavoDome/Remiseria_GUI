@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.Estilos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,10 +15,15 @@ namespace Programa.Vistas.Modificacion
     {
         public ModificarVueltaVista()
         {
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             InitializeComponent();
         }
 
-
+        private void ModificarVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+        }
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static ModificarVueltaVista instancia;
 

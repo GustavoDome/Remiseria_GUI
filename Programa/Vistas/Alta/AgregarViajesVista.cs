@@ -1,4 +1,6 @@
-﻿using Programa.Modelos;
+﻿using Programa.DTOs;
+using Programa.Estilos;
+using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using Programa.Presentadores;
 using Programa.Repositorios;
@@ -18,106 +20,71 @@ namespace Programa.Vistas.Alta
 {
     public partial class AgregarViajesVista : Form, IAgregarViajesVista
     {
-        private int id;
-        private int idusuario;
+        private int idViaje;
+        private int idOperador;
         private string rol;
-        public AgregarViajesVista(int id, int idusuario, string rol)
+
+        public AgregarViajesVista(int idViaje, int idOperador, string rol)
         {
-            this.id = id;
-            this.idusuario = idusuario;
-            this.rol = rol;
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             InitializeComponent();
-            cargarMovlies();
+            asociarPresentador();
+            this.idViaje = idViaje;
+            this.idOperador = idOperador;
+            this.rol = rol;
+            rbtnAfuera.CheckedChanged += (s, e) =>
+            {
+                if (rbtnAfuera.Checked)
+                    actualizarComentario("Escriba dónde es el viaje");
+            };
+
+            rdbtnDerivado.CheckedChanged += (s, e) =>
+            {
+                if (rdbtnDerivado.Checked)
+                    actualizarComentario("Escriba de quién se deriva el viaje");
+            };
+
+            rbtnDesignado.CheckedChanged += (s, e) =>
+            {
+                if (rbtnDesignado.Checked)
+                    actualizarComentario("Escriba quién designó el viaje");
+            };
+
+            rbtnOtro.CheckedChanged += (s, e) =>
+            {
+                if (rbtnOtro.Checked)
+                    actualizarComentario("Escriba el comentario");
+            };
         }
-        // Variable que llamaran los otros forms para el comportamiento Singleton
+        private void ModificarVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+        }
+        public void asociarPresentador() 
+        {
+            btnAgregar.Click += delegate { agregar?.Invoke(this, EventArgs.Empty); };
+            btnVolver.Click += delegate { volver?.Invoke(this, EventArgs.Empty); };
+        }
+
+        public event EventHandler agregar;
+        public event EventHandler volver;
+        private void actualizarComentario(string textoLabel)
+        {
+            lblComentario.Text = textoLabel;
+            lblComentario.Visible = true;
+
+            rtbComentario.Text = string.Empty;
+            rtbComentario.Visible = true;
+        }
+
+        // Singleton
         private static AgregarViajesVista instancia;
-
-        public string txtDirecciones 
-        {
-            get {return txtDireccion.Text;}
-            set {txtDireccion.Text = value;}
-        }
-        public string rtbComentarios 
-        {
-            get {return rtbComentario.Text;}
-            set {rtbComentario.Text = value;}
-        }
-        public string rbtnAfueras 
-        {
-            get { return rbtnAfuera.Text; }
-            set { rbtnAfuera.Text = value; }
-        }
-        public string rbtnDerivados 
-        {
-            get { return rdbtnDerivado.Text; }
-            set { rdbtnDerivado.Text = value; }
-        }
-        public string rbtnDesignados 
-        {
-            get { return rbtnDesignado.Text; }
-            set { rbtnDesignado.Text = value; }
-        }
-        public string rbtnOtros 
-        {
-            get { return rbtnOtro.Text; }
-            set { rbtnOtro.Text = value;}
-        }
-
-        private List<int> moviles;
-
-        public void cargarMovlies() 
-        {
-            var moviles = new MovilRepositorio();
-            // Obtenemos la lista de móviles desde tu función
-            //var listaMoviles = moviles.seleccionarMovil();
-
-            // Limpiamos ítems previos
-            clbMoviles.Items.Clear();
-
-            // Agregamos cada móvil como un ítem
-            //foreach (var movil in listaMoviles)
-            //{
-           //     clbMoviles.Items.Add($"Móvil {movil.Numero_movil}", false); // false = no seleccionado por defecto
-            //}
-        }
-        //public List<int> obtenermovil()
-       // {
-          //  var movilesrepositorios = new MovilRepositorio();
-           // var listaMoviles = movilesrepositorios.seleccionarMovil();
-
-            // IDs reales desde la base de datos
-            //var numeroMovilesid = listaMoviles.Select(m => m.Numero_movil).ToList();
-
-            // IDs seleccionados desde la UI
-          //  var numeroMoviles = clbMoviles.CheckedItems
-            //    .Cast<string>()
-            //    .Select(item => Convert.ToInt32(item.ToString().Split(' ')[1]))
-             //   .ToList();
-
-            // Intersección entre ambos
-           // var movilesSeleccionados = numeroMoviles.Intersect(numeroMovilesid).ToList();
-           // return movilesSeleccionados;
-       // }
-
-        public string obtenerOpcion()
-        {
-            string seleccion;
-
-            if (rbtnAfuera.Checked) { seleccion = rbtnAfueras; }
-            else if (rbtnDesignado.Checked) { seleccion = rbtnDesignados; }
-            else if (rdbtnDerivado.Checked) { seleccion = rbtnDerivados; }
-            else if (rbtnOtro.Checked) { seleccion = rbtnOtros; }
-            else { seleccion = null; }
-
-            return seleccion;
-        }
-
-        // Metodo para el uso del Singleton
-        public static AgregarViajesVista ObtenerInstancia(int id, int idusuario, string rol)
+        public static AgregarViajesVista ObtenerInstancia(int idViaje, int idOperador, string rol)
         {
             if (instancia == null || instancia.IsDisposed)
             {
-                instancia = new AgregarViajesVista(id, idusuario, rol);
+                instancia = new AgregarViajesVista(idViaje, idOperador, rol);
                 instancia.Show();
             }
             else
@@ -132,55 +99,71 @@ namespace Programa.Vistas.Alta
             return instancia;
         }
 
-       // public List<int> obtenerVuelta()
-        //{
-         //   var repositorio = new ViajesRepositorio();
-
-            // Móviles seleccionados desde la UI (por ejemplo, CheckedListBox)
-         //   var movilesSeleccionados = obtenermovil(); // List<int>
-
-            // Lista de vueltas desde la base
-          //  var listavueltas = repositorio.seleccionarVuelta(); // IEnumerable<VueltaIdModelo>
-
-            // Filtrar las vueltas que coinciden con los móviles seleccionados
-          //  var vueltasFiltradas = listavueltas
-          //      .Where(v => movilesSeleccionados.Contains(v.Numero_movil))
-          //      .Select(v => v.Vuelta)
-           //     .ToList();
-
-          //  return vueltasFiltradas;
-       // }
-
-        private void btnAgregar_Click(object sender, EventArgs e)
+        // Propiedades
+        public string txtDirecciones
         {
-            var repositorio = new ViajesRepositorio();
-        //    agregarViajeModelo viaje = new agregarViajeModelo();
-            TimeSpan hora = DateTime.Now.TimeOfDay;
-            DateTime fecha_vuelta = DateTime.Today;
-          //  viaje.Id = this.id;
-          //  viaje.Hora_viaje = hora;
-          //  viaje.Direccion = txtDirecciones;
-          //  viaje.Vuelta = obtenerVuelta();
-          //  viaje.Estado_vuelta = "X";
-          //  viaje.Vuelta_fecha = fecha_vuelta;
-          //  viaje.Estado_viaje = "·";
-          //  viaje.Comentario = obtenerOpcion();
-          //  viaje.Id_movil = obtenermovil();
-          //  viaje.Id_operador = this.idusuario;
+            get => txtDireccion.Text;
+            set => txtDireccion.Text = value;
+        }
 
-            try
+        public string rtbComentarios
+        {
+            get => rtbComentario.Text;
+            set => rtbComentario.Text = value;
+        }
+
+        public string obtenerOpcion()
+        {
+            if (rbtnAfuera.Checked) return rtbComentario.Text;
+            if (rbtnDesignado.Checked) return rtbComentario.Text;
+            if (rdbtnDerivado.Checked) return rtbComentario.Text;
+            if (rbtnOtro.Checked) return rtbComentario.Text;
+            return null;
+        }
+        private void ResetComentario()
+        {
+            rbtnAfuera.Checked = false;
+            rdbtnDerivado.Checked = false;
+            rbtnDesignado.Checked = false;
+            rbtnOtro.Checked = false;
+
+            lblComentario.Visible = false;
+            rtbComentario.Visible = false;
+            rtbComentario.Text = string.Empty;
+        }
+        public void LimpiarCampos()
+        {
+            txtDireccion.Text = string.Empty;
+            rtbComentario.Text = string.Empty;
+            lblComentario.Visible = false;
+            rtbComentario.Visible = false;
+
+            for (int i = 0; i < clbMoviles.Items.Count; i++)
+                clbMoviles.SetItemChecked(i, false);
+            ResetComentario();
+        }
+        public List<int> ObtenerMovilesSeleccionados()
+        {
+            return clbMoviles.CheckedItems
+                .Cast<MovilVisualDTO>()
+                .Select(m => m.IdMovil)
+                .ToList();
+        }
+
+        public void CargarMoviles(List<MovilResumenDTO> moviles)
+        {
+            clbMoviles.Items.Clear();
+            clbMoviles.DataSource = null; // por si quedó algo asignado
+
+            foreach (var movil in moviles)
             {
-           //     repositorio.agregar(viaje);
-                MessageBox.Show("si se pudo agregar el viaje");
-            }
-            catch (Exception ex) 
-            {
-                MessageBox.Show($"No se pudo agregar el viaje. Error {ex.Message}");
-            }
-            finally
-            {
-                IViajesVista viajesvista = ViajesVista.ObtenerInstancia(this.rol, this.id);
-                this.Close();
+                var visual = new MovilVisualDTO
+                {
+                    IdMovil = movil.IdMovil,
+                    Texto = $"Móvil {movil.NumeroMovil}"
+                };
+
+                clbMoviles.Items.Add(visual, false); // Ahora sí: objeto seguro + texto visible
             }
         }
     }

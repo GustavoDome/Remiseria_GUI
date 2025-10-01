@@ -1,4 +1,5 @@
-﻿using Programa.Vistas.Modificacion.Interfaces;
+﻿using Programa.Estilos;
+using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +16,15 @@ namespace Programa.Vistas.Modificacion
     {
         public ModificarBasesVista()
         {
+            this.Load += new System.EventHandler(this.ModificarVista_Load);
             InitializeComponent();
             asociarEventos();
         }
-
+        private void ModificarVista_Load(object sender, EventArgs e)
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+        }
         public DateTime fecha
         {
             get => dtpFecha.Value;

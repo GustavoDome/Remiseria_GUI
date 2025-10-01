@@ -115,18 +115,18 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(16, 346);
+            this.btnVolver.Location = new System.Drawing.Point(16, 331);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(82, 31);
+            this.btnVolver.Size = new System.Drawing.Size(130, 49);
             this.btnVolver.TabIndex = 8;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(602, 346);
+            this.btnAgregar.Location = new System.Drawing.Point(554, 331);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(82, 31);
+            this.btnAgregar.Size = new System.Drawing.Size(130, 46);
             this.btnAgregar.TabIndex = 9;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;

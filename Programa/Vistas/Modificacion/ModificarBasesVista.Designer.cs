@@ -40,7 +40,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(37, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(258, 20);
             this.label1.TabIndex = 2;
@@ -49,25 +49,25 @@
             // dtpFecha
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFecha.Location = new System.Drawing.Point(35, 42);
+            this.dtpFecha.Location = new System.Drawing.Point(58, 58);
             this.dtpFecha.Name = "dtpFecha";
             this.dtpFecha.Size = new System.Drawing.Size(202, 20);
             this.dtpFecha.TabIndex = 3;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(16, 219);
+            this.btnVolver.Location = new System.Drawing.Point(12, 230);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(125, 46);
             this.btnVolver.TabIndex = 4;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(195, 219);
+            this.btnModificar.Location = new System.Drawing.Point(202, 230);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.Size = new System.Drawing.Size(125, 46);
             this.btnModificar.TabIndex = 5;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -76,7 +76,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(54, 107);
+            this.label2.Location = new System.Drawing.Point(78, 106);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(162, 20);
             this.label2.TabIndex = 6;
@@ -84,16 +84,16 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(12, 139);
+            this.textBox1.Location = new System.Drawing.Point(12, 146);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(249, 20);
+            this.textBox1.Size = new System.Drawing.Size(315, 20);
             this.textBox1.TabIndex = 7;
             // 
             // ModificarBasesVista
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(282, 251);
+            this.ClientSize = new System.Drawing.Size(339, 288);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnModificar);

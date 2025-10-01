@@ -37,16 +37,16 @@
             // dtpFecha
             // 
             this.dtpFecha.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFecha.Location = new System.Drawing.Point(40, 47);
+            this.dtpFecha.Location = new System.Drawing.Point(16, 69);
             this.dtpFecha.Name = "dtpFecha";
-            this.dtpFecha.Size = new System.Drawing.Size(202, 20);
+            this.dtpFecha.Size = new System.Drawing.Size(361, 20);
             this.dtpFecha.TabIndex = 0;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 9);
+            this.label1.Location = new System.Drawing.Point(65, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(258, 20);
             this.label1.TabIndex = 1;
@@ -54,18 +54,18 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(16, 113);
+            this.btnVolver.Location = new System.Drawing.Point(16, 135);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(107, 40);
             this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(195, 113);
+            this.btnAgregar.Location = new System.Drawing.Point(270, 135);
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
+            this.btnAgregar.Size = new System.Drawing.Size(107, 40);
             this.btnAgregar.TabIndex = 3;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
@@ -74,7 +74,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(285, 150);
+            this.ClientSize = new System.Drawing.Size(389, 187);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.label1);

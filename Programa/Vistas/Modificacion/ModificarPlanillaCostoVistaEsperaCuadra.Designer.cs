@@ -38,7 +38,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(36, 9);
+            this.label1.Location = new System.Drawing.Point(80, 9);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(249, 18);
             this.label1.TabIndex = 0;
@@ -46,25 +46,25 @@
             // 
             // txtCuadrasEspera
             // 
-            this.txtCuadrasEspera.Location = new System.Drawing.Point(12, 40);
+            this.txtCuadrasEspera.Location = new System.Drawing.Point(12, 56);
             this.txtCuadrasEspera.Name = "txtCuadrasEspera";
-            this.txtCuadrasEspera.Size = new System.Drawing.Size(300, 20);
+            this.txtCuadrasEspera.Size = new System.Drawing.Size(413, 20);
             this.txtCuadrasEspera.TabIndex = 1;
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(15, 86);
+            this.btnVolver.Location = new System.Drawing.Point(12, 114);
             this.btnVolver.Name = "btnVolver";
-            this.btnVolver.Size = new System.Drawing.Size(75, 23);
+            this.btnVolver.Size = new System.Drawing.Size(134, 48);
             this.btnVolver.TabIndex = 2;
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
             // btnModificar
             // 
-            this.btnModificar.Location = new System.Drawing.Point(237, 84);
+            this.btnModificar.Location = new System.Drawing.Point(291, 114);
             this.btnModificar.Name = "btnModificar";
-            this.btnModificar.Size = new System.Drawing.Size(75, 23);
+            this.btnModificar.Size = new System.Drawing.Size(134, 48);
             this.btnModificar.TabIndex = 3;
             this.btnModificar.Text = "Modificar";
             this.btnModificar.UseVisualStyleBackColor = true;
@@ -73,7 +73,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 119);
+            this.ClientSize = new System.Drawing.Size(437, 174);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtCuadrasEspera);

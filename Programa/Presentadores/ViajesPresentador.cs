@@ -5,6 +5,8 @@ using Programa.Vistas;
 using Programa.Vistas.Alta;
 using Programa.Vistas.Alta.Interfaces;
 using Programa.Vistas.Interfaces;
+using Programa.Vistas.Modificacion;
+using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,6 +14,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Programa.Presentadores.CUPresentador.CUViajesPresentador;
 
 namespace Programa.Presentadores
 {
@@ -49,7 +52,16 @@ namespace Programa.Presentadores
             this.vista.volver += volver_menu;
             this.vista.recargar += cargar_datos;
         }
+        public int IdOperador => id;
 
+        public void RecargarVista()
+        {
+            vista.SetFecha(fechaActual);
+            var tabla = repositorio.MostrarTodo(fechaActual);
+            filtrador.DataSource = tabla;
+            vista.congelarVista();
+            vista.OcultarIdViaje();
+        }
         private void cargar_datos(object sender = null, EventArgs e = null)
         {
             var tabla = repositorio.MostrarTodo(fechaActual);
@@ -58,14 +70,20 @@ namespace Programa.Presentadores
             vista.OcultarIdViaje();
         }
 
-        private int ObtenerSiguienteNumeroViaje()
+        public int ObtenerSiguienteNumeroViaje()
         {
             var tabla = filtrador.DataSource as DataTable;
-            if (tabla == null || tabla.Rows.Count == 0)
+            if (tabla == null || tabla.Rows.Count == 0 || !tabla.Columns.Contains("N° Viaje"))
                 return 1;
 
             var max = tabla.AsEnumerable()
-                .Select(row => Convert.ToInt32(row["N° Viaje"]))
+                .Select(row =>
+                {
+                    var valor = row["N° Viaje"];
+                    if (valor == DBNull.Value || valor == null) return 0;
+                    if (int.TryParse(valor.ToString(), out int n)) return n;
+                    return 0;
+                })
                 .DefaultIfEmpty(0)
                 .Max();
 
@@ -75,14 +93,21 @@ namespace Programa.Presentadores
         private void agregar_viaje(object sender, EventArgs e)
         {
             int numeroViaje = ObtenerSiguienteNumeroViaje();
-            IAgregarViajesVista agregarVista = AgregarViajesVista.ObtenerInstancia(numeroViaje, id, rol);
-            // Podés pasar fechaActual si querés que el viaje se cree en ese día
+            IAgregarViajesVista agregarViajesVista = AgregarViajesVista.ObtenerInstancia(numeroViaje, this.id, this.rol);
+            new CUAgregarViajePresentador(agregarViajesVista, this.repositorio, this.fechaActual, this);
         }
 
         private void modificar_viaje(object sender, EventArgs e)
         {
-            // Implementar lógica de edición
-            cargar_datos();
+            int idViaje = vista.ObtenerIdViajeSeleccionado();
+            if (idViaje == 0)
+            {
+                MessageBox.Show("Debe seleccionar un viaje para modificar.");
+                return;
+            }
+
+            IModificarViajesVista modificarVista = ModificarViajesVista.ObtenerInstancia();
+            new CUModificarViajePresentador(modificarVista, this.repositorio, idViaje, this);
         }
 
         private void comentar_viaje(object sender, EventArgs e)
@@ -94,6 +119,21 @@ namespace Programa.Presentadores
         private void eliminar_viaje(object sender, EventArgs e)
         {
             int idViaje = vista.ObtenerIdViajeSeleccionado();
+            if (idViaje == 0)
+            {
+                MessageBox.Show("Debe seleccionar un viaje para eliminar.");
+                return;
+            }
+
+            var confirmacion = MessageBox.Show(
+                "¿Está seguro de que desea eliminar este viaje?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirmacion != DialogResult.Yes)
+                return;
+
             repositorio.Eliminar(idViaje);
             cargar_datos();
         }
