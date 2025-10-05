@@ -89,6 +89,7 @@ namespace Programa.Presentadores
 
             IAgregarBasesVista vistaAgregar = AgregarBasesVista.ObtenerInstancia();
             new CUBasesPresentador.CUAgregarBasePresentador(repositorio, vistaAgregar, id, vista.id_movil, this);
+            ((Form)vistaAgregar).ShowDialog();
         }
 
         private void modificar_base(object sender, EventArgs e)
@@ -104,6 +105,7 @@ namespace Programa.Presentadores
 
             IModificarBasesVista vistaModificar = ModificarBasesVista.ObtenerInstancia();
             new CUBasesPresentador.CUModificarBasePresentador(repositorio, vistaModificar, id, baseSeleccionada, this);
+            ((Form)vistaModificar).ShowDialog();
         }
 
         private void comentar_base(object sender, EventArgs e)
@@ -119,6 +121,7 @@ namespace Programa.Presentadores
 
             IAgregarBasesVistaComentario vistaComentario = AgregarBasesVistaComentario.ObtenerInstancia();
             new CUBasesPresentador.CUComentarioBasePresentador(repositorio, vistaComentario, baseSeleccionada, this);
+            ((Form)vistaComentario).ShowDialog();
         }
 
         private void eliminar_base(object sender, EventArgs e)

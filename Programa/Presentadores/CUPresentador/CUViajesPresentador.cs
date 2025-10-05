@@ -33,6 +33,7 @@ namespace Programa.Presentadores.CUPresentador
                 this.fechaActual = fechaActual;
                 this.presentadorPrincipal = presentadorPrincipal;
                 this.vista.volver += volver_menu;
+                this.vista.agregar -= agregar_viaje;
                 this.vista.agregar += agregar_viaje;
 
                 vista.CargarMoviles(repositorio.SeleccionarMovil().ToList());
@@ -42,7 +43,10 @@ namespace Programa.Presentadores.CUPresentador
             {
                 ((Form)vista).Close();
             }
-
+            private bool TieneVueltaPendiente(int idMovil, int numeroVuelta)
+            {
+                return repositorio.ExisteVueltaConEstado(idMovil, fechaActual, numeroVuelta, "·");
+            }
             private void agregar_viaje(object sender, EventArgs e)
             {
                 try
@@ -58,6 +62,13 @@ namespace Programa.Presentadores.CUPresentador
                         MessageBox.Show("Debe seleccionar al menos un móvil.");
                         return;
                     }
+
+                    var ids = obtenerMovilesSeleccionados();
+                    var vueltas = obtenerNumerosDeVuelta();
+
+                    var idsFiltrados = new List<int>();
+                    var vueltasFiltradas = new List<int>();
+
                     var dto = new AgregarViajeDTO
                     {
                         NumeroViaje = presentadorPrincipal.ObtenerSiguienteNumeroViaje(),
@@ -68,13 +79,33 @@ namespace Programa.Presentadores.CUPresentador
                         IdOperador = presentadorPrincipal.IdOperador,
                         VueltaFecha = fechaActual,
                         EstadoVuelta = "X",
-                        IdMoviles = obtenerMovilesSeleccionados(),
-                        Vueltas = obtenerNumerosDeVuelta()
+                        IdMoviles = new List<int>(),
+                        Vueltas = new List<int>(),
+                        IdsVueltasActivadas = new List<int>() // ← asegurate de que esta propiedad exista en el DTO
                     };
 
+                    for (int i = 0; i < ids.Count; i++)
+                    {
+                        int idMovil = ids[i];
+                        int numeroVuelta = vueltas[i];
+
+                        if (!TieneVueltaPendiente(idMovil, numeroVuelta))
+                        {
+                            idsFiltrados.Add(idMovil);
+                            vueltasFiltradas.Add(numeroVuelta);
+                        }
+                        else
+                        {
+                            repositorio.ActivarVueltaPendiente(idMovil, fechaActual, numeroVuelta);
+                            int idVuelta = repositorio.ObtenerIdVuelta(idMovil, fechaActual, numeroVuelta);
+                            dto.IdsVueltasActivadas.Add(idVuelta);
+                        }
+                    }
+
+                    dto.IdMoviles = idsFiltrados;
+                    dto.Vueltas = vueltasFiltradas;
+
                     repositorio.Agregar(dto);
-                    vista.LimpiarCampos();
-                    MessageBox.Show("El viaje fue agregado correctamente.");
                 }
                 catch (Exception ex)
                 {
@@ -94,9 +125,36 @@ namespace Programa.Presentadores.CUPresentador
 
             private List<int> obtenerNumerosDeVuelta()
             {
-                // Por ahora, simplemente numeramos las vueltas según el orden
                 var moviles = obtenerMovilesSeleccionados();
-                return Enumerable.Range(1, moviles.Count).ToList();
+                var vueltas = new List<int>();
+
+                foreach (var idMovil in moviles)
+                {
+                    bool tieneVueltas = repositorio.MovilTieneVueltas(idMovil, fechaActual);
+
+                    int numeroVuelta;
+
+                    if (tieneVueltas)
+                    {
+                        // Asignar la próxima vuelta libre para ese móvil
+                        numeroVuelta = repositorio.ObtenerProximoNumeroDeVuelta(idMovil, fechaActual);
+                    }
+                    else
+                    {
+                        // Asignar la vuelta más usada del día
+                        numeroVuelta = repositorio.CalcularVueltaJustaParaNuevoMovil(fechaActual);
+
+                        // Validar que el móvil no tenga ya esa vuelta (por seguridad)
+                        if (repositorio.MovilYaTieneVuelta(idMovil, fechaActual, numeroVuelta))
+                        {
+                            numeroVuelta = repositorio.ObtenerProximoNumeroDeVuelta(idMovil, fechaActual);
+                        }
+                    }
+
+                    vueltas.Add(numeroVuelta);
+                }
+
+                return vueltas;
             }
         }
         public class CUModificarViajePresentador

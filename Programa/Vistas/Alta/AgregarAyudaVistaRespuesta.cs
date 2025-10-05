@@ -62,24 +62,9 @@ namespace Programa.Vistas.Alta
                 }
             }
         }
-
-        // Singleton
-        private static AgregarAyudaVistaRespuesta instancia;
         public static AgregarAyudaVistaRespuesta ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new AgregarAyudaVistaRespuesta();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                    instancia.WindowState = FormWindowState.Normal;
-
-                instancia.BringToFront();
-                instancia.Activate();
-            }
+            var instancia = new AgregarAyudaVistaRespuesta();
             return instancia;
         }
     }

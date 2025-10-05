@@ -43,10 +43,26 @@ namespace Programa.Vistas
             {
                 volver?.Invoke(this, EventArgs.Empty);
             };
+            dgvMoviles.CellClick += delegate (object sender, DataGridViewCellEventArgs e)
+            {
+                if (e.RowIndex >= 0 && dgvMoviles.Columns.Contains("IdMovil"))
+                {
+                    dgvMoviles.CurrentCell = dgvMoviles.Rows[e.RowIndex].Cells["IdMovil"];
+                }
+            };
+            dgvMoviles.CellMouseDown += delegate (object sender, DataGridViewCellMouseEventArgs e)
+            {
+                if (e.RowIndex >= 0)
+                {
+                    dgvMoviles.ClearSelection();
+                    dgvMoviles.Rows[e.RowIndex].Selected = true;
+                    dgvMoviles.CurrentCell = dgvMoviles.Rows[e.RowIndex].Cells["IdMovil"];
+                }
+            };
         }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static MovilesVista instancia;
+        public static MovilesVista instancia;
 
         public event EventHandler agregarMovil;
         public event EventHandler modificarMovil;
@@ -58,7 +74,18 @@ namespace Programa.Vistas
         }
         public int ObtenerIdMovilSeleccionado()
         {
-            return Convert.ToInt32(dgvMoviles.CurrentRow.Cells["IdMovil"].Value);
+            var fila = dgvMoviles.CurrentRow;
+            if (fila == null || !dgvMoviles.Columns.Contains("IdMovil"))
+                return 0;
+
+            var celda = fila.Cells["IdMovil"];
+            if (celda == null || celda.Value == null)
+                return 0;
+
+            if (int.TryParse(celda.Value.ToString(), out int idMovil))
+                return idMovil;
+
+            return 0;
         }
         // Metodo para el uso del Singleton
         public static MovilesVista ObtenerInstancia()

@@ -39,24 +39,9 @@ namespace Programa.Vistas.Alta
             btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
             btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
         }
-
-        // Singleton
-        private static AgregarBasesVistaComentario instancia;
         public static AgregarBasesVistaComentario ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new AgregarBasesVistaComentario();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                    instancia.WindowState = FormWindowState.Normal;
-
-                instancia.BringToFront();
-                instancia.Activate();
-            }
+            var instancia = new AgregarBasesVistaComentario();
             return instancia;
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Programa.DTOs;
 using Programa.Estilos;
+using Programa.Vistas.Alta;
 using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -43,6 +44,19 @@ namespace Programa.Vistas.Modificacion
         }
         public void SetComentario(string comentario)
         {
+            if (string.IsNullOrWhiteSpace(comentario))
+            {
+                rbtnAfuera.Checked = false;
+                rbtnDerivado.Checked = false;
+                rbtnDesignado.Checked = false;
+                rbtnOtro.Checked = false;
+
+                rtbComentarios.Text = string.Empty;
+                lblComentario.Visible = false;
+                rtbComentarios.Visible = false;
+                return;
+            }
+
             if (comentario.StartsWith("Escriba dónde"))
                 rbtnAfuera.Checked = true;
             else if (comentario.StartsWith("Escriba de quién"))
@@ -65,23 +79,9 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler modificar;
         public event EventHandler volver;
 
-        // Singleton
-        private static ModificarViajesVista instancia;
         public static ModificarViajesVista ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new ModificarViajesVista();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                    instancia.WindowState = FormWindowState.Normal;
-
-                instancia.BringToFront();
-                instancia.Activate();
-            }
+            var instancia = new ModificarViajesVista();
             return instancia;
         }
 

@@ -64,7 +64,7 @@
             // 
             // clbMoviles
             // 
-            this.clbMoviles.ColumnWidth = 70;
+            this.clbMoviles.ColumnWidth = 190;
             this.clbMoviles.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.clbMoviles.FormattingEnabled = true;
             this.clbMoviles.HorizontalExtent = 4;
@@ -72,7 +72,6 @@
             this.clbMoviles.Location = new System.Drawing.Point(12, 57);
             this.clbMoviles.MultiColumn = true;
             this.clbMoviles.Name = "clbMoviles";
-            this.clbMoviles.SelectionMode = System.Windows.Forms.SelectionMode.None;
             this.clbMoviles.Size = new System.Drawing.Size(448, 256);
             this.clbMoviles.TabIndex = 21;
             // 

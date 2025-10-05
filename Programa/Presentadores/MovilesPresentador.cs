@@ -56,26 +56,33 @@ namespace Programa.Presentadores
         {
             IAgregarMovilesVista vistaAgregar = AgregarMovilesVista.ObtenerInstancia();
             new CUMovilesPresentador.CUAgregarMovilesPresentador(vistaAgregar, repositorio, this);
+            ((Form)vistaAgregar).ShowDialog();
         }
 
         private void modificar_movil(object sender, EventArgs e)
         {
-            int idMovil = vista.ObtenerIdMovilSeleccionado();
-            var movilSeleccionado = repositorio.ObtenerTodos().FirstOrDefault(m => m.IdMovil == idMovil);
-            if (movilSeleccionado == null)
+            try 
             {
-                MessageBox.Show("Debe seleccionar un móvil para modificar.");
-                return;
+                int idMovil = vista.ObtenerIdMovilSeleccionado();
+                var movilSeleccionado = repositorio.ObtenerTodos().FirstOrDefault(m => m.IdMovil == idMovil);
+                if (idMovil == 0)
+                {
+                    MessageBox.Show("Debe seleccionar un móvil válido para modificar.");
+                    return;
+                }
+                IModificarMovilesVista vistaModificar = ModificarMovilesVista.ObtenerInstancia();
+                new CUModificarMovilPresentador(vistaModificar, repositorio, movilSeleccionado, this);
+                ((Form)vistaModificar).ShowDialog();
             }
-
-            if (!repositorio.ObtenerTodos().Any(m => m.IdMovil == movilSeleccionado.IdMovil))
+            catch (Exception ex)
             {
-                MessageBox.Show("El móvil seleccionado no está activo y no puede ser modificado.");
-                return;
-            }
+                var inner = ex.InnerException;
+                while (inner?.InnerException != null)
+                    inner = inner.InnerException;
 
-            IModificarMovilesVista vistaModificar = ModificarMovilesVista.ObtenerInstancia();
-            new CUModificarMovilPresentador(vistaModificar, repositorio, movilSeleccionado, this);
+                MessageBox.Show("Error interno: " + (inner?.Message ?? ex.Message));
+                throw;
+            }
         }
 
         private void eliminar_movil(object sender, EventArgs e)

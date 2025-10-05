@@ -12,7 +12,6 @@ namespace Programa.DTOs
         public string NombreCompleto => $"{Nombre} {Apellido}";
         public bool Chofer { get; set; }
         public string Telefono { get; set; }
-
         public string Nombre { get; set; }
         public string Apellido { get; set; }
     }

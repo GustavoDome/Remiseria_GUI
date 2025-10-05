@@ -40,7 +40,9 @@
             // 
             this.dgvMoviles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMoviles.Location = new System.Drawing.Point(12, 12);
+            this.dgvMoviles.MultiSelect = false;
             this.dgvMoviles.Name = "dgvMoviles";
+            this.dgvMoviles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvMoviles.Size = new System.Drawing.Size(912, 434);
             this.dgvMoviles.TabIndex = 0;
             // 

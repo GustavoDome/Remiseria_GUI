@@ -43,7 +43,7 @@ namespace Programa.Vistas
         }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static OperadoresVista instancia;
+        public static OperadoresVista instancia;
 
         public event EventHandler agregarOperador;
         public event EventHandler modificiarOperador;

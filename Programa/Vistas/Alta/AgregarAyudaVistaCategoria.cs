@@ -43,26 +43,9 @@ namespace Programa.Vistas.Alta
         }
         public event EventHandler agregar;
         public event EventHandler volver;
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static AgregarAyudaVistaCategoria instancia;
-
-        // Metodo para el uso del Singleton
         public static AgregarAyudaVistaCategoria ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new AgregarAyudaVistaCategoria();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                {
-                    instancia.WindowState = FormWindowState.Normal;
-                }
-                instancia.BringToFront();
-                instancia.Activate();
-            }
+            var instancia = new AgregarAyudaVistaCategoria();
             return instancia;
         }
     }

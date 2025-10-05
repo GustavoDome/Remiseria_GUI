@@ -37,13 +37,7 @@ namespace Programa.Presentadores
         public int? IdCategoriaSeleccionada { get; private set; }
         public int? IdPreguntaSeleccionada { get; private set; }
 
-        public AyudaPresentador(
-            IAyudaVista vista,
-            ICategoriaRepositorio repositorioCategoria,
-            IPreguntaRepositorio repositorioPregunta,
-            IRespuestasRepositorio repositorioRespuesta,
-            string rol,
-            int id)
+        public AyudaPresentador(IAyudaVista vista, ICategoriaRepositorio repositorioCategoria, IPreguntaRepositorio repositorioPregunta, IRespuestasRepositorio repositorioRespuesta, string rol, int id)
         {
             this.vista = vista;
             this.repositorioCategoria = repositorioCategoria;
@@ -53,7 +47,7 @@ namespace Programa.Presentadores
             this.id = id;
             this.filtrador = new BindingSource();
 
-            vista.ocultarBotones(rol);
+            vista.ocultarBotones();
             // Cargar categorías y vincular eventos
             modeloCategoria = repositorioCategoria.ObtenerTodas().ToList();
             vista.SetCategoriaBindingSource(new BindingSource { DataSource = modeloCategoria });
@@ -77,7 +71,12 @@ namespace Programa.Presentadores
                 vistaConEventos.respuestaEliminarSeleccionada += eliminar_respuesta;
             }
         }
-
+        public void RefrescarModelos()
+        {
+            modeloCategoria = repositorioCategoria.ObtenerTodas().ToList();
+            modeloPregunta = repositorioPregunta.MostrarTodo().ToList();
+            modeloRespuesta = repositorioRespuesta.MostrarTodo().ToList();
+        }
         private void cargar_preguntas(int idCategoria)
         {
             IdCategoriaSeleccionada = idCategoria;
@@ -123,7 +122,8 @@ namespace Programa.Presentadores
             }
 
             IAgregarAyudaVistaPregunta vistaAgregar = AgregarAyudaVistaPregunta.ObtenerInstancia();
-            new CUAyudaPresentador.CUAgregarPreguntaPresentador(this.repositorioPregunta, vistaAgregar, this.vista, IdCategoriaSeleccionada.Value);
+            new CUAyudaPresentador.CUAgregarPreguntaPresentador(this.repositorioPregunta, vistaAgregar, this.vista, IdCategoriaSeleccionada.Value, this);
+            ((Form)vistaAgregar).ShowDialog();
         }
 
         public void modificar_pregunta(object sender, EventArgs e)
@@ -142,7 +142,8 @@ namespace Programa.Presentadores
             }
 
             IModificarAyudaVistaPregunta vistaModificar = ModificarAyudaVistaPregunta.ObtenerInstancia();
-            new CUAyudaPresentador.CUModificarPreguntaPresentador(this.repositorioPregunta, vistaModificar, this.vista, preguntaDTO);
+            new CUAyudaPresentador.CUModificarPreguntaPresentador(this.repositorioPregunta, vistaModificar, this.vista, preguntaDTO, this);
+            ((Form)vistaModificar).ShowDialog();
         }
 
         public void eliminar_pregunta(object sender, EventArgs e)
@@ -174,6 +175,7 @@ namespace Programa.Presentadores
                 vista.SetRespuestaBindingSource(new BindingSource());
 
                 IdPreguntaSeleccionada = null;
+                RefrescarModelos();
             }
         }
 
@@ -186,7 +188,8 @@ namespace Programa.Presentadores
             }
 
             IAgregarAyudaVistaRespuesta vistaAgregar = AgregarAyudaVistaRespuesta.ObtenerInstancia();
-            new CUAyudaPresentador.CUAgregarRespuestaPresentador(this.repositorioRespuesta, vistaAgregar, this.vista, IdPreguntaSeleccionada.Value);
+            new CUAyudaPresentador.CUAgregarRespuestaPresentador(this.repositorioRespuesta, vistaAgregar, this.vista, IdPreguntaSeleccionada.Value, this);
+            ((Form)vistaAgregar).ShowDialog();
         }
 
         private void modificar_respuesta(int idRespuesta)
@@ -199,7 +202,8 @@ namespace Programa.Presentadores
             }
 
             IModificarAyudaVistaRespuesta vistaModificar = ModificarAyudaVistaRespuesta.ObtenerInstancia();
-            new CUAyudaPresentador.CUModificarRespuestaPresentador(this.repositorioRespuesta, vistaModificar, this.vista, dto);
+            new CUAyudaPresentador.CUModificarRespuestaPresentador(this.repositorioRespuesta, vistaModificar, this.vista, dto, this);
+            ((Form)vistaModificar).ShowDialog();
         }
 
         private void eliminar_respuesta(int idRespuesta)
@@ -221,13 +225,15 @@ namespace Programa.Presentadores
                     .ToList();
 
                 vista.SetRespuestaBindingSource(new BindingSource { DataSource = modeloActualizado });
+                RefrescarModelos();
             }
         }
 
         public void agregar_categoria(object sender, EventArgs e) 
         {
             IAgregarAyudaVistaCategoria agregarCategoria = AgregarAyudaVistaCategoria.ObtenerInstancia();
-            new CUAgregarCategoriaPresentador(this.repositorioCategoria, agregarCategoria,this.vista);
+            new CUAgregarCategoriaPresentador(this.repositorioCategoria, agregarCategoria,this.vista, this);
+            ((Form)agregarCategoria).ShowDialog();
         }
 
         public void modificar_categoria(object sender, EventArgs e)
@@ -246,7 +252,8 @@ namespace Programa.Presentadores
             }
 
             IModificarAyudaVistaCategoria vistaModificar = ModificarAyudaVistaCategoria.ObtenerInstancia();
-            new CUAyudaPresentador.CUModificarCategoriaPresentador(this.repositorioCategoria, vistaModificar, ayudavista: this.vista, categoriaDTO);
+            new CUAyudaPresentador.CUModificarCategoriaPresentador(this.repositorioCategoria, vistaModificar, ayudavista: this.vista, categoriaDTO, this);
+            ((Form)vistaModificar).ShowDialog();
         }
 
         public void eliminar_categoria(object sender, EventArgs e)
@@ -289,6 +296,7 @@ namespace Programa.Presentadores
 
                 IdCategoriaSeleccionada = null;
                 IdPreguntaSeleccionada = null;
+                RefrescarModelos();
             }
         }
 

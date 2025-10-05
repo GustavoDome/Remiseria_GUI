@@ -19,6 +19,7 @@ namespace Programa.Vistas.Interfaces
 
         void RefrescarEstilos();
         void SetTipoFuenteBindingSource(BindingSource tipoFuentes);
+        void ReproducirAlarmaPreview(string nombreAlarma);
         void SetTamanoFuenteBindingSource(BindingSource tamanoFuentes);
         void SetTemaSistemaBindingSource(BindingSource temaSistemas);
         void SetTipoAlarmaBindingSource(BindingSource tipoAlarmas);

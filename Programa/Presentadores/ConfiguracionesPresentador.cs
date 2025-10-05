@@ -40,6 +40,10 @@ namespace Programa.Presentadores
             fuentes.DataSource = disponibles;
             vista.SetTipoFuenteBindingSource(fuentes);
 
+            BindingSource alarmas = new BindingSource();
+            alarmas.DataSource = new List<string> { "base", "fuerte", "tranquila", "constante", "reloj"};
+            vista.SetTipoAlarmaBindingSource(alarmas);
+
             cargar_configuracion();
         }
 
@@ -52,6 +56,8 @@ namespace Programa.Presentadores
                 vista.tamanoFuente = config.TamanoFuente.ToString();
                 vista.temaSistema = config.TemaColor;
                 vista.tipoAlarma = config.TipoAlarma;
+                // Reproducir preview de la alarma seleccionada
+                ((ConfiguracionesVista)vista).ReproducirAlarmaPreview(config.TipoAlarma);
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Programa.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace Programa.Vistas.Interfaces
         event EventHandler agregarVuelta;
         event EventHandler modificarVuelta;
         event EventHandler eliminarVuelta;
+        event EventHandler agregarMovil;
+        event EventHandler eliminarMovil;
         event EventHandler retroceder;
         event EventHandler adelantar;
         event EventHandler ingresarViaje;
@@ -20,5 +23,11 @@ namespace Programa.Vistas.Interfaces
         void SetFecha(DateTime fecha);
         void ocultarBotones(string rol);
         void SetViajesBindingSource(BindingSource viajes);
+        int ObtenerIdVueltaSeleccionada();
+        int ObtenerIdMovilSeleccionado();
+        int ObtenerNumeroMovilSeleccionado();
+        void ConfigurarMoviles(List<MovilResumenDTO> lista);
+        int ObtenerNumeroVueltaSeleccionada();
+        void MostrarMensaje(string mensaje);
     }
 }

@@ -77,26 +77,9 @@ namespace Programa.Vistas.Alta
             get { return rtbComentario.Text; }
             set { rtbComentario.Text = value; }
         }
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static AgregarInicioVistaRecordatorio instancia;
-
-        // Metodo para el uso del Singleton
         public static AgregarInicioVistaRecordatorio ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new AgregarInicioVistaRecordatorio();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                {
-                    instancia.WindowState = FormWindowState.Normal;
-                }
-                instancia.BringToFront();
-                instancia.Activate();
-            }
+            var instancia = new AgregarInicioVistaRecordatorio();
             return instancia;
         }
     }

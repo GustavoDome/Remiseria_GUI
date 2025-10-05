@@ -16,7 +16,6 @@ namespace Programa.Vistas.Alta.Interfaces
 
         List<int> ObtenerMovilesSeleccionados(); // Devuelve los IDs de móviles seleccionados
         void CargarMoviles(List<MovilResumenDTO> moviles); // Carga los móviles en el CheckedListBox
-        void LimpiarCampos();
 
         event EventHandler agregar;
         event EventHandler volver;

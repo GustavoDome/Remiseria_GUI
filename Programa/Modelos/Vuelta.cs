@@ -7,13 +7,18 @@ namespace Programa.Modelos
     [Table("vuelta", Schema = "public")]
     public class Vuelta
     {
-        [Key, Column("id_viaje", Order = 0)]
-        [ForeignKey("Viaje")]
-        public int IdViaje { get; set; }
+        [Key]
+        [Column("id_vuelta")]
+        public int IdVuelta { get; set; } // Nueva clave primaria única
 
-        [Key, Column("id_movil", Order = 1)]
+        [ForeignKey("Viaje")]
+        [Column("id_viaje")]
+        public int? IdViaje { get; set; } // Nullable para vueltas manuales
+
         [ForeignKey("Movil")]
+        [Column("id_movil")]
         public int IdMovil { get; set; }
+
         [Column("vuelta")]
         public int NumeroVuelta { get; set; }
 

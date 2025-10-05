@@ -128,31 +128,37 @@ namespace Programa.Presentadores
         {
             IModificarPlanillaCostoVistaCuadraPrecio vistaModificar = ModificarPlanillaCostoVistaCuadraPrecio.ObtenerInstancia();
             new CUModificarImporteCuadraPlanillaCostoVista(vistaModificar, cuadrasRepo, this);
+            ((Form)vistaModificar).ShowDialog();
         }
         private void modificarCuadras_mandado(object sender, EventArgs e)
         {
             IModificarPlanillaCostoVistaCuadraMandado vistaModificar = ModificarPlanillaCostoVistaCuadraMandado.ObtenerInstancia();
             new CUModificarImporteCuadraMandadoPlanillaCostoVista(vistaModificar, cuadrasRepo, this);
+            ((Form)vistaModificar).ShowDialog();
         }
         private void modificarCuadras_espera(object sender, EventArgs e)
         {
             IModificarPlanillaCostoVistaEsperaCuadra vistaModificar = ModificarPlanillaCostoVistaEsperaCuadra.ObtenerInstancia();
             new CUModificarImporteCuadraEsperaPlanillaCostoVista(vistaModificar, cuadrasRepo, this);
+            ((Form)vistaModificar).ShowDialog();
         }
         private void modificarCiudad_costo(object sender, EventArgs e)
         {
             IModificarPlanillaCostoVistaCiudadPrecio vistaModificar = ModificarPlanillaCostoVistaCiudadPrecio.ObtenerInstancia();
             new CUModificarImporteCiudadPlanillaCostoVista(vistaModificar, ciudadImporteRepo, this);
+            ((Form)vistaModificar).ShowDialog();
         }
         private void modificarCiudad_espera(object sender, EventArgs e)
         {
             IModificarPlanillaCostoVistaEsperaCiudad vistaModificar = ModificarPlanillaCostoVistaEsperaCiudad.ObtenerInstancia();
             new CUModificarImporteCiudadEsperaPlanillaCostoVista(vistaModificar, ciudadImporteRepo, this);
+            ((Form)vistaModificar).ShowDialog();
         }
         private void agregar_ciudad(object sender, EventArgs e)
         {
             IAgregarPlanillaCostoVista vistaAgregar = AgregarPlanillaCostoVista.ObtenerInstancia();
             new CUAgregarCiudadPlanillaCostoVista(vistaAgregar, ciudadRepo, ciudadImporteRepo, this);
+            ((Form)vistaAgregar).ShowDialog();
         }
         private void modificar_ciudad(object sender, EventArgs e)
         {
@@ -167,6 +173,7 @@ namespace Programa.Presentadores
 
             IModificarPlanillaCostoVistaCiudad vistaModificar = ModificarPlanillaCostoVistaCiudad.ObtenerInstancia();
             new CUModificarCiudadPlanillaCostoVista(vistaModificar, ciudadRepo, ciudadImporteRepo, ciudadSeleccionada, this);
+            ((Form)vistaModificar).ShowDialog();
         }
         private void eliminar_ciudad(object sender, EventArgs e)
         {

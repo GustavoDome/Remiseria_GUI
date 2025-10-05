@@ -1,11 +1,13 @@
 ﻿using Programa.Estilos;
 using Programa.Modelos;
+using Programa.Vistas.Alta;
 using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -32,33 +34,38 @@ namespace Programa.Vistas.Modificacion
             get { return trbRespuesta.Text; }
             set { trbRespuesta.Text = value; }
         }
+        public byte[] multimedia
+        {
+            get => multimediaData;
+            set => multimediaData = value;
+        }
 
         public event EventHandler modificar;
         public event EventHandler volver;
+
+        private byte[] multimediaData;
+        private void cargarMultimedia()
+        {
+            using (OpenFileDialog dialogo = new OpenFileDialog())
+            {
+                dialogo.Filter = "Archivos multimedia|*.mp4;*.mp3;*.wav";
+                if (dialogo.ShowDialog() == DialogResult.OK)
+                {
+                    multimediaData = File.ReadAllBytes(dialogo.FileName);
+                    MessageBox.Show("Multimedia cargada correctamente.");
+                }
+            }
+        }
 
         private void asociarEventos()
         {
             btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
             btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+            btnAgregarArchivo.Click += (s, e) => cargarMultimedia();
         }
-
-        // Singleton
-        private static ModificarAyudaVistaRespuesta instancia;
         public static ModificarAyudaVistaRespuesta ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new ModificarAyudaVistaRespuesta();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                    instancia.WindowState = FormWindowState.Normal;
-
-                instancia.BringToFront();
-                instancia.Activate();
-            }
+            var instancia = new ModificarAyudaVistaRespuesta();
             return instancia;
         }
     }

@@ -54,6 +54,7 @@ namespace Programa.Presentadores
         {
             IAgregarOperadoresVista vistaAgregar = AgregarOperadoresVista.ObtenerInstancia();
             new CUOperadorPresentador.CUAgregarOperadorPresentador(vistaAgregar, repositorio, this);
+            ((Form)vistaAgregar).ShowDialog();
         }
 
         private void modificar_operador(object sender, EventArgs e)
@@ -74,6 +75,7 @@ namespace Programa.Presentadores
 
             IModificarOperadorVista vistaModificar = ModificarOperadorVista.ObtenerInstancia();
             new CUModificarOperadorPresentador(vistaModificar, repositorio, operador, this);
+            ((Form)vistaModificar).ShowDialog();
         }
 
         private void eliminar_operador(object sender, EventArgs e)

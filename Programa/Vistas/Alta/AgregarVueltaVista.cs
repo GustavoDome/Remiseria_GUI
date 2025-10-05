@@ -1,4 +1,6 @@
-﻿using Programa.Estilos;
+﻿using Programa.DTOs;
+using Programa.Estilos;
+using Programa.Vistas.Alta.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,39 +13,50 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
-    public partial class AgregarVueltaVista : Form
+    public partial class AgregarVueltaVista : Form, IAgregarVueltaVista
     {
+        public event EventHandler agregarMovil;
+        public event EventHandler volver;
+
         public AgregarVueltaVista()
         {
-            this.Load += new System.EventHandler(this.ModificarVista_Load);
             InitializeComponent();
+            this.Load += ModificarVista_Load;
+            btnAgregar.Click += (s, e) => agregarMovil?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static AgregarVueltaVista instancia;
 
-        // Metodo para el uso del Singleton
+        public void SetMoviles(IEnumerable<MovilResumenDTO> moviles)
+        {
+            clbMoviles.Items.Clear();
+            foreach (var m in moviles)
+            {
+                clbMoviles.Items.Add(m, false);
+            }
+        }
+
+        public List<int> ObtenerMovilesSeleccionados()
+        {
+            return clbMoviles.CheckedItems
+                .OfType<MovilResumenDTO>()
+                .Select(m => m.IdMovil)
+                .ToList();
+        }
+
+        public void Cerrar()
+        {
+            this.Close();
+        }
+
         public static AgregarVueltaVista ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new AgregarVueltaVista();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                {
-                    instancia.WindowState = FormWindowState.Normal;
-                }
-                instancia.BringToFront();
-                instancia.Activate();
-            }
-            return instancia;
+            return new AgregarVueltaVista();
         }
     }
 }

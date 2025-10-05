@@ -1,4 +1,5 @@
 ﻿using Programa.Estilos;
+using Programa.Vistas.Alta;
 using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -78,26 +79,9 @@ namespace Programa.Vistas.Modificacion
             get { return rtbComentario.Text; }
             set { rtbComentario.Text = value; }
         }
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static ModificarInicioVistaRecordatorio instancia;
-
-        // Metodo para el uso del Singleton
         public static ModificarInicioVistaRecordatorio ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new ModificarInicioVistaRecordatorio();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                {
-                    instancia.WindowState = FormWindowState.Normal;
-                }
-                instancia.BringToFront();
-                instancia.Activate();
-            }
+            var instancia = new ModificarInicioVistaRecordatorio();
             return instancia;
         }
     }

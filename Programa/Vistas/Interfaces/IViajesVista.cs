@@ -11,7 +11,7 @@ namespace Programa.Vistas.Interfaces
     {
         event EventHandler agregarViaje;
         event EventHandler modificarViaje;
-        event EventHandler comentarViaje;
+        event EventHandler cambiarEstadoViaje;
         event EventHandler eliminarViaje;
         event EventHandler retroceder;
         event EventHandler adelantar;

@@ -1,4 +1,5 @@
-﻿using Programa.DTOs;
+﻿using Programa.Commons;
+using Programa.DTOs;
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using Programa.Repositorios;
@@ -21,6 +22,7 @@ namespace Programa.Presentadores
         private IRecordatorioRepositorio repositorio;
         private IInicioVista vista;
         private BindingSource filtrador;
+        private GestorAlarmasGlobal gestorAlarmas;
         private string rol;
         private int id;
 
@@ -33,6 +35,10 @@ namespace Programa.Presentadores
             this.repositorio = repositorio;
             this.rol = rol;
             this.id = id;
+            ((Form)this.vista).Shown += (s, e) =>
+            {
+                this.gestorAlarmas = new GestorAlarmasGlobal(this.repositorio, this.id, this);
+            };
 
             this.vista.ocultarBotones(this.rol);
 
@@ -78,6 +84,7 @@ namespace Programa.Presentadores
         {
             IAgregarInicioVistaRecordatorio agregarRecordatorio = AgregarInicioVistaRecordatorio.ObtenerInstancia();
             new CUAgregarRecordatorio(this.repositorio, agregarRecordatorio, this.id, this);
+            ((Form)agregarRecordatorio).ShowDialog();
         }
         private void modificarRecordatorio(object sender, EventArgs e)
         {
@@ -86,6 +93,7 @@ namespace Programa.Presentadores
             {
                 IModificarInicioVistaRecordatorio modificarRecordatorio = ModificarInicioVistaRecordatorio.ObtenerInstancia();
                 new CUModificarRecordatorio(modificarRecordatorio, this.repositorio, idrecordatorio, this.id, this);
+                ((Form)modificarRecordatorio).ShowDialog();
             }
             else
             {
@@ -108,44 +116,55 @@ namespace Programa.Presentadores
         }
         private void ingresarAyuda(object sender, EventArgs e)
         {
-            IAyudaVista ayuda = AyudaVista.ObtenerInstancia();
+            GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Ayuda");
+
+            AyudaVista ayuda = AyudaVista.ObtenerInstancia(); // Usá el tipo concreto si vas a setear propiedades
+            ayuda.RolActual = this.rol; // ← Esto es lo que faltaba
+
             ICategoriaRepositorio categoria = new CategoriaRepositorio();
             IPreguntaRepositorio pregunta = new PreguntaRepositorio();
             IRespuestasRepositorio respuesta = new RespuestaRepositorio();
+
             new AyudaPresentador(ayuda, categoria, pregunta, respuesta, this.rol, this.id);
         }
         private void ingresarConfiguracion(object sender, EventArgs e)
         {
+            GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Configuraciones");
             IConfiguracionesVista configuracion = ConfiguracionesVista.ObtenerInstancia();
             IOperadorRepositorio usuario = new OperadorRepositorio();
             new ConfiguracionesPresentador(configuracion, usuario, this.rol, this.id);
         }
         private void ingresarOperadores(object sender, EventArgs e)
         {
+            GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Operadores");
             IOperadoresVista operadores = OperadoresVista.ObtenerInstancia();
             IOperadorRepositorio usuario = new OperadorRepositorio();
             new OperadoresPresentador(operadores, usuario, this.id);
         }
         private void ingresarMoviles(object sender, EventArgs e)
         {
+            GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Moviles");
             IMovilesVista movilVista = MovilesVista.ObtenerInstancia();
             IMovilRepositorio movilrepositorio = new MovilRepositorio();
             new MovilesPresentador(movilVista, movilrepositorio, this.id);
         }
         private void ingresarViajes(object sender, EventArgs e)
         {
+            GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Viajes");
             IViajesVista viajesvista = ViajesVista.ObtenerInstancia(this.rol, this.id);
             IViajesRepositorio viajes = new ViajesRepositorio();
             new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
         }
         private void ingresarVueltas(object sender, EventArgs e)
         {
+            GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Vueltas");
             IVueltaVista vuelta = VueltaVista.ObtenerInstancia();
             IViajesRepositorio viajes = new ViajesRepositorio();
             new VueltaPresentador(vuelta, viajes, this.rol, this.id);
         }
         private void ingresarBases(object sender, EventArgs e)
         {
+            GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Bases");
             IBasesVista basesvista = BasesVista.ObtenerInstancia();
             IBasesRepositorio bases = new BaseRepositorio();
             new BasesPresentador(basesvista, bases, this.rol, this.id);

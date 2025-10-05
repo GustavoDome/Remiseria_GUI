@@ -1,5 +1,11 @@
-﻿using Programa.Modelos.Interfaces;
+﻿using Programa.DTOs;
 using Programa.Modelos;
+using Programa.Modelos.Interfaces;
+using Programa.Presentadores.CUPresentador;
+using Programa.Repositorios;
+using Programa.Vistas;
+using Programa.Vistas.Alta;
+using Programa.Vistas.Alta.Interfaces;
 using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -7,8 +13,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Programa.Repositorios;
-using Programa.Vistas;
 
 namespace Programa.Presentadores
 {
@@ -30,44 +34,191 @@ namespace Programa.Presentadores
             this.filtrador = new BindingSource();
             this.fechaActual = DateTime.Today;
 
-            this.vista.ocultarBotones(this.rol);
-            this.vista.SetViajesBindingSource(this.filtrador);
-            this.vista.SetFecha(this.fechaActual);
+            vista.ocultarBotones(rol);
+            vista.SetViajesBindingSource(filtrador);
+            vista.SetFecha(fechaActual);
 
             cargar_vueltas();
 
-            this.vista.agregarVuelta += agregar_vuelta;
-            this.vista.modificarVuelta += modificar_vuelta;
-            this.vista.eliminarVuelta += eliminar_vuelta;
-            this.vista.retroceder += retroceder_dia;
-            this.vista.adelantar += adelantar_dia;
-            this.vista.ingresarViaje += ingresar_viaje;
-            this.vista.volver += volver_menu;
+            vista.agregarVuelta += agregar_vuelta;
+            vista.modificarVuelta += modificar_vuelta;
+            vista.eliminarVuelta += eliminar_vuelta;
+            vista.agregarMovil += agregar_movil;
+            vista.eliminarMovil += eliminar_movil;
+            vista.retroceder += retroceder_dia;
+            vista.adelantar += adelantar_dia;
+            vista.ingresarViaje += ingresar_viaje;
+            vista.volver += volver_menu;
         }
 
         private void cargar_vueltas()
         {
-            var tabla = repositorio.MostrarVuelta(fechaActual); // Devuelve DataTable
+            var tabla = repositorio.MostrarVuelta(fechaActual);
+
+            if (tabla.Rows.Count == 0)
+            {
+                vista.MostrarMensaje("No hay vueltas registradas para esta fecha.");
+            }
+
             filtrador.DataSource = tabla;
+            if (vista is Form formulario)
+            {
+                var dgv = formulario.Controls.OfType<DataGridView>().FirstOrDefault(c => c.Name == "dgvVuelta");
+                if (dgv != null)
+                {
+                    foreach (DataGridViewColumn col in dgv.Columns)
+                    {
+                        if (col.Name.StartsWith("IdVuelta "))
+                            col.Visible = false;
+                    }
+                }
+            }
+
+            var moviles = repositorio.ObtenerMovilesDelDia(fechaActual);
+            vista.ConfigurarMoviles(moviles);
         }
 
         private void agregar_vuelta(object sender, EventArgs e)
         {
-            // Lógica para agregar vuelta manual o desde viaje
-            // Podés abrir un formulario de entrada o usar un DTO predefinido
-            cargar_vueltas();
+            int idMovil = vista.ObtenerIdMovilSeleccionado();
+            vista.MostrarMensaje($"Móvil {idMovil}");
+
+            if (idMovil == 0)
+            {
+                vista.MostrarMensaje("Debe seleccionar una celda de móvil para agregar vuelta.");
+                return;
+            }
+
+            int numeroVuelta = repositorio.ObtenerProximoNumeroDeVuelta(idMovil, fechaActual);
+
+            // Obtener el número visual del móvil para mostrarlo correctamente
+            int numeroMovil = vista.ObtenerNumeroMovilSeleccionado(); // ← esta función debe devolver el número desde el encabezado
+
+            if (repositorio.MovilYaTieneVuelta(idMovil, fechaActual, numeroVuelta))
+            {
+                vista.MostrarMensaje("El móvil ya tiene una vuelta en ese número.");
+                return;
+            }
+
+            vista.MostrarMensaje($"Móvil {numeroMovil} (ID {idMovil}) - Vuelta {numeroVuelta}");
+
+            var dto = new VueltaDTO
+            {
+                IdViaje = 0,
+                IdMovil = idMovil,
+                NumeroVuelta = numeroVuelta,
+                VueltaFecha = fechaActual,
+                EstadoVuelta = "X"
+            };
+
+            try
+            {
+                repositorio.AgregarVueltaManual(dto);
+                cargar_vueltas();
+            }
+            catch (Exception ex)
+            {
+                var inner = ex;
+                while (inner.InnerException != null)
+                    inner = inner.InnerException;
+
+                MessageBox.Show("Error interno: " + inner.Message);
+                throw;
+            }
         }
 
         private void modificar_vuelta(object sender, EventArgs e)
         {
-            // Lógica para modificar estado de vuelta o reordenar
-            cargar_vueltas();
+            int idVuelta = vista.ObtenerIdVueltaSeleccionada();
+
+            if (idVuelta == 0)
+            {
+                vista.MostrarMensaje("Debe seleccionar una vuelta válida para modificar.");
+                return;
+            }
+
+            try
+            {
+                bool modificado = repositorio.CambiarEstadoVuelta(idVuelta);
+                if (!modificado)
+                {
+                    vista.MostrarMensaje("No se pudo modificar el estado de la vuelta.");
+                    return;
+                }
+
+                cargar_vueltas();
+            }
+            catch (Exception ex)
+            {
+                vista.MostrarMensaje("Error al modificar vuelta: " + ex.Message);
+            }
         }
 
         private void eliminar_vuelta(object sender, EventArgs e)
         {
-            // Lógica para eliminar vuelta del día
-            cargar_vueltas();
+            int idMovil = vista.ObtenerIdMovilSeleccionado();
+            if (idMovil == 0)
+            {
+                vista.MostrarMensaje("Debe seleccionar un móvil para eliminar su última vuelta.");
+                return;
+            }
+
+            var confirmacion = MessageBox.Show(
+                "¿Está seguro que desea eliminar la última vuelta de este móvil?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirmacion != DialogResult.Yes)
+                return;
+
+            try
+            {
+                repositorio.EliminarUltimaVueltaDeMovil(idMovil, fechaActual);
+                cargar_vueltas();
+            }
+            catch (Exception ex)
+            {
+                vista.MostrarMensaje("Error al eliminar última vuelta: " + ex.Message);
+            }
+        }
+
+        private void agregar_movil(object sender, EventArgs e)
+        {
+            IAgregarVueltaVista popup = AgregarVueltaVista.ObtenerInstancia();
+            var presentador = new CUVueltaPresentador(popup, this.repositorio, fechaActual, () => cargar_vueltas());
+
+            ((Form)popup).ShowDialog();
+        }
+
+        private void eliminar_movil(object sender, EventArgs e)
+        {
+            int idVuelta = vista.ObtenerIdVueltaSeleccionada();
+
+            if (idVuelta == 0)
+            {
+                vista.MostrarMensaje("Debe seleccionar una vuelta válida para eliminar.");
+                return;
+            }
+
+            var confirmacion = MessageBox.Show(
+                "¿Está seguro que desea eliminar esta vuelta?",
+                "Confirmar eliminación",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning);
+
+            if (confirmacion != DialogResult.Yes)
+                return;
+
+            try
+            {
+                repositorio.EliminarVuelta(idVuelta);
+                cargar_vueltas();
+            }
+            catch (Exception ex)
+            {
+                vista.MostrarMensaje("Error al eliminar móvil de la vuelta: " + ex.Message);
+            }
         }
 
         private void retroceder_dia(object sender, EventArgs e)
@@ -79,6 +230,13 @@ namespace Programa.Presentadores
 
         private void adelantar_dia(object sender, EventArgs e)
         {
+            var hoy = DateTime.Today;
+            if (fechaActual >= hoy)
+            {
+                vista.MostrarMensaje("No se puede avanzar a días futuros.");
+                return;
+            }
+
             fechaActual = fechaActual.AddDays(1);
             vista.SetFecha(fechaActual);
             cargar_vueltas();
@@ -86,9 +244,9 @@ namespace Programa.Presentadores
 
         private void ingresar_viaje(object sender, EventArgs e)
         {
-            IViajesVista viajesvista = ViajesVista.ObtenerInstancia(this.rol, this.id);
+            IViajesVista viajesvista = ViajesVista.ObtenerInstancia(rol, id);
             IViajesRepositorio viajes = new ViajesRepositorio();
-            new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
+            new ViajesPresentador(viajesvista, viajes, rol, id);
             ((Form)vista).Close();
         }
 

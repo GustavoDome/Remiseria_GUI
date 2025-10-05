@@ -14,16 +14,15 @@ namespace Programa.Vistas.Interfaces
         event EventHandler modificarPregunta;
         event EventHandler eliminarPregunta;
         event EventHandler agregarRespuesta;
-        event EventHandler modificarRespuesta;
-        event EventHandler eliminarRespuesta;
         event EventHandler agregarCategoria;
         event EventHandler modificarCategoria;
         event EventHandler eliminarCategoria;
         event EventHandler volver;
         event Action<int> respuestaModificarSeleccionada;
         event Action<int> respuestaEliminarSeleccionada;
+        string RolActual { get; set; }
 
-        void ocultarBotones(string rol);
+        void ocultarBotones();
         void SetCategoriaBindingSource(BindingSource categorias);
         void SetPreguntaBindingSource(BindingSource preguntas);
         void SetRespuestaBindingSource(BindingSource respuestas);

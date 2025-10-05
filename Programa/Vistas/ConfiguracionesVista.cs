@@ -1,10 +1,12 @@
-﻿using Programa.Estilos;
+﻿using AxWMPLib;
+using Programa.Estilos;
 using Programa.Vistas.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,6 +20,7 @@ namespace Programa.Vistas
         {
             InitializeComponent();
             this.Load += new System.EventHandler(this.ModificarVista_Load);
+            cbAlarma.SelectedIndexChanged += cbAlarma_SelectedIndexChanged;
             tbTamanoFuente.TextChanged += tbTamanoFuente_TextChanged;
             asociacionPresentador();
         }
@@ -34,7 +37,33 @@ namespace Programa.Vistas
                 tbTamanoFuente.ForeColor = tema == "oscuro" ? Color.White : Color.Black;
             }
         }
+        private void cbAlarma_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string nombreAlarma = cbAlarma.Text;
+            string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Commons", "Alarmas");
+            string ruta = Path.Combine(basePath, nombreAlarma + ".wav");
 
+            if (File.Exists(ruta))
+            {
+                axWindowsMediaPlayer1.URL = ruta;
+                axWindowsMediaPlayer1.Ctlcontrols.play();
+            }
+            else
+            {
+                MessageBox.Show("No se encontró el archivo de alarma: " + nombreAlarma, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        public void ReproducirAlarmaPreview(string nombreAlarma)
+        {
+            string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Commons", "Alarmas");
+            string ruta = Path.Combine(basePath, nombreAlarma + ".wav");
+
+            if (File.Exists(ruta))
+            {
+                axWindowsMediaPlayer1.URL = ruta;
+                axWindowsMediaPlayer1.Ctlcontrols.play();
+            }
+        }
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
@@ -100,9 +129,8 @@ namespace Programa.Vistas
         {
             cbAlarma.DataSource = tipoAlarmas;
         }
-
         // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static ConfiguracionesVista instancia;
+        public static ConfiguracionesVista instancia;
 
         // Metodo para el uso del Singleton
         public static ConfiguracionesVista ObtenerInstancia()

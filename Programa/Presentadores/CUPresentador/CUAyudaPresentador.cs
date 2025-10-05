@@ -23,11 +23,13 @@ namespace Programa.Presentadores.CUPresentador
             private IAgregarAyudaVistaCategoria agregarCategoriaVista;
             private List<CategoriaDTO> modeloCategoria;
             private IAyudaVista ayudavista;
-            public CUAgregarCategoriaPresentador(ICategoriaRepositorio repositorio,IAgregarAyudaVistaCategoria categoria, IAyudaVista ayudavista)
+            private AyudaPresentador presentador;
+            public CUAgregarCategoriaPresentador(ICategoriaRepositorio repositorio,IAgregarAyudaVistaCategoria categoria, IAyudaVista ayudavista, AyudaPresentador presentador)
             {
                 this.categoriaRepositorio = repositorio;
                 this.agregarCategoriaVista = categoria;
                 this.ayudavista = ayudavista;
+                this.presentador = presentador;
 
                 this.agregarCategoriaVista.agregar += agregarCategoria;
                 this.agregarCategoriaVista.volver += volverAyuda;
@@ -41,6 +43,7 @@ namespace Programa.Presentadores.CUPresentador
                     modeloCategoria = categoriaRepositorio.ObtenerTodas().ToList();
                     ayudavista.SetCategoriaBindingSource(new BindingSource { DataSource = modeloCategoria });
                     IAyudaVista ayuda = AyudaVista.ObtenerInstancia();
+                    this.presentador.RefrescarModelos();
                     ((Form)agregarCategoriaVista).Close();
                 }
                 else 
@@ -60,23 +63,22 @@ namespace Programa.Presentadores.CUPresentador
             private IModificarAyudaVistaCategoria modificarCategoriaVista;
             private IAyudaVista ayudavista;
             private CategoriaDTO categoriaOriginal;
+            private AyudaPresentador presentador;
 
-            public CUModificarCategoriaPresentador(
-                ICategoriaRepositorio repositorio,
-                IModificarAyudaVistaCategoria vista,
-                IAyudaVista ayudavista,
-                CategoriaDTO categoriaDTO)
+            public CUModificarCategoriaPresentador(ICategoriaRepositorio repositorio,IModificarAyudaVistaCategoria vista,IAyudaVista ayudavista,CategoriaDTO categoriaDTO,AyudaPresentador presentador)
             {
                 this.categoriaRepositorio = repositorio;
                 this.modificarCategoriaVista = vista;
                 this.ayudavista = ayudavista;
                 this.categoriaOriginal = categoriaDTO;
+                this.presentador = presentador;
 
                 this.modificarCategoriaVista.volver += volverAyuda;
                 this.modificarCategoriaVista.modificar += modificarCategoria;
 
                 // Mostrar nombre actual en la vista
                 this.modificarCategoriaVista.categorianombre = categoriaDTO.NombreCategoria;
+                this.presentador = presentador;
             }
 
             private void modificarCategoria(object sender, EventArgs e)
@@ -99,6 +101,7 @@ namespace Programa.Presentadores.CUPresentador
                 // Refrescar vista principal
                 var modeloActualizado = categoriaRepositorio.ObtenerTodas().ToList();
                 ayudavista.SetCategoriaBindingSource(new BindingSource { DataSource = modeloActualizado });
+                this.presentador.RefrescarModelos();
 
                 ((Form)modificarCategoriaVista).Close();
             }
@@ -114,12 +117,9 @@ namespace Programa.Presentadores.CUPresentador
             private IPreguntaRepositorio preguntaRepositorio;
             private IAyudaVista ayudavista;
             private int idCategoria;
+            private AyudaPresentador presentador;
 
-            public CUAgregarPreguntaPresentador(
-                IPreguntaRepositorio repositorio,
-                IAgregarAyudaVistaPregunta vista,
-                IAyudaVista ayudavista,
-                int idCategoria)
+            public CUAgregarPreguntaPresentador(IPreguntaRepositorio repositorio, IAgregarAyudaVistaPregunta vista, IAyudaVista ayudavista, int idCategoria, AyudaPresentador presentador)
             {
                 this.preguntaRepositorio = repositorio;
                 this.agregarPreguntaVista = vista;
@@ -128,6 +128,7 @@ namespace Programa.Presentadores.CUPresentador
 
                 this.agregarPreguntaVista.agregar += agregarPregunta;
                 this.agregarPreguntaVista.volver += volverAyuda;
+                this.presentador = presentador;
             }
 
             private void agregarPregunta(object sender, EventArgs e)
@@ -152,6 +153,7 @@ namespace Programa.Presentadores.CUPresentador
                     .ToList();
 
                 ayudavista.SetPreguntaBindingSource(new BindingSource { DataSource = modeloActualizado });
+                this.presentador.RefrescarModelos();
 
                 ((Form)agregarPreguntaVista).Close();
             }
@@ -167,12 +169,9 @@ namespace Programa.Presentadores.CUPresentador
             private IPreguntaRepositorio preguntaRepositorio;
             private IAyudaVista ayudavista;
             private PreguntaDTO preguntaOriginal;
+            private AyudaPresentador presentador;
 
-            public CUModificarPreguntaPresentador(
-                IPreguntaRepositorio repositorio,
-                IModificarAyudaVistaPregunta vista,
-                IAyudaVista ayudavista,
-                PreguntaDTO preguntaDTO)
+            public CUModificarPreguntaPresentador(IPreguntaRepositorio repositorio, IModificarAyudaVistaPregunta vista, IAyudaVista ayudavista, PreguntaDTO preguntaDTO, AyudaPresentador presentador)
             {
                 this.preguntaRepositorio = repositorio;
                 this.modificarPreguntaVista = vista;
@@ -183,6 +182,7 @@ namespace Programa.Presentadores.CUPresentador
                 this.modificarPreguntaVista.modificar += modificarPregunta;
 
                 this.modificarPreguntaVista.preguntatexto = preguntaDTO.Texto;
+                this.presentador = presentador;
             }
 
             private void modificarPregunta(object sender, EventArgs e)
@@ -208,6 +208,7 @@ namespace Programa.Presentadores.CUPresentador
                     .ToList();
 
                 ayudavista.SetPreguntaBindingSource(new BindingSource { DataSource = modeloActualizado });
+                this.presentador.RefrescarModelos();
 
                 ((Form)modificarPreguntaVista).Close();
             }
@@ -223,12 +224,9 @@ namespace Programa.Presentadores.CUPresentador
             private IRespuestasRepositorio respuestasRepositorio;
             private IAyudaVista ayudavista;
             private int idPregunta;
+            private AyudaPresentador presentador;
 
-            public CUAgregarRespuestaPresentador(
-                IRespuestasRepositorio repositorio,
-                IAgregarAyudaVistaRespuesta vista,
-                IAyudaVista ayudavista,
-                int idPregunta)
+            public CUAgregarRespuestaPresentador(IRespuestasRepositorio repositorio, IAgregarAyudaVistaRespuesta vista, IAyudaVista ayudavista, int idPregunta, AyudaPresentador presentador)
             {
                 this.respuestasRepositorio = repositorio;
                 this.agregarRespuestaVista = vista;
@@ -237,6 +235,7 @@ namespace Programa.Presentadores.CUPresentador
 
                 this.agregarRespuestaVista.agregar += agregarRespuesta;
                 this.agregarRespuestaVista.volver += volverAyuda;
+                this.presentador = presentador;
             }
 
             private void agregarRespuesta(object sender, EventArgs e)
@@ -264,6 +263,7 @@ namespace Programa.Presentadores.CUPresentador
                     .ToList();
 
                 ayudavista.SetRespuestaBindingSource(new BindingSource { DataSource = modeloRespuesta });
+                this.presentador.RefrescarModelos();
 
                 ((Form)agregarRespuestaVista).Close();
             }
@@ -279,12 +279,9 @@ namespace Programa.Presentadores.CUPresentador
             private IRespuestasRepositorio respuestasRepositorio;
             private IAyudaVista ayudavista;
             private RespuestaDTO respuestaOriginal;
+            private AyudaPresentador presentador;
 
-            public CUModificarRespuestaPresentador(
-                IRespuestasRepositorio repositorio,
-                IModificarAyudaVistaRespuesta vista,
-                IAyudaVista ayudavista,
-                RespuestaDTO respuestaDTO)
+            public CUModificarRespuestaPresentador(IRespuestasRepositorio repositorio, IModificarAyudaVistaRespuesta vista, IAyudaVista ayudavista, RespuestaDTO respuestaDTO, AyudaPresentador presentador)
             {
                 this.respuestasRepositorio = repositorio;
                 this.modificarRespuestaVista = vista;
@@ -295,11 +292,13 @@ namespace Programa.Presentadores.CUPresentador
                 this.modificarRespuestaVista.modificar += modificarRespuesta;
 
                 this.modificarRespuestaVista.respuestatexto = respuestaDTO.TextoRespuesta;
+                this.presentador = presentador;
             }
 
             private void modificarRespuesta(object sender, EventArgs e)
             {
                 string nuevoTexto = modificarRespuestaVista.respuestatexto;
+                byte[] nuevamultimedia = modificarRespuestaVista.multimedia;
                 if (string.IsNullOrWhiteSpace(nuevoTexto))
                 {
                     MessageBox.Show("Por favor complete el texto de la respuesta.");
@@ -310,7 +309,8 @@ namespace Programa.Presentadores.CUPresentador
                 {
                     IdRespuesta = respuestaOriginal.IdRespuesta,
                     TextoRespuesta = nuevoTexto,
-                    IdPregunta = respuestaOriginal.IdPregunta
+                    IdPregunta = respuestaOriginal.IdPregunta,
+                    AudioVideo = nuevamultimedia
                 };
 
                 respuestasRepositorio.Editar(respuestaModificada);
@@ -320,6 +320,7 @@ namespace Programa.Presentadores.CUPresentador
                     .ToList();
 
                 ayudavista.SetRespuestaBindingSource(new BindingSource { DataSource = modeloActualizado });
+                this.presentador.RefrescarModelos();
 
                 ((Form)modificarRespuestaVista).Close();
             }

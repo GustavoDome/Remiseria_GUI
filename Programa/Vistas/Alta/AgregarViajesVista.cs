@@ -29,6 +29,14 @@ namespace Programa.Vistas.Alta
             this.Load += new System.EventHandler(this.ModificarVista_Load);
             InitializeComponent();
             asociarPresentador();
+            rbtnAfuera.Checked = false;
+            rdbtnDerivado.Checked = false;
+            rbtnDesignado.Checked = false;
+            rbtnOtro.Checked = false;
+
+            lblComentario.Visible = false;
+            rtbComentario.Visible = false;
+
             this.idViaje = idViaje;
             this.idOperador = idOperador;
             this.rol = rol;
@@ -77,26 +85,10 @@ namespace Programa.Vistas.Alta
             rtbComentario.Text = string.Empty;
             rtbComentario.Visible = true;
         }
-
-        // Singleton
-        private static AgregarViajesVista instancia;
         public static AgregarViajesVista ObtenerInstancia(int idViaje, int idOperador, string rol)
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new AgregarViajesVista(idViaje, idOperador, rol);
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                {
-                    instancia.WindowState = FormWindowState.Normal;
-                }
-                instancia.BringToFront();
-                instancia.Activate();
-            }
-            return instancia;
+            var vista = new AgregarViajesVista(idViaje, idOperador, rol);
+            return vista;
         }
 
         // Propiedades
@@ -119,28 +111,6 @@ namespace Programa.Vistas.Alta
             if (rdbtnDerivado.Checked) return rtbComentario.Text;
             if (rbtnOtro.Checked) return rtbComentario.Text;
             return null;
-        }
-        private void ResetComentario()
-        {
-            rbtnAfuera.Checked = false;
-            rdbtnDerivado.Checked = false;
-            rbtnDesignado.Checked = false;
-            rbtnOtro.Checked = false;
-
-            lblComentario.Visible = false;
-            rtbComentario.Visible = false;
-            rtbComentario.Text = string.Empty;
-        }
-        public void LimpiarCampos()
-        {
-            txtDireccion.Text = string.Empty;
-            rtbComentario.Text = string.Empty;
-            lblComentario.Visible = false;
-            rtbComentario.Visible = false;
-
-            for (int i = 0; i < clbMoviles.Items.Count; i++)
-                clbMoviles.SetItemChecked(i, false);
-            ResetComentario();
         }
         public List<int> ObtenerMovilesSeleccionados()
         {

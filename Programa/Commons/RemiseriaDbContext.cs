@@ -39,9 +39,19 @@ namespace Programa.Conexion
 
             modelBuilder.Entity<Recordatorio>().ToTable("recordatorio", "public");
 
-            // Clave compuesta para Vuelta
             modelBuilder.Entity<Vuelta>()
-                .HasKey(v => new { v.IdViaje, v.IdMovil });
+                .HasKey(v => v.IdVuelta); // Clave primaria única
+
+            modelBuilder.Entity<Vuelta>()
+                .HasRequired(v => v.Viaje)
+                .WithMany(v => v.Vueltas)
+                .HasForeignKey(v => v.IdViaje)
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<Vuelta>()
+                .HasRequired(v => v.Movil)
+                .WithMany()
+                .HasForeignKey(v => v.IdMovil);
 
             // Relación opcional con Operador en Recordatorio
             modelBuilder.Entity<Recordatorio>()

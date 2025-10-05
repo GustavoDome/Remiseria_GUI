@@ -29,16 +29,28 @@ namespace Programa.Repositorios
         {
             using (var contexto = new RemiseriaDbContext())
             {
-                var movilExistente = contexto.Moviles.Find(movilEditado.IdMovil);
+                var movilExistente = contexto.Moviles
+                    .Include(m => m.Dueno)
+                    .FirstOrDefault(m => m.IdMovil == movilEditado.IdMovil);
+
                 if (movilExistente != null)
                 {
+                    // Actualizar datos del móvil
                     movilExistente.NumeroMovil = movilEditado.NumeroMovil;
                     movilExistente.MarcaAuto = movilEditado.MarcaAuto;
                     movilExistente.ModeloAuto = movilEditado.ModeloAuto;
                     movilExistente.AnoAuto = movilEditado.AnoAuto;
                     movilExistente.ColorAuto = movilEditado.ColorAuto;
-                    movilExistente.IdDueno = movilEditado.IdDueno;
                     movilExistente.Activo = movilEditado.Activo;
+
+                    // Actualizar datos del dueño
+                    if (movilExistente.Dueno != null)
+                    {
+                        movilExistente.Dueno.Nombre = movilEditado.Dueno.Nombre;
+                        movilExistente.Dueno.Apellido = movilEditado.Dueno.Apellido;
+                        movilExistente.Dueno.Telefono = movilEditado.Dueno.Telefono;
+                        movilExistente.Dueno.Chofer = movilEditado.Dueno.Chofer;
+                    }
 
                     contexto.SaveChanges();
                 }

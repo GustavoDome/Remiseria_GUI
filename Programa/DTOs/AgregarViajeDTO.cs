@@ -19,5 +19,6 @@ namespace Programa.DTOs
         public List<int> Vueltas { get; set; }
         public DateTime VueltaFecha { get; set; }
         public string EstadoVuelta { get; set; }
+        public List<int> IdsVueltasActivadas { get; set; } = new List<int>();
     }
 }

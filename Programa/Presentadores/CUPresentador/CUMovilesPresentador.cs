@@ -106,7 +106,7 @@ namespace Programa.Presentadores.CUPresentador
                 vista.TelefonoDueno = movilOriginal.TelefonoDueno;
 
                 if (movilOriginal.EsChofer)
-                    ((Form)vista).Controls.OfType<RadioButton>().First(r => r.Name == "rbtnRemisero").Checked = true;
+                    ((Form)vista).Controls.OfType<RadioButton>().First(r => r.Name == "rbtnDueno").Checked = true;
                 else
                     ((Form)vista).Controls.OfType<RadioButton>().First(r => r.Name == "rbtnChofer").Checked = true;
 

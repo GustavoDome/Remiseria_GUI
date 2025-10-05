@@ -1,4 +1,5 @@
 ﻿using Programa.Estilos;
+using Programa.Vistas.Alta;
 using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -45,23 +46,9 @@ namespace Programa.Vistas.Modificacion
             btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
             brnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
         }
-
-        private static ModificarPlanillaCostoVistaCiudad instancia;
         public static ModificarPlanillaCostoVistaCiudad ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new ModificarPlanillaCostoVistaCiudad();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                    instancia.WindowState = FormWindowState.Normal;
-
-                instancia.BringToFront();
-                instancia.Activate();
-            }
+            var instancia = new ModificarPlanillaCostoVistaCiudad();
             return instancia;
         }
     }

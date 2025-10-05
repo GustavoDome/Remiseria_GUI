@@ -168,7 +168,7 @@ namespace Programa.Vistas
         }
 
         // Singleton
-        private static BasesVista instancia;
+        public static BasesVista instancia;
         public static BasesVista ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)

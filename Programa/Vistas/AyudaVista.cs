@@ -21,14 +21,13 @@ namespace Programa.Vistas
         public event EventHandler modificarPregunta;
         public event EventHandler eliminarPregunta;
         public event EventHandler agregarRespuesta;
-        public event EventHandler modificarRespuesta;
-        public event EventHandler eliminarRespuesta;
         public event EventHandler agregarCategoria;
         public event EventHandler modificarCategoria;
         public event EventHandler eliminarCategoria;
         public event EventHandler volver;
         public event Action<int> respuestaModificarSeleccionada;
         public event Action<int> respuestaEliminarSeleccionada;
+        public string RolActual { get; set; }
         public AyudaVista()
         {
             InitializeComponent();
@@ -49,8 +48,6 @@ namespace Programa.Vistas
             btnModificarPregunta.Click += (s, e) => modificarPregunta?.Invoke(this, EventArgs.Empty);
             btnEliminarPregunta.Click += (s, e) => eliminarPregunta?.Invoke(this, EventArgs.Empty);
             btnAgregarRespuesta.Click += (s, e) => agregarRespuesta?.Invoke(this, EventArgs.Empty);
-            btnModificarRespuesta.Click += (s, e) => modificarRespuesta?.Invoke(this, EventArgs.Empty);
-            btnEliminarRespuesta.Click += (s, e) => eliminarRespuesta?.Invoke(this, EventArgs.Empty);
             btnAgregarCategoria.Click += (s, e) => agregarCategoria?.Invoke(this, EventArgs.Empty);
             btnModificarCategoria.Click += (s, e) => modificarCategoria?.Invoke(this, EventArgs.Empty);
             btnEliminarCategoria.Click += (s, e) => eliminarCategoria?.Invoke(this, EventArgs.Empty);
@@ -67,9 +64,15 @@ namespace Programa.Vistas
         }
 
 
-        public void ocultarBotones(string rol)
+        public void ocultarBotones()
         {
-            // lógica para ocultar botones según el rol
+            if(RolActual == "Usuario") 
+            {
+                btnAgregarCategoria.Hide();
+                btnModificarCategoria.Hide();
+                btnEliminarPregunta.Hide();
+                btnAgregarRespuesta.Hide();
+            }
         }
 
         public void SetCategoriaBindingSource(BindingSource categorias)
@@ -155,38 +158,9 @@ namespace Programa.Vistas
                     };
                     GBRespuestas.Controls.Add(label);
 
-                    var btnModificar = new Button
-                    {
-                        Text = "Modificar",
-                        Width = 150,
-                        Height = 30,
-                        Location = new Point(10, y + 75),
-                        Tag = dto.IdRespuesta
-                    };
-                    btnModificar.Click += (s, e) =>
-                    {
-                        int idRespuesta = (int)((Button)s).Tag;
-                        OnModificarRespuesta(idRespuesta);
-                    };
-                    GBRespuestas.Controls.Add(btnModificar);
-
-                    var btnEliminar = new Button
-                    {
-                        Text = "Eliminar",
-                        Width = 150,
-                        Height = 30,
-                        Location = new Point(160, y + 75),
-                        Tag = dto.IdRespuesta
-                    };
-                    btnEliminar.Click += (s, e) =>
-                    {
-                        int idRespuesta = (int)((Button)s).Tag;
-                        OnEliminarRespuesta(idRespuesta);
-                    };
-                    GBRespuestas.Controls.Add(btnEliminar);
-
                     if (dto.AudioVideo != null && dto.AudioVideo.Length > 0)
                     {
+                        y += 50;
                         var btnMultimedia = new Button
                         {
                             Text = "Ver multimedia",
@@ -197,9 +171,42 @@ namespace Programa.Vistas
                         };
                         btnMultimedia.Click += (s, e) => ReproducirMultimedia((byte[])btnMultimedia.Tag);
                         GBRespuestas.Controls.Add(btnMultimedia);
-                    }
 
-                    y += 120;
+                        y += 70;
+                    }
+                    if (this.RolActual != "Usuario")
+                    {
+                        var btnModificar = new Button
+                        {
+                            Text = "Modificar",
+                            Width = 150,
+                            Height = 30,
+                            Location = new Point(10, y + 75),
+                            Tag = dto.IdRespuesta
+                        };
+                        btnModificar.Click += (s, e) =>
+                        {
+                            int idRespuesta = (int)((Button)s).Tag;
+                            OnModificarRespuesta(idRespuesta);
+                        };
+                        GBRespuestas.Controls.Add(btnModificar);
+
+                        var btnEliminar = new Button
+                        {
+                            Text = "Eliminar",
+                            Width = 150,
+                            Height = 30,
+                            Location = new Point(160, y + 75),
+                            Tag = dto.IdRespuesta
+                        };
+                        btnEliminar.Click += (s, e) =>
+                        {
+                            int idRespuesta = (int)((Button)s).Tag;
+                            OnEliminarRespuesta(idRespuesta);
+                        };
+                        GBRespuestas.Controls.Add(btnEliminar);
+                    }
+                    y += 40;
                 }
             }
         }
@@ -219,7 +226,7 @@ namespace Programa.Vistas
         }
 
         // Singleton
-        private static AyudaVista instancia;
+        public static AyudaVista instancia;
         public static AyudaVista ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)

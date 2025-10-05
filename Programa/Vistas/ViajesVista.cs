@@ -48,9 +48,9 @@ namespace Programa.Vistas
             {
                 modificarViaje?.Invoke(this, EventArgs.Empty); 
             };
-            btnComentar.Click += delegate 
+            btnCambiarEstado.Click += delegate 
             {
-                comentarViaje?.Invoke(this, EventArgs.Empty);
+                cambiarEstadoViaje?.Invoke(this, EventArgs.Empty);
             };
             btnEliminar.Click += delegate 
             { 
@@ -72,12 +72,16 @@ namespace Programa.Vistas
             {
                 volver?.Invoke(this, EventArgs.Empty); 
             };
+            dgvViajes.CellDoubleClick += (s, e) =>
+            {
+                cambiarEstadoViaje?.Invoke(this, EventArgs.Empty);
+            };
         }
 
 
         public event EventHandler agregarViaje;
         public event EventHandler modificarViaje;
-        public event EventHandler comentarViaje;
+        public event EventHandler cambiarEstadoViaje;
         public event EventHandler eliminarViaje;
         public event EventHandler retroceder;
         public event EventHandler adelantar;
@@ -103,7 +107,17 @@ namespace Programa.Vistas
         }
         public int ObtenerIdViajeSeleccionado()
         {
-            return Convert.ToInt32(dgvViajes.CurrentRow.Cells["ID Viaje"].Value);
+            if (dgvViajes.CurrentRow == null)
+                return 0;
+
+            var celda = dgvViajes.CurrentRow.Cells["ID Viaje"];
+            if (celda == null || celda.Value == null)
+                return 0;
+
+            if (int.TryParse(celda.Value.ToString(), out int idViaje))
+                return idViaje;
+
+            return 0;
         }
         public void congelarVista()
         {
@@ -134,7 +148,7 @@ namespace Programa.Vistas
         }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
-        private static ViajesVista instancia;
+        public static ViajesVista instancia;
 
         // Metodo para el uso del Singleton
         public static ViajesVista ObtenerInstancia(string rol, int id)

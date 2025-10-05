@@ -81,6 +81,14 @@ namespace Programa.Repositorios
                 };
             }
         }
+        public string ObtenerTipoAlarma(int idOperador)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var operador = contexto.Operadores.FirstOrDefault(o => o.IdOperador == idOperador);
+                return operador?.TipoAlarma ?? "default";
+            }
+        }
         public IEnumerable<RecordatorioDTO> ObtenerTodos()
         {
             using (var contexto = new RemiseriaDbContext())

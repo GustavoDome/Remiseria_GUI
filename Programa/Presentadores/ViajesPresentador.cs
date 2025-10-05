@@ -44,7 +44,7 @@ namespace Programa.Presentadores
 
             this.vista.agregarViaje += agregar_viaje;
             this.vista.modificarViaje += modificar_viaje;
-            this.vista.comentarViaje += comentar_viaje;
+            this.vista.cambiarEstadoViaje += cambiar_estado_viaje;
             this.vista.eliminarViaje += eliminar_viaje;
             this.vista.retroceder += retroceder_dia;
             this.vista.adelantar += adelantar_dia;
@@ -94,7 +94,12 @@ namespace Programa.Presentadores
         {
             int numeroViaje = ObtenerSiguienteNumeroViaje();
             IAgregarViajesVista agregarViajesVista = AgregarViajesVista.ObtenerInstancia(numeroViaje, this.id, this.rol);
+
+            // Crear el presentador primero
             new CUAgregarViajePresentador(agregarViajesVista, this.repositorio, this.fechaActual, this);
+
+            // Mostrar la vista como modal después
+            ((Form)agregarViajesVista).ShowDialog();
         }
 
         private void modificar_viaje(object sender, EventArgs e)
@@ -108,12 +113,27 @@ namespace Programa.Presentadores
 
             IModificarViajesVista modificarVista = ModificarViajesVista.ObtenerInstancia();
             new CUModificarViajePresentador(modificarVista, this.repositorio, idViaje, this);
+            ((Form)modificarVista).ShowDialog();
         }
 
-        private void comentar_viaje(object sender, EventArgs e)
+        private void cambiar_estado_viaje(object sender, EventArgs e)
         {
-            // Implementar lógica de comentario
-            cargar_datos();
+            int idViaje = vista.ObtenerIdViajeSeleccionado();
+            if (idViaje == 0)
+            {
+                MessageBox.Show("Debe seleccionar un viaje para cambiar su estado.");
+                return;
+            }
+
+            try
+            {
+                repositorio.CambiarEstado(idViaje);
+                RecargarVista();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cambiar el estado del viaje: " + ex.Message);
+            }
         }
 
         private void eliminar_viaje(object sender, EventArgs e)
@@ -147,6 +167,13 @@ namespace Programa.Presentadores
 
         private void adelantar_dia(object sender, EventArgs e)
         {
+            var hoy = DateTime.Today;
+            if (fechaActual >= hoy)
+            {
+                MessageBox.Show("No se puede avanzar a días futuros.");
+                return;
+            }
+
             fechaActual = fechaActual.AddDays(1);
             vista.SetFecha(fechaActual);
             cargar_datos();

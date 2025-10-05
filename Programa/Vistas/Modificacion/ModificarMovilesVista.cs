@@ -1,4 +1,5 @@
 ﻿using Programa.Estilos;
+using Programa.Vistas.Alta;
 using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -83,23 +84,9 @@ namespace Programa.Vistas.Modificacion
             btnAgregar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
             btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
         }
-
-        private static ModificarMovilesVista instancia;
         public static ModificarMovilesVista ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new ModificarMovilesVista();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                    instancia.WindowState = FormWindowState.Normal;
-
-                instancia.BringToFront();
-                instancia.Activate();
-            }
+            var instancia = new ModificarMovilesVista();
             return instancia;
         }
     }

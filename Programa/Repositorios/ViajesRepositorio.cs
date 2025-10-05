@@ -43,15 +43,41 @@ namespace Programa.Repositorios
                     // Agregar vueltas directamente a la colección
                     for (int i = 0; i < dto.IdMoviles.Count; i++)
                     {
-                        var vuelta = new Vuelta
-                        {
-                            IdMovil = dto.IdMoviles[i],
-                            NumeroVuelta = dto.Vueltas[i],
-                            VueltaFecha = dto.VueltaFecha,
-                            EstadoVuelta = dto.EstadoVuelta
-                        };
+                        int idMovil = dto.IdMoviles[i];
+                        int numeroVuelta = dto.Vueltas[i];
 
-                        viaje.Vueltas.Add(vuelta); // EF se encarga de asignar IdViaje
+                        var vueltaPendiente = contexto.Vueltas.FirstOrDefault(v =>
+                            v.IdMovil == idMovil &&
+                            DbFunctions.TruncateTime(v.VueltaFecha) == dto.VueltaFecha.Date &&
+                            v.NumeroVuelta == numeroVuelta &&
+                            v.EstadoVuelta == "·");
+
+                        if (vueltaPendiente != null)
+                        {
+                            vueltaPendiente.EstadoVuelta = dto.EstadoVuelta; // por ejemplo "X"
+                            viaje.Vueltas.Add(vueltaPendiente); // EF lo asocia al viaje
+                        }
+                        else
+                        {
+                            var nuevaVuelta = new Vuelta
+                            {
+                                IdMovil = idMovil,
+                                NumeroVuelta = numeroVuelta,
+                                VueltaFecha = dto.VueltaFecha,
+                                EstadoVuelta = dto.EstadoVuelta
+                            };
+
+                            viaje.Vueltas.Add(nuevaVuelta);
+                        }
+                    }
+
+                    foreach (var idVuelta in dto.IdsVueltasActivadas)
+                    {
+                        var vuelta = contexto.Vueltas.FirstOrDefault(v => v.IdVuelta == idVuelta);
+                        if (vuelta != null)
+                        {
+                            viaje.Vueltas.Add(vuelta); // EF la vincula al viaje
+                        }
                     }
 
                     // Guardar todo en cascada
@@ -150,7 +176,6 @@ namespace Programa.Repositorios
                 }
             }
         }
-
         public void Eliminar(int idViaje)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -181,7 +206,32 @@ namespace Programa.Repositorios
                 }
             }
         }
+        public void CambiarEstado(int idViaje)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var viaje = contexto.Viajes.FirstOrDefault(v => v.IdViajes == idViaje);
+                if (viaje == null)
+                    throw new Exception("Viaje no encontrado.");
 
+                // Ciclo de estado: · → L → X → ·
+                switch (viaje.EstadoViaje)
+                {
+                    case "·":
+                        viaje.EstadoViaje = "L";
+                        break;
+                    case "L":
+                        viaje.EstadoViaje = "X";
+                        break;
+                    case "X":
+                    default:
+                        viaje.EstadoViaje = "·";
+                        break;
+                }
+
+                contexto.SaveChanges();
+            }
+        }
         public IEnumerable<MovilResumenDTO> SeleccionarMovil()
         {
             using (var contexto = new RemiseriaDbContext())
@@ -213,9 +263,12 @@ namespace Programa.Repositorios
             {
                 using (var contexto = new RemiseriaDbContext())
                 {
+                    DateTime fechaSinHora = fecha.Date;
+
                     var viajes = contexto.Viajes
-                        .Include(v => v.Vueltas.Select(vu => vu.Movil))
-                        .Where(v => DbFunctions.TruncateTime(v.Vueltas.FirstOrDefault().VueltaFecha) == fecha.Date)
+                        .Where(v => v.Vueltas.Any(vu => vu.VueltaFecha.Year == fechaSinHora.Year &&
+                                                        vu.VueltaFecha.Month == fechaSinHora.Month &&
+                                                        vu.VueltaFecha.Day == fechaSinHora.Day))
                         .OrderBy(v => v.IdViajes)
                         .ToList();
 
@@ -231,7 +284,11 @@ namespace Programa.Repositorios
                         dt.Rows.Add(row);
                         filas[viaje.IdViajes] = row;
 
-                        foreach (var vuelta in viaje.Vueltas)
+                        var vueltasDelDia = viaje.Vueltas
+                            .Where(vu => vu.VueltaFecha.Date == fecha.Date && vu.Movil != null)
+                            .ToList();
+
+                        foreach (var vuelta in vueltasDelDia)
                         {
                             string colName = $"Movil {vuelta.Movil.NumeroMovil}";
                             if (!dt.Columns.Contains(colName))
@@ -244,13 +301,100 @@ namespace Programa.Repositorios
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al cargar los viajes: " + ex.Message);
+                var inner = ex;
+                while (inner.InnerException != null)
+                    inner = inner.InnerException;
+
+                MessageBox.Show("Error al cargar los viajes: " + inner.Message);
             }
 
             return dt;
         }
+        public void AgregarVueltaManual(VueltaDTO dto)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var yaExiste = contexto.Vueltas.Any(v =>
+                    v.IdMovil == dto.IdMovil &&
+                    DbFunctions.TruncateTime(v.VueltaFecha) == dto.VueltaFecha.Date &&
+                    v.NumeroVuelta == dto.NumeroVuelta);
 
+                if (yaExiste)
+                    return; // No duplicar
 
+                var nueva = new Vuelta
+                {
+                    IdViaje = null,
+                    IdMovil = dto.IdMovil,
+                    NumeroVuelta = dto.NumeroVuelta,
+                    VueltaFecha = dto.VueltaFecha,
+                    EstadoVuelta = dto.EstadoVuelta
+                };
+
+                contexto.Vueltas.Add(nueva);
+                contexto.SaveChanges();
+            }
+        }
+        public bool CambiarEstadoVuelta(int idVuelta)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var vuelta = contexto.Vueltas.FirstOrDefault(v => v.IdVuelta == idVuelta);
+                if (vuelta == null)
+                    return false;
+
+                switch (vuelta.EstadoVuelta)
+                {
+                    case "X":
+                        vuelta.EstadoVuelta = "S";
+                        break;
+                    case "S":
+                        vuelta.EstadoVuelta = "R";
+                        break;
+                    case "R":
+                        vuelta.EstadoVuelta = "/";
+                        break;
+                    case "/":
+                        vuelta.EstadoVuelta = "X";
+                        break;
+                    default:
+                        vuelta.EstadoVuelta = "X"; // Estado desconocido, reinicia en "X"
+                        break;
+                }
+
+                contexto.SaveChanges();
+                return true;
+            }
+        }
+        public void EliminarVuelta(int idVuelta)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var vuelta = contexto.Vueltas.FirstOrDefault(v => v.IdVuelta == idVuelta);
+
+                if (vuelta == null)
+                    throw new Exception("Vuelta no encontrada.");
+
+                contexto.Vueltas.Remove(vuelta);
+                contexto.SaveChanges();
+            }
+        }
+        public void EliminarUltimaVueltaDeMovil(int idMovil, DateTime fecha)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var ultima = contexto.Vueltas
+                    .Where(v => v.IdMovil == idMovil && DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date)
+                    .OrderByDescending(v => v.NumeroVuelta)
+                    .FirstOrDefault();
+
+                if (ultima == null)
+                    throw new Exception("No hay vueltas para ese móvil en esa fecha.");
+
+                contexto.Vueltas.Remove(ultima);
+                contexto.SaveChanges();
+            }
+        }
         public DataTable MostrarVuelta(DateTime fecha)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -274,17 +418,165 @@ namespace Programa.Repositorios
 
                     foreach (var vuelta in grupo)
                     {
-                        string colName = $"Movil {vuelta.Movil.NumeroMovil}";
-                        if (!dt.Columns.Contains(colName))
-                            dt.Columns.Add(colName);
+                        string colEstado = $"Movil {vuelta.Movil.NumeroMovil}";
+                        string colId = $"IdVuelta {vuelta.Movil.NumeroMovil}";
 
-                        row[colName] = vuelta.EstadoVuelta;
+                        if (!dt.Columns.Contains(colEstado))
+                            dt.Columns.Add(colEstado);
+
+                        if (!dt.Columns.Contains(colId))
+                            dt.Columns.Add(colId);
+
+                        row[colEstado] = vuelta.EstadoVuelta;
+                        row[colId] = vuelta.IdVuelta;
+
                     }
 
                     dt.Rows.Add(row);
                 }
 
                 return dt;
+            }
+        }
+        public int ObtenerProximoNumeroDeVuelta(int idMovil, DateTime fecha)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                // Buscar vuelta pendiente
+                var vueltaPendiente = contexto.Vueltas.FirstOrDefault(v =>
+                    v.IdMovil == idMovil &&
+                    DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date &&
+                    v.EstadoVuelta == "·");
+
+                if (vueltaPendiente != null)
+                {
+                    // Reutilizar la vuelta pendiente
+                    return vueltaPendiente.NumeroVuelta;
+                }
+
+                // Si no hay pendiente, continuar desde la última
+                var vueltasDelMovil = contexto.Vueltas
+                    .Where(v => v.IdMovil == idMovil && DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date)
+                    .Select(v => v.NumeroVuelta)
+                    .ToList();
+
+                if (vueltasDelMovil.Any())
+                {
+                    return vueltasDelMovil.Max() + 1;
+                }
+
+                // Si el móvil es nuevo, buscar la vuelta menos saturada
+                var ocupacionPorVuelta = contexto.Vueltas
+                    .Where(v => DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date)
+                    .GroupBy(v => v.NumeroVuelta)
+                    .Select(g => new { Vuelta = g.Key, Cantidad = g.Count() })
+                    .OrderBy(g => g.Cantidad)
+                    .ThenBy(g => g.Vuelta)
+                    .ToList();
+
+                if (!ocupacionPorVuelta.Any())
+                    return 1;
+
+                return ocupacionPorVuelta.First().Vuelta;
+            }
+        }
+        public int CalcularVueltaJustaParaNuevoMovil(DateTime fecha)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var vueltasPorMovil = contexto.Vueltas
+                    .Where(v => DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date)
+                    .GroupBy(v => v.IdMovil)
+                    .Select(g => g.Max(v => v.NumeroVuelta))
+                    .ToList();
+
+                if (!vueltasPorMovil.Any())
+                    return 1;
+
+                // Detectar la vuelta más frecuente entre los móviles
+                var frecuencia = vueltasPorMovil
+                    .GroupBy(v => v)
+                    .OrderByDescending(g => g.Count())
+                    .ThenBy(g => g.Key)
+                    .First()
+                    .Key;
+
+                return frecuencia;
+            }
+        }
+        public bool MovilYaTieneVuelta(int idMovil, DateTime fecha, int numeroVuelta)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                return contexto.Vueltas.Any(v =>
+                    v.IdMovil == idMovil &&
+                    DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date &&
+                    v.NumeroVuelta == numeroVuelta);
+            }
+        }
+        public bool MovilTieneVueltas(int idMovil, DateTime fecha)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                return contexto.Vueltas.Any(v =>
+                    v.IdMovil == idMovil &&
+                    DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date);
+            }
+        }
+        public List<MovilResumenDTO> ObtenerMovilesDelDia(DateTime fecha)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                return contexto.Vueltas
+                    .Include(v => v.Movil)
+                    .Where(v => DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date)
+                    .Select(v => new MovilResumenDTO
+                    {
+                        IdMovil = v.Movil.IdMovil,
+                        NumeroMovil = v.Movil.NumeroMovil
+                    })
+                    .Distinct()
+                    .ToList();
+            }
+        }
+        public bool ExisteVueltaConEstado(int idMovil, DateTime fecha, int numeroVuelta, string estado)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                return contexto.Vueltas.Any(v =>
+                    v.IdMovil == idMovil &&
+                    DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date &&
+                    v.NumeroVuelta == numeroVuelta &&
+                    v.EstadoVuelta == estado);
+            }
+        }
+        public void ActivarVueltaPendiente(int idMovil, DateTime fecha, int numeroVuelta)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var vuelta = contexto.Vueltas.FirstOrDefault(v =>
+                    v.IdMovil == idMovil &&
+                    DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date &&
+                    v.NumeroVuelta == numeroVuelta &&
+                    v.EstadoVuelta == "·");
+
+                if (vuelta != null)
+                {
+                    vuelta.EstadoVuelta = "X";
+                    contexto.SaveChanges();
+                }
+            }
+        }
+        public int ObtenerIdVuelta(int idMovil, DateTime fecha, int numeroVuelta)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var vuelta = contexto.Vueltas.FirstOrDefault(v =>
+                    v.IdMovil == idMovil &&
+                    DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date &&
+                    v.NumeroVuelta == numeroVuelta);
+
+                return vuelta?.IdVuelta ?? 0;
             }
         }
     }

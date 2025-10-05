@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ConfiguracionesVista));
             this.btnVolver = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
             this.cbTipoFuente = new System.Windows.Forms.ComboBox();
@@ -38,11 +39,13 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.axWindowsMediaPlayer1 = new AxWMPLib.AxWindowsMediaPlayer();
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(380, 300);
+            this.btnVolver.Location = new System.Drawing.Point(12, 300);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(121, 44);
             this.btnVolver.TabIndex = 0;
@@ -51,7 +54,7 @@
             // 
             // btnGuardar
             // 
-            this.btnGuardar.Location = new System.Drawing.Point(123, 300);
+            this.btnGuardar.Location = new System.Drawing.Point(573, 300);
             this.btnGuardar.Name = "btnGuardar";
             this.btnGuardar.Size = new System.Drawing.Size(172, 44);
             this.btnGuardar.TabIndex = 1;
@@ -63,14 +66,14 @@
             this.cbTipoFuente.FormattingEnabled = true;
             this.cbTipoFuente.Location = new System.Drawing.Point(254, 36);
             this.cbTipoFuente.Name = "cbTipoFuente";
-            this.cbTipoFuente.Size = new System.Drawing.Size(226, 21);
+            this.cbTipoFuente.Size = new System.Drawing.Size(491, 21);
             this.cbTipoFuente.TabIndex = 2;
             // 
             // tbTamanoFuente
             // 
             this.tbTamanoFuente.Location = new System.Drawing.Point(254, 99);
             this.tbTamanoFuente.Name = "tbTamanoFuente";
-            this.tbTamanoFuente.Size = new System.Drawing.Size(226, 20);
+            this.tbTamanoFuente.Size = new System.Drawing.Size(491, 20);
             this.tbTamanoFuente.TabIndex = 3;
             this.tbTamanoFuente.Text = " ";
             // 
@@ -79,7 +82,7 @@
             this.cbTema.FormattingEnabled = true;
             this.cbTema.Location = new System.Drawing.Point(254, 162);
             this.cbTema.Name = "cbTema";
-            this.cbTema.Size = new System.Drawing.Size(226, 21);
+            this.cbTema.Size = new System.Drawing.Size(491, 21);
             this.cbTema.TabIndex = 4;
             // 
             // cbAlarma
@@ -130,10 +133,20 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Tipo de Alarma";
             // 
+            // axWindowsMediaPlayer1
+            // 
+            this.axWindowsMediaPlayer1.Enabled = true;
+            this.axWindowsMediaPlayer1.Location = new System.Drawing.Point(518, 213);
+            this.axWindowsMediaPlayer1.Name = "axWindowsMediaPlayer1";
+            this.axWindowsMediaPlayer1.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("axWindowsMediaPlayer1.OcxState")));
+            this.axWindowsMediaPlayer1.Size = new System.Drawing.Size(227, 44);
+            this.axWindowsMediaPlayer1.TabIndex = 10;
+            // 
             // ConfiguracionesVista
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(513, 356);
+            this.ClientSize = new System.Drawing.Size(761, 356);
+            this.Controls.Add(this.axWindowsMediaPlayer1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -146,6 +159,7 @@
             this.Controls.Add(this.btnVolver);
             this.Name = "ConfiguracionesVista";
             this.Text = "Configuraciones";
+            ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -163,5 +177,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private AxWMPLib.AxWindowsMediaPlayer axWindowsMediaPlayer1;
     }
 }

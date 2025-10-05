@@ -59,23 +59,9 @@ namespace Programa.Vistas.Alta
             btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
             btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
         }
-
-        private static AgregarOperadoresVista instancia;
         public static AgregarOperadoresVista ObtenerInstancia()
         {
-            if (instancia == null || instancia.IsDisposed)
-            {
-                instancia = new AgregarOperadoresVista();
-                instancia.Show();
-            }
-            else
-            {
-                if (instancia.WindowState == FormWindowState.Minimized)
-                    instancia.WindowState = FormWindowState.Normal;
-
-                instancia.BringToFront();
-                instancia.Activate();
-            }
+            var instancia = new AgregarOperadoresVista();
             return instancia;
         }
     }

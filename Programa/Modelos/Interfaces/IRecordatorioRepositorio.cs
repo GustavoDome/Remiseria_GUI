@@ -12,6 +12,7 @@ namespace Programa.Modelos.Interfaces
         void Agregar(Recordatorio recordatorioModelo);
         void Editar(Recordatorio recordatorioModelo);
         void Eliminar(int id);
+        string ObtenerTipoAlarma(int idOperador);
         RecordatorioDTO ObtenerPorId(int id);
         IEnumerable<RecordatorioDTO> ObtenerTodos();
     }
