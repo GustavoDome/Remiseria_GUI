@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModificarPlanillaCostoVistaCiudadPrecio));
             this.label1 = new System.Windows.Forms.Label();
             this.txtMontoKilometro = new System.Windows.Forms.TextBox();
             this.btnVolver = new System.Windows.Forms.Button();
@@ -78,6 +79,8 @@
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtMontoKilometro);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ModificarPlanillaCostoVistaCiudadPrecio";
             this.Text = "Modificar precio por kilometro";
             this.ResumeLayout(false);

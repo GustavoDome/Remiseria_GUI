@@ -2,6 +2,7 @@
 using Programa.Modelos;
 using Programa.Modelos.Interfaces;
 using Programa.Vistas.Alta.Interfaces;
+using Programa.Vistas.Interfaces;
 using Programa.Vistas.Modificacion.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -18,19 +19,16 @@ namespace Programa.Presentadores.CUPresentador
         {
             private readonly IAgregarBasesVista vista;
             private readonly IBasesRepositorio repositorio;
+            private readonly IBasesVista vistaPrincipal;
             private readonly int idOperador;
             private readonly int idMovil;
             private readonly BasesPresentador presentador;
 
-            public CUAgregarBasePresentador(
-                IBasesRepositorio repositorio,
-                IAgregarBasesVista vista,
-                int idOperador,
-                int idMovil,
-                BasesPresentador presentador)
+            public CUAgregarBasePresentador(IBasesRepositorio repositorio, IAgregarBasesVista vista, int idOperador, int idMovil, BasesPresentador presentador, IBasesVista vistaPrincipal)
             {
                 this.repositorio = repositorio;
                 this.vista = vista;
+                this.vistaPrincipal = vistaPrincipal;
                 this.idOperador = idOperador;
                 this.idMovil = idMovil;
                 this.presentador = presentador;
@@ -54,6 +52,9 @@ namespace Programa.Presentadores.CUPresentador
 
                     repositorio.Agregar(nuevaBase);
                     presentador.vista_OnMovilSeleccionado(this, EventArgs.Empty); // recarga la grilla
+                    MessageBox.Show($"{nuevaBase.Fecha_base},{nuevaBase.EstadoBase},{nuevaBase.IdMovil},{nuevaBase.IdOperador},{nuevaBase.Activo}");
+                    var listaBases = repositorio.MostrarTodo(idMovil).ToList();
+                    vistaPrincipal.mostrarBases(listaBases);
 
                     ((Form)vista).Close();
                 }

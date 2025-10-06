@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModificarPlanillaCostoVistaCuadraMandado));
             this.label1 = new System.Windows.Forms.Label();
             this.btnModificar = new System.Windows.Forms.Button();
             this.txtCuadrasMandado = new System.Windows.Forms.TextBox();
@@ -78,6 +79,8 @@
             this.Controls.Add(this.txtCuadrasMandado);
             this.Controls.Add(this.btnModificar);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ModificarPlanillaCostoVistaCuadraMandado";
             this.Text = "Modificar Mandado";
             this.ResumeLayout(false);

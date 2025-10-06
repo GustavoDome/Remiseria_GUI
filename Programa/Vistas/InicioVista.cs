@@ -24,7 +24,7 @@ namespace Programa.Vistas
 
         public void ocultarBotones(string rol) 
         {
-            if(rol == "Usuario") 
+            if(rol == "Operador") 
             {
                 btnMoviles.Hide();
                 btnOperadores.Hide();
@@ -111,12 +111,16 @@ namespace Programa.Vistas
             {
                 if (col.Name == "Direccion") // ajustá al nombre real
                 {
-                    col.Width = 300; // ancho personalizado
+                    col.Width = 350; // ancho personalizado
+                }
+                if (col.Name == "Comentario") // ajustá al nombre real
+                {
+                    col.Width = 450; // ancho personalizado
                 }
                 else if (col.Visible)
                 {
                     col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-                    col.MinimumWidth = 150;
+                    col.MinimumWidth = 200;
                 }
             }
         }

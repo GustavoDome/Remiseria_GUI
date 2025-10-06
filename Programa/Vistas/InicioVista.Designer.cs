@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(InicioVista));
             this.tcInternet = new System.Windows.Forms.TabControl();
             this.WebWhatsapp = new System.Windows.Forms.TabPage();
             this.wbWhatsapp = new Microsoft.Web.WebView2.WinForms.WebView2();
@@ -299,6 +300,8 @@
             this.Controls.Add(this.btnVuelta);
             this.Controls.Add(this.btnViajes);
             this.Controls.Add(this.tcInternet);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimizeBox = false;
             this.Name = "InicioVista";
             this.Text = "Inicio";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

@@ -16,5 +16,6 @@ namespace Programa.Modelos.Interfaces
         void EditarComentario(Base baseEditada);
         IEnumerable<MovilResumenDTO> SeleccionarMovil(); // reemplaza MovilModeloId
         IEnumerable<BaseDetalleDTO> MostrarTodo(int id_movil);
+        BaseDetalleDTO BuscarPorId(int idBase);
     }
 }

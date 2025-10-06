@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModificarPlanillaCostoVistaCuadraPrecio));
             this.label1 = new System.Windows.Forms.Label();
             this.txtCuadrasMinimo = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -99,6 +100,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtCuadrasMinimo);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ModificarPlanillaCostoVistaCuadraPrecio";
             this.Text = "Modificar costo de cada cuadra";
             this.ResumeLayout(false);

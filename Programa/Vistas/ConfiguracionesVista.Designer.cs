@@ -157,6 +157,8 @@
             this.Controls.Add(this.cbTipoFuente);
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnVolver);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ConfiguracionesVista";
             this.Text = "Configuraciones";
             ((System.ComponentModel.ISupportInitialize)(this.axWindowsMediaPlayer1)).EndInit();

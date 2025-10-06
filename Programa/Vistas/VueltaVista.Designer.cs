@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VueltaVista));
             this.dgvVuelta = new System.Windows.Forms.DataGridView();
             this.btnAgregarMovil = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
@@ -154,6 +155,8 @@
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAgregarMovil);
             this.Controls.Add(this.dgvVuelta);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimizeBox = false;
             this.Name = "VueltaVista";
             this.Text = "Vuelta";
             ((System.ComponentModel.ISupportInitialize)(this.dgvVuelta)).EndInit();

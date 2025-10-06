@@ -27,6 +27,21 @@ namespace Programa.Vistas
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
 
+        public void ocultarBotones(string rol) 
+        {
+            if(rol == "Operador")
+            {
+                btnAgregarCiudad.Hide();
+                btnEliminarCiudad.Hide();
+                btnModificarCiudad.Hide();
+                btnPrecioCiudad.Hide();
+                btnPrecioCiudadEspera.Hide();
+                btnPrecioCuadra.Hide();
+                btnPrecioCuadraEspera.Hide();
+                btnPrecioCuadraMandado.Hide();
+            }
+        }
+
         public event EventHandler modificarCuadrasCosto;
         public event EventHandler modificarCuadrasCostoMandado;
         public event EventHandler modificarCuadrasEspera;

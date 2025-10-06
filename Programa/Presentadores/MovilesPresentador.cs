@@ -46,6 +46,11 @@ namespace Programa.Presentadores
         {
             var lista = repositorio.ObtenerTodos().ToList(); // usa DTO
             filtrador.DataSource = lista;
+
+            if (vista is MovilesVista vistaConcreta)
+            {
+                vistaConcreta.configurarGrilla();
+            }
         }
         public void Recargar()
         {

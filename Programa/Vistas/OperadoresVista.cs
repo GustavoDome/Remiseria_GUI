@@ -57,7 +57,32 @@ namespace Programa.Vistas
         {
             return Convert.ToInt32(dgvOperadores.CurrentRow.Cells[0].Value);
         }
+        public void configurarGrilla()
+        {
+            dgvOperadores.Columns["RolUsuario"].HeaderText = "Rol";
+            dgvOperadores.Columns["Contrasena"].HeaderText = "Contraseña";
+            dgvOperadores.Columns["TemaSistema"].HeaderText = "Color del sistema";
+            dgvOperadores.Columns["TamanoFuente"].HeaderText = "Tamaño de la fuente";
+            dgvOperadores.Columns["TipoAlarma"].HeaderText = "Alarma";
 
+            if(dgvOperadores.Columns.Contains("IdOperador"))
+            {
+                dgvOperadores.Columns["IdOperador"].Visible = false;
+            }
+            if (dgvOperadores.Columns.Contains("Activo"))
+            {
+                dgvOperadores.Columns["Activo"].Visible = false;
+            }
+            foreach (DataGridViewColumn col in dgvOperadores.Columns)
+            {
+                if (col.Name == "Telefono") // ajustá al nombre real
+                {
+                    col.Width = 350; // ancho personalizado
+                }
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                col.MinimumWidth = 200;
+            }
+        }
         // Metodo para el uso del Singleton
         public static OperadoresVista ObtenerInstancia()
         {

@@ -77,6 +77,25 @@ namespace Programa.Repositorios
                     .ToList();
             }
         }
+        public BaseDetalleDTO BuscarPorId(int idBase)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                return contexto.Bases
+                    .Include(b => b.Operador)
+                    .Where(b => b.IdBase == idBase)
+                    .Select(b => new BaseDetalleDTO
+                    {
+                        IdBase = b.IdBase,
+                        Fecha_base = b.Fecha_base,
+                        EstadoBase = b.EstadoBase,
+                        Comentario = b.Comentario,
+                        NombreOperador = b.Operador.Nombre,
+                        RolOperador = b.Operador.RolUsuario
+                    })
+                    .FirstOrDefault();
+            }
+        }
         public IEnumerable<BaseDetalleDTO> MostrarTodo(int id_movil)
         {
             using (var contexto = new RemiseriaDbContext())

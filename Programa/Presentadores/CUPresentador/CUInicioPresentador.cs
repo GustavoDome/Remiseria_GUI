@@ -42,6 +42,7 @@ namespace Programa.Presentadores.CUPresentador
                         FechaDia = this.agregarvista.fecha,
                         FechaHora = this.agregarvista.hora,
                         Ubicacion = this.agregarvista.direccion,
+                        Comentario = this.agregarvista.comentario,
                         IdOperador = this.id,
                     };
                     this.recordatorio.Agregar(Arecordatorio);
@@ -88,6 +89,7 @@ namespace Programa.Presentadores.CUPresentador
                 this.modificarRecordatorio.fecha = recordatorio.FechaDia.Value;
                 this.modificarRecordatorio.hora = recordatorio.FechaHora.Value;
                 this.modificarRecordatorio.direccion = recordatorio.Direccion;
+                this.modificarRecordatorio.comentario = recordatorio.Comentario;
 
                 // Suscripción a eventos
                 this.modificarRecordatorio.modificar += modificar_recordatorio;
@@ -109,6 +111,7 @@ namespace Programa.Presentadores.CUPresentador
                     FechaDia = this.modificarRecordatorio.fecha,
                     FechaHora = this.modificarRecordatorio.hora,
                     Ubicacion = this.modificarRecordatorio.direccion,
+                    Comentario = this.modificarRecordatorio.comentario,
                     IdOperador = this.id,
                 };
                 if(this.modificarRecordatorio.fecha != null || this.modificarRecordatorio.hora != null || this.modificarRecordatorio.direccion != null)

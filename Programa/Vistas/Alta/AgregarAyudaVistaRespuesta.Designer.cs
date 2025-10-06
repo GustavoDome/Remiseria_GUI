@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarAyudaVistaRespuesta));
             this.btnAgregarArchivo = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
             this.ofdBuscarArchivo = new System.Windows.Forms.OpenFileDialog();
@@ -95,6 +96,8 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.btnAgregarArchivo);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "AgregarAyudaVistaRespuesta";
             this.Text = "Agregar Respuesta";
             this.ResumeLayout(false);

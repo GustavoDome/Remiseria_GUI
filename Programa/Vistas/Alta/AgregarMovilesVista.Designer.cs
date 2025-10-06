@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarMovilesVista));
             this.txtNumeroMovil = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtMarcaAuto = new System.Windows.Forms.TextBox();
@@ -263,6 +264,8 @@
             this.Controls.Add(this.txtMarcaAuto);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtNumeroMovil);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "AgregarMovilesVista";
             this.Text = "Agregar Remis";
             this.ResumeLayout(false);

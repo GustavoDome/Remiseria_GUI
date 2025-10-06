@@ -24,12 +24,14 @@ namespace Programa.Presentadores.CUPresentador
             private List<CategoriaDTO> modeloCategoria;
             private IAyudaVista ayudavista;
             private AyudaPresentador presentador;
-            public CUAgregarCategoriaPresentador(ICategoriaRepositorio repositorio,IAgregarAyudaVistaCategoria categoria, IAyudaVista ayudavista, AyudaPresentador presentador)
+            private string rol;
+            public CUAgregarCategoriaPresentador(ICategoriaRepositorio repositorio,IAgregarAyudaVistaCategoria categoria, IAyudaVista ayudavista, AyudaPresentador presentador, string rol)
             {
                 this.categoriaRepositorio = repositorio;
                 this.agregarCategoriaVista = categoria;
                 this.ayudavista = ayudavista;
                 this.presentador = presentador;
+                this.rol = rol;
 
                 this.agregarCategoriaVista.agregar += agregarCategoria;
                 this.agregarCategoriaVista.volver += volverAyuda;
@@ -42,7 +44,7 @@ namespace Programa.Presentadores.CUPresentador
                     this.categoriaRepositorio.Agregar(agregarCategoria);
                     modeloCategoria = categoriaRepositorio.ObtenerTodas().ToList();
                     ayudavista.SetCategoriaBindingSource(new BindingSource { DataSource = modeloCategoria });
-                    IAyudaVista ayuda = AyudaVista.ObtenerInstancia();
+                    IAyudaVista ayuda = AyudaVista.ObtenerInstancia(this.rol);
                     this.presentador.RefrescarModelos();
                     ((Form)agregarCategoriaVista).Close();
                 }
@@ -53,7 +55,7 @@ namespace Programa.Presentadores.CUPresentador
             }
             private void volverAyuda(object sender, EventArgs e) 
             {
-                IAyudaVista ayuda = AyudaVista.ObtenerInstancia();
+                IAyudaVista ayuda = AyudaVista.ObtenerInstancia(this.rol);
                 ((Form)agregarCategoriaVista).Close();
             }
         }

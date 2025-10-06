@@ -48,6 +48,8 @@ namespace Programa.Presentadores
             this.tablacuadras = new BindingSource();
             this.tablaciudades = new BindingSource();
 
+            this.vista.ocultarBotones(this.rol);
+
             vista.modificarCuadrasCosto += modificarCuadras_costo;
             vista.modificarCuadrasCostoMandado += modificarCuadras_mandado;
             vista.modificarCuadrasEspera += modificarCuadras_espera;
@@ -67,7 +69,7 @@ namespace Programa.Presentadores
             var ciudadDTO = ciudadImporteRepo.ObtenerImportes();
             var ciudades = ciudadRepo.ObtenerTodas();
 
-            vista.MostrarImportesCuadras(cuadrasDTO.Minimo, cuadrasDTO.Espera, cuadrasDTO.Mandado);
+            vista.MostrarImportesCuadras(cuadrasDTO.Cuadras, cuadrasDTO.Espera, cuadrasDTO.Mandado);
             vista.MostrarImportesCiudad(ciudadDTO.Kilometro, ciudadDTO.Espera);
 
             var tabla = new DataTable();

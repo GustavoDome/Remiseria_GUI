@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ViajesVista));
             this.dgvViajes = new System.Windows.Forms.DataGridView();
             this.dtpFecha = new System.Windows.Forms.DateTimePicker();
             this.btnAgregar = new System.Windows.Forms.Button();
@@ -144,6 +145,8 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.dtpFecha);
             this.Controls.Add(this.dgvViajes);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ViajesVista";
             this.Text = "Viajes";
             ((System.ComponentModel.ISupportInitialize)(this.dgvViajes)).EndInit();

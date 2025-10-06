@@ -32,10 +32,19 @@ namespace Programa.Vistas
 
             dgvMoviles.CellClick += (s, e) =>
             {
-                if (e.RowIndex >= 0 && e.ColumnIndex > 0) // ignorar columna "Propiedad"
+                if (e.RowIndex >= 0 && e.ColumnIndex > 0)
                 {
-                    id_movil = e.ColumnIndex; // delegamos el índice de columna como identificador lógico
-                    OnMovilSeleccionado?.Invoke(this, EventArgs.Empty);
+                    var binding = dgvMoviles.DataSource as BindingSource;
+                    var dt = binding?.DataSource as DataTable;
+                    var idMovil = dt.Rows
+                        .Cast<DataRow>()
+                        .FirstOrDefault(r => r[0].ToString() == "IdMovil")?[e.ColumnIndex];
+
+                    if (idMovil != null)
+                    {
+                        id_movil = Convert.ToInt32(idMovil);
+                        OnMovilSeleccionado?.Invoke(this, EventArgs.Empty);
+                    }
                 }
             };
         }
@@ -59,7 +68,7 @@ namespace Programa.Vistas
         // Métodos
         public void ocultarBotones(string rol)
         {
-            if (rol == "Usuario")
+            if (rol == "Operador")
             {
                 btnModificar.Hide();
                 btnEliminar.Hide();

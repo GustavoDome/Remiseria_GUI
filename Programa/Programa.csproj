@@ -35,6 +35,10 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Commons\Imagenes\Icono.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.5.1\lib\net45\EntityFramework.dll</HintPath>
@@ -585,9 +589,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Commons\Imagenes\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Content Include="Commons\Alarmas\base.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -604,6 +606,9 @@
     <Content Include="Commons\Alarmas\tranquila.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Commons\Imagenes\IconoPantallas.ico" />
+    <Content Include="Commons\Imagenes\Icono.ico" />
+    <Content Include="Icono.ico" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="AxWMPLib">

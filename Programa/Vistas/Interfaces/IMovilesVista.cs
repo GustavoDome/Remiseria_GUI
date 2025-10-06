@@ -13,9 +13,11 @@ namespace Programa.Vistas.Interfaces
         event EventHandler agregarMovil;
         event EventHandler modificarMovil;
         event EventHandler eliminarMovil;
+        event EventHandler OnMovilSeleccionado;
         event EventHandler volver;
 
         int ObtenerIdMovilSeleccionado();
         void SetMovilesBindingSource(BindingSource moviles);
+        void configurarGrilla();
     }
 }

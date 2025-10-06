@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AyudaVista));
             this.GBCategorias = new System.Windows.Forms.GroupBox();
             this.GBPreguntas = new System.Windows.Forms.GroupBox();
             this.GBRespuestas = new System.Windows.Forms.GroupBox();
@@ -211,6 +212,8 @@
             this.Controls.Add(this.btnModificarPregunta);
             this.Controls.Add(this.btnPlanillaCostos);
             this.Controls.Add(this.btnAgregarPregunta);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimizeBox = false;
             this.Name = "AyudaVista";
             this.Text = "Ayuda";
             this.PCategorias.ResumeLayout(false);

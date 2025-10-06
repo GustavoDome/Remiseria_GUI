@@ -46,6 +46,7 @@ namespace Programa.Repositorios
                     recordatorioExistente.Ubicacion = recordatorioEditado.Ubicacion;
                     recordatorioExistente.FechaDia = recordatorioEditado.FechaDia;
                     recordatorioExistente.FechaHora = recordatorioEditado.FechaHora;
+                    recordatorioExistente.Comentario = recordatorioEditado.Comentario;
 
                     contexto.SaveChanges();
                 }
@@ -77,6 +78,7 @@ namespace Programa.Repositorios
                     Direccion = r.Ubicacion,
                     FechaDia = r.FechaDia ?? DateTime.MinValue,
                     FechaHora = r.FechaHora ?? DateTime.MinValue,
+                    Comentario = r.Comentario,
                     NombreOperador = "" // opcional
                 };
             }
@@ -101,6 +103,7 @@ namespace Programa.Repositorios
                         Direccion = r.Ubicacion,
                         FechaDia = r.FechaDia ?? DateTime.MinValue,
                         FechaHora = r.FechaHora ?? DateTime.MinValue,
+                        Comentario = r.Comentario,
                         NombreOperador = r.Operador != null ? r.Operador.Nombre : "(Sin nombre)"
                     })
                     .ToList();

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModificarPlanillaCostoVistaEsperaCiudad));
             this.label1 = new System.Windows.Forms.Label();
             this.txtEsperaCiudad = new System.Windows.Forms.TextBox();
             this.btnVolver = new System.Windows.Forms.Button();
@@ -78,6 +79,8 @@
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.txtEsperaCiudad);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ModificarPlanillaCostoVistaEsperaCiudad";
             this.Text = "Modificar costo de espera fuera de la ciudad";
             this.ResumeLayout(false);

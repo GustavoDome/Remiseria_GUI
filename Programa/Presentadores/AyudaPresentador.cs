@@ -232,7 +232,7 @@ namespace Programa.Presentadores
         public void agregar_categoria(object sender, EventArgs e) 
         {
             IAgregarAyudaVistaCategoria agregarCategoria = AgregarAyudaVistaCategoria.ObtenerInstancia();
-            new CUAgregarCategoriaPresentador(this.repositorioCategoria, agregarCategoria,this.vista, this);
+            new CUAgregarCategoriaPresentador(this.repositorioCategoria, agregarCategoria,this.vista, this, this.rol);
             ((Form)agregarCategoria).ShowDialog();
         }
 

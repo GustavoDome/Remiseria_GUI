@@ -16,5 +16,6 @@ namespace Programa.Vistas.Interfaces
 
         int ObtenerIdOperadorSeleccionado();
         void SetOperadoresBindingSource(BindingSource operadores);
+        void configurarGrilla();
     }
 }

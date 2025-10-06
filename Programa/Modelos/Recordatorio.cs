@@ -20,6 +20,9 @@ namespace Programa.Modelos
         [Column("fecha_hora")]
         public DateTime? FechaHora { get; set; }
 
+        [Column("comentario")]
+        public string Comentario { get; set; }
+
         [Column("id_operador")]
         public int IdOperador { get; set; }
 

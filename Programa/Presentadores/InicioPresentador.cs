@@ -118,8 +118,7 @@ namespace Programa.Presentadores
         {
             GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Ayuda");
 
-            AyudaVista ayuda = AyudaVista.ObtenerInstancia(); // Usá el tipo concreto si vas a setear propiedades
-            ayuda.RolActual = this.rol; // ← Esto es lo que faltaba
+            AyudaVista ayuda = AyudaVista.ObtenerInstancia(this.rol); // Usá el tipo concreto si vas a setear propiedades
 
             ICategoriaRepositorio categoria = new CategoriaRepositorio();
             IPreguntaRepositorio pregunta = new PreguntaRepositorio();

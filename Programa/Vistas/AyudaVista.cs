@@ -27,12 +27,13 @@ namespace Programa.Vistas
         public event EventHandler volver;
         public event Action<int> respuestaModificarSeleccionada;
         public event Action<int> respuestaEliminarSeleccionada;
-        public string RolActual { get; set; }
-        public AyudaVista()
+        private string rol;
+        public AyudaVista(string rol)
         {
             InitializeComponent();
             this.Load += new System.EventHandler(this.ModificarVista_Load);
             asociarPresentador();
+            this.rol = rol;
         }
 
         private void ModificarVista_Load(object sender, EventArgs e)
@@ -66,10 +67,11 @@ namespace Programa.Vistas
 
         public void ocultarBotones()
         {
-            if(RolActual == "Usuario") 
+            if(this.rol == "Operador") 
             {
                 btnAgregarCategoria.Hide();
                 btnModificarCategoria.Hide();
+                btnEliminarCategoria.Hide();
                 btnEliminarPregunta.Hide();
                 btnAgregarRespuesta.Hide();
             }
@@ -174,7 +176,7 @@ namespace Programa.Vistas
 
                         y += 70;
                     }
-                    if (this.RolActual != "Usuario")
+                    if (this.rol != "Operador")
                     {
                         var btnModificar = new Button
                         {
@@ -227,11 +229,11 @@ namespace Programa.Vistas
 
         // Singleton
         public static AyudaVista instancia;
-        public static AyudaVista ObtenerInstancia()
+        public static AyudaVista ObtenerInstancia(string rol)
         {
             if (instancia == null || instancia.IsDisposed)
             {
-                instancia = new AyudaVista();
+                instancia = new AyudaVista(rol);
                 instancia.Show();
             }
             else

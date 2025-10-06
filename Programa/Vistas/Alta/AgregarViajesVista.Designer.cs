@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AgregarViajesVista));
             this.label3 = new System.Windows.Forms.Label();
             this.rbtnAfuera = new System.Windows.Forms.RadioButton();
             this.rdbtnDerivado = new System.Windows.Forms.RadioButton();
@@ -206,6 +207,8 @@
             this.Controls.Add(this.txtDireccion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "AgregarViajesVista";
             this.Text = "Agregar Viaje";
             this.gbTipoComentario.ResumeLayout(false);

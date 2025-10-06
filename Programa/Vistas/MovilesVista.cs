@@ -45,19 +45,32 @@ namespace Programa.Vistas
             };
             dgvMoviles.CellClick += delegate (object sender, DataGridViewCellEventArgs e)
             {
-                if (e.RowIndex >= 0 && dgvMoviles.Columns.Contains("IdMovil"))
+                if (e.RowIndex >= 0)
                 {
-                    dgvMoviles.CurrentCell = dgvMoviles.Rows[e.RowIndex].Cells["IdMovil"];
+                    dgvMoviles.ClearSelection();
+                    dgvMoviles.Rows[e.RowIndex].Selected = true;
+
+                    var binding = dgvMoviles.DataSource as BindingSource;
+                    var dt = binding?.DataSource as DataTable;
+
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        var idMovil = dt.Rows
+                            .Cast<DataRow>()
+                            .FirstOrDefault(r => r[0].ToString() == "IdMovil")?[e.ColumnIndex];
+
+                        if (idMovil != null)
+                        {
+                            idMovil = Convert.ToInt32(idMovil);
+                            OnMovilSeleccionado?.Invoke(this, EventArgs.Empty);
+                        }
+                    }
                 }
             };
             dgvMoviles.CellMouseDown += delegate (object sender, DataGridViewCellMouseEventArgs e)
             {
                 if (e.RowIndex >= 0)
-                {
-                    dgvMoviles.ClearSelection();
                     dgvMoviles.Rows[e.RowIndex].Selected = true;
-                    dgvMoviles.CurrentCell = dgvMoviles.Rows[e.RowIndex].Cells["IdMovil"];
-                }
             };
         }
 
@@ -67,25 +80,49 @@ namespace Programa.Vistas
         public event EventHandler agregarMovil;
         public event EventHandler modificarMovil;
         public event EventHandler eliminarMovil;
+        public event EventHandler OnMovilSeleccionado;
         public event EventHandler volver;
         public void SetMovilesBindingSource(BindingSource moviles) 
         {
             dgvMoviles.DataSource = moviles;
         }
+        public void configurarGrilla()
+        {
+            dgvMoviles.Columns["NumeroMovil"].HeaderText = "Movil";
+            dgvMoviles.Columns["Ano"].HeaderText = "Año";
+            dgvMoviles.Columns["NombreDueno"].HeaderText = "Remisero";
+            dgvMoviles.Columns["ApellidoDueno"].HeaderText = "Apellido";
+            dgvMoviles.Columns["TelefonoDueno"].HeaderText = "Telefono";
+            dgvMoviles.Columns["EsChofer"].HeaderText = "¿Chofer?";
+
+            if (dgvMoviles.Columns.Contains("IdMovil"))
+            {
+                dgvMoviles.Columns["IdMovil"].Visible = false;
+            }
+            if (dgvMoviles.Columns.Contains("IdDueno"))
+            {
+                dgvMoviles.Columns["IdDueno"].Visible = false;
+            }
+            foreach (DataGridViewColumn col in dgvMoviles.Columns)
+            {
+                if (col.Name == "Telefono") // ajustá al nombre real
+                {
+                    col.Width = 350; // ancho personalizado
+                }
+                col.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+                col.MinimumWidth = 200;
+            }
+        }
         public int ObtenerIdMovilSeleccionado()
         {
-            var fila = dgvMoviles.CurrentRow;
-            if (fila == null || !dgvMoviles.Columns.Contains("IdMovil"))
+            if (dgvMoviles.SelectedRows.Count == 0 || !dgvMoviles.Columns.Contains("IdMovil"))
                 return 0;
 
-            var celda = fila.Cells["IdMovil"];
-            if (celda == null || celda.Value == null)
+            var celda = dgvMoviles.SelectedRows[0].Cells["IdMovil"];
+            if (celda?.Value == null)
                 return 0;
 
-            if (int.TryParse(celda.Value.ToString(), out int idMovil))
-                return idMovil;
-
-            return 0;
+            return int.TryParse(celda.Value.ToString(), out int idMovil) ? idMovil : 0;
         }
         // Metodo para el uso del Singleton
         public static MovilesVista ObtenerInstancia()

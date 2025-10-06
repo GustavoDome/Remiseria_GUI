@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlanillaCostoVista));
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.PCuadras = new System.Windows.Forms.Panel();
@@ -39,6 +40,8 @@
             this.btnPrecioCuadraEspera = new System.Windows.Forms.Button();
             this.btnPrecioCuadra = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.PCiudades = new System.Windows.Forms.Panel();
+            this.TLPCiudades = new System.Windows.Forms.TableLayoutPanel();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.btnEliminarCiudad = new System.Windows.Forms.Button();
@@ -47,8 +50,6 @@
             this.btnPrecioCiudadEspera = new System.Windows.Forms.Button();
             this.btnPrecioCiudad = new System.Windows.Forms.Button();
             this.btnVolver = new System.Windows.Forms.Button();
-            this.PCiudades = new System.Windows.Forms.Panel();
-            this.TLPCiudades = new System.Windows.Forms.TableLayoutPanel();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.PCuadras.SuspendLayout();
@@ -183,6 +184,27 @@
             this.tabPage2.Text = "Fuera de la ciudad";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // PCiudades
+            // 
+            this.PCiudades.Controls.Add(this.TLPCiudades);
+            this.PCiudades.Location = new System.Drawing.Point(0, 0);
+            this.PCiudades.Name = "PCiudades";
+            this.PCiudades.Size = new System.Drawing.Size(984, 352);
+            this.PCiudades.TabIndex = 9;
+            // 
+            // TLPCiudades
+            // 
+            this.TLPCiudades.ColumnCount = 2;
+            this.TLPCiudades.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLPCiudades.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLPCiudades.Location = new System.Drawing.Point(0, 0);
+            this.TLPCiudades.Name = "TLPCiudades";
+            this.TLPCiudades.RowCount = 2;
+            this.TLPCiudades.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLPCiudades.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.TLPCiudades.Size = new System.Drawing.Size(984, 349);
+            this.TLPCiudades.TabIndex = 0;
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -262,33 +284,14 @@
             this.btnVolver.Text = "Volver";
             this.btnVolver.UseVisualStyleBackColor = true;
             // 
-            // PCiudades
-            // 
-            this.PCiudades.Controls.Add(this.TLPCiudades);
-            this.PCiudades.Location = new System.Drawing.Point(0, 0);
-            this.PCiudades.Name = "PCiudades";
-            this.PCiudades.Size = new System.Drawing.Size(984, 352);
-            this.PCiudades.TabIndex = 9;
-            // 
-            // TLPCiudades
-            // 
-            this.TLPCiudades.ColumnCount = 2;
-            this.TLPCiudades.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TLPCiudades.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TLPCiudades.Location = new System.Drawing.Point(0, 0);
-            this.TLPCiudades.Name = "TLPCiudades";
-            this.TLPCiudades.RowCount = 2;
-            this.TLPCiudades.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TLPCiudades.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TLPCiudades.Size = new System.Drawing.Size(984, 349);
-            this.TLPCiudades.TabIndex = 0;
-            // 
             // PlanillaCostoVista
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1016, 578);
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.tabControl1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "PlanillaCostoVista";
             this.Text = "Planilla de Costos";
             this.tabControl1.ResumeLayout(false);

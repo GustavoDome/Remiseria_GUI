@@ -26,6 +26,7 @@ namespace Programa.Vistas.Interfaces
         void MostrarCuadrasEnLayout(CuadrasImporteDTO dto);
         int? ObtenerCuadraSeleccionada();
         int? ObtenerCiudadSeleccionada();
+        void ocultarBotones(string rol);
 
         // Labels
         void MostrarImportesCuadras(int minimo, int espera, int mandado);

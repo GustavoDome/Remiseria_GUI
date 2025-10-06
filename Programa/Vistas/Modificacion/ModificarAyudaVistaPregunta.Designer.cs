@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ModificarAyudaVistaPregunta));
             this.label1 = new System.Windows.Forms.Label();
             this.rtbPregunta = new System.Windows.Forms.RichTextBox();
             this.btnVolver = new System.Windows.Forms.Button();
@@ -79,6 +80,8 @@
             this.Controls.Add(this.btnVolver);
             this.Controls.Add(this.rtbPregunta);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "ModificarAyudaVistaPregunta";
             this.Text = "Modificar Pregunta";
             this.ResumeLayout(false);

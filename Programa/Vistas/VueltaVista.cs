@@ -25,7 +25,7 @@ namespace Programa.Vistas
 
         public void ocultarBotones(string rol) 
         {
-            if(rol== "Usuario")
+            if(rol== "Operador")
             {
                 dateTimePicker1.Enabled = false;
                 btnEliminarMovil.Hide();

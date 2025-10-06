@@ -45,6 +45,11 @@ namespace Programa.Presentadores
         {
             var lista = repositorio.MostrarActivos().ToList(); // solo operadores activos
             filtrador.DataSource = lista;
+
+            if (vista is OperadoresVista vistaConcreta)
+            {
+                vistaConcreta.configurarGrilla();
+            }
         }
         public void Recargar()
         {

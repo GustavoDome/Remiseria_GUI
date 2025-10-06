@@ -20,7 +20,6 @@ namespace Programa.Vistas.Interfaces
         event EventHandler volver;
         event Action<int> respuestaModificarSeleccionada;
         event Action<int> respuestaEliminarSeleccionada;
-        string RolActual { get; set; }
 
         void ocultarBotones();
         void SetCategoriaBindingSource(BindingSource categorias);

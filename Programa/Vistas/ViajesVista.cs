@@ -25,7 +25,7 @@ namespace Programa.Vistas
 
         public void ocultarBotones(string rol)
         {
-            if(rol == "Usuario")
+            if(rol == "Operador")
             {
                 btnEliminar.Hide();
                 btnSiguiente.Hide();
@@ -128,7 +128,7 @@ namespace Programa.Vistas
             {
                 dgvViajes.Columns[1].Width = 60;
                 dgvViajes.Columns[2].Width = 60;
-                dgvViajes.Columns[3].Width = 200;
+                dgvViajes.Columns[3].Width = 250;
                 dgvViajes.Columns[4].Width = 120;
 
                 dgvViajes.Columns[0].Frozen = true;

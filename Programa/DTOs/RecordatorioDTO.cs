@@ -12,6 +12,7 @@ namespace Programa.DTOs
         public string Direccion { get; set; }
         public DateTime? FechaDia { get; set; }
         public DateTime? FechaHora { get; set; }
+        public string Comentario { get; set; }
         public string NombreOperador { get; set; }
     }
 }
