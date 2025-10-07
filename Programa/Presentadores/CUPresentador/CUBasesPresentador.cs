@@ -52,7 +52,6 @@ namespace Programa.Presentadores.CUPresentador
 
                     repositorio.Agregar(nuevaBase);
                     presentador.vista_OnMovilSeleccionado(this, EventArgs.Empty); // recarga la grilla
-                    MessageBox.Show($"{nuevaBase.Fecha_base},{nuevaBase.EstadoBase},{nuevaBase.IdMovil},{nuevaBase.IdOperador},{nuevaBase.Activo}");
                     var listaBases = repositorio.MostrarTodo(idMovil).ToList();
                     vistaPrincipal.mostrarBases(listaBases);
 

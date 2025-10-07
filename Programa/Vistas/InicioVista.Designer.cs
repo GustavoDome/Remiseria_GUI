@@ -41,7 +41,6 @@
             this.btnOperadores = new System.Windows.Forms.Button();
             this.btnMoviles = new System.Windows.Forms.Button();
             this.btnBases = new System.Windows.Forms.Button();
-            this.btnAyuda = new System.Windows.Forms.PictureBox();
             this.btnRecAgregar = new System.Windows.Forms.Button();
             this.btnRecModificar = new System.Windows.Forms.Button();
             this.btnRecEliminar = new System.Windows.Forms.Button();
@@ -49,6 +48,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnVolver = new System.Windows.Forms.Button();
             this.dgvRecordatorio = new System.Windows.Forms.DataGridView();
+            this.btnAyuda = new System.Windows.Forms.PictureBox();
             this.tcInternet.SuspendLayout();
             this.WebWhatsapp.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wbWhatsapp)).BeginInit();
@@ -56,8 +56,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.wbGoogleMaps)).BeginInit();
             this.WebInternet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wbGoogle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnAyuda)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecordatorio)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnAyuda)).BeginInit();
             this.SuspendLayout();
             // 
             // tcInternet
@@ -203,15 +203,6 @@
             this.btnBases.Text = "Bases";
             this.btnBases.UseVisualStyleBackColor = true;
             // 
-            // btnAyuda
-            // 
-            this.btnAyuda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAyuda.Location = new System.Drawing.Point(536, 230);
-            this.btnAyuda.Name = "btnAyuda";
-            this.btnAyuda.Size = new System.Drawing.Size(509, 76);
-            this.btnAyuda.TabIndex = 6;
-            this.btnAyuda.TabStop = false;
-            // 
             // btnRecAgregar
             // 
             this.btnRecAgregar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -282,6 +273,16 @@
             this.dgvRecordatorio.Size = new System.Drawing.Size(509, 110);
             this.dgvRecordatorio.TabIndex = 14;
             // 
+            // btnAyuda
+            // 
+            this.btnAyuda.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAyuda.Image = global::Programa.Properties.Resources.ImagenAyuda;
+            this.btnAyuda.Location = new System.Drawing.Point(540, 231);
+            this.btnAyuda.Name = "btnAyuda";
+            this.btnAyuda.Size = new System.Drawing.Size(501, 73);
+            this.btnAyuda.TabIndex = 6;
+            this.btnAyuda.TabStop = false;
+            // 
             // InicioVista
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
@@ -312,8 +313,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.wbGoogleMaps)).EndInit();
             this.WebInternet.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.wbGoogle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.btnAyuda)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecordatorio)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnAyuda)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

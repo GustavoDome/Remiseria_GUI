@@ -100,8 +100,6 @@ namespace Programa.Presentadores
                 return;
             }
 
-            vista.MostrarMensaje($"Móvil {numeroMovil} (ID {idMovil}) - Vuelta {numeroVuelta}");
-
             var dto = new VueltaDTO
             {
                 IdViaje = 0,

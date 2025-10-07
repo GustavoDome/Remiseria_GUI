@@ -469,6 +469,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Vistas\Alta\AgregarAyudaVistaCategoria.resx">
       <DependentUpon>AgregarAyudaVistaCategoria.cs</DependentUpon>
@@ -606,8 +607,8 @@
     <Content Include="Commons\Alarmas\tranquila.wav">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Commons\Imagenes\IconoPantallas.ico" />
     <Content Include="Commons\Imagenes\Icono.ico" />
+    <Content Include="Commons\Imagenes\ImagenAyuda.png" />
     <Content Include="Icono.ico" />
   </ItemGroup>
   <ItemGroup>

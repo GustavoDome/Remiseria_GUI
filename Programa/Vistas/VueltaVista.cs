@@ -28,7 +28,6 @@ namespace Programa.Vistas
             if(rol== "Operador")
             {
                 dateTimePicker1.Enabled = false;
-                btnEliminarMovil.Hide();
                 btnAnterior.Hide();
                 btnSiguiente.Hide();
             }
