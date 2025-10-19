@@ -57,7 +57,12 @@ namespace Programa.Presentadores
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Error al intentar iniciar sesión: {ex.Message}");
+                var inner = ex.InnerException;
+                while (inner?.InnerException != null)
+                    inner = inner.InnerException;
+
+                MessageBox.Show("Error interno: " + (inner?.Message ?? ex.Message));
+                throw;
             }
         }
     }

@@ -110,3 +110,4 @@ C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Program
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.csproj.Up2Date
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.exe
 C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.pdb
+C:\Users\usuario\Desktop\Codigos\GithubProjectos\Remiseria\Remiseria_GUI\Programa\obj\Debug\Programa.exe.config

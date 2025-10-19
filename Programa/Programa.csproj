@@ -141,6 +141,7 @@
     <Compile Include="Commons\GestorEstilosGlobal.cs" />
     <Compile Include="Commons\GestorPantallasGlobal.cs" />
     <Compile Include="Commons\RemiseriaDbContext.cs" />
+    <Compile Include="DbBootstrapper.cs" />
     <Compile Include="DTOs\AgregarViajeDTO.cs" />
     <Compile Include="DTOs\BaseDetalleDTO.cs" />
     <Compile Include="DTOs\CategoriaDTO.cs" />

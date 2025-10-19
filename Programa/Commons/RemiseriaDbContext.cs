@@ -1,12 +1,30 @@
-﻿using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration.Conventions;
+﻿using Npgsql;
 using Programa.Modelos;
+using System.Data.Common;
+using System.Data.Entity;
+using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Programa.Conexion
 {
     public class RemiseriaDbContext : DbContext
     {
-        public RemiseriaDbContext() : base("name=DefaultConnection") { }
+        public RemiseriaDbContext()
+            : base("name=RemiseriaConnection")
+        {
+        }
+
+        // Constructor para pasar una DbConnection (usado por DbBootstrapper)
+        public RemiseriaDbContext(DbConnection connection, bool contextOwnsConnection)
+            : base(connection, contextOwnsConnection)
+        {
+            Database.SetInitializer<RemiseriaDbContext>(null); // Evita reinicializaciones automáticas
+        }
+
+        // Opcional: constructor que acepta connection string directa
+        public RemiseriaDbContext(string connectionString)
+            : base(new NpgsqlConnection(connectionString), true)
+        {
+        }
 
         // DbSets
         public DbSet<DuenoAuto> DuenoAutos { get; set; }
@@ -23,8 +41,12 @@ namespace Programa.Conexion
         public DbSet<ImporteCiudad> ImportesCiudad { get; set; }
         public DbSet<Ciudad> Ciudades { get; set; }
 
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();
+            modelBuilder.HasDefaultSchema("public");
+
             modelBuilder.Entity<DuenoAuto>().ToTable("dueno_auto", "public");
 
             modelBuilder.Entity<Movil>().ToTable("movil", "public");
@@ -38,6 +60,8 @@ namespace Programa.Conexion
             modelBuilder.Entity<Vuelta>().ToTable("vuelta", "public");
 
             modelBuilder.Entity<Recordatorio>().ToTable("recordatorio", "public");
+
+            modelBuilder.Entity<ImporteCuadras>().ToTable("importescuadras", "public");
 
             modelBuilder.Entity<Vuelta>()
                 .HasKey(v => v.IdVuelta); // Clave primaria única

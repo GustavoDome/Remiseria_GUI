@@ -12,7 +12,7 @@ namespace Programa.Modelos.Interfaces
         void Agregar(Base entidad);
         void Editar(Base entidad);
         void Eliminar(int id);
-
+        bool ExisteBaseEnFecha(int idMovil, DateTime fecha);
         void EditarComentario(Base baseEditada);
         IEnumerable<MovilResumenDTO> SeleccionarMovil(); // reemplaza MovilModeloId
         IEnumerable<BaseDetalleDTO> MostrarTodo(int id_movil);

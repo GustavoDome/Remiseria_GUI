@@ -248,7 +248,7 @@ namespace Programa.Vistas
             TransformarCiudadesEnHorizontalEnTLP(ciudades);
         }
         // Singleton
-        private static PlanillaCostoVista instancia;
+        public static PlanillaCostoVista instancia;
         public static PlanillaCostoVista ObtenerInstancia()
         {
             if (instancia == null || instancia.IsDisposed)

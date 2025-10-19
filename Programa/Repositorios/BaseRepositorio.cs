@@ -63,6 +63,20 @@ namespace Programa.Repositorios
                 }
             }
         }
+        public bool ExisteBaseEnFecha(int idMovil, DateTime fecha)
+        {
+            using (var contexto = new RemiseriaDbContext())
+            {
+                var fechaInicio = fecha.Date;
+                var fechaFin = fechaInicio.AddDays(1);
+
+                return contexto.Bases.Any(b =>
+                    b.IdMovil == idMovil &&
+                    b.Fecha_base >= fechaInicio &&
+                    b.Fecha_base < fechaFin &&
+                    b.Activo);
+            }
+        }
         public IEnumerable<MovilResumenDTO> SeleccionarMovil()
         {
             using (var contexto = new RemiseriaDbContext())

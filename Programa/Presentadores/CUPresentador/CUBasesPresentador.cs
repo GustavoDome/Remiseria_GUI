@@ -41,6 +41,11 @@ namespace Programa.Presentadores.CUPresentador
             {
                 if (vista.fecha != DateTime.MinValue)
                 {
+                    if (repositorio.ExisteBaseEnFecha(idMovil, vista.fecha))
+                    {
+                        MessageBox.Show("Ya existe una base registrada para este móvil en la fecha seleccionada.");
+                        return;
+                    }
                     Base nuevaBase = new Base
                     {
                         Fecha_base = vista.fecha,

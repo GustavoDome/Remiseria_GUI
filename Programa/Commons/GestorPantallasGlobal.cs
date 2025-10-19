@@ -21,6 +21,7 @@ namespace Programa.Commons
                 CerrarSiExiste(BasesVista.instancia);
                 CerrarSiExiste(OperadoresVista.instancia);
                 CerrarSiExiste(AyudaVista.instancia);
+                CerrarSiExiste(PlanillaCostoVista.instancia);
             }
 
             // Operadores bloquea configuraciones

@@ -17,6 +17,11 @@ namespace Programa
             Application.SetCompatibleTextRenderingDefault(false);
             try
             {
+                bool created = DbBootstrapper.InitializeDatabase();
+                if (created)
+                {
+                    MessageBox.Show("Se creo de manera exitosa la Base de Datos");
+                }
                 ILogin vista = new Login();
                 IOperadorRepositorio vista_modelo = new OperadorRepositorio();
                 new LoginPresentador(vista, vista_modelo);

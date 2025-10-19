@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -45,6 +46,44 @@ namespace Programa.Presentadores.CUPresentador
                     string.IsNullOrWhiteSpace(vista.TelefonoDueno))
                 {
                     MessageBox.Show("Por favor complete todos los campos.");
+                    return;
+                }
+                Regex soloTexto = new Regex(@"^[a-zA-Z\s]+$");
+                Regex soloNumeros = new Regex(@"^\d+$");
+
+                if (!soloTexto.IsMatch(vista.Marca))
+                {
+                    MessageBox.Show("La marca debe contener solo letras.");
+                    return;
+                }
+
+                if (!soloTexto.IsMatch(vista.Modelo))
+                {
+                    MessageBox.Show("El modelo debe contener solo letras.");
+                    return;
+                }
+
+                if (!soloTexto.IsMatch(vista.Color))
+                {
+                    MessageBox.Show("El color debe contener solo letras.");
+                    return;
+                }
+
+                if (!soloTexto.IsMatch(vista.NombreDueno))
+                {
+                    MessageBox.Show("El nombre del dueño debe contener solo letras.");
+                    return;
+                }
+
+                if (!soloTexto.IsMatch(vista.ApellidoDueno))
+                {
+                    MessageBox.Show("El apellido del dueño debe contener solo letras.");
+                    return;
+                }
+
+                if (!soloNumeros.IsMatch(vista.Anio))
+                {
+                    MessageBox.Show("El año debe contener solo números.");
                     return;
                 }
 
@@ -126,6 +165,44 @@ namespace Programa.Presentadores.CUPresentador
                     string.IsNullOrWhiteSpace(vista.TelefonoDueno))
                 {
                     MessageBox.Show("Por favor complete todos los campos.");
+                    return;
+                }
+                Regex soloTexto = new Regex(@"^[a-zA-Z\s]+$");
+                Regex soloNumeros = new Regex(@"^\d+$");
+
+                if (!soloTexto.IsMatch(vista.Marca))
+                {
+                    MessageBox.Show("La marca debe contener solo letras.");
+                    return;
+                }
+
+                if (!soloTexto.IsMatch(vista.Modelo))
+                {
+                    MessageBox.Show("El modelo debe contener solo letras.");
+                    return;
+                }
+
+                if (!soloTexto.IsMatch(vista.Color))
+                {
+                    MessageBox.Show("El color debe contener solo letras.");
+                    return;
+                }
+
+                if (!soloTexto.IsMatch(vista.NombreDueno))
+                {
+                    MessageBox.Show("El nombre del dueño debe contener solo letras.");
+                    return;
+                }
+
+                if (!soloTexto.IsMatch(vista.ApellidoDueno))
+                {
+                    MessageBox.Show("El apellido del dueño debe contener solo letras.");
+                    return;
+                }
+
+                if (!soloNumeros.IsMatch(vista.Anio))
+                {
+                    MessageBox.Show("El año debe contener solo números.");
                     return;
                 }
 
