@@ -11,8 +11,16 @@ using static Programa.Conexion.RemiseriaDbContext;
 
 namespace Programa.Repositorios
 {
+    /// <summary>
+    /// Repositorio encargado de gestionar operaciones CRUD sobre la entidad Respuesta.
+    /// Implementa la interfaz <see cref="IRespuestasRepositorio"/>.
+    /// </summary>
     public class RespuestaRepositorio : IRespuestasRepositorio
     {
+        /// <summary>
+        /// Agrega una nueva respuesta al contexto de datos y guarda los cambios.
+        /// </summary>
+        /// <param name="respuestaModelo">Instancia de <see cref="Respuesta"/> que representa la nueva respuesta a registrar.</param>
         public void Agregar(Respuesta respuestaModelo)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -22,6 +30,10 @@ namespace Programa.Repositorios
             }
         }
 
+        /// <summary>
+        /// Edita los datos de una respuesta existente en la base de datos.
+        /// </summary>
+        /// <param name="respuestaModelo">Instancia de <see cref="Respuesta"/> con los nuevos datos a actualizar.</param>
         public void Editar(Respuesta respuestaModelo)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -38,6 +50,10 @@ namespace Programa.Repositorios
             }
         }
 
+        /// <summary>
+        /// Elimina físicamente una respuesta de la base de datos según su identificador.
+        /// </summary>
+        /// <param name="id">Identificador de la respuesta a eliminar.</param>
         public void Eliminar(int id)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -51,6 +67,12 @@ namespace Programa.Repositorios
             }
         }
 
+        /// <summary>
+        /// Muestra todas las respuestas registradas en la base de datos.
+        /// </summary>
+        /// <returns>
+        /// Lista de objetos <see cref="RespuestaDTO"/> con los datos básicos de cada respuesta.
+        /// </returns>
         public IEnumerable<RespuestaDTO> MostrarTodo()
         {
             using (var contexto = new RemiseriaDbContext())

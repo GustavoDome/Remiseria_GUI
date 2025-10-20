@@ -8,6 +8,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista de planilla de costos.
+    /// Permite visualizar y modificar importes por ciudad y cuadra, con layouts dinámicos y eventos de gestión.
+    /// </summary>
     public interface IPlanillaCostoVista
     {
         // Eventos

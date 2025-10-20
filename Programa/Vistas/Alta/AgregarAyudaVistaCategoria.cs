@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
+    /// <summary>
+    /// Vista de agregación para una nueva categoría en el módulo de ayuda.
+    /// Permite ingresar el nombre y disparar eventos de confirmación o cancelación.
+    /// </summary>
     public partial class AgregarAyudaVistaCategoria : Form, IAgregarAyudaVistaCategoria
     {
         public AgregarAyudaVistaCategoria()
@@ -20,11 +24,13 @@ namespace Programa.Vistas.Alta
             InitializeComponent();
             asociarPresentador();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
         public void asociarPresentador()
         {
             btnAgregar.Click += delegate 

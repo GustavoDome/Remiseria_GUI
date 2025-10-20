@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
+    /// <summary>
+    /// Vista de agregación para registrar un nuevo operador.
+    /// Permite ingresar datos personales, contraseña y rol asignado.
+    /// </summary>
     public partial class AgregarOperadoresVista : Form, IAgregarOperadoresVista
     {
         public AgregarOperadoresVista()
@@ -20,11 +24,19 @@ namespace Programa.Vistas.Alta
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public string Nombre
         {
             get => txtNombre.Text;
@@ -54,11 +66,6 @@ namespace Programa.Vistas.Alta
         public event EventHandler agregar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static AgregarOperadoresVista ObtenerInstancia()
         {
             var instancia = new AgregarOperadoresVista();

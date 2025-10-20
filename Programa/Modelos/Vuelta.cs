@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa una vuelta realizada por un móvil, asociada o no a un viaje.
+    /// </summary>
     [Table("vuelta", Schema = "public")]
     public class Vuelta
     {

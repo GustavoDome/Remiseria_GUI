@@ -15,6 +15,10 @@ namespace Programa.Presentadores.CUPresentador
 {
     public class CUViajesPresentador
     {
+        /// <summary>
+        /// Subpresentador encargado de agregar un nuevo viaje.
+        /// Asigna vueltas, activa pendientes si existen y actualiza la vista principal.
+        /// </summary>
         public class CUAgregarViajePresentador
         {
             private readonly IAgregarViajesVista vista;
@@ -157,6 +161,11 @@ namespace Programa.Presentadores.CUPresentador
                 return vueltas;
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar los datos de un viaje existente.
+        /// Valida campos, actualiza móviles asociados y sincroniza la vista principal.
+        /// </summary>
         public class CUModificarViajePresentador
         {
             private readonly IModificarViajesVista vista;

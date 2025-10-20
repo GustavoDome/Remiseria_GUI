@@ -12,6 +12,10 @@ using Programa.Estilos;
 
 namespace Programa.Vistas.Alta
 {
+    /// <summary>
+    /// Vista de agregación para una nueva base.
+    /// Permite seleccionar la fecha y confirmar la creación.
+    /// </summary>
     public partial class AgregarBasesVista : Form, IAgregarBasesVista
     {
         public AgregarBasesVista()
@@ -20,11 +24,19 @@ namespace Programa.Vistas.Alta
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public DateTime fecha
         {
             get => dtpFecha.Value;
@@ -34,11 +46,6 @@ namespace Programa.Vistas.Alta
         public event EventHandler agregar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static AgregarBasesVista ObtenerInstancia()
         {
             var instancia = new AgregarBasesVista();

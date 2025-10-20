@@ -13,6 +13,11 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para una pregunta en el módulo de ayuda.
+    /// Permite editar el texto y confirmar los cambios.
+    /// </summary>
+
     public partial class ModificarAyudaVistaPregunta : Form, IModificarAyudaVistaPregunta
     {
         public ModificarAyudaVistaPregunta()
@@ -21,11 +26,19 @@ namespace Programa.Vistas.Modificacion
             this.Load += new System.EventHandler(this.ModificarAyudaVistaPreguntaVista_Load);
             asociarEventos();
         }
+
         private void ModificarAyudaVistaPreguntaVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public string preguntatexto
         {
             get { return rtbPregunta.Text; }
@@ -35,11 +48,6 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler modificar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static ModificarAyudaVistaPregunta ObtenerInstancia()
         {
             var instancia = new ModificarAyudaVistaPregunta();

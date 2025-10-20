@@ -13,6 +13,10 @@ namespace Programa.Presentadores.CUPresentador
 {
     public class CUOperadorPresentador
     {
+        /// <summary>
+        /// Subpresentador encargado de agregar un nuevo operador.
+        /// Valida duplicados y configura valores iniciales como fuente, tema y alarma.
+        /// </summary>
         public class CUAgregarOperadorPresentador
         {
             private readonly IAgregarOperadoresVista vista;
@@ -78,6 +82,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)vista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar los datos de un operador existente.
+        /// Mantiene la configuración visual original y actualiza la grilla principal.
+        /// </summary>
         public class CUModificarOperadorPresentador
         {
             private readonly IModificarOperadorVista vista;

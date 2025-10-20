@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Alta.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para agregar una nueva ciudad a la planilla de costos.
+    /// Permite ingresar nombre y distancia en kilómetros.
+    /// </summary>
     public interface IAgregarPlanillaCostoVista
     {
         string NombreCiudad { get; set; }

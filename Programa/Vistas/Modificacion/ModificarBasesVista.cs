@@ -13,6 +13,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para una base existente.
+    /// Permite editar la fecha y el comentario asociado.
+    /// </summary>
     public partial class ModificarBasesVista : Form, IModificarBasesVista
     {
         public ModificarBasesVista()
@@ -21,11 +25,19 @@ namespace Programa.Vistas.Modificacion
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public DateTime fecha
         {
             get => dtpFecha.Value;
@@ -41,11 +53,6 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler modificar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static ModificarBasesVista ObtenerInstancia()
         {
             var instancia = new ModificarBasesVista();

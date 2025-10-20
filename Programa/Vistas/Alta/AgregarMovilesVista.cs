@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
+    /// <summary>
+    /// Vista de agregación para registrar un nuevo móvil.
+    /// Permite ingresar datos del vehículo y del remisero, incluyendo rol como chofer.
+    /// </summary>
     public partial class AgregarMovilesVista : Form, IAgregarMovilesVista
     {
         public AgregarMovilesVista()
@@ -20,11 +24,19 @@ namespace Programa.Vistas.Alta
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public int NumeroMovil
         {
             get => int.TryParse(txtNumeroMovil.Text, out int n) ? n : 0;
@@ -78,11 +90,6 @@ namespace Programa.Vistas.Alta
         public event EventHandler agregar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static AgregarMovilesVista ObtenerInstancia()
         {
             var instancia = new AgregarMovilesVista();

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Programa.Modelos.Interfaces
 {
+    /// <summary>
+    /// Interfaz que define las operaciones de acceso a datos para la entidad DuenoAuto.
+    /// </summary>
     public interface IDuenoAutoRepositorio
     {
         void Agregar(DuenoAuto dueno);

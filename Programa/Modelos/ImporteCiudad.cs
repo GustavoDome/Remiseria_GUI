@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa los importes por kilómetro y espera dentro de la ciudad.
+    /// </summary>
     [Table("importeciudad", Schema = "public")]
     public class ImporteCiudad
     {

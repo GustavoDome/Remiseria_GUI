@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
+    /// <summary>
+    /// Vista de agregación para un comentario asociado a una base.
+    /// Permite ingresar texto y confirmar la acción.
+    /// </summary>
     public partial class AgregarBasesVistaComentario : Form, IAgregarBasesVistaComentario
     {
         public AgregarBasesVistaComentario()
@@ -20,11 +24,19 @@ namespace Programa.Vistas.Alta
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public string comentario
         {
             get => textBox1.Text;
@@ -34,11 +46,6 @@ namespace Programa.Vistas.Alta
         public event EventHandler agregar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static AgregarBasesVistaComentario ObtenerInstancia()
         {
             var instancia = new AgregarBasesVistaComentario();

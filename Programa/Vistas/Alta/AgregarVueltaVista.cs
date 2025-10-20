@@ -13,11 +13,12 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
+    /// <summary>
+    /// Vista de agregación para asignar móviles a una vuelta.
+    /// Permite seleccionar móviles disponibles y confirmar la operación.
+    /// </summary>
     public partial class AgregarVueltaVista : Form, IAgregarVueltaVista
     {
-        public event EventHandler agregarMovil;
-        public event EventHandler volver;
-
         public AgregarVueltaVista()
         {
             InitializeComponent();
@@ -53,6 +54,9 @@ namespace Programa.Vistas.Alta
         {
             this.Close();
         }
+
+        public event EventHandler agregarMovil;
+        public event EventHandler volver;
 
         public static AgregarVueltaVista ObtenerInstancia()
         {

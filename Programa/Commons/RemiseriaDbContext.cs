@@ -6,27 +6,42 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 
 namespace Programa.Conexion
 {
+    /// <summary>
+    /// Contexto principal de Entity Framework para la aplicación Remisería.
+    /// Gestiona la conexión a la base de datos y el mapeo de entidades al esquema "public".
+    /// </summary>
     public class RemiseriaDbContext : DbContext
     {
+        /// <summary>
+        /// Constructor por defecto que utiliza la cadena de conexión definida en el archivo de configuración.
+        /// </summary>
         public RemiseriaDbContext()
             : base("name=RemiseriaConnection")
         {
         }
 
-        // Constructor para pasar una DbConnection (usado por DbBootstrapper)
+        /// <summary>
+        /// Constructor que permite inyectar una instancia de <see cref="DbConnection"/>.
+        /// Utilizado principalmente por <see cref="DbBootstrapper"/> para inicializar la base de datos.
+        /// </summary>
+        /// <param name="connection">Conexión a la base de datos.</param>
+        /// <param name="contextOwnsConnection">Indica si el contexto debe cerrar la conexión al finalizar.</param>
         public RemiseriaDbContext(DbConnection connection, bool contextOwnsConnection)
             : base(connection, contextOwnsConnection)
         {
             Database.SetInitializer<RemiseriaDbContext>(null); // Evita reinicializaciones automáticas
         }
 
-        // Opcional: constructor que acepta connection string directa
+        /// <summary>
+        /// Constructor alternativo que acepta una cadena de conexión directa.
+        /// </summary>
+        /// <param name="connectionString">Cadena de conexión a la base de datos PostgreSQL.</param>
         public RemiseriaDbContext(string connectionString)
             : base(new NpgsqlConnection(connectionString), true)
         {
         }
 
-        // DbSets
+        // DbSets que representan las tablas del modelo de datos
         public DbSet<DuenoAuto> DuenoAutos { get; set; }
         public DbSet<Movil> Moviles { get; set; }
         public DbSet<Operador> Operadores { get; set; }
@@ -41,12 +56,20 @@ namespace Programa.Conexion
         public DbSet<ImporteCiudad> ImportesCiudad { get; set; }
         public DbSet<Ciudad> Ciudades { get; set; }
 
-
+        /// <summary>
+        /// Configura el modelo de datos y las convenciones de mapeo entre entidades y tablas.
+        /// Define nombres de tablas, claves primarias y relaciones entre entidades.
+        /// </summary>
+        /// <param name="modelBuilder">Constructor del modelo de EF.</param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Evita la pluralización automática de nombres de tablas
             modelBuilder.Conventions.Remove<System.Data.Entity.ModelConfiguration.Conventions.PluralizingTableNameConvention>();
+
+            // Define el esquema por defecto
             modelBuilder.HasDefaultSchema("public");
 
+            // Mapeo explícito de entidades a tablas
             modelBuilder.Entity<DuenoAuto>().ToTable("dueno_auto", "public");
 
             modelBuilder.Entity<Movil>().ToTable("movil", "public");
@@ -63,6 +86,7 @@ namespace Programa.Conexion
 
             modelBuilder.Entity<ImporteCuadras>().ToTable("importescuadras", "public");
 
+            // Configuración de relaciones y claves
             modelBuilder.Entity<Vuelta>()
                 .HasKey(v => v.IdVuelta); // Clave primaria única
 

@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Programa.Modelos.Interfaces
 {
+    /// <summary>
+    /// Interfaz que define las operaciones de acceso a datos para la entidad Recordatorio.
+    /// </summary>
     public interface IRecordatorioRepositorio
     {
         void Agregar(Recordatorio recordatorioModelo);

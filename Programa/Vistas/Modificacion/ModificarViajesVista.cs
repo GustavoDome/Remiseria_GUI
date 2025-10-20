@@ -15,6 +15,10 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para viajes existentes.
+    /// Permite editar dirección, móviles asignados y comentarios según tipo de viaje.
+    /// </summary>
     public partial class ModificarViajesVista : Form, IModificarViajesVista
     {
         public ModificarViajesVista()
@@ -35,6 +39,12 @@ namespace Programa.Vistas.Modificacion
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
 
+        private void asociarPresentador()
+        {
+            btnAgregar.Click += delegate { modificar?.Invoke(this, EventArgs.Empty); };
+            btnVolver.Click += delegate { volver?.Invoke(this, EventArgs.Empty); };
+        }
+
         private void actualizarComentario(string textoLabel)
         {
             lblComentario.Text = textoLabel;
@@ -42,6 +52,7 @@ namespace Programa.Vistas.Modificacion
             rtbComentarios.Text = string.Empty;
             rtbComentarios.Visible = true;
         }
+
         public void SetComentario(string comentario)
         {
             if (string.IsNullOrWhiteSpace(comentario))
@@ -69,33 +80,6 @@ namespace Programa.Vistas.Modificacion
             rtbComentarios.Text = comentario;
             lblComentario.Visible = true;
             rtbComentarios.Visible = true;
-        }
-        private void asociarPresentador()
-        {
-            btnAgregar.Click += delegate { modificar?.Invoke(this, EventArgs.Empty); };
-            btnVolver.Click += delegate { volver?.Invoke(this, EventArgs.Empty); };
-        }
-
-        public event EventHandler modificar;
-        public event EventHandler volver;
-
-        public static ModificarViajesVista ObtenerInstancia()
-        {
-            var instancia = new ModificarViajesVista();
-            return instancia;
-        }
-
-        // Propiedades
-        public string txtDirecciones
-        {
-            get => txtViaje.Text;
-            set => txtViaje.Text = value;
-        }
-
-        public string rtbComentario
-        {
-            get => rtbComentarios.Text;
-            set => rtbComentarios.Text = value;
         }
 
         public string obtenerOpcion()
@@ -142,5 +126,28 @@ namespace Programa.Vistas.Modificacion
                 .Select(m => m.IdMovil)
                 .ToList();
         }
+
+        public event EventHandler modificar;
+        public event EventHandler volver;
+
+        // Propiedades
+        public string txtDirecciones
+        {
+            get => txtViaje.Text;
+            set => txtViaje.Text = value;
+        }
+
+        public string rtbComentario
+        {
+            get => rtbComentarios.Text;
+            set => rtbComentarios.Text = value;
+        }
+
+        public static ModificarViajesVista ObtenerInstancia()
+        {
+            var instancia = new ModificarViajesVista();
+            return instancia;
+        }
+
     }
 }

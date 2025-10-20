@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Modificacion.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para modificar un viaje existente.
+    /// Permite editar dirección, móviles asignados y comentarios según tipo.
+    /// </summary>
     public interface IModificarViajesVista
     {
         string txtDirecciones { get; set; }

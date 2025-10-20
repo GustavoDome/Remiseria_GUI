@@ -16,6 +16,10 @@ using System.Windows.Forms;
 
 namespace Programa.Presentadores
 {
+    /// <summary>
+    /// Presentador encargado de gestionar la vista de vueltas.
+    /// Coordina la visualización, creación, modificación y eliminación de vueltas manuales por móvil.
+    /// </summary>
     public class VueltaPresentador
     {
         private readonly IVueltaVista vista;
@@ -25,6 +29,13 @@ namespace Programa.Presentadores
         private readonly string rol;
         private readonly int id;
 
+        /// <summary>
+        /// Inicializa el presentador con la vista de vueltas, el repositorio de viajes, el rol y el identificador del operador.
+        /// </summary>
+        /// <param name="vista">Vista que implementa <see cref="IVueltaVista"/>.</param>
+        /// <param name="repositorio">Repositorio que implementa <see cref="IViajesRepositorio"/>.</param>
+        /// <param name="rol">Rol del operador.</param>
+        /// <param name="id">Identificador del operador.</param>
         public VueltaPresentador(IVueltaVista vista, IViajesRepositorio repositorio, string rol, int id)
         {
             this.vista = vista;
@@ -51,6 +62,9 @@ namespace Programa.Presentadores
             vista.volver += volver_menu;
         }
 
+        /// <summary>
+        /// Carga las vueltas registradas para la fecha actual y configura la grilla y los móviles disponibles.
+        /// </summary>
         private void cargar_vueltas()
         {
             var tabla = repositorio.MostrarVuelta(fechaActual);
@@ -78,6 +92,9 @@ namespace Programa.Presentadores
             vista.ConfigurarMoviles(moviles);
         }
 
+        /// <summary>
+        /// Agrega una nueva vuelta manual para el móvil seleccionado.
+        /// </summary>
         private void agregar_vuelta(object sender, EventArgs e)
         {
             int idMovil = vista.ObtenerIdMovilSeleccionado();
@@ -125,6 +142,9 @@ namespace Programa.Presentadores
             }
         }
 
+        /// <summary>
+        /// Modifica el estado de la vuelta seleccionada.
+        /// </summary>
         private void modificar_vuelta(object sender, EventArgs e)
         {
             int idVuelta = vista.ObtenerIdVueltaSeleccionada();
@@ -152,6 +172,9 @@ namespace Programa.Presentadores
             }
         }
 
+        /// <summary>
+        /// Elimina la última vuelta registrada del móvil seleccionado.
+        /// </summary>
         private void eliminar_vuelta(object sender, EventArgs e)
         {
             int idMovil = vista.ObtenerIdMovilSeleccionado();
@@ -181,6 +204,9 @@ namespace Programa.Presentadores
             }
         }
 
+        /// <summary>
+        /// Abre el formulario para agregar un móvil a la grilla de vueltas.
+        /// </summary>
         private void agregar_movil(object sender, EventArgs e)
         {
             IAgregarVueltaVista popup = AgregarVueltaVista.ObtenerInstancia();
@@ -189,6 +215,9 @@ namespace Programa.Presentadores
             ((Form)popup).ShowDialog();
         }
 
+        /// <summary>
+        /// Elimina la vuelta seleccionada previa confirmación.
+        /// </summary>
         private void eliminar_movil(object sender, EventArgs e)
         {
             int idVuelta = vista.ObtenerIdVueltaSeleccionada();
@@ -219,6 +248,9 @@ namespace Programa.Presentadores
             }
         }
 
+        /// <summary>
+        /// Retrocede un día en la vista de vueltas.
+        /// </summary>
         private void retroceder_dia(object sender, EventArgs e)
         {
             fechaActual = fechaActual.AddDays(-1);
@@ -226,6 +258,9 @@ namespace Programa.Presentadores
             cargar_vueltas();
         }
 
+        /// <summary>
+        /// Avanza un día en la vista de vueltas, evitando fechas futuras.
+        /// </summary>
         private void adelantar_dia(object sender, EventArgs e)
         {
             var hoy = DateTime.Today;
@@ -240,6 +275,9 @@ namespace Programa.Presentadores
             cargar_vueltas();
         }
 
+        /// <summary>
+        /// Navega al módulo de viajes desde la vista de vueltas.
+        /// </summary>
         private void ingresar_viaje(object sender, EventArgs e)
         {
             IViajesVista viajesvista = ViajesVista.ObtenerInstancia(rol, id);
@@ -248,6 +286,9 @@ namespace Programa.Presentadores
             ((Form)vista).Close();
         }
 
+        /// <summary>
+        /// Cierra la vista actual y retorna al menú de inicio.
+        /// </summary>
         private void volver_menu(object sender, EventArgs e)
         {
             IInicioVista inicio = InicioVista.ObtenerInstancia();

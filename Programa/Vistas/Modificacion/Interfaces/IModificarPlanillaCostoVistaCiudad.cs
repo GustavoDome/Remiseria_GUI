@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Modificacion.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para modificar una ciudad en la planilla de costos.
+    /// </summary>
     public interface IModificarPlanillaCostoVistaCiudad
     {
         string NombreCiudad { get; set; }

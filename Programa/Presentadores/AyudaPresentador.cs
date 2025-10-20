@@ -20,6 +20,10 @@ using static Programa.Presentadores.CUPresentador.CUAyudaPresentador;
 
 namespace Programa.Presentadores
 {
+    /// <summary>
+    /// Presentador encargado de gestionar la vista de ayuda.
+    /// Coordina la visualización, creación, modificación y eliminación de categorías, preguntas y respuestas.
+    /// </summary>
     public class AyudaPresentador
     {
         private readonly ICategoriaRepositorio repositorioCategoria;
@@ -34,9 +38,19 @@ namespace Programa.Presentadores
         private List<PreguntaDTO> modeloPregunta;
         private List<RespuestaDTO> modeloRespuesta;
 
+        /// <summary>
+        /// Identificador de la categoría actualmente seleccionada.
+        /// </summary>
         public int? IdCategoriaSeleccionada { get; private set; }
+
+        /// <summary>
+        /// Identificador de la pregunta actualmente seleccionada.
+        /// </summary>
         public int? IdPreguntaSeleccionada { get; private set; }
 
+        /// <summary>
+        /// Inicializa el presentador con la vista de ayuda, los repositorios y los datos del operador.
+        /// </summary>
         public AyudaPresentador(IAyudaVista vista, ICategoriaRepositorio repositorioCategoria, IPreguntaRepositorio repositorioPregunta, IRespuestasRepositorio repositorioRespuesta, string rol, int id)
         {
             this.vista = vista;
@@ -71,12 +85,20 @@ namespace Programa.Presentadores
                 vistaConEventos.respuestaEliminarSeleccionada += eliminar_respuesta;
             }
         }
+
+        /// <summary>
+        /// Refresca los modelos internos de categorías, preguntas y respuestas desde los repositorios.
+        /// </summary>
         public void RefrescarModelos()
         {
             modeloCategoria = repositorioCategoria.ObtenerTodas().ToList();
             modeloPregunta = repositorioPregunta.MostrarTodo().ToList();
             modeloRespuesta = repositorioRespuesta.MostrarTodo().ToList();
         }
+
+        /// <summary>
+        /// Carga las preguntas asociadas a la categoría seleccionada.
+        /// </summary>
         private void cargar_preguntas(int idCategoria)
         {
             IdCategoriaSeleccionada = idCategoria;
@@ -92,6 +114,9 @@ namespace Programa.Presentadores
             vista.SetRespuestaBindingSource(new BindingSource()); // Limpia respuestas
         }
 
+        /// <summary>
+        /// Carga las respuestas asociadas a la pregunta seleccionada.
+        /// </summary>
         private void cargar_respuestas(int idPregunta)
         {
             IdPreguntaSeleccionada = idPregunta;
@@ -103,6 +128,9 @@ namespace Programa.Presentadores
             vista.SetRespuestaBindingSource(new BindingSource { DataSource = modeloRespuesta });
         }
 
+        /// <summary>
+        /// Navega al módulo de planilla de costos desde la vista de ayuda.
+        /// </summary>
         public void ingresar_planilla_costos(object sender, EventArgs e)
         {
             IPlanillaCostoVista planilla = PlanillaCostoVista.ObtenerInstancia();
@@ -113,6 +141,9 @@ namespace Programa.Presentadores
             ((Form)vista).Close();
         }
 
+        /// <summary>
+        /// Abre el formulario para agregar una nueva pregunta.
+        /// </summary>
         public void agregar_pregunta(object sender, EventArgs e)
         {
             if (IdCategoriaSeleccionada == null)
@@ -126,6 +157,9 @@ namespace Programa.Presentadores
             ((Form)vistaAgregar).ShowDialog();
         }
 
+        /// <summary>
+        /// Abre el formulario para modificar la pregunta seleccionada.
+        /// </summary>
         public void modificar_pregunta(object sender, EventArgs e)
         {
             if (IdPreguntaSeleccionada == null)
@@ -146,6 +180,9 @@ namespace Programa.Presentadores
             ((Form)vistaModificar).ShowDialog();
         }
 
+        /// <summary>
+        /// Elimina la pregunta seleccionada junto con sus respuestas.
+        /// </summary>
         public void eliminar_pregunta(object sender, EventArgs e)
         {
             if (IdPreguntaSeleccionada == null)
@@ -179,6 +216,9 @@ namespace Programa.Presentadores
             }
         }
 
+        /// <summary>
+        /// Abre el formulario para agregar una nueva respuesta.
+        /// </summary>
         public void agregar_respuesta(object sender, EventArgs e)
         {
             if (IdPreguntaSeleccionada == null)
@@ -192,6 +232,9 @@ namespace Programa.Presentadores
             ((Form)vistaAgregar).ShowDialog();
         }
 
+        /// <summary>
+        /// Abre el formulario para modificar la respuesta seleccionada.
+        /// </summary>
         private void modificar_respuesta(int idRespuesta)
         {
             var dto = modeloRespuesta.FirstOrDefault(r => r.IdRespuesta == idRespuesta);
@@ -206,6 +249,9 @@ namespace Programa.Presentadores
             ((Form)vistaModificar).ShowDialog();
         }
 
+        /// <summary>
+        /// Elimina la respuesta seleccionada.
+        /// </summary>
         private void eliminar_respuesta(int idRespuesta)
         {
             var dto = modeloRespuesta.FirstOrDefault(r => r.IdRespuesta == idRespuesta);
@@ -229,6 +275,9 @@ namespace Programa.Presentadores
             }
         }
 
+        /// <summary>
+        /// Abre el formulario para agregar una nueva categoría.
+        /// </summary>
         public void agregar_categoria(object sender, EventArgs e) 
         {
             IAgregarAyudaVistaCategoria agregarCategoria = AgregarAyudaVistaCategoria.ObtenerInstancia();
@@ -236,6 +285,9 @@ namespace Programa.Presentadores
             ((Form)agregarCategoria).ShowDialog();
         }
 
+        /// <summary>
+        /// Abre el formulario para modificar la categoría seleccionada.
+        /// </summary>
         public void modificar_categoria(object sender, EventArgs e)
         {
             if (IdCategoriaSeleccionada == null)
@@ -256,6 +308,9 @@ namespace Programa.Presentadores
             ((Form)vistaModificar).ShowDialog();
         }
 
+        /// <summary>
+        /// Elimina la categoría seleccionada junto con sus preguntas y respuestas.
+        /// </summary>
         public void eliminar_categoria(object sender, EventArgs e)
         {
             if (IdCategoriaSeleccionada == null)
@@ -300,6 +355,9 @@ namespace Programa.Presentadores
             }
         }
 
+        /// <summary>
+        /// Cierra la vista actual y retorna al menú de inicio.
+        /// </summary>
         public void volver_menu(object sender, EventArgs e)
         {
             IInicioVista inicio = InicioVista.ObtenerInstancia();

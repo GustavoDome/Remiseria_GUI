@@ -8,6 +8,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista de móviles.
+    /// Permite gestionar móviles, configurar la grilla y obtener el móvil seleccionado.
+    /// </summary>
     public interface IMovilesVista
     {
         event EventHandler agregarMovil;

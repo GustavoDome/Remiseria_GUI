@@ -18,6 +18,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
+    /// <summary>
+    /// Vista de agregación para registrar un nuevo viaje.
+    /// Permite ingresar dirección, móviles asignados y comentarios según tipo de viaje.
+    /// </summary>
     public partial class AgregarViajesVista : Form, IAgregarViajesVista
     {
         private int idViaje;
@@ -64,44 +68,17 @@ namespace Programa.Vistas.Alta
                     actualizarComentario("Escriba el comentario");
             };
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
         public void asociarPresentador() 
         {
             btnAgregar.Click += delegate { agregar?.Invoke(this, EventArgs.Empty); };
             btnVolver.Click += delegate { volver?.Invoke(this, EventArgs.Empty); };
-        }
-
-        public event EventHandler agregar;
-        public event EventHandler volver;
-        private void actualizarComentario(string textoLabel)
-        {
-            lblComentario.Text = textoLabel;
-            lblComentario.Visible = true;
-
-            rtbComentario.Text = string.Empty;
-            rtbComentario.Visible = true;
-        }
-        public static AgregarViajesVista ObtenerInstancia(int idViaje, int idOperador, string rol)
-        {
-            var vista = new AgregarViajesVista(idViaje, idOperador, rol);
-            return vista;
-        }
-
-        // Propiedades
-        public string txtDirecciones
-        {
-            get => txtDireccion.Text;
-            set => txtDireccion.Text = value;
-        }
-
-        public string rtbComentarios
-        {
-            get => rtbComentario.Text;
-            set => rtbComentario.Text = value;
         }
 
         public string obtenerOpcion()
@@ -112,6 +89,7 @@ namespace Programa.Vistas.Alta
             if (rbtnOtro.Checked) return rtbComentario.Text;
             return null;
         }
+
         public List<int> ObtenerMovilesSeleccionados()
         {
             return clbMoviles.CheckedItems
@@ -136,5 +114,37 @@ namespace Programa.Vistas.Alta
                 clbMoviles.Items.Add(visual, false); // Ahora sí: objeto seguro + texto visible
             }
         }
+
+        private void actualizarComentario(string textoLabel)
+        {
+            lblComentario.Text = textoLabel;
+            lblComentario.Visible = true;
+
+            rtbComentario.Text = string.Empty;
+            rtbComentario.Visible = true;
+        }
+
+        // Propiedades
+        public string txtDirecciones
+        {
+            get => txtDireccion.Text;
+            set => txtDireccion.Text = value;
+        }
+
+        public string rtbComentarios
+        {
+            get => rtbComentario.Text;
+            set => rtbComentario.Text = value;
+        }
+
+        public event EventHandler agregar;
+        public event EventHandler volver;
+
+        public static AgregarViajesVista ObtenerInstancia(int idViaje, int idOperador, string rol)
+        {
+            var vista = new AgregarViajesVista(idViaje, idOperador, rol);
+            return vista;
+        }
+
     }
 }

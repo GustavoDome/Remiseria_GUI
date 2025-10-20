@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa un viaje registrado en el sistema.
+    /// </summary>
     [Table("viajes", Schema = "public")]
     public class Viaje
     {

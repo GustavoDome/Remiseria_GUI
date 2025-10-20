@@ -15,6 +15,10 @@ namespace Programa.Presentadores.CUPresentador
 {
     public class CUBasesPresentador
     {
+        /// <summary>
+        /// Subpresentador encargado de agregar una nueva base para un móvil en una fecha específica.
+        /// Valida duplicados y actualiza la vista principal.
+        /// </summary>
         public class CUAgregarBasePresentador
         {
             private readonly IAgregarBasesVista vista;
@@ -74,6 +78,10 @@ namespace Programa.Presentadores.CUPresentador
             }
         }
 
+        /// <summary>
+        /// Subpresentador encargado de modificar los datos de una base existente.
+        /// Coordina entre la vista de edición y el repositorio, actualizando la grilla de móviles.
+        /// </summary>
         public class CUModificarBasePresentador
         {
             private readonly IModificarBasesVista vista;
@@ -134,6 +142,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)vista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de agregar o modificar el comentario de una base existente.
+        /// Coordina entre la vista de comentario y el repositorio.
+        /// </summary>
         public class CUComentarioBasePresentador
         {
             private readonly IAgregarBasesVistaComentario vista;

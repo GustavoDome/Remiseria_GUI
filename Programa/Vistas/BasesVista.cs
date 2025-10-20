@@ -13,6 +13,11 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas
 {
+    /// <summary>
+    /// Vista principal del módulo de bases.
+    /// Permite visualizar, agregar, modificar, comentar y eliminar bases asociadas a móviles.
+    /// Adapta la interfaz según el rol del operador.
+    /// </summary>
     public partial class BasesVista : Form, IBasesVista
     {
         public BasesVista()
@@ -54,17 +59,6 @@ namespace Programa.Vistas
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
 
-        // Eventos
-        public event EventHandler agregarBase;
-        public event EventHandler modificarBase;
-        public event EventHandler comentarBase;
-        public event EventHandler eliminarBase;
-        public event EventHandler volver;
-        public event EventHandler OnMovilSeleccionado;
-
-        // Propiedades
-        public int id_movil { get; set; }
-
         // Métodos
         public void ocultarBotones(string rol)
         {
@@ -92,10 +86,12 @@ namespace Programa.Vistas
             if (dgvMoviles.Rows.Count > 0)
                 dgvMoviles.Rows[0].Visible = false;
         }
+
         private void BasesVista_Load(object sender, EventArgs e)
         {
             dgvMoviles.ClearSelection();
         }
+
         public void mostrarBases(List<BaseDetalleDTO> listaBases)
         {
             TLPBases.SuspendLayout();
@@ -175,6 +171,17 @@ namespace Programa.Vistas
         {
             return TLPBases.Tag is int id ? id : (int?)null;
         }
+
+        // Eventos
+        public event EventHandler agregarBase;
+        public event EventHandler modificarBase;
+        public event EventHandler comentarBase;
+        public event EventHandler eliminarBase;
+        public event EventHandler volver;
+        public event EventHandler OnMovilSeleccionado;
+
+        // Propiedades
+        public int id_movil { get; set; }
 
         // Singleton
         public static BasesVista instancia;

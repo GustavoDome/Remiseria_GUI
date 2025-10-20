@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Modificacion.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para modificar un recordatorio.
+    /// Permite editar fecha, hora, dirección y comentario.
+    /// </summary>
     public interface IModificarInicioVistaRecordatorio
     {
         event EventHandler volver;

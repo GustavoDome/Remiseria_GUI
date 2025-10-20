@@ -13,6 +13,11 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas
 {
+    /// <summary>
+    /// Vista principal del módulo de planilla de costos.
+    /// Permite visualizar y gestionar importes por ciudad y por cuadra, con controles adaptados al rol del operador.
+    /// Incluye layouts dinámicos para representar ciudades y cuadras en formato horizontal.
+    /// </summary>
     public partial class PlanillaCostoVista : Form, IPlanillaCostoVista
     {
         public PlanillaCostoVista()
@@ -21,6 +26,7 @@ namespace Programa.Vistas
             this.Load += new System.EventHandler(this.ModificarVista_Load);
             asociarPresentador();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
@@ -42,16 +48,6 @@ namespace Programa.Vistas
             }
         }
 
-        public event EventHandler modificarCuadrasCosto;
-        public event EventHandler modificarCuadrasCostoMandado;
-        public event EventHandler modificarCuadrasEspera;
-        public event EventHandler modificarCiudadCosto;
-        public event EventHandler modificarCiudadEspera;
-        public event EventHandler agregarCiudad;
-        public event EventHandler modificarCiudad;
-        public event EventHandler eliminarCiudad;
-        public event EventHandler volver;
-
         public void asociarPresentador()
         {
             btnPrecioCuadra.Click += (s, e) => modificarCuadrasCosto?.Invoke(this, EventArgs.Empty);
@@ -64,6 +60,7 @@ namespace Programa.Vistas
             btnEliminarCiudad.Click += (s, e) => eliminarCiudad?.Invoke(this, EventArgs.Empty);
             btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
         }
+
         public void MostrarImportesCuadras(int minimo, int espera, int mandado)
         {
             label3.Text = $"Monto de cuadras: {minimo}";
@@ -76,6 +73,7 @@ namespace Programa.Vistas
             label1.Text = $"Costo del KM: {kilometro}";
             label2.Text = $"Espera fuera de la ciudad: {espera}";
         }
+
         private void TransformarCiudadesEnHorizontalEnTLP(List<CiudadDTO> ciudades)
         {
             TLPCiudades.SuspendLayout();
@@ -150,6 +148,7 @@ namespace Programa.Vistas
             ScrollHelper.OcultarScrollVertical(PCiudades);
             TLPCiudades.ResumeLayout();
         }
+
         private void TransformarCuadrasEnHorizontalEnTLP(CuadrasImporteDTO dto)
         {
             TLPCuadras.SuspendLayout();
@@ -231,22 +230,37 @@ namespace Programa.Vistas
             ScrollHelper.OcultarScrollVertical(PCuadras);
             TLPCuadras.ResumeLayout();
         }
+
         public int? ObtenerCuadraSeleccionada()
         {
             return TLPCuadras.Tag is int valor ? valor : (int?)null;
         }
+
         public int? ObtenerCiudadSeleccionada()
         {
             return TLPCiudades.Tag is int id ? id : (int?)null;
         }
+
         public void MostrarCuadrasEnLayout(CuadrasImporteDTO dto)
         {
             TransformarCuadrasEnHorizontalEnTLP(dto);
         }
+
         public void MostrarCiudadesEnLayout(List<CiudadDTO> ciudades)
         {
             TransformarCiudadesEnHorizontalEnTLP(ciudades);
         }
+
+        public event EventHandler modificarCuadrasCosto;
+        public event EventHandler modificarCuadrasCostoMandado;
+        public event EventHandler modificarCuadrasEspera;
+        public event EventHandler modificarCiudadCosto;
+        public event EventHandler modificarCiudadEspera;
+        public event EventHandler agregarCiudad;
+        public event EventHandler modificarCiudad;
+        public event EventHandler eliminarCiudad;
+        public event EventHandler volver;
+
         // Singleton
         public static PlanillaCostoVista instancia;
         public static PlanillaCostoVista ObtenerInstancia()

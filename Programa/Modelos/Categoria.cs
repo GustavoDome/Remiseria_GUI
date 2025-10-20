@@ -5,6 +5,9 @@ using Programa.Modelos;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa una categoría de preguntas.
+    /// </summary>
     [Table("categoria", Schema = "public")]
     public class Categoria
     {
@@ -19,3 +22,4 @@ namespace Programa.Modelos
         public virtual ICollection<Pregunta> Preguntas { get; set; }
     }
 }
+

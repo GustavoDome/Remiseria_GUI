@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa una base operativa registrada por un operador y asociada a un móvil.
+    /// </summary>
     [Table("bases", Schema = "public")]
     public class Base
     {

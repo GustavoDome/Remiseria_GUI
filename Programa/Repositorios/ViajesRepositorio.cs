@@ -13,8 +13,16 @@ using static Programa.Conexion.RemiseriaDbContext;
 
 namespace Programa.Repositorios
 {
+    /// <summary>
+    /// Repositorio encargado de gestionar operaciones sobre la entidad Viaje y sus Vueltas asociadas.
+    /// Implementa la interfaz <see cref="IViajesRepositorio"/>.
+    /// </summary>
     public class ViajesRepositorio : IViajesRepositorio
     {
+        /// <summary>
+        /// Agrega un nuevo viaje junto con sus vueltas asociadas, validando móviles y estados.
+        /// </summary>
+        /// <param name="dto">Objeto <see cref="AgregarViajeDTO"/> con los datos del viaje y vueltas.</param>
         public void Agregar(AgregarViajeDTO dto)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -98,6 +106,12 @@ namespace Programa.Repositorios
                 }
             }
         }
+
+        /// <summary>
+        /// Obtiene los datos de un viaje por su identificador para edición.
+        /// </summary>
+        /// <param name="idViaje">Identificador del viaje.</param>
+        /// <returns>Objeto <see cref="ModificarViajeDTO"/> con los datos del viaje.</returns>
         public ModificarViajeDTO ObtenerPorId(int idViaje)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -118,6 +132,11 @@ namespace Programa.Repositorios
                 };
             }
         }
+
+        /// <summary>
+        /// Edita los datos de un viaje existente y reemplaza sus vueltas asociadas.
+        /// </summary>
+        /// <param name="dto">Objeto <see cref="ModificarViajeDTO"/> con los nuevos datos.</param>
         public void Editar(ModificarViajeDTO dto)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -176,6 +195,11 @@ namespace Programa.Repositorios
                 }
             }
         }
+
+        /// <summary>
+        /// Elimina un viaje y todas sus vueltas asociadas.
+        /// </summary>
+        /// <param name="idViaje">Identificador del viaje a eliminar.</param>
         public void Eliminar(int idViaje)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -206,6 +230,11 @@ namespace Programa.Repositorios
                 }
             }
         }
+
+        /// <summary>
+        /// Cambia el estado de un viaje siguiendo el ciclo: · → L → X → ·.
+        /// </summary>
+        /// <param name="idViaje">Identificador del viaje.</param>
         public void CambiarEstado(int idViaje)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -232,6 +261,11 @@ namespace Programa.Repositorios
                 contexto.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// Obtiene una lista de móviles activos en formato resumido.
+        /// </summary>
+        /// <returns>Lista de <see cref="MovilResumenDTO"/>.</returns>
         public IEnumerable<MovilResumenDTO> SeleccionarMovil()
         {
             using (var contexto = new RemiseriaDbContext())
@@ -246,6 +280,12 @@ namespace Programa.Repositorios
                     .ToList();
             }
         }
+
+        /// <summary>
+        /// Muestra todos los viajes registrados en una fecha específica, incluyendo columnas dinámicas por móvil.
+        /// </summary>
+        /// <param name="fecha">Fecha a consultar.</param>
+        /// <returns>Tabla con los datos de viajes y estado por móvil.</returns>
         public DataTable MostrarTodo(DateTime fecha)
         {
             DataTable dt = new DataTable();
@@ -310,6 +350,11 @@ namespace Programa.Repositorios
 
             return dt;
         }
+
+        /// <summary>
+        /// Agrega manualmente una vuelta si no existe previamente.
+        /// </summary>
+        /// <param name="dto">Objeto <see cref="VueltaDTO"/> con los datos de la vuelta.</param>
         public void AgregarVueltaManual(VueltaDTO dto)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -335,6 +380,12 @@ namespace Programa.Repositorios
                 contexto.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// Cambia el estado de una vuelta siguiendo el ciclo: X → S → R → / → X.
+        /// </summary>
+        /// <param name="idVuelta">Identificador de la vuelta.</param>
+        /// <returns>True si se modificó correctamente, false si no se encontró.</returns>
         public bool CambiarEstadoVuelta(int idVuelta)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -366,6 +417,11 @@ namespace Programa.Repositorios
                 return true;
             }
         }
+
+        /// <summary>
+        /// Elimina una vuelta específica por su identificador.
+        /// </summary>
+        /// <param name="idVuelta">Identificador de la vuelta.</param>
         public void EliminarVuelta(int idVuelta)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -379,6 +435,12 @@ namespace Programa.Repositorios
                 contexto.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// Elimina la última vuelta registrada para un móvil en una fecha determinada.
+        /// </summary>
+        /// <param name="idMovil">Identificador del móvil.</param>
+        /// <param name="fecha">Fecha de la vuelta.</param>
         public void EliminarUltimaVueltaDeMovil(int idMovil, DateTime fecha)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -395,6 +457,12 @@ namespace Programa.Repositorios
                 contexto.SaveChanges();
             }
         }
+
+        /// <summary>
+        /// Muestra todas las vueltas registradas en una fecha agrupadas por número de vuelta.
+        /// </summary>
+        /// <param name="fecha">Fecha a consultar.</param>
+        /// <returns>Tabla con vueltas por móvil y sus identificadores.</returns>
         public DataTable MostrarVuelta(DateTime fecha)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -438,6 +506,13 @@ namespace Programa.Repositorios
                 return dt;
             }
         }
+
+        /// <summary>
+        /// Obtiene el próximo número de vuelta disponible para un móvil en una fecha.
+        /// </summary>
+        /// <param name="idMovil">Identificador del móvil.</param>
+        /// <param name="fecha">Fecha de la vuelta.</param>
+        /// <returns>Número de vuelta sugerido.</returns>
         public int ObtenerProximoNumeroDeVuelta(int idMovil, DateTime fecha)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -480,6 +555,12 @@ namespace Programa.Repositorios
                 return ocupacionPorVuelta.First().Vuelta;
             }
         }
+
+        /// <summary>
+        /// Calcula la vuelta más justa para asignar a un nuevo móvil en una fecha.
+        /// </summary>
+        /// <param name="fecha">Fecha de la vuelta.</param>
+        /// <returns>Número de vuelta más equilibrado.</returns>
         public int CalcularVueltaJustaParaNuevoMovil(DateTime fecha)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -504,6 +585,14 @@ namespace Programa.Repositorios
                 return frecuencia;
             }
         }
+
+        /// <summary>
+        /// Verifica si un móvil ya tiene una vuelta registrada en una fecha y número específico.
+        /// </summary>
+        /// <param name="idMovil">Identificador del móvil.</param>
+        /// <param name="fecha">Fecha de la vuelta.</param>
+        /// <param name="numeroVuelta">Número de vuelta.</param>
+        /// <returns>True si existe, false si no.</returns>
         public bool MovilYaTieneVuelta(int idMovil, DateTime fecha, int numeroVuelta)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -514,6 +603,13 @@ namespace Programa.Repositorios
                     v.NumeroVuelta == numeroVuelta);
             }
         }
+
+        /// <summary>
+        /// Verifica si un móvil tiene alguna vuelta registrada en una fecha específica.
+        /// </summary>
+        /// <param name="idMovil">Identificador del móvil.</param>
+        /// <param name="fecha">Fecha a consultar.</param>
+        /// <returns>True si tiene vueltas, false si no.</returns>
         public bool MovilTieneVueltas(int idMovil, DateTime fecha)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -523,6 +619,12 @@ namespace Programa.Repositorios
                     DbFunctions.TruncateTime(v.VueltaFecha) == fecha.Date);
             }
         }
+
+        /// <summary>
+        /// Obtiene todos los móviles que tienen vueltas registradas en una fecha específica.
+        /// </summary>
+        /// <param name="fecha">Fecha a consultar.</param>
+        /// <returns>Lista de <see cref="MovilResumenDTO"/>.</returns>
         public List<MovilResumenDTO> ObtenerMovilesDelDia(DateTime fecha)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -539,6 +641,16 @@ namespace Programa.Repositorios
                     .ToList();
             }
         }
+
+
+        /// <summary>
+        /// Verifica si existe una vuelta con un estado específico para un móvil en una fecha y número determinado.
+        /// </summary>
+        /// <param name="idMovil">Identificador del móvil.</param>
+        /// <param name="fecha">Fecha de la vuelta.</param>
+        /// <param name="numeroVuelta">Número de vuelta.</param>
+        /// <param name="estado">Estado esperado.</param>
+        /// <returns>True si existe, false si no.</returns>
         public bool ExisteVueltaConEstado(int idMovil, DateTime fecha, int numeroVuelta, string estado)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -550,6 +662,13 @@ namespace Programa.Repositorios
                     v.EstadoVuelta == estado);
             }
         }
+
+        /// <summary>
+        /// Activa una vuelta pendiente (estado "·") cambiándola a estado "X".
+        /// </summary>
+        /// <param name="idMovil">Identificador del móvil.</param>
+        /// <param name="fecha">Fecha de la vuelta.</param>
+        /// <param name="numeroVuelta">Número de vuelta.</param>
         public void ActivarVueltaPendiente(int idMovil, DateTime fecha, int numeroVuelta)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -567,6 +686,14 @@ namespace Programa.Repositorios
                 }
             }
         }
+
+        /// <summary>
+        /// Obtiene el identificador de una vuelta específica por móvil, fecha y número de vuelta.
+        /// </summary>
+        /// <param name="idMovil">Identificador del móvil.</param>
+        /// <param name="fecha">Fecha de la vuelta.</param>
+        /// <param name="numeroVuelta">Número de vuelta.</param>
+        /// <returns>Identificador de la vuelta, o 0 si no existe.</returns>
         public int ObtenerIdVuelta(int idMovil, DateTime fecha, int numeroVuelta)
         {
             using (var contexto = new RemiseriaDbContext())

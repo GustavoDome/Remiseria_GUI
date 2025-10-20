@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Alta.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para agregar un nuevo móvil.
+    /// Permite ingresar datos del vehículo y del remisero, incluyendo si es chofer.
+    /// </summary>
     public interface IAgregarMovilesVista
     {
         int NumeroMovil { get; set; }

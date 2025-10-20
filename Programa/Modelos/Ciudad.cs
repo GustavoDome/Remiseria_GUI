@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa una ciudad y su importe asociado para viajes.
+    /// </summary>
     [Table("ciudad", Schema = "public")]
     public class Ciudad
     {

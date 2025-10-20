@@ -13,6 +13,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
+    /// <summary>
+    /// Vista de agregación para una nueva respuesta en el módulo de ayuda.
+    /// Permite ingresar texto y adjuntar contenido multimedia.
+    /// </summary>
     public partial class AgregarAyudaVistaRespuesta : Form, IAgregarAyudaVistaRespuesta
     {
         public AgregarAyudaVistaRespuesta()
@@ -21,27 +25,12 @@ namespace Programa.Vistas.Alta
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
-        public string respuestatexto
-        {
-            get => trbRespuesta.Text;
-            set => trbRespuesta.Text = value;
-        }
-
-        public byte[] multimedia
-        {
-            get => multimediaData;
-            set => multimediaData = value;
-        }
-
-        public event EventHandler agregar;
-        public event EventHandler volver;
-
-        private byte[] multimediaData;
 
         private void asociarEventos()
         {
@@ -62,6 +51,23 @@ namespace Programa.Vistas.Alta
                 }
             }
         }
+        public string respuestatexto
+        {
+            get => trbRespuesta.Text;
+            set => trbRespuesta.Text = value;
+        }
+
+        public byte[] multimedia
+        {
+            get => multimediaData;
+            set => multimediaData = value;
+        }
+
+        public event EventHandler agregar;
+        public event EventHandler volver;
+
+        private byte[] multimediaData;
+
         public static AgregarAyudaVistaRespuesta ObtenerInstancia()
         {
             var instancia = new AgregarAyudaVistaRespuesta();

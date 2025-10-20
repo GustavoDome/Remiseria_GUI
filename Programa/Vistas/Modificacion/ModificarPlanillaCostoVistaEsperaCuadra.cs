@@ -13,6 +13,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para el importe de espera por cuadra.
+    /// Permite editar el valor asociado y confirmar los cambios.
+    /// </summary>
     public partial class ModificarPlanillaCostoVistaEsperaCuadra : Form, IModificarPlanillaCostoVistaEsperaCuadra
     {
         public ModificarPlanillaCostoVistaEsperaCuadra()
@@ -21,11 +25,19 @@ namespace Programa.Vistas.Modificacion
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public int MontoEsperaCuadra
         {
             get => int.TryParse(txtCuadrasEspera.Text, out int m) ? m : 0;
@@ -35,11 +47,6 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler modificar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static ModificarPlanillaCostoVistaEsperaCuadra ObtenerInstancia()
         {
             var instancia = new ModificarPlanillaCostoVistaEsperaCuadra();

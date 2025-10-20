@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Modificacion.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para modificar el importe mínimo y por cuadra.
+    /// </summary>
     public interface IModificarPlanillaCostoVistaCuadraPrecio
     {
         int MontoMinimo { get; set; }

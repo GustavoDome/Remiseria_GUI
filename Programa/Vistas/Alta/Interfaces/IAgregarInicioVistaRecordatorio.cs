@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Alta.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para agregar un nuevo recordatorio.
+    /// Permite configurar fecha, hora, dirección y comentario.
+    /// </summary>
     public interface IAgregarInicioVistaRecordatorio
     {
         event EventHandler volver;

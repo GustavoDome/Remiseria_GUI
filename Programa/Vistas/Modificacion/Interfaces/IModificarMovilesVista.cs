@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Modificacion.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para modificar un móvil registrado.
+    /// Permite editar datos del vehículo y del remisero.
+    /// </summary>
     public interface IModificarMovilesVista
     {
         int NumeroMovil { get; set; }

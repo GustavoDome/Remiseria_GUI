@@ -14,6 +14,11 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas
 {
+    /// <summary>
+    /// Vista principal del módulo de vueltas.
+    /// Permite gestionar vueltas por móvil y fecha, con navegación, asignación y edición contextual desde la grilla.
+    /// Adapta la interfaz según el rol del operador.
+    /// </summary>
     public partial class VueltaVista : Form, IVueltaVista
     {
         public VueltaVista()
@@ -34,11 +39,13 @@ namespace Programa.Vistas
             if (dgvVuelta.Columns.Contains("IdVuelta"))
                 dgvVuelta.Columns["IdVuelta"].Visible = false;
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
         public void asociarPresentador() 
         {
             btnAgregarVuelta.Click += delegate
@@ -86,30 +93,21 @@ namespace Programa.Vistas
             };
         }
 
-        public event EventHandler agregarVuelta;
-        public event EventHandler modificarVuelta;
-        public event EventHandler eliminarVuelta;
-        public event EventHandler agregarMovil;
-        public event EventHandler eliminarMovil;
-        public event EventHandler retroceder;
-        public event EventHandler adelantar;
-        public event EventHandler ingresarViaje;
-        public event EventHandler volver;
-
         public void SetViajesBindingSource(BindingSource viajes) 
         {
             dgvVuelta.DataSource = viajes;
         }
+
         public void SetFecha(DateTime fecha)
         {
             dateTimePicker1.Value = fecha;
         }
 
-        private List<MovilResumenDTO> movilesResumen;
         public void ConfigurarMoviles(List<MovilResumenDTO> lista)
         {
             movilesResumen = lista;
         }
+
         public int ObtenerIdMovilSeleccionado()
         {
             if (dgvVuelta.CurrentCell == null || movilesResumen == null)
@@ -126,6 +124,7 @@ namespace Programa.Vistas
 
             return 0;
         }
+
         public int ObtenerNumeroMovilSeleccionado()
         {
             if (dgvVuelta.CurrentCell == null)
@@ -153,6 +152,7 @@ namespace Programa.Vistas
 
             return 0;
         }
+
         public int ObtenerIdVueltaSeleccionada()
         {
             if (dgvVuelta.CurrentCell == null)
@@ -181,10 +181,24 @@ namespace Programa.Vistas
 
             return 0;
         }
+
         public void MostrarMensaje(string mensaje)
         {
             MessageBox.Show(mensaje);
         }
+
+        private List<MovilResumenDTO> movilesResumen;
+
+        public event EventHandler agregarVuelta;
+        public event EventHandler modificarVuelta;
+        public event EventHandler eliminarVuelta;
+        public event EventHandler agregarMovil;
+        public event EventHandler eliminarMovil;
+        public event EventHandler retroceder;
+        public event EventHandler adelantar;
+        public event EventHandler ingresarViaje;
+        public event EventHandler volver;
+
         // Variable que llamaran los otros forms para el comportamiento Singleton
         public static VueltaVista instancia;
 

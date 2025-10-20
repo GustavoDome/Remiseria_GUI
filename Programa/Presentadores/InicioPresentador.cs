@@ -17,6 +17,10 @@ using static Programa.Presentadores.CUPresentador.CUInicioPresentador;
 
 namespace Programa.Presentadores
 {
+    /// <summary>
+    /// Presentador principal del sistema. Gestiona la vista de inicio, los recordatorios del operador
+    /// y la navegación hacia los distintos módulos del sistema.
+    /// </summary>
     public class InicioPresentador
     {
         private IRecordatorioRepositorio repositorio;
@@ -26,8 +30,15 @@ namespace Programa.Presentadores
         private string rol;
         private int id;
 
+        /// <summary>
+        /// Inicializa el presentador con la vista de inicio, el repositorio de recordatorios,
+        /// el rol del operador y su identificador.
+        /// </summary>
+        /// <param name="vista">Vista principal que implementa <see cref="IInicioVista"/>.</param>
+        /// <param name="repositorio">Repositorio de recordatorios.</param>
+        /// <param name="rol">Rol del operador (por ejemplo: "Gerente").</param>
+        /// <param name="id">Identificador del operador actual.</param>
 
-        //constructor
         public InicioPresentador(IInicioVista vista, IRecordatorioRepositorio repositorio, string rol, int id)
         {
             this.filtrador = new BindingSource();
@@ -60,6 +71,9 @@ namespace Programa.Presentadores
 
         }
 
+        /// <summary>
+        /// Carga todos los recordatorios del operador y los vincula al BindingSource de la vista.
+        /// </summary>
         public void cargarRecordatorio()
         {
             var lista = this.repositorio.ObtenerTodos().ToList();
@@ -72,6 +86,10 @@ namespace Programa.Presentadores
             }
         }
 
+        /// <summary>
+        /// Obtiene el identificador del recordatorio actualmente seleccionado en la grilla.
+        /// </summary>
+        /// <returns>Id del recordatorio o null si no hay selección.</returns>
         public int? ObtenerIdRecordatorioSeleccionado()
         {
             if (filtrador.Current is RecordatorioDTO seleccionado)
@@ -80,12 +98,20 @@ namespace Programa.Presentadores
             }
             return null;
         }
+
+        /// <summary>
+        /// Abre el formulario para agregar un nuevo recordatorio.
+        /// </summary>
         private void agregarRecordatorio(object sender, EventArgs e)
         {
             IAgregarInicioVistaRecordatorio agregarRecordatorio = AgregarInicioVistaRecordatorio.ObtenerInstancia();
             new CUAgregarRecordatorio(this.repositorio, agregarRecordatorio, this.id, this);
             ((Form)agregarRecordatorio).ShowDialog();
         }
+
+        /// <summary>
+        /// Abre el formulario para modificar el recordatorio seleccionado.
+        /// </summary>
         private void modificarRecordatorio(object sender, EventArgs e)
         {
             int? idrecordatorio = ObtenerIdRecordatorioSeleccionado();
@@ -100,6 +126,10 @@ namespace Programa.Presentadores
                 MessageBox.Show("Porfavor seleccione el recordatorio a modificar");
             }
         }
+
+        /// <summary>
+        /// Elimina el recordatorio seleccionado previa confirmación del usuario.
+        /// </summary>
         private void eliminarRecordatorio(object sender, EventArgs e)
         {
             int? idrecordatorio = ObtenerIdRecordatorioSeleccionado();
@@ -110,10 +140,18 @@ namespace Programa.Presentadores
                 cargarRecordatorio();
             }
         }
+
+        /// <summary>
+        /// Cierra la aplicación.
+        /// </summary>
         private void volver_menu(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
+        /// <summary>
+        /// Navega al módulo de ayuda, inicializando su presentador y cerrando vistas en conflicto.
+        /// </summary>
         private void ingresarAyuda(object sender, EventArgs e)
         {
             GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Ayuda");
@@ -126,6 +164,10 @@ namespace Programa.Presentadores
 
             new AyudaPresentador(ayuda, categoria, pregunta, respuesta, this.rol, this.id);
         }
+
+        /// <summary>
+        /// Navega al módulo de configuración del operador.
+        /// </summary>
         private void ingresarConfiguracion(object sender, EventArgs e)
         {
             GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Configuraciones");
@@ -133,6 +175,10 @@ namespace Programa.Presentadores
             IOperadorRepositorio usuario = new OperadorRepositorio();
             new ConfiguracionesPresentador(configuracion, usuario, this.rol, this.id);
         }
+
+        /// <summary>
+        /// Navega al módulo de gestión de operadores.
+        /// </summary>
         private void ingresarOperadores(object sender, EventArgs e)
         {
             GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Operadores");
@@ -140,6 +186,10 @@ namespace Programa.Presentadores
             IOperadorRepositorio usuario = new OperadorRepositorio();
             new OperadoresPresentador(operadores, usuario, this.id);
         }
+
+        /// <summary>
+        /// Navega al módulo de gestión de móviles.
+        /// </summary>
         private void ingresarMoviles(object sender, EventArgs e)
         {
             GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Moviles");
@@ -147,6 +197,10 @@ namespace Programa.Presentadores
             IMovilRepositorio movilrepositorio = new MovilRepositorio();
             new MovilesPresentador(movilVista, movilrepositorio, this.id);
         }
+
+        /// <summary>
+        /// Navega al módulo de gestión de viajes.
+        /// </summary>
         private void ingresarViajes(object sender, EventArgs e)
         {
             GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Viajes");
@@ -154,6 +208,10 @@ namespace Programa.Presentadores
             IViajesRepositorio viajes = new ViajesRepositorio();
             new ViajesPresentador(viajesvista, viajes, this.rol, this.id);
         }
+
+        /// <summary>
+        /// Navega al módulo de gestión de vueltas.
+        /// </summary>
         private void ingresarVueltas(object sender, EventArgs e)
         {
             GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Vueltas");
@@ -161,6 +219,10 @@ namespace Programa.Presentadores
             IViajesRepositorio viajes = new ViajesRepositorio();
             new VueltaPresentador(vuelta, viajes, this.rol, this.id);
         }
+
+        /// <summary>
+        /// Navega al módulo de gestión de bases.
+        /// </summary>
         private void ingresarBases(object sender, EventArgs e)
         {
             GestorPantallasGlobal.CerrarConflictosAntesDeAbrir("Bases");

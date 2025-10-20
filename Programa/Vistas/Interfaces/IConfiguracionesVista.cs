@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista de configuración.
+    /// Permite ajustar fuente, tamaño, tema y alarma, con eventos de guardado y navegación.
+    /// </summary>
     public interface IConfiguracionesVista
     {
         string tipoFuente { get; set; }

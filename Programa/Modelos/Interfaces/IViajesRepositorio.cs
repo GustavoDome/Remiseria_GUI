@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Programa.Modelos.Interfaces
 {
+    /// <summary>
+    /// Interfaz que define las operaciones de acceso a datos para la entidad Viaje y sus Vueltas asociadas.
+    /// </summary>
     public interface IViajesRepositorio
     {
         //Funcion general para el id de los moviles

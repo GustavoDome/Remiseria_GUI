@@ -14,6 +14,11 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas
 {
+    /// <summary>
+    /// Vista principal del módulo de viajes.
+    /// Permite gestionar viajes, cambiar estados, navegar entre fechas y asignar vueltas.
+    /// Adapta la interfaz según el rol del operador.
+    /// </summary>
     public partial class ViajesVista : Form, IViajesVista
     {
         public ViajesVista()
@@ -33,11 +38,13 @@ namespace Programa.Vistas
                 dtpFecha.Enabled = false;
             }
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
         public void asociarPresentador() 
         {
             btnAgregar.Click += delegate 
@@ -78,21 +85,11 @@ namespace Programa.Vistas
             };
         }
 
-
-        public event EventHandler agregarViaje;
-        public event EventHandler modificarViaje;
-        public event EventHandler cambiarEstadoViaje;
-        public event EventHandler eliminarViaje;
-        public event EventHandler retroceder;
-        public event EventHandler adelantar;
-        public event EventHandler ingresarVuelta;
-        public event EventHandler volver;
-        public event EventHandler recargar;
-
         public void SetViajesBindingSource(BindingSource viajes) 
         {
             dgvViajes.DataSource = viajes;
         }
+
         public void SetFecha(DateTime fecha)
         {
             dtpFecha.Value = fecha;
@@ -105,6 +102,7 @@ namespace Programa.Vistas
                 dgvViajes.Columns["ID Viaje"].Visible = false;
             }
         }
+
         public int ObtenerIdViajeSeleccionado()
         {
             if (dgvViajes.CurrentRow == null)
@@ -119,6 +117,7 @@ namespace Programa.Vistas
 
             return 0;
         }
+
         public void congelarVista()
         {
             if (dgvViajes.Columns.Contains("ID Viaje"))
@@ -146,6 +145,16 @@ namespace Programa.Vistas
         {
             recargar.Invoke(this, EventArgs.Empty);
         }
+
+        public event EventHandler agregarViaje;
+        public event EventHandler modificarViaje;
+        public event EventHandler cambiarEstadoViaje;
+        public event EventHandler eliminarViaje;
+        public event EventHandler retroceder;
+        public event EventHandler adelantar;
+        public event EventHandler ingresarVuelta;
+        public event EventHandler volver;
+        public event EventHandler recargar;
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
         public static ViajesVista instancia;

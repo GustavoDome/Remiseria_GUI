@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Alta.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para agregar un nuevo viaje.
+    /// Permite ingresar dirección, comentario contextual y móviles asignados.
+    /// </summary>
     public interface IAgregarViajesVista
     {
         string txtDirecciones { get; set; }

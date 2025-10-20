@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa una respuesta a una pregunta, con posible contenido multimedia.
+    /// </summary>
     [Table("respuesta", Schema = "public")]
     public class Respuesta
     {
@@ -23,3 +26,4 @@ namespace Programa.Modelos
         public virtual Pregunta Pregunta { get; set; }
     }
 }
+

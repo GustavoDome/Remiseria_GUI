@@ -8,8 +8,17 @@ using System.Windows.Forms;
 
 namespace Programa.Commons
 {
+    /// <summary>
+    /// Clase encargada de gestionar el cierre de vistas en conflicto antes de abrir una nueva pantalla.
+    /// Permite mantener la coherencia visual y evitar superposición de formularios.
+    /// </summary>
     public static class GestorPantallasGlobal
     {
+        /// <summary>
+        /// Cierra las vistas que podrían generar conflicto visual antes de abrir la vista destino.
+        /// La lógica depende del tipo de pantalla que se desea abrir.
+        /// </summary>
+        /// <param name="destino">Nombre de la vista que se desea abrir.</param>
         public static void CerrarConflictosAntesDeAbrir(string destino)
         {
             // Configuración bloquea todo
@@ -65,6 +74,11 @@ namespace Programa.Commons
                 CerrarSiExiste(ConfiguracionesVista.instancia);
             }
         }
+
+        /// <summary>
+        /// Cierra una vista si está activa y no ha sido eliminada.
+        /// </summary>
+        /// <param name="vista">Instancia del formulario a cerrar.</param>
         private static void CerrarSiExiste(Form vista)
         {
             if (vista != null && !vista.IsDisposed)

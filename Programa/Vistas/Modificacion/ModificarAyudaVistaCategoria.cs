@@ -13,6 +13,11 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para una categoría en el módulo de ayuda.
+    /// Permite editar el nombre y confirmar los cambios.
+    /// </summary>
+
     public partial class ModificarAyudaVistaCategoria : Form, IModificarAyudaVistaCategoria
     {
         public ModificarAyudaVistaCategoria()
@@ -21,11 +26,19 @@ namespace Programa.Vistas.Modificacion
             this.Load += new System.EventHandler(this.ModificarAyudaVista_Load);
             asociarEventos();
         }
+
         private void ModificarAyudaVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnAgregar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         // Propiedad para acceder al texto del TextBox
         public string categorianombre
         {
@@ -37,11 +50,6 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler modificar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnAgregar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static ModificarAyudaVistaCategoria ObtenerInstancia()
         {
             var instancia = new ModificarAyudaVistaCategoria();

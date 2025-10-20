@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Programa.Modelos.Interfaces
 {
+    /// <summary>
+    /// Interfaz que define las operaciones de acceso a datos para la entidad Movil.
+    /// </summary>
     public interface IMovilRepositorio
     {
         void Agregar(Movil movil);

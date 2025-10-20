@@ -10,12 +10,24 @@ using System.Windows.Forms;
 
 namespace Programa
 {
+    /// <summary>
+    /// Clase encargada de inicializar la base de datos PostgreSQL para el sistema Remisería.
+    /// Crea la base si no existe, define el esquema y las tablas, e inserta datos mínimos.
+    /// </summary>
     public static class DbBootstrapper
     {
+        /// <summary>
+        /// Inicializa la base de datos: crea la base si no existe, define el esquema y las tablas,
+        /// y agrega datos iniciales como el operador "admin" y los importes por cuadras.
+        /// </summary>
+        /// <returns>
+        /// True si la base de datos fue creada en esta ejecución; false si ya existía.
+        /// </returns>
         public static bool InitializeDatabase()
         {
             try
             {
+                // Obtener cadena de conexión principal
                 string connectionString = ConfigurationManager.ConnectionStrings["RemiseriaConnection"].ConnectionString;
                 var builder = new NpgsqlConnectionStringBuilder(connectionString);
 
@@ -25,6 +37,7 @@ namespace Programa
 
                 bool dbCreated = false;
 
+                // Verificar si la base de datos existe, y crearla si no
                 using (var adminConnection = new NpgsqlConnection(adminConnectionString))
                 {
                     adminConnection.Open();
@@ -43,7 +56,7 @@ namespace Programa
                     }
                 }
 
-                // 2) Conectarse a la BD recién creada o existente
+                // Conectarse a la BD recién creada o existente
                 using (var context = new RemiseriaDbContext(connectionString))
                 {
                     // Crear esquema si no existe (solo por seguridad)
@@ -165,7 +178,7 @@ namespace Programa
                     CREATE INDEX IF NOT EXISTS idx_vuelta_viaje_movil ON public.vuelta(id_viaje, id_movil);
                     ");
 
-                    // 3) Insertar datos iniciales mínimos
+                    // Insertar datos iniciales mínimos
                     if (!context.Operadores.Any(o => o.Nombre == "admin"))
                     {
                         var admin = new Operador

@@ -14,19 +14,35 @@ using System.Windows.Forms;
 
 namespace Programa.Presentadores
 {
+    /// <summary>
+    /// Presentador encargado de gestionar el proceso de autenticación del operador.
+    /// Coordina entre la vista de login y el repositorio de operadores.
+    /// </summary>
     public class LoginPresentador
     {
         private readonly IOperadorRepositorio repositorio;
         private readonly ILogin vista;
 
+        /// <summary>
+        /// Inicializa el presentador con la vista de login y el repositorio de operadores.
+        /// </summary>
+        /// <param name="vista">Vista que implementa <see cref="ILogin"/>.</param>
+        /// <param name="repositorio">Repositorio que implementa <see cref="IOperadorRepositorio"/>.</param>
         public LoginPresentador(ILogin vista, IOperadorRepositorio repositorio)
         {
             this.vista = vista;
             this.repositorio = repositorio;
 
+            // Asocia el evento de búsqueda de usuario al método correspondiente
             this.vista.buscarUsuario += buscar_usuario;
         }
 
+        /// <summary>
+        /// Lógica de autenticación del operador. Verifica credenciales, aplica configuración visual
+        /// y lanza la vista principal del sistema si el login es exitoso.
+        /// </summary>
+        /// <param name="sender">Origen del evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         private void buscar_usuario(object sender, EventArgs e)
         {
             try

@@ -13,6 +13,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para móviles registrados.
+    /// Permite editar datos del vehículo y del remisero, incluyendo si es chofer.
+    /// </summary>
     public partial class ModificarMovilesVista : Form, IModificarMovilesVista
     {
         public ModificarMovilesVista()
@@ -21,11 +25,19 @@ namespace Programa.Vistas.Modificacion
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnAgregar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public int NumeroMovil
         {
             get => int.TryParse(txtNumeroMovil.Text, out int n) ? n : 0;
@@ -79,11 +91,6 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler modificar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnAgregar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static ModificarMovilesVista ObtenerInstancia()
         {
             var instancia = new ModificarMovilesVista();

@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas
 {
+    /// <summary>
+    /// Vista principal del módulo de operadores.
+    /// Permite visualizar, agregar, modificar y eliminar operadores, con grilla interactiva y configuración personalizada.
+    /// </summary>
     public partial class OperadoresVista : Form, IOperadoresVista
     {
         public OperadoresVista()
@@ -20,11 +24,13 @@ namespace Programa.Vistas
             this.Load += new System.EventHandler(this.ModificarVista_Load);
             asociacionPresentador();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
         public void asociacionPresentador() 
         {
             btnAgregar.Click += delegate 
@@ -42,21 +48,16 @@ namespace Programa.Vistas
             };
         }
 
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        public static OperadoresVista instancia;
-
-        public event EventHandler agregarOperador;
-        public event EventHandler modificiarOperador;
-        public event EventHandler eliminarOperador;
-        public event EventHandler volver;
         public void SetOperadoresBindingSource(BindingSource operadores) 
         {
             dgvOperadores.DataSource = operadores;
         }
+
         public int ObtenerIdOperadorSeleccionado()
         {
             return Convert.ToInt32(dgvOperadores.CurrentRow.Cells[0].Value);
         }
+
         public void configurarGrilla()
         {
             dgvOperadores.Columns["RolUsuario"].HeaderText = "Rol";
@@ -83,6 +84,15 @@ namespace Programa.Vistas
                 col.MinimumWidth = 200;
             }
         }
+
+        public event EventHandler agregarOperador;
+        public event EventHandler modificiarOperador;
+        public event EventHandler eliminarOperador;
+        public event EventHandler volver;
+
+        // Variable que llamaran los otros forms para el comportamiento Singleton
+        public static OperadoresVista instancia;
+
         // Metodo para el uso del Singleton
         public static OperadoresVista ObtenerInstancia()
         {

@@ -16,6 +16,10 @@ namespace Programa.Presentadores.CUPresentador
 {
     public class CUInicioPresentador
     {
+        /// <summary>
+        /// Subpresentador encargado de agregar un nuevo recordatorio.
+        /// Valida los campos y actualiza la vista principal de inicio.
+        /// </summary>
         public class CUAgregarRecordatorio
         {
             private IRecordatorioRepositorio recordatorio;
@@ -63,6 +67,10 @@ namespace Programa.Presentadores.CUPresentador
             }
         }
 
+        /// <summary>
+        /// Subpresentador encargado de modificar un recordatorio existente.
+        /// Precarga los datos, valida la edición y actualiza la vista principal.
+        /// </summary>
         public class CUModificarRecordatorio
         {
             private IModificarInicioVistaRecordatorio modificarRecordatorio;

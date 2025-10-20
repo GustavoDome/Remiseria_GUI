@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa un dueño de móvil, incluyendo si también es chofer.
+    /// </summary>
     [Table("dueno_auto", Schema = "public")]
     public class DuenoAuto
     {
@@ -34,3 +37,4 @@ namespace Programa.Modelos
         public virtual ICollection<Movil> Moviles { get; set; }
     }
 }
+

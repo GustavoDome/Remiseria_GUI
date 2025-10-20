@@ -14,20 +14,13 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas
 {
+    /// <summary>
+    /// Vista principal del módulo de ayuda.
+    /// Permite gestionar categorías, preguntas y respuestas, incluyendo contenido multimedia.
+    /// Adapta la interfaz según el rol del operador.
+    /// </summary>
     public partial class AyudaVista : Form, IAyudaVista
     {
-        public event EventHandler ingresarPlanillasCosto;
-        public event EventHandler agregarPregunta;
-        public event EventHandler modificarPregunta;
-        public event EventHandler eliminarPregunta;
-        public event EventHandler agregarRespuesta;
-        public event EventHandler agregarCategoria;
-        public event EventHandler modificarCategoria;
-        public event EventHandler eliminarCategoria;
-        public event EventHandler volver;
-        public event Action<int> respuestaModificarSeleccionada;
-        public event Action<int> respuestaEliminarSeleccionada;
-        private string rol;
         public AyudaVista(string rol)
         {
             InitializeComponent();
@@ -63,7 +56,6 @@ namespace Programa.Vistas
         {
             respuestaEliminarSeleccionada?.Invoke(idRespuesta);
         }
-
 
         public void ocultarBotones()
         {
@@ -213,10 +205,6 @@ namespace Programa.Vistas
             }
         }
 
-        // Eventos internos para comunicar selección al presentador
-        public event Action<int> categoriaSeleccionada;
-        public event Action<int> preguntaSeleccionada;
-
         private void OnCategoriaSeleccionada(int idCategoria)
         {
             categoriaSeleccionada?.Invoke(idCategoria);
@@ -226,6 +214,22 @@ namespace Programa.Vistas
         {
             preguntaSeleccionada?.Invoke(idPregunta);
         }
+
+        // Eventos internos para comunicar selección al presentador
+        public event Action<int> categoriaSeleccionada;
+        public event Action<int> preguntaSeleccionada;
+        public event EventHandler ingresarPlanillasCosto;
+        public event EventHandler agregarPregunta;
+        public event EventHandler modificarPregunta;
+        public event EventHandler eliminarPregunta;
+        public event EventHandler agregarRespuesta;
+        public event EventHandler agregarCategoria;
+        public event EventHandler modificarCategoria;
+        public event EventHandler eliminarCategoria;
+        public event EventHandler volver;
+        public event Action<int> respuestaModificarSeleccionada;
+        public event Action<int> respuestaEliminarSeleccionada;
+        private string rol;
 
         // Singleton
         public static AyudaVista instancia;

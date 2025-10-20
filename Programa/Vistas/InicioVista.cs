@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas
 {
+    /// <summary>
+    /// Vista principal del sistema.
+    /// Permite navegar entre módulos, gestionar recordatorios y adaptar la interfaz según el rol del operador.
+    /// </summary>
     public partial class InicioVista : Form, IInicioVista
     {
         public InicioVista()
@@ -31,23 +35,20 @@ namespace Programa.Vistas
                 btnRecEliminar.Hide();
             }
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
-        public void RefrescarEstilos()
-        {
-            this.AutoSize = false;
-            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
-        }
+
         public void asociacionPresentador()
         {
-            btnRecAgregar.Click += delegate 
+            btnRecAgregar.Click += delegate
             {
                 agregarRecordatorio?.Invoke(this, EventArgs.Empty);
             };
-            btnRecModificar.Click += delegate 
+            btnRecModificar.Click += delegate
             {
                 modificarRecordatorio?.Invoke(this, EventArgs.Empty);
             };
@@ -55,11 +56,11 @@ namespace Programa.Vistas
             {
                 eliminarRecordatorio?.Invoke(this, EventArgs.Empty);
             };
-            btnVolver.Click += delegate 
+            btnVolver.Click += delegate
             {
                 volver?.Invoke(this, EventArgs.Empty);
             };
-            btnAyuda.Click += delegate 
+            btnAyuda.Click += delegate
             {
                 ingresarAyuda?.Invoke(this, EventArgs.Empty);
             };
@@ -67,7 +68,7 @@ namespace Programa.Vistas
             {
                 ingresarConfiguracion?.Invoke(this, EventArgs.Empty);
             };
-            btnOperadores.Click += delegate 
+            btnOperadores.Click += delegate
             {
                 ingresarOperadores?.Invoke(this, EventArgs.Empty);
             };
@@ -88,6 +89,13 @@ namespace Programa.Vistas
                 ingresarBases?.Invoke(this, EventArgs.Empty);
             };
         }
+
+        public void RefrescarEstilos()
+        {
+            this.AutoSize = false;
+            GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+        }
+
         public void ConfigurarGrilla()
         {
             dgvRecordatorio.Columns["FechaDia"].HeaderText = "Fecha Día";
@@ -125,6 +133,10 @@ namespace Programa.Vistas
             }
         }
 
+        public void SetRecordatoriosBindingSource(BindingSource RecordatorioLista)
+        {
+            dgvRecordatorio.DataSource = RecordatorioLista;
+        }
 
         // Variable que llamaran los otros forms para el comportamiento Singleton
         private static InicioVista instancia;
@@ -161,16 +173,6 @@ namespace Programa.Vistas
                 instancia.Activate();
             }
             return instancia;
-        }
-
-        public void SetRecordatoriosBindingSource(BindingSource RecordatorioLista)
-        {
-            dgvRecordatorio.DataSource = RecordatorioLista;
-        }
-
-        public void Mostrar()
-        {
-            throw new NotImplementedException();
         }
     }
 }

@@ -6,6 +6,10 @@ using System.Windows.Forms;
 
 namespace Programa.Estilos
 {
+    /// <summary>
+    /// Clase encargada de aplicar estilos visuales globales a los formularios y controles de la aplicación.
+    /// Utiliza la configuración del operador para definir fuente, colores y tema visual.
+    /// </summary>
     public class GestorEstilosGlobal
     {
         private static GestorEstilosGlobal instancia;
@@ -13,6 +17,9 @@ namespace Programa.Estilos
 
         private GestorEstilosGlobal() { }
 
+        /// <summary>
+        /// Instancia única del gestor de estilos (patrón Singleton).
+        /// </summary>
         public static GestorEstilosGlobal Instance
         {
             get
@@ -25,11 +32,19 @@ namespace Programa.Estilos
             }
         }
 
+        /// <summary>
+        /// Aplica la configuración visual actual (fuente, tamaño, tema, colores).
+        /// </summary>
+        /// <param name="config">Objeto <see cref="ConfiguracionDTO"/> con los parámetros visuales.</param>
         public void AplicarConfiguracion(ConfiguracionDTO config)
         {
             configuracionActual = config;
         }
 
+        /// <summary>
+        /// Aplica los estilos visuales al formulario especificado, incluyendo fuente y colores.
+        /// </summary>
+        /// <param name="form">Formulario al que se aplicarán los estilos.</param>
         public void AplicarEstilosAFormulario(Form form)
         {
             if (configuracionActual == null) return;
@@ -60,11 +75,21 @@ namespace Programa.Estilos
                 AplicarEstilosRecursivos(form, fuente, fondo, fuenteColor);
             }
         }
+
+        /// <summary>
+        /// Obtiene el nombre del tema visual actual en minúsculas.
+        /// </summary>
+        /// <returns>Cadena con el nombre del tema (por ejemplo, "oscuro", "claro").</returns>
         public string ObtenerTemaActual()
         {
             return configuracionActual?.TemaColor.ToLower() ?? "claro";
         }
 
+        // Métodos privados para aplicar estilos recursivos y obtener colores según el tema
+        // - AplicarEstilosRecursivos(Control, Font, Color, Color)
+        // - ObtenerColorTextoLabel(string)
+        // - ObtenerColorDataGrid(string)
+        // - ObtenerColor(string)
         private void AplicarEstilosRecursivos(Control control, Font fuente, Color fondo, Color fuenteColor)
         {
             control.Font = fuente;
@@ -188,8 +213,14 @@ namespace Programa.Estilos
             }
         }
     }
+
+    /// <summary>
+    /// Clase auxiliar para manipular el scroll vertical de controles en Windows Forms.
+    /// Utiliza funciones nativas de la API de Windows.
+    /// </summary>
     public static class ScrollHelper
     {
+        // Importación de funciones nativas de user32.dll
         private const int SB_VERT = 1;
         private const int SB_BOTH = 3;
         private const int GWL_STYLE = -16;
@@ -201,6 +232,10 @@ namespace Programa.Estilos
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
 
+        /// <summary>
+        /// Oculta el scroll vertical de un control específico utilizando llamadas a la API de Windows.
+        /// </summary>
+        /// <param name="control">Control al que se le ocultará el scroll vertical.</param>
         public static void OcultarScrollVertical(Control control)
         {
             int style = GetWindowLong(control.Handle, GWL_STYLE);

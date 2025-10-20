@@ -15,6 +15,10 @@ namespace Programa.Presentadores.CUPresentador
 {
     public class CUMovilesPresentador
     {
+        /// <summary>
+        /// Subpresentador encargado de agregar un nuevo móvil con validación de campos y dueño asociado.
+        /// Coordina entre la vista de ingreso y el repositorio, actualizando la grilla principal.
+        /// </summary>
         public class CUAgregarMovilesPresentador
         {
             private readonly IAgregarMovilesVista vista;
@@ -116,6 +120,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)vista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar los datos de un móvil existente.
+        /// Valida duplicados, actualiza el dueño y sincroniza la vista principal.
+        /// </summary>
         public class CUModificarMovilPresentador
         {
             private readonly IModificarMovilesVista vista;

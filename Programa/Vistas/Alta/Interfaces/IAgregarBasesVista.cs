@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Alta.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para agregar una nueva base.
+    /// Permite seleccionar la fecha y confirmar la creación.
+    /// </summary>
     public interface IAgregarBasesVista
     {
         DateTime fecha { get; set; }

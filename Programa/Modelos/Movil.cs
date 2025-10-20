@@ -5,6 +5,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa un móvil registrado en el sistema.
+    /// </summary>
     [Table("movil", Schema = "public")]
     public class Movil
     {

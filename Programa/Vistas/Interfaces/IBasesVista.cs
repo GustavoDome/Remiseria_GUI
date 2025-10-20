@@ -8,6 +8,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista de bases.
+    /// Permite visualizar bases y móviles, gestionar acciones sobre ellas y obtener la selección actual.
+    /// </summary>
     public interface IBasesVista
     {
         // Eventos

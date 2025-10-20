@@ -3,6 +3,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa los importes configurados por cuadras, mínimo, mandado y espera.
+    /// </summary>
     [Table("importescuadras", Schema = "public")]
     public class ImporteCuadras
     {

@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas
 {
+    /// <summary>
+    /// Vista principal del módulo de móviles.
+    /// Permite visualizar, agregar, modificar y eliminar móviles, con grilla interactiva y selección contextual.
+    /// </summary>
     public partial class MovilesVista : Form, IMovilesVista
     {
         public MovilesVista()
@@ -20,11 +24,13 @@ namespace Programa.Vistas
             this.Load += new System.EventHandler(this.ModificarVista_Load);
             asociacionPresentador();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
         public void asociacionPresentador()
         {
             btnAgregar.Click += delegate 
@@ -74,18 +80,11 @@ namespace Programa.Vistas
             };
         }
 
-        // Variable que llamaran los otros forms para el comportamiento Singleton
-        public static MovilesVista instancia;
-
-        public event EventHandler agregarMovil;
-        public event EventHandler modificarMovil;
-        public event EventHandler eliminarMovil;
-        public event EventHandler OnMovilSeleccionado;
-        public event EventHandler volver;
         public void SetMovilesBindingSource(BindingSource moviles) 
         {
             dgvMoviles.DataSource = moviles;
         }
+
         public void configurarGrilla()
         {
             dgvMoviles.Columns["NumeroMovil"].HeaderText = "Movil";
@@ -113,6 +112,7 @@ namespace Programa.Vistas
                 col.MinimumWidth = 200;
             }
         }
+
         public int ObtenerIdMovilSeleccionado()
         {
             if (dgvMoviles.SelectedRows.Count == 0 || !dgvMoviles.Columns.Contains("IdMovil"))
@@ -124,6 +124,16 @@ namespace Programa.Vistas
 
             return int.TryParse(celda.Value.ToString(), out int idMovil) ? idMovil : 0;
         }
+
+        public event EventHandler agregarMovil;
+        public event EventHandler modificarMovil;
+        public event EventHandler eliminarMovil;
+        public event EventHandler OnMovilSeleccionado;
+        public event EventHandler volver;
+
+        // Variable que llamaran los otros forms para el comportamiento Singleton
+        public static MovilesVista instancia;
+
         // Metodo para el uso del Singleton
         public static MovilesVista ObtenerInstancia()
         {

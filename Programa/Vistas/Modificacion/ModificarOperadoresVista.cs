@@ -6,6 +6,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para operadores registrados.
+    /// Permite editar datos personales, contraseña y rol asignado.
+    /// </summary>
     public partial class ModificarOperadorVista : Form, IModificarOperadorVista
     {
         public ModificarOperadorVista()
@@ -14,11 +18,19 @@ namespace Programa.Vistas.Modificacion
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public string Nombre
         {
             get => txtNombre.Text;
@@ -48,11 +60,6 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler modificar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static ModificarOperadorVista ObtenerInstancia()
         {
             var instancia = new ModificarOperadorVista();

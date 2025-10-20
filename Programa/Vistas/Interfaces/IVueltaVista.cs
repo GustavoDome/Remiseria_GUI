@@ -8,6 +8,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista de vueltas.
+    /// Permite gestionar vueltas por móvil y fecha, con navegación, selección y mensajes contextuales.
+    /// </summary>
     public interface IVueltaVista
     {
         event EventHandler agregarVuelta;

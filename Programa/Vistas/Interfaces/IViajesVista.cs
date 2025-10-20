@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista de viajes.
+    /// Permite gestionar viajes, navegar entre fechas, cambiar estados y configurar la grilla.
+    /// </summary>
     public interface IViajesVista
     {
         event EventHandler agregarViaje;

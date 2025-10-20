@@ -8,6 +8,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa un operador del sistema, incluyendo configuración visual y estado.
+    /// </summary>
     [Table("operador", Schema = "public")]
     public class Operador
     {

@@ -20,6 +20,10 @@ using static Programa.Presentadores.CUPresentador.CUPlanillaCostoVistaPresentado
 
 namespace Programa.Presentadores
 {
+    /// <summary>
+    /// Presentador encargado de gestionar la vista de planilla de costos.
+    /// Coordina la visualización y modificación de importes por cuadras y ciudades.
+    /// </summary>
     public class PlanillaCostoPresentador
     {
         private readonly IPlanillaCostoVista vista;
@@ -31,13 +35,16 @@ namespace Programa.Presentadores
         private readonly string rol;
         private readonly int id;
 
-        public PlanillaCostoPresentador(
-            IPlanillaCostoVista vista,
-            ICiudadRepositorio ciudadRepo,
-            IImporteCuadrasRepositorio cuadrasRepo,
-            IImporteCiudadRepositorio ciudadImporteRepo,
-            string rol,
-            int id)
+        /// <summary>
+        /// Inicializa el presentador con la vista, los repositorios y los datos del operador.
+        /// </summary>
+        /// <param name="vista">Vista que implementa <see cref="IPlanillaCostoVista"/>.</param>
+        /// <param name="ciudadRepo">Repositorio de ciudades.</param>
+        /// <param name="cuadrasRepo">Repositorio de importes por cuadras.</param>
+        /// <param name="ciudadImporteRepo">Repositorio de importes por ciudad.</param>
+        /// <param name="rol">Rol del operador.</param>
+        /// <param name="id">Identificador del operador.</param>
+        public PlanillaCostoPresentador(IPlanillaCostoVista vista, ICiudadRepositorio ciudadRepo, IImporteCuadrasRepositorio cuadrasRepo, IImporteCiudadRepositorio ciudadImporteRepo, string rol, int id)
         {
             this.vista = vista;
             this.ciudadRepo = ciudadRepo;
@@ -63,6 +70,9 @@ namespace Programa.Presentadores
             cargarDatos();
         }
 
+        /// <summary>
+        /// Carga los datos iniciales de importes y ciudades en la vista.
+        /// </summary>
         private void cargarDatos()
         {
             var cuadrasDTO = cuadrasRepo.ObtenerImportes();
@@ -100,12 +110,20 @@ namespace Programa.Presentadores
 
             vista.MostrarCiudadesEnLayout(ciudadesDTO);
         }
+
+        /// <summary>
+        /// Recarga los importes por cuadras en la vista.
+        /// </summary>
         public void RecargarImportesCuadras()
         {
             var dto = cuadrasRepo.ObtenerImportes();
             vista.MostrarImportesCuadras(dto.Minimo, dto.Espera, dto.Mandado);
             vista.MostrarCuadrasEnLayout(dto);
         }
+
+        /// <summary>
+        /// Recarga la lista de ciudades en la vista.
+        /// </summary>
         public void RecargarCiudades()
         {
             var ciudadesDTO = ciudadRepo.ObtenerTodas()
@@ -120,48 +138,80 @@ namespace Programa.Presentadores
 
             vista.MostrarCiudadesEnLayout(ciudadesDTO);
         }
+
+        /// <summary>
+        /// Recarga los importes por ciudad y actualiza la vista.
+        /// </summary>
         public void RecargarImporteCiudad()
         {
             var dto = ciudadImporteRepo.ObtenerImportes();
             vista.MostrarImportesCiudad(dto.Kilometro, dto.Espera);
             RecargarCiudades();
         }
+
+        /// <summary>
+        /// Abre el formulario para modificar el costo por cuadras.
+        /// </summary>
         private void modificarCuadras_costo(object sender, EventArgs e)
         {
             IModificarPlanillaCostoVistaCuadraPrecio vistaModificar = ModificarPlanillaCostoVistaCuadraPrecio.ObtenerInstancia();
             new CUModificarImporteCuadraPlanillaCostoVista(vistaModificar, cuadrasRepo, this);
             ((Form)vistaModificar).ShowDialog();
         }
+
+        /// <summary>
+        /// Abre el formulario para modificar el importe por mandado.
+        /// </summary>
         private void modificarCuadras_mandado(object sender, EventArgs e)
         {
             IModificarPlanillaCostoVistaCuadraMandado vistaModificar = ModificarPlanillaCostoVistaCuadraMandado.ObtenerInstancia();
             new CUModificarImporteCuadraMandadoPlanillaCostoVista(vistaModificar, cuadrasRepo, this);
             ((Form)vistaModificar).ShowDialog();
         }
+
+        /// <summary>
+        /// Abre el formulario para modificar el importe por espera en cuadras.
+        /// </summary>
         private void modificarCuadras_espera(object sender, EventArgs e)
         {
             IModificarPlanillaCostoVistaEsperaCuadra vistaModificar = ModificarPlanillaCostoVistaEsperaCuadra.ObtenerInstancia();
             new CUModificarImporteCuadraEsperaPlanillaCostoVista(vistaModificar, cuadrasRepo, this);
             ((Form)vistaModificar).ShowDialog();
         }
+
+        /// <summary>
+        /// Abre el formulario para modificar el costo por kilómetro en ciudad.
+        /// </summary>
         private void modificarCiudad_costo(object sender, EventArgs e)
         {
             IModificarPlanillaCostoVistaCiudadPrecio vistaModificar = ModificarPlanillaCostoVistaCiudadPrecio.ObtenerInstancia();
             new CUModificarImporteCiudadPlanillaCostoVista(vistaModificar, ciudadImporteRepo, this);
             ((Form)vistaModificar).ShowDialog();
         }
+
+        /// <summary>
+        /// Abre el formulario para modificar el importe por espera en ciudad.
+        /// </summary>
         private void modificarCiudad_espera(object sender, EventArgs e)
         {
             IModificarPlanillaCostoVistaEsperaCiudad vistaModificar = ModificarPlanillaCostoVistaEsperaCiudad.ObtenerInstancia();
             new CUModificarImporteCiudadEsperaPlanillaCostoVista(vistaModificar, ciudadImporteRepo, this);
             ((Form)vistaModificar).ShowDialog();
         }
+
+        /// <summary>
+        /// Abre el formulario para agregar una nueva ciudad.
+        /// </summary>
         private void agregar_ciudad(object sender, EventArgs e)
         {
             IAgregarPlanillaCostoVista vistaAgregar = AgregarPlanillaCostoVista.ObtenerInstancia();
             new CUAgregarCiudadPlanillaCostoVista(vistaAgregar, ciudadRepo, ciudadImporteRepo, this);
             ((Form)vistaAgregar).ShowDialog();
         }
+
+        /// <summary>
+        /// Abre el formulario para modificar una ciudad seleccionada.
+        /// </summary>
         private void modificar_ciudad(object sender, EventArgs e)
         {
             var ciudadId = vista.ObtenerCiudadSeleccionada();
@@ -177,6 +227,10 @@ namespace Programa.Presentadores
             new CUModificarCiudadPlanillaCostoVista(vistaModificar, ciudadRepo, ciudadImporteRepo, ciudadSeleccionada, this);
             ((Form)vistaModificar).ShowDialog();
         }
+
+        /// <summary>
+        /// Elimina la ciudad seleccionada previa confirmación.
+        /// </summary>
         private void eliminar_ciudad(object sender, EventArgs e)
         {
             var ciudadId = vista.ObtenerCiudadSeleccionada();
@@ -200,6 +254,10 @@ namespace Programa.Presentadores
             ciudadRepo.Eliminar(ciudadSeleccionada.IdCiudad);
             RecargarCiudades();
         }
+
+        /// <summary>
+        /// Cierra la vista actual y retorna al menú de inicio.
+        /// </summary>
         private void volver_menu(object sender, EventArgs e)
         {
             IInicioVista inicio = InicioVista.ObtenerInstancia();

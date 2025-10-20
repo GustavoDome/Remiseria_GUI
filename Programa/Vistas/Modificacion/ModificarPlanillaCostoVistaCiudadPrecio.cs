@@ -13,6 +13,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para el importe por kilómetro en ciudad.
+    /// Permite editar el valor y confirmar los cambios.
+    /// </summary>
     public partial class ModificarPlanillaCostoVistaCiudadPrecio : Form, IModificarPlanillaCostoVistaCiudadPrecio
     {
         public ModificarPlanillaCostoVistaCiudadPrecio()
@@ -21,11 +25,19 @@ namespace Programa.Vistas.Modificacion
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public int MontoKilometro
         {
             get => int.TryParse(txtMontoKilometro.Text, out int m) ? m : 0;
@@ -35,11 +47,6 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler modificar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static ModificarPlanillaCostoVistaCiudadPrecio ObtenerInstancia()
         {
             var instancia = new ModificarPlanillaCostoVistaCiudadPrecio();

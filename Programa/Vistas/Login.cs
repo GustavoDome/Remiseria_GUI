@@ -11,6 +11,10 @@ using Programa.Vistas.Interfaces;
 using Programa.Presentadores;
 namespace Programa.Vistas
 {
+    /// <summary>
+    /// Vista de inicio de sesión del sistema.
+    /// Permite ingresar credenciales y delega la autenticación al presentador correspondiente.
+    /// </summary>
     public partial class Login : Form, ILogin
     {
         public Login() //Constructor del archivo

@@ -13,6 +13,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para un recordatorio existente.
+    /// Permite editar fecha, hora, dirección y comentario con validaciones contextuales.
+    /// </summary>
     public partial class ModificarInicioVistaRecordatorio : Form, IModificarInicioVistaRecordatorio
     {
         public ModificarInicioVistaRecordatorio()
@@ -21,6 +25,7 @@ namespace Programa.Vistas.Modificacion
             InitializeComponent();
             asociarPresentador();
         }
+
         public void asociarPresentador()
         {
             btnVolver.Click += delegate
@@ -42,6 +47,7 @@ namespace Programa.Vistas.Modificacion
             dtpHora.Format = DateTimePickerFormat.Time;
             dtpHora.ShowUpDown = true;
         }
+
         private void dtpFecha_ValueChanged(object sender, EventArgs e)
         {
             if (dtpFecha.Value.Date == DateTime.Today)

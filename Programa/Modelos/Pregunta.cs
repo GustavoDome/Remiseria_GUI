@@ -5,6 +5,9 @@ using Programa.Modelos;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa una pregunta registrada en el sistema.
+    /// </summary>
     [Table("pregunta", Schema = "public")]
     public class Pregunta
     {

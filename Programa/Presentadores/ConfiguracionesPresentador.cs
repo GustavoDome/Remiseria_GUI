@@ -16,12 +16,23 @@ using System.Windows.Forms;
 
 namespace Programa.Presentadores
 {
+    /// <summary>
+    /// Presentador encargado de gestionar la configuración visual y de alarmas del operador.
+    /// Coordina entre la vista de configuración y el repositorio de operadores.
+    /// </summary>
     public class ConfiguracionesPresentador
     {
         private readonly IOperadorRepositorio repositorio;
         private readonly IConfiguracionesVista vista;
         private readonly int idOperador;
 
+        /// <summary>
+        /// Inicializa el presentador con la vista, el repositorio, el rol del operador y su identificador.
+        /// </summary>
+        /// <param name="vista">Vista que implementa <see cref="IConfiguracionesVista"/>.</param>
+        /// <param name="repositorio">Repositorio que implementa <see cref="IOperadorRepositorio"/>.</param>
+        /// <param name="rol">Rol del operador (por ejemplo: "Gerente").</param>
+        /// <param name="id">Identificador del operador actual.</param>
         public ConfiguracionesPresentador(IConfiguracionesVista vista, IOperadorRepositorio repositorio, string rol, int id)
         {
             this.vista = vista;
@@ -47,6 +58,9 @@ namespace Programa.Presentadores
             cargar_configuracion();
         }
 
+        /// <summary>
+        /// Carga la configuración actual del operador desde el repositorio y la aplica a la vista.
+        /// </summary>
         private void cargar_configuracion()
         {
             var config = repositorio.ObtenerConfiguracion(idOperador);
@@ -61,6 +75,11 @@ namespace Programa.Presentadores
             }
         }
 
+        /// <summary>
+        /// Guarda la configuración modificada por el operador y aplica los estilos visuales en tiempo real.
+        /// </summary>
+        /// <param name="sender">Origen del evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         private void guardar_configuracion(object sender, EventArgs e)
         {
             var config = new ConfiguracionDTO
@@ -82,6 +101,11 @@ namespace Programa.Presentadores
             ConfiguracionesVista.ObtenerInstancia();
         }
 
+        /// <summary>
+        /// Cierra la vista de configuración y retorna al menú de inicio.
+        /// </summary>
+        /// <param name="sender">Origen del evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         private void volver_menu(object sender, EventArgs e)
         {
             IInicioVista inicio = InicioVista.ObtenerInstancia();

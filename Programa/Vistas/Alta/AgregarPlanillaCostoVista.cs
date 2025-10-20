@@ -12,6 +12,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Alta
 {
+    /// <summary>
+    /// Vista de agregación para registrar una nueva ciudad en la planilla de costos.
+    /// Permite ingresar nombre y distancia en kilómetros.
+    /// </summary>
     public partial class AgregarPlanillaCostoVista : Form, IAgregarPlanillaCostoVista
     {
         public AgregarPlanillaCostoVista()
@@ -20,11 +24,19 @@ namespace Programa.Vistas.Alta
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public string NombreCiudad
         {
             get => txtCiudad.Text;
@@ -40,11 +52,6 @@ namespace Programa.Vistas.Alta
         public event EventHandler agregar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnAgregar.Click += (s, e) => agregar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static AgregarPlanillaCostoVista ObtenerInstancia()
         {
             var instancia = new AgregarPlanillaCostoVista();

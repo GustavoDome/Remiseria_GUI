@@ -17,6 +17,10 @@ namespace Programa.Presentadores.CUPresentador
 {
     public class CUAyudaPresentador
     {
+        /// <summary>
+        /// Subpresentador encargado de gestionar el caso de uso de agregar una nueva categoría.
+        /// Coordina entre la vista de ingreso de categoría y el repositorio correspondiente.
+        /// </summary>
         public class CUAgregarCategoriaPresentador
         {
             private ICategoriaRepositorio categoriaRepositorio;
@@ -25,6 +29,7 @@ namespace Programa.Presentadores.CUPresentador
             private IAyudaVista ayudavista;
             private AyudaPresentador presentador;
             private string rol;
+
             public CUAgregarCategoriaPresentador(ICategoriaRepositorio repositorio,IAgregarAyudaVistaCategoria categoria, IAyudaVista ayudavista, AyudaPresentador presentador, string rol)
             {
                 this.categoriaRepositorio = repositorio;
@@ -36,6 +41,7 @@ namespace Programa.Presentadores.CUPresentador
                 this.agregarCategoriaVista.agregar += agregarCategoria;
                 this.agregarCategoriaVista.volver += volverAyuda;
             }
+
             private void agregarCategoria(object sender, EventArgs e) 
             {
                 if(this.agregarCategoriaVista.categorianombre != null) 
@@ -53,12 +59,18 @@ namespace Programa.Presentadores.CUPresentador
                     MessageBox.Show("Porfavor complete todos los campos faltantes");
                 }
             }
+
             private void volverAyuda(object sender, EventArgs e) 
             {
                 IAyudaVista ayuda = AyudaVista.ObtenerInstancia(this.rol);
                 ((Form)agregarCategoriaVista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar una categoría existente.
+        /// Coordina entre la vista de modificación y el repositorio, actualizando la vista principal.
+        /// </summary>
         public class CUModificarCategoriaPresentador
         {
             private ICategoriaRepositorio categoriaRepositorio;
@@ -113,6 +125,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)modificarCategoriaVista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de agregar una nueva pregunta a una categoría seleccionada.
+        /// Coordina entre la vista de ingreso y el repositorio de preguntas.
+        /// </summary>
         public class CUAgregarPreguntaPresentador
         {
             private IAgregarAyudaVistaPregunta agregarPreguntaVista;
@@ -165,6 +182,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)agregarPreguntaVista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar una pregunta existente.
+        /// Coordina entre la vista de edición y el repositorio, actualizando la vista principal.
+        /// </summary>
         public class CUModificarPreguntaPresentador
         {
             private IModificarAyudaVistaPregunta modificarPreguntaVista;
@@ -220,6 +242,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)modificarPreguntaVista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de agregar una nueva respuesta a una pregunta seleccionada.
+        /// Coordina entre la vista de ingreso y el repositorio de respuestas, incluyendo contenido multimedia.
+        /// </summary>
         public class CUAgregarRespuestaPresentador
         {
             private IAgregarAyudaVistaRespuesta agregarRespuestaVista;
@@ -275,6 +302,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)agregarRespuestaVista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar una respuesta existente en el módulo de ayuda.
+        /// Coordina entre la vista de edición y el repositorio, actualizando la vista principal.
+        /// </summary>
         public class CUModificarRespuestaPresentador
         {
             private IModificarAyudaVistaRespuesta modificarRespuestaVista;

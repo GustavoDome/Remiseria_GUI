@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Programa.Modelos.Interfaces
 {
+    /// <summary>
+    /// Interfaz que define las operaciones de acceso a datos para la entidad Operador.
+    /// </summary>
     public interface IOperadorRepositorio
     {
         void Agregar(Operador operador);

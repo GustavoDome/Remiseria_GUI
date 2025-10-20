@@ -11,8 +11,16 @@ using static Programa.Conexion.RemiseriaDbContext;
 
 namespace Programa.Repositorios
 {
+    /// <summary>
+    /// Repositorio para operaciones CRUD sobre la entidad Base.
+    /// Implementa la interfaz IBasesRepositorio.
+    /// </summary>
     public class BaseRepositorio : IBasesRepositorio
     {
+        /// <summary>
+        /// Agrega una nueva instancia de Base al contexto de datos y guarda los cambios.
+        /// </summary>
+        /// <param name="nuevaBase">Instancia de Base a agregar.</param>
         public void Agregar(Base nuevaBase)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -22,6 +30,10 @@ namespace Programa.Repositorios
             }
         }
 
+        /// <summary>
+        /// Edita los campos de una Base existente en la base de datos.
+        /// </summary>
+        /// <param name="baseEditada">Instancia de Base con los nuevos valores.</param>
         public void Editar(Base baseEditada)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -39,6 +51,11 @@ namespace Programa.Repositorios
                 }
             }
         }
+
+        /// <summary>
+        /// Realiza un borrado lógico de una Base, marcándola como inactiva.
+        /// </summary>
+        /// <param name="id">Identificador de la Base a eliminar.</param>
         public void Eliminar(int id)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -51,6 +68,11 @@ namespace Programa.Repositorios
                 }
             }
         }
+
+        /// <summary>
+        /// Edita únicamente el comentario de una Base existente.
+        /// </summary>
+        /// <param name="baseEditada">Instancia de Base con el nuevo comentario.</param>
         public void EditarComentario(Base baseEditada)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -63,6 +85,13 @@ namespace Programa.Repositorios
                 }
             }
         }
+
+        /// <summary>
+        /// Verifica si existe una Base activa para un móvil en una fecha determinada.
+        /// </summary>
+        /// <param name="idMovil">Identificador del móvil.</param>
+        /// <param name="fecha">Fecha a verificar.</param>
+        /// <returns>True si existe una Base activa en esa fecha, false en caso contrario.</returns>
         public bool ExisteBaseEnFecha(int idMovil, DateTime fecha)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -77,6 +106,11 @@ namespace Programa.Repositorios
                     b.Activo);
             }
         }
+
+        /// <summary>
+        /// Obtiene una lista de móviles activos en formato DTO resumido.
+        /// </summary>
+        /// <returns>Lista de objetos MovilResumenDTO.</returns>
         public IEnumerable<MovilResumenDTO> SeleccionarMovil()
         {
             using (var contexto = new RemiseriaDbContext())
@@ -91,6 +125,12 @@ namespace Programa.Repositorios
                     .ToList();
             }
         }
+
+        /// <summary>
+        /// Busca una Base por su identificador y devuelve sus datos en formato DTO detallado.
+        /// </summary>
+        /// <param name="idBase">Identificador de la Base.</param>
+        /// <returns>Instancia de BaseDetalleDTO con los datos encontrados, o null si no existe.</returns>
         public BaseDetalleDTO BuscarPorId(int idBase)
         {
             using (var contexto = new RemiseriaDbContext())
@@ -110,6 +150,12 @@ namespace Programa.Repositorios
                     .FirstOrDefault();
             }
         }
+
+        /// <summary>
+        /// Muestra todas las Bases activas asociadas a un móvil, ordenadas por fecha.
+        /// </summary>
+        /// <param name="id_movil">Identificador del móvil.</param>
+        /// <returns>Lista de objetos BaseDetalleDTO.</returns>
         public IEnumerable<BaseDetalleDTO> MostrarTodo(int id_movil)
         {
             using (var contexto = new RemiseriaDbContext())

@@ -11,6 +11,10 @@ using System.Windows.Forms;
 
 namespace Programa.Commons
 {
+    /// <summary>
+    /// Clase encargada de gestionar las alarmas de recordatorios.
+    /// Verifica periódicamente los recordatorios próximos y ejecuta notificaciones visuales y sonoras.
+    /// </summary>
     public class GestorAlarmasGlobal
     {
         private readonly IRecordatorioRepositorio repositorio;
@@ -21,6 +25,12 @@ namespace Programa.Commons
         private readonly string tipoAlarma;
         private InicioPresentador InicioPresentador;
 
+        /// <summary>
+        /// Inicializa el gestor de alarmas con el repositorio de recordatorios, el operador actual y el presentador de inicio.
+        /// </summary>
+        /// <param name="repositorio">Repositorio de recordatorios.</param>
+        /// <param name="idOperador">Identificador del operador actual.</param>
+        /// <param name="inicioPresentador">Instancia del presentador de la vista de inicio.</param>
         public GestorAlarmasGlobal(IRecordatorioRepositorio repositorio, int idOperador, InicioPresentador inicioPresentador)
         {
             this.repositorio = repositorio;
@@ -34,6 +44,11 @@ namespace Programa.Commons
             this.reloj.Start();
         }
 
+        /// <summary>
+        /// Verifica los recordatorios activos y dispara alarmas si están próximos o vencidos.
+        /// </summary>
+        /// <param name="sender">Origen del evento.</param>
+        /// <param name="e">Argumentos del evento.</param>
         private void VerificarAlarmas(object sender, EventArgs e)
         {
             var ahora = DateTime.Now;
@@ -48,6 +63,7 @@ namespace Programa.Commons
                 var minutosRestantes = (fechaCompleta - ahora).TotalMinutes;
                 int minutos = (int)Math.Round(minutosRestantes);
 
+                // Notificación previa
                 if ((minutos == 15 || minutos == 10 || minutos == 5 || minutos == 0) &&
                     !recordatoriosNotificados.Contains(r.IdRecordatorio))
                 {
@@ -55,6 +71,7 @@ namespace Programa.Commons
                     recordatoriosNotificados.Add(r.IdRecordatorio);
                 }
 
+                // Eliminación automática si vencido
                 if (minutos <= -5 && !recordatoriosEliminados.Contains(r.IdRecordatorio))
                 {
                     MostrarPopup(r);
@@ -64,6 +81,10 @@ namespace Programa.Commons
                 }
             }
         }
+
+        /// <summary>
+        /// Reproduce el sonido de alarma correspondiente al tipo configurado por el operador.
+        /// </summary>
         private void ReproducirAlarma()
         {
             string basePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Commons", "Alarmas");
@@ -77,6 +98,11 @@ namespace Programa.Commons
                 }
             }
         }
+
+        /// <summary>
+        /// Muestra una ventana emergente con los datos del recordatorio y reproduce la alarma.
+        /// </summary>
+        /// <param name="r">Recordatorio a notificar.</param>
         private void MostrarPopup(RecordatorioDTO r)
         {
             var mensaje = $" Dirección: {r.Direccion}\n Hora: {r.FechaHora:HH:mm}\n Operador: {r.NombreOperador}";

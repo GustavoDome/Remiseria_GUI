@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista de ayuda.
+    /// Define eventos para gestionar categorías, preguntas y respuestas, y métodos para renderizar contenido dinámico.
+    /// </summary>
     public interface IAyudaVista
     {
         event EventHandler ingresarPlanillasCosto;

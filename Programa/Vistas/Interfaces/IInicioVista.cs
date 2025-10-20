@@ -7,6 +7,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista de inicio.
+    /// Define navegación entre módulos, gestión de recordatorios y configuración visual adaptada al rol.
+    /// </summary>
     public interface IInicioVista
     {
         //Eventos

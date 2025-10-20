@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Programa.Modelos.Interfaces
 {
+    /// <summary>
+    /// Interfaz que define las operaciones de acceso a datos para los importes por ciudad.
+    /// </summary>
     public interface IImporteCiudadRepositorio
     {
         ImporteCiudadDTO ObtenerImportes();

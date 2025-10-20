@@ -13,6 +13,10 @@ namespace Programa.Presentadores.CUPresentador
 {
     public class CUPlanillaCostoVistaPresentador
     {
+        /// <summary>
+        /// Subpresentador encargado de agregar una nueva ciudad.
+        /// Calcula el importe según kilómetros y actualiza la vista principal.
+        /// </summary>
         public class CUAgregarCiudadPlanillaCostoVista
         {
             private readonly IAgregarPlanillaCostoVista vista;
@@ -71,6 +75,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)vista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar los datos de una ciudad existente.
+        /// Recalcula el importe y actualiza la grilla de ciudades.
+        /// </summary>
         public class CUModificarCiudadPlanillaCostoVista
         {
             private readonly IModificarPlanillaCostoVistaCiudad vista;
@@ -144,6 +153,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)vista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar los importes mínimos y por cuadra.
+        /// Valida los valores y actualiza la vista de cuadras.
+        /// </summary>
         public class CUModificarImporteCuadraPlanillaCostoVista
         {
             private readonly IModificarPlanillaCostoVistaCuadraPrecio vista;
@@ -195,6 +209,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)vista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar el importe de espera por cuadra.
+        /// Valida el monto y actualiza la vista de importes.
+        /// </summary>
         public class CUModificarImporteCuadraEsperaPlanillaCostoVista
         {
             private readonly IModificarPlanillaCostoVistaEsperaCuadra vista;
@@ -243,6 +262,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)vista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar el importe por mandado.
+        /// Valida el monto y actualiza la vista de importes por cuadra.
+        /// </summary>
         public class CUModificarImporteCuadraMandadoPlanillaCostoVista
         {
             private readonly IModificarPlanillaCostoVistaCuadraMandado vista;
@@ -291,6 +315,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)vista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar el importe por kilómetro en ciudad.
+        /// Valida el monto y actualiza la vista principal de importes por ciudad.
+        /// </summary>
         public class CUModificarImporteCiudadPlanillaCostoVista
         {
             private readonly IModificarPlanillaCostoVistaCiudadPrecio vista;
@@ -346,6 +375,11 @@ namespace Programa.Presentadores.CUPresentador
                 ((Form)vista).Close();
             }
         }
+
+        /// <summary>
+        /// Subpresentador encargado de modificar el importe de espera en ciudad.
+        /// Valida el monto y actualiza la vista principal de importes por ciudad.
+        /// </summary>
         public class CUModificarImporteCiudadEsperaPlanillaCostoVista
         {
             private readonly IModificarPlanillaCostoVistaEsperaCiudad vista;

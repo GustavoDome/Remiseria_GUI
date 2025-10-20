@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista de login.
+    /// Expone las credenciales ingresadas y el evento de autenticación.
+    /// </summary>
     public interface ILogin
     {
         //Propiedades

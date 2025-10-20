@@ -13,6 +13,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para el importe por mandado en cuadras.
+    /// Permite editar el valor y confirmar los cambios.
+    /// </summary>
     public partial class ModificarPlanillaCostoVistaCuadraMandado : Form, IModificarPlanillaCostoVistaCuadraMandado
     {
         public ModificarPlanillaCostoVistaCuadraMandado()
@@ -21,11 +25,19 @@ namespace Programa.Vistas.Modificacion
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public int MontoMandado
         {
             get => int.TryParse(txtCuadrasMandado.Text, out int m) ? m : 0;
@@ -35,11 +47,6 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler modificar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static ModificarPlanillaCostoVistaCuadraMandado ObtenerInstancia()
         {
             var instancia = new ModificarPlanillaCostoVistaCuadraMandado();

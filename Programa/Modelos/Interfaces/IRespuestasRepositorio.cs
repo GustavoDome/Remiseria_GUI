@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Programa.Modelos.Interfaces
 {
+    /// <summary>
+    /// Interfaz que define las operaciones de acceso a datos para la entidad Respuesta.
+    /// </summary>
     public interface IRespuestasRepositorio
     {
         void Agregar(Respuesta respuestaModelo);

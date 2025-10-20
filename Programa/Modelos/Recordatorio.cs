@@ -4,6 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Programa.Modelos
 {
+    /// <summary>
+    /// Modelo que representa un recordatorio programado por un operador.
+    /// </summary>
     [Table("recordatorio", Schema = "public")]
     public class Recordatorio
     {

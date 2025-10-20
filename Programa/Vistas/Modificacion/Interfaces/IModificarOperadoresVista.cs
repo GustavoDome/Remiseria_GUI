@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Modificacion.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para modificar un operador registrado.
+    /// Permite editar datos personales, contraseña y rol asignado.
+    /// </summary>
     public interface IModificarOperadorVista
     {
         string Nombre { get; set; }

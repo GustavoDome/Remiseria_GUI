@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Alta.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para agregar un nuevo operador.
+    /// Permite ingresar datos personales, contraseña y rol asignado.
+    /// </summary>
     public interface IAgregarOperadoresVista
     {
         string Nombre { get; set; }

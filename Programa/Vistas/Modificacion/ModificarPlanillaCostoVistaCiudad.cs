@@ -13,6 +13,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para una ciudad en la planilla de costos.
+    /// Permite editar nombre y distancia en kilómetros.
+    /// </summary>
     public partial class ModificarPlanillaCostoVistaCiudad : Form, IModificarPlanillaCostoVistaCiudad
     {
         public ModificarPlanillaCostoVistaCiudad()
@@ -21,11 +25,19 @@ namespace Programa.Vistas.Modificacion
             InitializeComponent();
             asociarEventos();
         }
+
         private void ModificarVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            brnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
+
         public string NombreCiudad
         {
             get => txtCiudad.Text;
@@ -41,11 +53,6 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler modificar;
         public event EventHandler volver;
 
-        private void asociarEventos()
-        {
-            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            brnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
         public static ModificarPlanillaCostoVistaCiudad ObtenerInstancia()
         {
             var instancia = new ModificarPlanillaCostoVistaCiudad();

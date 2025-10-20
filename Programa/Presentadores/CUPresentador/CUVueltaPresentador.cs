@@ -10,6 +10,10 @@ using System.Windows.Forms;
 
 namespace Programa.Presentadores.CUPresentador
 {
+    /// <summary>
+    /// Subpresentador encargado de agregar móviles a la grilla de vueltas.
+    /// Asigna la vuelta justa si no tienen registrada y actualiza la vista principal.
+    /// </summary>
     public class CUVueltaPresentador
     {
         private readonly IAgregarVueltaVista vista;

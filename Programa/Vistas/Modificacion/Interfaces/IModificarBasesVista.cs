@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Modificacion.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para modificar una base existente.
+    /// Permite editar fecha y comentario asociado.
+    /// </summary>
     public interface IModificarBasesVista
     {
         DateTime fecha { get; set; }

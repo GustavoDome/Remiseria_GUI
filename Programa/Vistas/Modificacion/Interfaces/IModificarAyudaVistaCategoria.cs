@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Programa.Vistas.Modificacion.Interfaces
 {
+    /// <summary>
+    /// Contrato de la vista para modificar una categoría en el módulo de ayuda.
+    /// </summary>
     public interface IModificarAyudaVistaCategoria
     {
         string categorianombre { get; set; }

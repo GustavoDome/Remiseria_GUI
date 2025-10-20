@@ -15,6 +15,10 @@ using System.Windows.Forms;
 
 namespace Programa.Vistas.Modificacion
 {
+    /// <summary>
+    /// Vista de modificación para una respuesta en el módulo de ayuda.
+    /// Permite editar el texto y actualizar el contenido multimedia adjunto.
+    /// </summary>
     public partial class ModificarAyudaVistaRespuesta : Form, IModificarAyudaVistaRespuesta
     {
         public ModificarAyudaVistaRespuesta()
@@ -23,10 +27,31 @@ namespace Programa.Vistas.Modificacion
             this.Load += new System.EventHandler(this.ModificarAyudaRespuestaVista_Load);
             asociarEventos();
         }
+
         private void ModificarAyudaRespuestaVista_Load(object sender, EventArgs e)
         {
             this.AutoSize = false;
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
+        }
+
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+            btnAgregarArchivo.Click += (s, e) => cargarMultimedia();
+        }
+
+        private void cargarMultimedia()
+        {
+            using (OpenFileDialog dialogo = new OpenFileDialog())
+            {
+                dialogo.Filter = "Archivos multimedia|*.mp4;*.mp3;*.wav";
+                if (dialogo.ShowDialog() == DialogResult.OK)
+                {
+                    multimediaData = File.ReadAllBytes(dialogo.FileName);
+                    MessageBox.Show("Multimedia cargada correctamente.");
+                }
+            }
         }
 
         public string respuestatexto
@@ -44,25 +69,7 @@ namespace Programa.Vistas.Modificacion
         public event EventHandler volver;
 
         private byte[] multimediaData;
-        private void cargarMultimedia()
-        {
-            using (OpenFileDialog dialogo = new OpenFileDialog())
-            {
-                dialogo.Filter = "Archivos multimedia|*.mp4;*.mp3;*.wav";
-                if (dialogo.ShowDialog() == DialogResult.OK)
-                {
-                    multimediaData = File.ReadAllBytes(dialogo.FileName);
-                    MessageBox.Show("Multimedia cargada correctamente.");
-                }
-            }
-        }
 
-        private void asociarEventos()
-        {
-            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-            btnAgregarArchivo.Click += (s, e) => cargarMultimedia();
-        }
         public static ModificarAyudaVistaRespuesta ObtenerInstancia()
         {
             var instancia = new ModificarAyudaVistaRespuesta();
