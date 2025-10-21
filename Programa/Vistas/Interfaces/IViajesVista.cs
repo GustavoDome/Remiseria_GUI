@@ -1,0 +1,34 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Programa.Vistas.Interfaces
+{
+    /// <summary>
+    /// Contrato de la vista de viajes.
+    /// Permite gestionar viajes, navegar entre fechas, cambiar estados y configurar la grilla.
+    /// </summary>
+    public interface IViajesVista
+    {
+        event EventHandler agregarViaje;
+        event EventHandler modificarViaje;
+        event EventHandler cambiarEstadoViaje;
+        event EventHandler eliminarViaje;
+        event EventHandler retroceder;
+        event EventHandler adelantar;
+        event EventHandler ingresarVuelta;
+        event EventHandler volver;
+        event EventHandler recargar;
+
+        int ObtenerIdViajeSeleccionado();
+        void ocultarBotones(string rol);
+        void SetViajesBindingSource(BindingSource viajes);
+        void congelarVista();
+        void SetFecha(DateTime fecha);
+        void OcultarIdViaje();
+
+    }
+}

@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace Programa.Vistas.Interfaces
+{
+    /// <summary>
+    /// Contrato de la vista de inicio.
+    /// Define navegación entre módulos, gestión de recordatorios y configuración visual adaptada al rol.
+    /// </summary>
+    public interface IInicioVista
+    {
+        //Eventos
+        event EventHandler agregarRecordatorio;
+        event EventHandler eliminarRecordatorio;
+        event EventHandler modificarRecordatorio;
+        event EventHandler ingresarViajes;
+        event EventHandler ingresarBases;
+        event EventHandler ingresarVueltas;
+        event EventHandler ingresarMoviles;
+        event EventHandler ingresarOperadores;
+        event EventHandler ingresarAyuda;
+        event EventHandler ingresarConfiguracion;
+        event EventHandler volver;
+
+        //Metodos
+        void RefrescarEstilos();
+        void ocultarBotones(string rol);
+        void SetRecordatoriosBindingSource(BindingSource RecordatorioLista);
+        void ConfigurarGrilla();
+    }
+}
