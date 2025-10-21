@@ -89,23 +89,20 @@ namespace Programa.Presentadores.CUPresentador
             private readonly int idOperador;
             private readonly BaseDetalleDTO baseOriginal;
             private readonly BasesPresentador presentador;
+            private readonly int id_movil;
 
-            public CUModificarBasePresentador(
-                IBasesRepositorio repositorio,
-                IModificarBasesVista vista,
-                int idOperador,
-                BaseDetalleDTO baseOriginal,
-                BasesPresentador presentador)
+            public CUModificarBasePresentador( IBasesRepositorio repositorio, IModificarBasesVista vista, int idOperador, BaseDetalleDTO baseOriginal, BasesPresentador presentador, int id_movil)
             {
                 this.repositorio = repositorio;
                 this.vista = vista;
                 this.idOperador = idOperador;
                 this.baseOriginal = baseOriginal;
                 this.presentador = presentador;
+                this.id_movil = id_movil;
 
                 // Precargar datos
-                this.vista.fecha = baseOriginal.Fecha_base;
-                this.vista.comentario = baseOriginal.Comentario ?? string.Empty; // o usar Comentario si lo tenés separado
+                this.vista.fecha = this.baseOriginal.Fecha_base;
+                this.vista.comentario = this.baseOriginal.Comentario ?? string.Empty; // o usar Comentario si lo tenés separado
 
                 this.vista.modificar += modificar_base;
                 this.vista.volver += volver;
@@ -122,10 +119,10 @@ namespace Programa.Presentadores.CUPresentador
                 Base baseModificada = new Base
                 {
                     IdBase = baseOriginal.IdBase,
-                    Fecha_base = vista.fecha,
+                    Fecha_base = this.vista.fecha,
                     EstadoBase = baseOriginal.EstadoBase,
                     Comentario = this.vista.comentario,
-                    IdMovil = presentador.id_movil,
+                    IdMovil = this.id_movil,
                     IdOperador = idOperador,
                     Activo = true
                     // Si tenés un campo Comentario en la entidad, lo agregás acá

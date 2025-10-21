@@ -49,6 +49,7 @@ namespace Programa.Presentadores
             this.id = id;
             this.filtrador = new BindingSource();
             this.tablaBases = new BindingSource();
+            id_movil = vista.id_movil;
 
             vista.ocultarBotones(rol);
             vista.mostrarMoviles(filtrador);
@@ -114,9 +115,9 @@ namespace Programa.Presentadores
                 return;
             }
 
-            var baseSeleccionada = repositorio.MostrarTodo(id_movil).FirstOrDefault(b => b.IdBase == baseId.Value);
+            var baseSeleccionada = repositorio.MostrarTodo(vista.id_movil).FirstOrDefault(b => b.IdBase == baseId.Value);
             IModificarBasesVista vistaModificar = ModificarBasesVista.ObtenerInstancia();
-            new CUBasesPresentador.CUModificarBasePresentador(repositorio, vistaModificar, id, baseSeleccionada, this);
+            new CUBasesPresentador.CUModificarBasePresentador(repositorio, vistaModificar, id, baseSeleccionada, this, vista.id_movil);
             ((Form)vistaModificar).ShowDialog();
         }
 
@@ -131,10 +132,10 @@ namespace Programa.Presentadores
                 MessageBox.Show("Debe seleccionar una base.");
                 return;
             }
-            MessageBox.Show($"{baseId}");
-            var baseSeleccionada = repositorio.MostrarTodo(id_movil).FirstOrDefault(b => b.IdBase == baseId.Value);
+            var baseSeleccionada = repositorio.MostrarTodo(vista.id_movil).FirstOrDefault(b => b.IdBase == baseId.Value);
+            BaseDetalleDTO baseseleccion = baseSeleccionada;
             IAgregarBasesVistaComentario vistaComentario = AgregarBasesVistaComentario.ObtenerInstancia();
-            new CUBasesPresentador.CUComentarioBasePresentador(repositorio, vistaComentario, baseSeleccionada, this);
+            new CUBasesPresentador.CUComentarioBasePresentador(repositorio, vistaComentario, baseseleccion, this);
             ((Form)vistaComentario).ShowDialog();
         }
 

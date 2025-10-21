@@ -32,11 +32,6 @@ namespace Programa.Vistas.Modificacion
             GestorEstilosGlobal.Instance.AplicarEstilosAFormulario(this);
         }
 
-        private void asociarEventos()
-        {
-            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
-            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
-        }
 
         public DateTime fecha
         {
@@ -52,6 +47,11 @@ namespace Programa.Vistas.Modificacion
 
         public event EventHandler modificar;
         public event EventHandler volver;
+        private void asociarEventos()
+        {
+            btnModificar.Click += (s, e) => modificar?.Invoke(this, EventArgs.Empty);
+            btnVolver.Click += (s, e) => volver?.Invoke(this, EventArgs.Empty);
+        }
 
         public static ModificarBasesVista ObtenerInstancia()
         {

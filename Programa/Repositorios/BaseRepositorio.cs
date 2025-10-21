@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using static Programa.Conexion.RemiseriaDbContext;
+using System.Windows.Forms;
 
 namespace Programa.Repositorios
 {
@@ -173,6 +174,7 @@ namespace Programa.Repositorios
                         NombreOperador = b.Operador.Nombre,
                         RolOperador = b.Operador.RolUsuario
                     })
+
                     .ToList();
             }
         }

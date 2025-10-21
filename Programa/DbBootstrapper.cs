@@ -208,6 +208,15 @@ namespace Programa
                         };
                         context.ImportesCuadras.Add(imp);
                     }
+                    if (!context.ImportesCiudad.Any())
+                    {
+                        var imp = new ImporteCiudad
+                        {
+                            Kilometro = 100,
+                            Espera = 20
+                        };
+                        context.ImportesCiudad.Add(imp);
+                    }
 
                     context.SaveChanges();
                 }
