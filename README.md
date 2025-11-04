@@ -1,10 +1,13 @@
 # Remiseria_GUI
- Programa para una empresa, proyecto de Practicas Profesionalizantes ll
+Programa para una empresa, proyecto de Practicas Profesionalizantes ll
 
-Crear contenedor docker: 
-docker run --name remiseria-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=Remiseria -v remiseria_data:/var/lib/postgresql/data -p 5432:5432 -d postgres:16
+Link del programa: https://github.com/GustavoDome/Remiseria_GUI
 
-Luego de haber creado el contenedor, se tiene que autorizar por parte del firewall asi que dentro de una carpeta donde deberia estar la otra carpeta se ejecuta este comando en el powershell (como administrador):
+Descargar Docker Desktop
+
+Crear contenedor docker: docker run --name remiseria-db -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=Remiseria -v remiseria_data:/var/lib/postgresql/data -p 5432:5432 -d postgres:16
+
+Luego de haber creado el contenedor, se tiene que autorizar por parte del firewall asi que dentro de la carpeta donde deberia estar otra carpeta que contenga el programa, se ejecuta este comando en el powershell (como administrador):
 
 Get-ChildItem -Path . -Recurse | Unblock-File
 
